@@ -1,0 +1,17 @@
+{
+    "Name": "Sprites_King",
+    "Path": "Assets/SPUM/Resources/Addons",
+    "Version": "",
+    "CreationDate": "2025-06-17 17:36:09",
+    "SpumAnimationData": [],
+    "SpumTextureData": [
+        {
+            "Name": "SPUM_SpritePreset",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "SPUM_SpritePreset",
+            "PartSubType": "",
+            "Path": "Addons/Sprites_King/0_Unit/0_Sprite/4_Helmet/SPUM_SpritePreset"
+        }
+    ]
+}
