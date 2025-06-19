@@ -35,7 +35,7 @@ public class TowerProjectile : MonoBehaviour
         // [◇] - [◆] - ) 타겟과 투사체간의 거리.
         Vector3 dir = target.position - this.transform.position;          // ) 타겟위치 - 투사체위치.
         float ditanceThisFrame = Time.deltaTime * projectileSpeed;    // ) 이번 프레임에 투사체가 이동하는 거리.
-        // [◇] - [◆] - ) ???.
+        // [◇] - [◆] - ) 투사체가 타겟에게 충돌했는지 확인.
         if (dir.magnitude <= ditanceThisFrame)
         {
             HitTarget();
