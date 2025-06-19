@@ -26,7 +26,7 @@ namespace MainGame.UI {
         #region Unity Event Method
         private void Start() {
             //수치 표현
-            statValue.text = currStat.ToString();
+            statValue.text = currStat.ToString() + " / " + currStatMax.ToString();
             //버튼에 이벤트 추가 - TODO : 범위와 값은 별도 스크립트에 저장된 값에서 받아와야 함
             plusButton.onClick.AddListener(() => OnClick(5, 25));
             minusButton.onClick.AddListener(() => OnClick(-25, -5));
