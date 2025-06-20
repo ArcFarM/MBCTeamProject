@@ -1,17 +1,34 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using MainGame.Manager;
+using MainGame.Enum;
 
 namespace MainGame.UI {
     public class PolicyCard : MonoBehaviour {
         #region Variables
         //정책 카드 선택 버튼
         [SerializeField] Button acceptButton;
-        //카드의 효과
-        
+        //카드의 등급과 이 카드가 건드리는 요소
+        [SerializeField] CardGrade cardGrade;
+        [SerializeField] CardEffect cardEffect;
+        //이 카드가 건드릴 능력치들과 유닛들
+        [SerializeField] int[] stats;
+        //[SerializeField] Units[] units;
         #endregion
 
         #region Properties
+        public CardGrade GetSetCardGrade {
+            get { return cardGrade; }
+            set { cardGrade = value; }
+        }
+        public CardEffect GetSetCardEffect {
+            get { return cardEffect; }
+            set { cardEffect = value; }
+        }
+        public int[] GetSetStatsArr {
+            get { return stats; }
+            set { stats = value; }
+        }
         #endregion
 
         #region Unity Event Method
@@ -25,7 +42,7 @@ namespace MainGame.UI {
 
         void OnPolicySelected() {
             //카드 클릭하면 싱글톤이 사용
-
+            CardManager.Instance.ApplyEffect(this);
         }
         #endregion
     }
