@@ -4,8 +4,12 @@ using UnityEngine.UI;
 
 public class ChageScene : MonoBehaviour
 {
-    private string mainMenuScene = "MainMenu";
+    private string mainMenuScene = "New Scene";
     public Button continueButton;
+
+
+    public GameObject confirmPanel; // 확인창 패널//
+    
 
     private void Start()
     {
@@ -16,10 +20,16 @@ public class ChageScene : MonoBehaviour
     // 새 게임 시작
     public void GameStartButton()
     {
-        // 기존 저장 데이터 초기화 (선택사항)
-        PlayerPrefs.DeleteAll();
-
-        SceneManager.LoadScene(mainMenuScene);
+        if(HasSaveData())
+        {
+            // 저장된 데이터가 있다면 확인창 띄우기
+            confirmPanel.SetActive(true);
+            
+        }
+        else
+        {
+            SceneManager.LoadScene(mainMenuScene);
+        }
     }
 
     // 이어하기 버튼
