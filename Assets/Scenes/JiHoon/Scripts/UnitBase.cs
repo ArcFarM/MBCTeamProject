@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 namespace JiHoon
 {
@@ -32,7 +30,7 @@ namespace JiHoon
                 Die();
             }
         }
-        public virtual void Die()
+        protected virtual void Die()
         {
             isDead = true;
             //죽음 애니메이션, 이펙트 처리
