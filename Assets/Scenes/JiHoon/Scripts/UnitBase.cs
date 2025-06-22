@@ -6,7 +6,7 @@ namespace JiHoon
     public class UnitBase : MonoBehaviour
     {
         [Header("Config")]
-        public UnitData data; // 유닛 데이터
+        public UnitData data; // 유닛 데이터 참조
 
         protected int currentHP; // 현재 체력
         protected bool isDead; // 유닛이 죽었는지 여부
@@ -17,7 +17,7 @@ namespace JiHoon
         }
         protected virtual void Start()
         {
-            StartCoroutine(AttackRoutin());
+            StartCoroutine(AttackRoutine());
         }
 
         //생명력 감소
@@ -38,7 +38,7 @@ namespace JiHoon
         }
 
         //공격 루틴(공통)
-        protected virtual IEnumerator AttackRoutin()
+        protected virtual IEnumerator AttackRoutine()
         {
             while (!isDead)
             {
@@ -68,10 +68,29 @@ namespace JiHoon
         protected void MeleeAttack()
         {
             if (isDead) return;
-            var hits = Physics2D.OverlapCircleAll(transform.position, data.attackRange, LayerMask.GetMask("Enemy"));
+
+            Collider2D[] hits = Physics2D.OverlapCircleAll(
+                transform.position,
+                data.attackRange,
+                LayerMask.GetMask("Enemy")
+            );
+
+            Collider2D closest = null;
+            float minDistSq = float.MaxValue;
+
             foreach (var h in hits)
             {
-                h.GetComponent<UnitBase>()?.TakeDamage(data.damage);
+                float distSq = (h.transform.position - transform.position).sqrMagnitude;
+                if (distSq < minDistSq)
+                {
+                    minDistSq = distSq;
+                    closest = h;
+                }
+            }
+
+            if (closest != null)
+            {
+                closest.GetComponent<UnitBase>()?.TakeDamage(data.damage);
             }
         }
         //원거리 공격 처리

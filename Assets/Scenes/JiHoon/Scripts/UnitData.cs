@@ -18,6 +18,12 @@ namespace JiHoon
         public float attackRange; // 공격 사거리
         public float attackInterval; // 공격 주기
 
+        [Header("Footprint")]
+        // 유닛이 차지하는 셀 크기 (가로)
+        public int footprintWidth = 1;
+        // 유닛이 차지하는 셀 크기 (세로)
+        public int footprintHeight = 1;
+
         //TODO :[Header("Special")] 상태이상 공격, 상태이상등 체크 아직 기획안함
 
     }

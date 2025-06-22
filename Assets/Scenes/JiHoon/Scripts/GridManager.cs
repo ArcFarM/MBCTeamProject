@@ -19,7 +19,7 @@ public class GridManager : MonoBehaviour
 
     void Start()
     {
-        // ① baseTilemap 에서 roadTile 과 일치하는 모든 셀을 수집
+        // baseTilemap 에서 roadTile 과 일치하는 모든 셀을 수집
         roadCells = new List<Vector3Int>();
         var b = baseTilemap.cellBounds;
         foreach (var pos in b.allPositionsWithin)
@@ -27,11 +27,19 @@ public class GridManager : MonoBehaviour
             if (baseTilemap.GetTile(pos) == roadTile)
                 roadCells.Add(pos);
         }
+
+
+    }
+    // 도로 셀인지 여부를 확인하는 헬퍼 함수
+    public bool IsRoadCell(Vector3Int cell)
+    {
+        // 도로 셀인지 여부를 확인
+        return roadCells != null && roadCells.Contains(cell);
     }
 
-    /// <summary>
-    /// ② 미리 수집해둔 도로(roadCells)만 파란색으로 하이라이트
-    /// </summary>
+
+    // 미리 수집해둔 도로(roadCells)만 파란색으로 하이라이트
+
     public void HighlightAllowedCells()
     {
         rangeTilemap.ClearAllTiles();
@@ -39,17 +47,17 @@ public class GridManager : MonoBehaviour
             rangeTilemap.SetTile(cell, rangeHighlightTile);
     }
 
-    /// <summary>
-    /// ③ 프리뷰 전용 타일맵 클리어
-    /// </summary>
+    
+    //프리뷰 전용 타일맵 클리어
+    
     public void ClearPreview()
     {
         previewTilemap.ClearAllTiles();
     }
 
-    /// <summary>
-    /// ④ 특정 셀에만 빨간색 프리뷰 찍기 (도로 셀일 때만)
-    /// </summary>
+    
+    // 특정 셀에만 빨간색 프리뷰 찍기 (도로 셀일 때만)
+    
     public void PreviewCell(Vector3Int cell)
     {
         previewTilemap.ClearAllTiles();
@@ -57,9 +65,9 @@ public class GridManager : MonoBehaviour
             previewTilemap.SetTile(cell, placementPreviewTile);
     }
 
-    /// <summary>
-    /// ⑤ 전체 하이라이트(범위+프리뷰) 한 번에 지우기
-    /// </summary>
+    
+    // 전체 하이라이트(범위+프리뷰) 한 번에 지우기
+    
     public void ClearAllHighlights()
     {
         rangeTilemap.ClearAllTiles();
