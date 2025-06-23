@@ -1,59 +1,58 @@
 using UnityEngine;
 using UnityEngine.UI;
-
-public class ShopUIManager : MonoBehaviour
+namespace JiHoon
 {
-    [Header("Panel Refences")]
-    public GameObject shopPanel; // »óÁ¡ ÆĞ³Î
-    public Button openButton; // »óÁ¡ ¹öÆ°
-    public Button closeButton; // ´İ±â ¹öÆ°
 
-    [Header("Card Grid")]
-    public Transform cardGrid; // Ä«µå ±×¸®µå ºÎ¸ğ ¿ÀºêÁ§Æ®
-    public GameObject cardSlotPrefab; // Ä«µå ÇÁ¸®ÆÕ
-
-    [Header("Other UI")]
-    public Button buyButton; // ±¸¸Å ¹öÆ°
-
-
-    private void Start()
+    public class ShopUIManager : MonoBehaviour
     {
-        
+        [Header("Panel Refences")]
+        public GameObject shopPanel; // ìƒì  íŒ¨ë„
+        public Button openButton; // ìƒì  ë²„íŠ¼
+        public Button closeButton; // ë‹«ê¸° ë²„íŠ¼
 
-        //Ä«µå ½½·Ô Ã¤¿ì±â(»ùÇÃ 9°³)
-        PopulateCard(9);
+        [Header("Card Grid")]
+        public Transform cardGrid; // ì¹´ë“œ ê·¸ë¦¬ë“œ ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸
+        public GameObject cardSlotPrefab; // ì¹´ë“œ í”„ë¦¬íŒ¹
 
-        
+        [Header("Other UI")]
+        public Button buyButton; // êµ¬ë§¤ ë²„íŠ¼
 
-        shopPanel.SetActive(false); // ½ÃÀÛ ½Ã »óÁ¡ ÆĞ³Î ºñÈ°¼ºÈ­
-    }
 
-    void PopulateCard(int count)
-    {
-        //±âÁ¸ ½½·Ô ¸ğµÎ Áö¿ì±â
-        foreach (Transform t in cardGrid) Destroy(t.gameObject);
-
-        for (int i = 0; i < count; i++)
+        private void Start()
         {
-            //CardSlot ÇÁ¸®ÆéÀ» CardGrid ¹Ù·Î ¾Æ·¡ »ı¼º
-            var slot = Instantiate(cardSlotPrefab, cardGrid, false);
-            
+            //ì¹´ë“œ ìŠ¬ë¡¯ ì±„ìš°ê¸°(ìƒ˜í”Œ 9ê°œ)
+            PopulateCard(9);
+
+            shopPanel.SetActive(false); // ì‹œì‘ ì‹œ ìƒì  íŒ¨ë„ ë¹„í™œì„±í™”
+        }
+
+        void PopulateCard(int count)
+        {
+            //ê¸°ì¡´ ìŠ¬ë¡¯ ëª¨ë‘ ì§€ìš°ê¸°
+            foreach (Transform t in cardGrid) Destroy(t.gameObject);
+
+            for (int i = 0; i < count; i++)
+            {
+                //CardSlot í”„ë¦¬í©ì„ CardGrid ë°”ë¡œ ì•„ë˜ ìƒì„±
+                var slot = Instantiate(cardSlotPrefab, cardGrid, false);
+
+            }
+
+        }
+
+        public void OpenShop()
+        {
+            shopPanel.SetActive(true); // ìƒì  íŒ¨ë„ í™œì„±í™”
+        }
+        public void CloseShop()
+        {
+            shopPanel.SetActive(false); // ìƒì  íŒ¨ë„ ë¹„í™œì„±í™”
+        }
+
+        public void BuyButton()
+        {
+            Debug.Log("êµ¬ë§¤ ë²„íŠ¼ í´ë¦­ë¨");
         }
 
     }
-    
-    public void OpenShop()
-    {
-        shopPanel.SetActive(true); // »óÁ¡ ÆĞ³Î È°¼ºÈ­
-    }
-    public void CloseShop()
-    {
-        shopPanel.SetActive(false); // »óÁ¡ ÆĞ³Î ºñÈ°¼ºÈ­
-    }
-
-    public void BuyButton()
-    {
-        Debug.Log("±¸¸Å ¹öÆ° Å¬¸¯µÊ");
-    }
-
 }
