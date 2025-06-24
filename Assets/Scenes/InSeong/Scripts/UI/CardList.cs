@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using MainGame.Units;
+using MainGame.Enum;
 
 //UI 내에서 유닛 카드를 들고 있는 부분을 담당
 namespace MainGame.UI {
@@ -39,12 +40,17 @@ namespace MainGame.UI {
             }
         }
         public void RemoveCard(GameObject go) {
-            if(cards.Count == 0) {
+            if (go.GetComponent<AllyUnitBase>() == null) return;
+            if (cards.Count == 0) {
                 //TODO : 손패가 없어서 카드를 낼 수 없다는 경고 팝업
             }
             //손에서 카드를 내서 재고가 사라짐
             for(int i = 0; i < cards.Count; i++) {
-                if (cards[i].GetComponent<AllyUnitBase>().)
+                if (cards[i].GetComponent<AllyUnitBase>().GetID == go.GetComponent<AllyUnitBase>().GetID) {
+                    //TODO : UnitManager를 통해 유닛 배치 모드에 돌입하기
+                    cards.Remove(cards[i]);
+                    break;
+                }
             }
         }
         #endregion
