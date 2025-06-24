@@ -1,3 +1,4 @@
+using MainGame.Enum;
 using UnityEngine;
 
 namespace MainGame.Units {
@@ -44,6 +45,8 @@ namespace MainGame.Units {
         protected float currRange = 1;
         [SerializeField, Tooltip("이동 속도, 기본값 1")]
         protected float currSpd = 1;
+        //능력치는 배열로 관리
+        [SerializeField] protected float[] stats;
         //참조
         //애니메이션 사용에 필요한 Animator
         Animator animator;
@@ -51,12 +54,58 @@ namespace MainGame.Units {
         #endregion
 
         #region Properties
+        public string GetID { get { return unitID; } }
+        public string GetName { get { return unitName; } }
+
+        //프로퍼티처럼 쓰일 메서드
+        public float GetStat(StatType st) {
+            int index = (int)st;
+            if (index >= 0 && index < stats.Length) return stats[index];
+            else {
+                Debug.LogError("올바르지 않은 StatType 입력됨 : "+ st);
+                return -1;
+            }
+        }
+
+        public void SetStat(StatType st, float value) {
+            int index = (int)st;
+            if (index >= 0 && index < stats.Length) stats[index] = value;
+            else {
+                Debug.LogError("올바르지 않은 StatType 입력됨 : " + st);
+            }
+        }
         #endregion
 
         #region Unity Event Method
+        private void Start() {
+            InitStats();
+        }
         #endregion
 
         #region Custom Method
+        //능력치 초기화
+        void InitStats() {
+            stats[(int)StatType.BaseRawSize] = baseRawSize;
+            stats[(int)StatType.BaseColSize] = baseColSize;
+            stats[(int)StatType.BaseSplash] = baseSplash;
+
+            stats[(int)StatType.BaseHealth] = baseHealth;
+            stats[(int)StatType.BaseDamage] = baseDamage;
+            stats[(int)StatType.BaseAtkSpd] = baseAtkSpd;
+            stats[(int)StatType.BaseRange] = baseRange;
+            stats[(int)StatType.BaseSpd] = baseSpd;
+
+            SetToBase();
+        }
+
+        //능력치 기본값으로 설정
+        void SetToBase() {
+            stats[(int)StatType.CurrHealth] = baseHealth;
+            stats[(int)StatType.CurrDamage] = baseDamage;
+            stats[(int)StatType.CurrAtkSpd] = baseAtkSpd;
+            stats[(int)StatType.CurrRange] = baseRange;
+            stats[(int)StatType.CurrSpd] = baseSpd;
+        }
         #endregion
     }
 

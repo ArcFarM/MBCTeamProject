@@ -16,9 +16,9 @@ namespace MainGame.Manager {
         #endregion
 
         #region Custom Method
-        //유닛 카드를 배치하기
+        //구매한 유닛 카드를 손패에 넣는다
         public void SetUnitCard(GameObject go) {
-            
+            cl.AddCard(go);
         }
         #endregion
     }
