@@ -1,30 +1,32 @@
 using UnityEngine;
+
 namespace JiHoon
 {
     [System.Serializable]
     public struct UnitPreset
     {
-        public UnitData data;   //À¯´Ö µ¥ÀÌÅÍ ÂüÁ¶
-        public GameObject prefab;   //½ÇÁ¦ À¯´Ö ÇÁ¸®Æé
-        
+        public UnitData data;   //ìœ ë‹› ë°ì´í„° ì°¸ì¡°
+        public GameObject prefab;   //ì‹¤ì œ ìœ ë‹› í”„ë¦¬í©
+
     }
 
     public class UnitSpawner : MonoBehaviour
     {
+
         public UnitPreset[] unitPresets;
 
-        // ¸¶¿ì½º Å¬¸¯ À§Ä¡¸¦ ÀÎÀÚ·Î ¹Ş´Â ¸Ş¼­µå
+        // ë§ˆìš°ìŠ¤ í´ë¦­ ìœ„ì¹˜ë¥¼ ì¸ìë¡œ ë°›ëŠ” ë©”ì„œë“œ
         public void SpawnAtPosition(int presetIndex, Vector3 worldPos)
         {
-            //À¯È¿ ¹üÀ§ Ã¼Å©
+            //ìœ íš¨ ë²”ìœ„ ì²´í¬
             if (presetIndex < 0 || presetIndex >= unitPresets.Length) return;
 
-            // À¯´Ö ÇÁ¸®Æé ÀÎ½ºÅÏ½ºÈ­
+            // ìœ ë‹› í”„ë¦¬í© ì¸ìŠ¤í„´ìŠ¤í™”
             var preset = unitPresets[presetIndex];
             GameObject go = Instantiate(preset.prefab, worldPos, Quaternion.identity);
-            go.name = preset.data.unitName; //¿ÀºêÁ§Æ® ÀÌ¸§ ¼³Á¤
+            go.name = preset.data.unitName; //ì˜¤ë¸Œì íŠ¸ ì´ë¦„ ì„¤ì •
 
-            //À¯´Öº£ÀÌ½º ¼¼ÆÃ
+            //ìœ ë‹›ë² ì´ìŠ¤ ì„¸íŒ…
             var unit = go.GetComponent<UnitBase>() ?? go.AddComponent<UnitBase>();
             unit.data = preset.data;
         }

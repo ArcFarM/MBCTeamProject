@@ -1,3 +1,4 @@
+using JiHoon;
 using MainGame.Enum;
 using UnityEngine;
 
@@ -50,7 +51,8 @@ namespace MainGame.Units {
         //참조
         //애니메이션 사용에 필요한 Animator
         Animator animator;
-        
+
+        public UnitData data; // 유닛 데이터 참조
         #endregion
 
         #region Properties
@@ -77,6 +79,13 @@ namespace MainGame.Units {
         #endregion
 
         #region Unity Event Method
+        private void Awake()
+        {
+            // StatType 열거형이 몇 개인지 계산
+            int statCount = System.Enum.GetValues(typeof(StatType)).Length;
+            // stats 배열을 그 크기만큼 생성
+            stats = new float[statCount];
+        }
         private void Start() {
             InitStats();
         }
@@ -85,6 +94,8 @@ namespace MainGame.Units {
         #region Custom Method
         //능력치 초기화
         void InitStats() {
+            
+
             stats[(int)StatType.BaseRawSize] = baseRawSize;
             stats[(int)StatType.BaseColSize] = baseColSize;
             stats[(int)StatType.BaseSplash] = baseSplash;
