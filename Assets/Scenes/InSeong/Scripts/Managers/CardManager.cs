@@ -24,7 +24,7 @@ namespace MainGame.Manager {
                     StatManager.Instance.AdjustStat(pc);
                     break;
                 case CardEffect.Change_Unit:
-                    //UnitManager를 통해 손패에 유닛 추가
+                    //UnitManager를 통해 손패에 유닛 변경 사항 반영
                     foreach(GameObject go in pc.GetSetUnitsArr) {
                         AllyUnitBase aub = go.GetComponent<AllyUnitBase>();
                         //대상이 아군 유닛이 맞다면 추가
