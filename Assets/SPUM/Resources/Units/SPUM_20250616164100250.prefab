@@ -2293,6 +2293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1805534778349714949}
   - component: {fileID: 5827040043015594914}
+  - component: {fileID: 8945417691131044376}
   m_Layer: 5
   m_Name: SPUM_20250616164100250
   m_TagString: Untagged
@@ -5260,6 +5261,38 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 4c70df3312bb83346a1bf065b30d3467, type: 2}
   - {fileID: 7400000, guid: 1ef525d53ae254f7d82ef364ced85490, type: 2}
   - {fileID: 7400000, guid: fabe4f140fdb9cb448bc941c7c93e8b6, type: 2}
+--- !u!114 &8945417691131044376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4647916805021003324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b7f2a50298afb4794d291cf3d103bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitID: 
+  unitName: 
+  baseRawSize: 1
+  baseColSize: 1
+  baseSplash: 0
+  baseHealth: 1
+  baseDamage: 1
+  baseAtkSpd: 1
+  baseRange: 1
+  baseSpd: 1
+  currRawSize: 1
+  currColSize: 1
+  currSplash: 0
+  currHealth: 1
+  currDamage: 1
+  currAtkSpd: 1
+  currRange: 1
+  currSpd: 1
+  stats: []
+  prices: 00000000000000000000000000000000
 --- !u!1 &4736324038422468125
 GameObject:
   m_ObjectHideFlags: 0

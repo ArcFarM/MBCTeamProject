@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -21,6 +21,18 @@ namespace MainGame.UI {
         #endregion
 
         #region Properties
+        public int GetStat {
+            get { return currStat; }
+            set { currStat = value; }
+        }
+        public int GetStatMin {
+            get { return currStatMin; }
+            set { currStatMin = value; }
+        }
+        public int GetStatMax {
+            get { return currStatMax; }
+            set { currStatMin = value; }
+        }
         #endregion
 
         #region Unity Event Method
