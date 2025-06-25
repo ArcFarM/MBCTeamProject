@@ -16,10 +16,16 @@ namespace MainGame.Units {
         //각 유닛의 능력치 - 버프,디버프 감안하여 원래 능력치와 현재 능력치로 구분
         //기본 능력치 - 현재는 수정 불가능
         [Header("===== 유닛 기본 능력치 - 현재 수정 불가 =====")]
+<<<<<<< Updated upstream
         [SerializeField, Tooltip("유닛의 행 크기, 기본값 1")]
         protected float baseRawSize = 1;
         [SerializeField, Tooltip("유닛의 열 크기, 기본값 1")]
         protected float baseColSize = 1;
+=======
+        [SerializeField, Tooltip("유닛의 크기, 기본값 1/1")]
+        public int baseRawSize = 1;
+        public int baseColSize = 1;
+>>>>>>> Stashed changes
         [SerializeField, Tooltip("방사형 공격 범위, 기본값 0")]
         protected float baseSplash = 0f;
         //수정 가능한 기본 능력치

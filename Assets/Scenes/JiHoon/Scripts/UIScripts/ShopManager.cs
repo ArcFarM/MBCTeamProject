@@ -5,39 +5,40 @@ using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
-    [Header("UI ÆĞ³Î")]
-    public GameObject shopPanel; // »óÁ¡ UI ÆĞ³Î
+    [Header("UI íŒ¨ë„")]
+    public GameObject shopPanel; // ìƒì  UI íŒ¨ë„
     
 
-    [Header("ÇÃ·¹ÀÌ¾î °ñµå")]
+    [Header("í”Œë ˆì´ì–´ ê³¨ë“œ")]
     public int playerGold = 1000;
     public TextMeshProUGUI goldText;
 
-    [Header("µ¥ÀÌÅÍ")]
-    public List<ItemData> allItems;
-    public Transform gridParent;
-    public GameObject itemButtonPrefab;
+    [Header("ë°ì´í„°")]
+    public List<ItemData> allItems; // ìƒì ì— íŒë§¤ë˜ëŠ” ì•„ì´í…œ ë°ì´í„° ë¦¬ìŠ¤íŠ¸
+    public Transform gridParent; // ì•„ì´í…œ ë²„íŠ¼ë“¤ì´ ë°°ì¹˜ë  ë¶€ëª¨ ì˜¤ë¸Œì íŠ¸
+    public GameObject itemButtonPrefab; // ì•„ì´í…œ ë²„íŠ¼ í”„ë¦¬íŒ¹
 
-    [Header("¿ìÃø UI")]
+    [Header("ìš°ì¸¡ UI")]
     public Button buyButton;
 
-    [Header("Ãß°¡ UI")]
-    public TextMeshProUGUI effectText;         // ¿ŞÂÊ »ó´Ü ¼³¸í¿ë
-    public Image npcIllustration;    // ¿À¸¥ÂÊ »ó´Ü ÀÏ·¯½ºÆ®¿ë
+    [Header("ì¶”ê°€ UI")]
+    public TextMeshProUGUI effectText;         // ì™¼ìª½ ìƒë‹¨ ì„¤ëª…ìš©
+    public Image npcIllustration;    // ì˜¤ë¥¸ìª½ ìƒë‹¨ ì¼ëŸ¬ìŠ¤íŠ¸ìš©
 
-    private ItemData selectedItem;
+    private ItemData selectedItem;  // í˜„ì¬ ì„ íƒëœ ì•„ì´í…œ
 
     private void Start()
     {
-        UpdateGoldUI();
-        PopulateGrid();
+        UpdateGoldUI(); // í”Œë ˆì´ì–´ ê³¨ë“œ UI ì´ˆê¸°í™”
+        PopulateGrid(); // ì•„ì´í…œ ë²„íŠ¼ ìƒì„±
 
-        // ÃÖÃÊ¿£ ºñÈ°¼ºÈ­
+        // ìµœì´ˆì—” ë¹„í™œì„±í™”
         ClearDetail();
 
         
     }
 
+    // ì•„ì´í…œ ë²„íŠ¼ë“¤ì„ ê·¸ë¦¬ë“œì— ì±„ìš°ëŠ” í•¨ìˆ˜
     private void PopulateGrid()
     {
         foreach (var item in allItems)
@@ -48,17 +49,17 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    // ¾ÆÀÌÅÛ ¼±ÅÃ ½Ã È£ÃâµÇ´Â ÇÔ¼ö
+    // ì•„ì´í…œ ì„ íƒ ì‹œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜
     public void SelectItem(ItemData item)
     {
         selectedItem = item;
         buyButton.interactable = true;
 
-        // 1) Effect ¿µ¿ª¿¡ ¼³¸í ¶ç¿ì±â
+        // 1) Effect ì˜ì—­ì— ì„¤ëª… ë„ìš°ê¸°
         if (effectText != null)
             effectText.text = item.description;
 
-        // 2) NPC ILUST ¿µ¿ª¿¡ ÀÏ·¯½ºÆ® ¶ç¿ì±â
+        // 2) NPC ILUST ì˜ì—­ì— ì¼ëŸ¬ìŠ¤íŠ¸ ë„ìš°ê¸°
         if (npcIllustration != null)
             npcIllustration.sprite = item.illustration;
     }
@@ -67,11 +68,12 @@ public class ShopManager : MonoBehaviour
     {
         buyButton.interactable = false;
         if (effectText != null)
-            effectText.text = "";            // ¼³¸í ÃÊ±âÈ­
+            effectText.text = "";            // ì„¤ëª… ì´ˆê¸°í™”
         if (npcIllustration != null)
-            npcIllustration.sprite = null;   // ÀÏ·¯½ºÆ® ¼û±â±â
+            npcIllustration.sprite = null;   // ì¼ëŸ¬ìŠ¤íŠ¸ ìˆ¨ê¸°ê¸°
     }
 
+    // êµ¬ë§¤ ë²„íŠ¼ í´ë¦­ ì‹œ í˜¸ì¶œë˜ëŠ” í•¨ìˆ˜   
     public void OnBuyButton()
     {
         if (selectedItem == null) return;
@@ -80,14 +82,15 @@ public class ShopManager : MonoBehaviour
         {
             playerGold -= selectedItem.price;
             UpdateGoldUI();
-            Debug.Log($"{selectedItem.itemName} ±¸¸Å! ³²Àº °ñµå: {playerGold}");
+            Debug.Log($"{selectedItem.itemName} êµ¬ë§¤! ë‚¨ì€ ê³¨ë“œ: {playerGold}");
         }
         else
         {
-            Debug.Log("°ñµå°¡ ºÎÁ·ÇÕ´Ï´Ù!");
+            Debug.Log("ê³¨ë“œê°€ ë¶€ì¡±í•©ë‹ˆë‹¤!");
         }
     }
 
+    // í”Œë ˆì´ì–´ ê³¨ë“œ UI ì—…ë°ì´íŠ¸ í•¨ìˆ˜
     private void UpdateGoldUI()
     {
         if (goldText != null)
@@ -100,6 +103,6 @@ public class ShopManager : MonoBehaviour
     public void CloseShop()
     {
         shopPanel.SetActive(false);
-        ClearDetail(); // »óÁ¡ ´İÀ» ¶§ ¼±ÅÃµÈ ¾ÆÀÌÅÛ Á¤º¸ ÃÊ±âÈ­
+        ClearDetail(); // ìƒì  ë‹«ì„ ë•Œ ì„ íƒëœ ì•„ì´í…œ ì •ë³´ ì´ˆê¸°í™”
     }
 }

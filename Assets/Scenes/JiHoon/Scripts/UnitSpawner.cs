@@ -5,30 +5,27 @@ namespace JiHoon
     [System.Serializable]
     public struct UnitPreset
     {
-        public UnitData data;   //유닛 데이터 참조
-        public GameObject prefab;   //실제 유닛 프리펩
-
+        public GameObject prefab;   
     }
 
     public class UnitSpawner : MonoBehaviour
     {
-
         public UnitPreset[] unitPresets;
 
-        // 마우스 클릭 위치를 인자로 받는 메서드
+        // 마우스 클릭 위치(worldPos)에 prefab 그대로 인스턴스화
         public void SpawnAtPosition(int presetIndex, Vector3 worldPos)
         {
-            //유효 범위 체크
             if (presetIndex < 0 || presetIndex >= unitPresets.Length) return;
 
-            // 유닛 프리펩 인스턴스화
-            var preset = unitPresets[presetIndex];
-            GameObject go = Instantiate(preset.prefab, worldPos, Quaternion.identity);
-            go.name = preset.data.unitName; //오브젝트 이름 설정
+            // 단순 instantiate
+            GameObject go = Instantiate(
+                unitPresets[presetIndex].prefab,
+                worldPos,
+                Quaternion.identity
+            );
 
-            //유닛베이스 세팅
-            var unit = go.GetComponent<UnitBase>() ?? go.AddComponent<UnitBase>();
-            unit.data = preset.data;
+            // 추가 세팅이 필요 없으면 여기서 끝!
+            // UnitBase 스크립트가 Awake/Start에서 stats 초기화 담당
         }
     }
 }
