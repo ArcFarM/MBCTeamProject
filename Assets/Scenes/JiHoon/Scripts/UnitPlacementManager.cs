@@ -1,48 +1,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using MainGame.Units;
 namespace JiHoon
 {
     public class UnitPlacementManager : MonoBehaviour
     {
         [Header("References")]
-        public UnitSpawner spawner;      // UnitSpawner ¿ÀºêÁ§Æ®
-        public GridManager gridManager;  // GridManager ¿ÀºêÁ§Æ®
+        public UnitSpawner spawner;      // UnitSpawner ì˜¤ë¸Œì íŠ¸
+        public GridManager gridManager;  // GridManager ì˜¤ë¸Œì íŠ¸
 
-        private int selectedPreset = -1; // ¼±ÅÃµÈ À¯´Ö ÀÎµ¦½º
+        private int selectedPreset = -1; // ì„ íƒëœ ìœ ë‹› ì¸ë±ìŠ¤
 
-        private HashSet<Vector3Int> occupiedCells = new HashSet<Vector3Int>(); // ÀÌ¹Ì ¹èÄ¡µÈ ¼¿ ¸ñ·Ï
-        // UI ¹öÆ°¿¡¼­ È£Ãâ
+        private HashSet<Vector3Int> occupiedCells = new HashSet<Vector3Int>(); // ì´ë¯¸ ë°°ì¹˜ëœ ì…€ ëª©ë¡
+        // UI ë²„íŠ¼ì—ì„œ í˜¸ì¶œ
         public void OnClickSelectUmit(int presetIndex)
         {
             selectedPreset = presetIndex;
-            // º£ÀÌÁö ±æ ¼¿¸¸ ÆÄ¶õ»öÀ¸·Î ÇÏÀÌ¶óÀÌÆ®
+            // ë² ì´ì§€ ê¸¸ ì…€ë§Œ íŒŒë€ìƒ‰ìœ¼ë¡œ í•˜ì´ë¼ì´íŠ¸
             gridManager.HighlightAllowedCells();
         }
 
         void Update()
         {
-            // ¹èÄ¡ ¸ğµå°¡ ¾Æ´Ò ¶§´Â ºüÁ®³ª°¨
+            // ë°°ì¹˜ ëª¨ë“œê°€ ì•„ë‹ ë•ŒëŠ” ë¹ ì ¸ë‚˜ê°
             if (selectedPreset < 0) return;
 
-            // 1) ¸¶¿ì½º¡æ¿ùµå¡æ¼¿
+            // 1) ë§ˆìš°ìŠ¤â†’ì›”ë“œâ†’ì…€
             Vector3 wp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             wp.z = 0;
             Vector3Int baseCell = gridManager.WorldToCell(wp);
 
-            // 2) footprint Å©±â ÀĞ±â
-            UnitData data = spawner.unitPresets[selectedPreset].data;
-            int w = data.footprintWidth;
-            int h = data.footprintHeight;
+            // 2) ì„ íƒëœ ìœ ë‹›ì˜ footprint í¬ê¸° ê°€ì ¸ì˜¤ê¸°
+            GameObject prefabObj = spawner.unitPresets[selectedPreset].prefab;
+            MainGame.Units.UnitBase prefab = prefabObj.GetComponent<MainGame.Units.UnitBase>();
 
-            // 3) footprint¿¡ Æ÷ÇÔµÉ ¸ğµç ¼¿ ¸®½ºÆ® »ı¼º
+            int w = prefab.baseRawSize;  // í”„ë¡œí¼í‹° ì‚¬ìš©
+            int h = prefab.baseColSize; // í”„ë¡œí¼í‹° ì‚¬ìš©
+
+            // 3) footprintì— í¬í•¨ë  ëª¨ë“  ì…€ ë¦¬ìŠ¤íŠ¸ ìƒì„±
             List<Vector3Int> cells = new List<Vector3Int>();
             for (int dx = 0; dx < w; dx++)
                 for (int dy = 0; dy < h; dy++)
                     cells.Add(new Vector3Int(baseCell.x + dx, baseCell.y + dy, baseCell.z));
 
-            // 4) ÇÁ¸®ºä Ã³¸®
+            // 4) í”„ë¦¬ë·° ì²˜ë¦¬
             gridManager.ClearPreview();
             bool canPlace = true;
             foreach (var c in cells)
@@ -60,12 +62,12 @@ namespace JiHoon
             }
 
 
-            // 5) ¼³Ä¡ È®Á¤ Å¬¸¯
+            // 5) ì„¤ì¹˜ í™•ì • í´ë¦­
             if (canPlace
                 && Input.GetMouseButtonDown(0)
                 && !EventSystem.current.IsPointerOverGameObject())
             {
-                // footprint ¼¿µéÀÇ Áß¾Ó °è»ê
+                // footprint ì…€ë“¤ì˜ ì¤‘ì•™ ê³„ì‚°
                 Vector3 worldSum = Vector3.zero;
                 foreach (var c in cells)
                     worldSum += gridManager.CellToWorldCenter(c);
@@ -73,16 +75,16 @@ namespace JiHoon
 
                 spawner.SpawnAtPosition(selectedPreset, spawnPos);
 
-                // Á¡À¯ ±â·Ï
+                // ì ìœ  ê¸°ë¡
                 foreach (var c in cells)
                     occupiedCells.Add(c);
 
-                // ¸ğµå Á¾·á
+                // ëª¨ë“œ ì¢…ë£Œ
                 selectedPreset = -1;
                 gridManager.ClearAllHighlights();
             }
 
-            // 6) ESC·Î Ãë¼Ò
+            // 6) ESCë¡œ ì·¨ì†Œ
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 selectedPreset = -1;

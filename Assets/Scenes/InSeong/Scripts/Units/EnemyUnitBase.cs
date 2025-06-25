@@ -3,6 +3,7 @@ using UnityEngine;
 namespace MainGame.Units {
     public class EnemyUnitBase : UnitBase {
         #region Variables
+        
         //적 유닛 통과 시 패널티
         [SerializeField, Tooltip("적 유닛 통과 시 입을 패널티")]
         protected int panelty;

@@ -1,3 +1,4 @@
+using JiHoon;
 using MainGame.Enum;
 using UnityEngine;
 
@@ -10,11 +11,21 @@ namespace MainGame.Units {
         protected string unitID;
         [SerializeField, Tooltip("개체명")]
         protected string unitName;
+        [SerializeField, Tooltip("소속")]
+        protected UnitFaction faction;
         //각 유닛의 능력치 - 버프,디버프 감안하여 원래 능력치와 현재 능력치로 구분
         //기본 능력치 - 현재는 수정 불가능
         [Header("===== 유닛 기본 능력치 - 현재 수정 불가 =====")]
+<<<<<<< Updated upstream
+        [SerializeField, Tooltip("유닛의 행 크기, 기본값 1")]
+        protected float baseRawSize = 1;
+        [SerializeField, Tooltip("유닛의 열 크기, 기본값 1")]
+        protected float baseColSize = 1;
+=======
         [SerializeField, Tooltip("유닛의 크기, 기본값 1/1")]
-        protected float baseRawSize = 1, baseColSize = 1;
+        public int baseRawSize = 1;
+        public int baseColSize = 1;
+>>>>>>> Stashed changes
         [SerializeField, Tooltip("방사형 공격 범위, 기본값 0")]
         protected float baseSplash = 0f;
         //수정 가능한 기본 능력치
@@ -30,8 +41,10 @@ namespace MainGame.Units {
         [SerializeField, Tooltip("이동 속도, 기본값 1")]
         protected float baseSpd = 1;
         [Header("===== 유닛 현재 기본 능력치 - 현재 수정 불가 =====")]
-        [SerializeField, Tooltip("유닛의 크기, 기본값 1/1")]
-        protected float currRawSize = 1, currColSize = 1;
+        [SerializeField, Tooltip("유닛의 행 크기, 기본값 1")]
+        protected float currRawSize = 1;
+        [SerializeField, Tooltip("유닛의 열 크기, 기본값 1")]
+        protected float currColSize = 1;
         [SerializeField, Tooltip("방사형 공격 범위, 기본값 0")]
         protected float currSplash = 0f;
         [Header("===== 유닛 현재 능력치 - 수정 가능 =====")]
@@ -50,7 +63,6 @@ namespace MainGame.Units {
         //참조
         //애니메이션 사용에 필요한 Animator
         Animator animator;
-        
         #endregion
 
         #region Properties
@@ -85,6 +97,12 @@ namespace MainGame.Units {
         #region Custom Method
         //능력치 초기화
         void InitStats() {
+            // StatType 열거형이 몇 개인지 계산
+            int statCount = System.Enum.GetValues(typeof(StatType)).Length;
+            // 경우에 따라 배열도 초기화
+            if (stats.Length != statCount) {
+                stats = new float[statCount];
+            }
             stats[(int)StatType.BaseRawSize] = baseRawSize;
             stats[(int)StatType.BaseColSize] = baseColSize;
             stats[(int)StatType.BaseSplash] = baseSplash;
