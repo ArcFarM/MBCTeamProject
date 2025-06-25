@@ -1,5 +1,6 @@
-﻿using MainGame.Enum;
+using MainGame.Enum;
 using MainGame.UI;
+using MainGame.Units;
 using UnityEngine;
 
 namespace MainGame.Manager {
@@ -23,7 +24,14 @@ namespace MainGame.Manager {
                     StatManager.Instance.AdjustStat(pc);
                     break;
                 case CardEffect.Change_Unit:
-
+                    //UnitManager를 통해 손패에 유닛 추가
+                    foreach(GameObject go in pc.GetSetUnitsArr) {
+                        AllyUnitBase aub = go.GetComponent<AllyUnitBase>();
+                        //대상이 아군 유닛이 맞다면 추가
+                        if(aub != null) {
+                            UnitManager.Instance.SetUnitCard(pc.GetAddFlag, go);
+                        }
+                    }
                     break;
                 case CardEffect.Change_Both:
 

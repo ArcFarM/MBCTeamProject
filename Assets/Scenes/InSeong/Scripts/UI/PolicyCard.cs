@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MainGame.Manager;
 using MainGame.Enum;
+using MainGame.Units;
 
 namespace MainGame.UI {
     public class PolicyCard : MonoBehaviour {
@@ -13,7 +14,8 @@ namespace MainGame.UI {
         [SerializeField] CardEffect cardEffect;
         //이 카드가 건드릴 능력치들과 유닛들
         [SerializeField] int[] stats;
-        //[SerializeField] Units[] units;
+        [SerializeField] GameObject[] units;
+        [SerializeField] bool isAdd;
         #endregion
 
         #region Properties
@@ -28,6 +30,15 @@ namespace MainGame.UI {
         public int[] GetSetStatsArr {
             get { return stats; }
             set { stats = value; }
+        }
+
+        public GameObject[] GetSetUnitsArr {
+            get { return units; }
+            set { units = value; }
+        }
+
+        public bool GetAddFlag {
+            get { return isAdd; }
         }
         #endregion
 

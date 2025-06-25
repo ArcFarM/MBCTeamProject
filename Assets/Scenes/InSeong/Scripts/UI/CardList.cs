@@ -32,8 +32,10 @@ namespace MainGame.UI {
         }
         //상점에서 카드를 구매했을 때
         public void AddCard(GameObject go) {
+            //공간이 충분하다면 카드를 자신의 자식으로 놓기
             if(cards.Count < maxCards) {
                 cards.Add(go);
+                go.transform.SetParent(transform);
             } else {
                 //TODO : 손패가 가득 차서 카드 구매 불가
                 //상점 스크립트에도 추가될 내용
@@ -44,7 +46,7 @@ namespace MainGame.UI {
             if (cards.Count == 0) {
                 //TODO : 손패가 없어서 카드를 낼 수 없다는 경고 팝업
             }
-            //손에서 카드를 내서 재고가 사라짐
+            //손에서 카드를 내거나 이벤트를 통해 들고 있는 카드가 사라지는 경우
             for(int i = 0; i < cards.Count; i++) {
                 if (cards[i].GetComponent<AllyUnitBase>().GetID == go.GetComponent<AllyUnitBase>().GetID) {
                     //TODO : UnitManager를 통해 유닛 배치 모드에 돌입하기
