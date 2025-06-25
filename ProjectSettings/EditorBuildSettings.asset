@@ -14,6 +14,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 398dc11d3ce86754aa599dd9b2ed6edc
+  - enabled: 1
+    path: Assets/Scenes/JiHoon/UITestScene.unity
+    guid: 206ac62effbaf364e84a80f54352bb5b
+  - enabled: 1
+    path: Assets/Scenes/JeaYoon/Scene/MainPlay_UI.unity
+    guid: 6f1d1dcdd45030a4bb0e87c6740b4c56
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
