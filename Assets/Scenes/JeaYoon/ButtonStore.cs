@@ -1,6 +1,8 @@
-using MyDefence;
+
 using UnityEngine;
 
+namespace JeaYoon
+{
     public class ButtonStore : MonoBehaviour
     {
         #region Field
@@ -26,3 +28,4 @@ using UnityEngine;
             Application.Quit();
         }
     }
+}
