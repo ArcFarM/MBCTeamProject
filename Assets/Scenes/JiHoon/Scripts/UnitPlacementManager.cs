@@ -35,8 +35,8 @@ namespace JiHoon
             GameObject prefabObj = spawner.unitPresets[selectedPreset].prefab;
             MainGame.Units.UnitBase prefab = prefabObj.GetComponent<MainGame.Units.UnitBase>();
 
-            int w = prefab.baseRawSize;  // 프로퍼티 사용
-            int h = prefab.baseColSize; // 프로퍼티 사용
+            int w = prefab.GetBaseRawSize;  // 프로퍼티 사용
+            int h = prefab.GetBaseColSize; // 프로퍼티 사용
 
             // 3) footprint에 포함될 모든 셀 리스트 생성
             List<Vector3Int> cells = new List<Vector3Int>();

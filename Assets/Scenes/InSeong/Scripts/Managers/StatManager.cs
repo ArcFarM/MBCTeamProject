@@ -1,7 +1,7 @@
 using UnityEngine;
 using MainGame.UI;
 using MainGame.Enum;
-using MainGame.System;
+using MainGame.SystemProcess;
 //능력치를 현재 수치와 동기화하여 시각 효과
 namespace MainGame.Manager {
     public class StatManager : SingletonManager<StatManager> {
