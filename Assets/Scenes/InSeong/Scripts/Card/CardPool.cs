@@ -1,19 +1,18 @@
 using MainGame.UI;
 using UnityEngine;
+using MainGame.Enum;
 
 namespace MainGame.Card {
     public class CardPool : MonoBehaviour {
         //Policy Card 들을 저장할 Pool 오브젝트이며, 확률에 따라 정해진 등급의 카드들을 뽑아서 반환
         #region Variables
-        [SerializeField] GameObject cardPool_Crisis;
         int crisislevel = -1; //crisis 등급은 특수한 경우에만 등장
         public bool crisisEvent = false; //위기 이벤트가 발생했는지 여부
-        [SerializeField] GameObject cardPool_NotBad;
         int notBadLevel = 30; //Not Bad 등급은 30% 확률로 등장 (변동 가능)
-        [SerializeField] GameObject cardPool_Good;
         int goodLevel = 90; //Good 등급은 60% 확률로 등장 (변동 가능)
-        [SerializeField] GameObject cardPool_Awesome;
         int awesomeLevel = 100; //Awesome 등급은 10% 확률로 등장 (변동 가능)
+        [SerializeField] GameObject[] cards;
+        /* cards[(int)CardGrade.NotBad]; */
         #endregion
 
         #region Properties
@@ -32,11 +31,17 @@ namespace MainGame.Card {
             } else {
                 if(cardGrade <= notBadLevel) {
                     //Not Bad 등급 카드 반환
+                    int rnd = Random.Range(0, cards[(int)CardGrade.NotBad].transform.childCount);
+                    card = cards[(int)CardGrade.NotBad].transform.GetChild(rnd).GetComponent<PolicyCard>();
                 } else if(cardGrade <= goodLevel) {
                     //Good 등급 카드 반환
+                    int rnd = Random.Range(0, cards[(int)CardGrade.Good].transform.childCount);
+                    card = cards[(int)CardGrade.Good].transform.GetChild(rnd).GetComponent<PolicyCard>();
                 }
                 else if (cardGrade <= awesomeLevel) {
                     //Awesome 등급 카드 반환
+                    int rnd = Random.Range(0, cards[(int)CardGrade.Awesome].transform.childCount);
+                    card = cards[(int)CardGrade.Awesome].transform.GetChild(rnd).GetComponent<PolicyCard>();
                 }
             }
             return card;

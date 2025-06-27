@@ -2582,6 +2582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1893f7e5973c8647b78e30acb42060e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardPool: {fileID: 0}
 --- !u!1 &1936776044
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,6 +2736,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statArr:
   - {fileID: 1871250788}
+  minStat: 00000000
+  maxStat: 64000000
+  defaultStat: 0
+  goe: {fileID: 0}
 --- !u!1 &2063060423
 GameObject:
   m_ObjectHideFlags: 0

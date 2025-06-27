@@ -80,10 +80,18 @@ namespace MainGame.Manager {
             waveCounter++;
 
             //TODO : 결과에 따라 스탯 적용 - 놓친 적에 따라 패널티 적용
+            /*
+             개별 적 유닛은 패널티 스탯을 지니고 있음 - 놓친 적 유닛 정보를 놓친 적 리스트에 담고,
+             그걸 읽어서 스탯을 적용
+             */
 
             //TODO : CardManager를 통해 카드 발생 이벤트 호출
 
             //TODO : StoreManager를 통해 상점 갱신 이벤트 호출
+            /*
+             카드 이벤트가 끝나고 사용 가능한 유닛 리스트에 변화가 있다면 그걸 적용하고 새로고침,
+            아니면 그냥 기존 유닛 풀에서 새로고침해서 유닛들을 상점에 무작위 배치
+             */
 
             //대기 시간 동안 대기
             StartCoroutine(EndWave_Wait());
