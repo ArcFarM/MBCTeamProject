@@ -53,7 +53,7 @@ namespace JeaYoon
                 t -= Time.deltaTime;                         // ) 점점 투명하게 만듬.
                 float a = curve.Evaluate(t);                  // ) t에 따라 애니메이션 커브에서 투명도 계산.
                 img.color = new Color(0f, 0f, 0f, a);       // ) 알파값 a를 이용해 페이드 인/아웃 효과를 만드는 것.
-                yield return 0f;                                // ) IEnumerator는 yield return 문을 통해 "중간에 잠깐 멈췄다가 다시 실행되는" 함수.
+                yield return null;                                // ) IEnumerator는 yield return 문을 통해 "중간에 잠깐 멈췄다가 다시 실행되는" 함수.
             }
         }
 
@@ -69,7 +69,7 @@ namespace JeaYoon
                 t -= Time.deltaTime;                         // ) 점점 투명하게 만듬.
                 float a = curve.Evaluate(t);                  // ) t에 따라 애니메이션 커브에서 투명도 계산.
                 img.color = new Color(0f, 0f, 0f, a);       // ) 알파값 a를 이용해 페이드 인/아웃 효과를 만드는 것.
-                yield return 0f;                                // ) IEnumerator는 yield return 문을 통해 "중간에 잠깐 멈췄다가 다시 실행되는" 함수.
+                yield return null;                                // ) IEnumerator는 yield return 문을 통해 "중간에 잠깐 멈췄다가 다시 실행되는" 함수.
             }
             // [◇] - [◆] - ) sceneName이 빈 문자열이 아닐 때 → 씬 이름이 실제로 전달됐을 때만 씬을 전환하기.
             if (sceneName != "")
