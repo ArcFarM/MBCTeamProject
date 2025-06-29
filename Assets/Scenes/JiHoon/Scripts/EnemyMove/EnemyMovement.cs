@@ -67,6 +67,7 @@ namespace JiHoon
             // 목적지 도착 시 할 일
             Debug.Log("목표 도착");
             Destroy(gameObject);    // 도착시 제거
+            
         }
         void OnDrawGizmos()
         {

@@ -5,7 +5,8 @@ namespace JiHoon
     [System.Serializable]
     public struct UnitPreset
     {
-        public GameObject prefab;   
+        public GameObject prefab;
+        public Sprite icon;    // 카드 덱에 보여줄 스프라이트
     }
 
     public class UnitSpawner : MonoBehaviour
