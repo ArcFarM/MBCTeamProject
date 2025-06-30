@@ -1,86 +1,141 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
     [Header("Tilemaps")]
-    public Tilemap baseTilemap;    // ½ÇÁ¦ ¸Ê Å¸ÀÏ¸Ê (º£ÀÌÁö ±æÀÌ ±ò·Á ÀÖ´Â)
-    public Tilemap rangeTilemap;   // ¼³Ä¡ °¡´É ¹üÀ§ ÇÏÀÌ¶óÀÌÆ®¿ë
-    public Tilemap previewTilemap; // ¸¶¿ì½º ¿À¹ö ÇÁ¸®ºä¿ë
+    public Tilemap baseTilemap;    // ì‹¤ì œ ë§µ (ë„ë¡œ)
+    public Tilemap rangeTilemap;   // ì„¤ì¹˜ ê°€ëŠ¥ ë²”ìœ„ í•˜ì´ë¼ì´íŠ¸
+    public Tilemap previewTilemap; // ë§ˆìš°ìŠ¤ ì˜¤ë²„ í”„ë¦¬ë·°
 
     [Header("Tiles")]
-    public TileBase roadTile;               // º£ÀÌÁö ±æ Å¸ÀÏ (¼³Ä¡ Çã¿ë ÆÇÁ¤)
-    public Tile rangeHighlightTile;     // ÆÄ¶õ»ö ¹İÅõ¸í ¹üÀ§ Å¸ÀÏ
-    public Tile placementPreviewTile;   // »¡°£»ö ¹İÅõ¸í ÇÁ¸®ºä Å¸ÀÏ
+    public TileBase roadTile;
+    public Tile rangeHighlightTile;
+    public Tile placementPreviewTile;
 
-    // ³»ºÎ¿¡¼­¸¸ ¾²ÀÌ´Â µµ·Î ¼¿ ÁÂÇ¥ ¸ñ·Ï
-    public List<Vector3Int> roadCells;
+    // ë„ë¡œ ì…€ ëª©ë¡ (ReadOnly)
+    public List<Vector3Int> roadCells { get; private set; }
+
+    // *** ìœ ë‹›ë³„ ì ìœ  ì…€ ê¸°ë¡ ***
+    private Dictionary<GameObject, HashSet<Vector3Int>> _unitCells
+        = new Dictionary<GameObject, HashSet<Vector3Int>>();
 
     void Start()
     {
-        // baseTilemap ¿¡¼­ roadTile °ú ÀÏÄ¡ÇÏ´Â ¸ğµç ¼¿À» ¼öÁı
+        // roadCells ì´ˆê¸°í™”
         roadCells = new List<Vector3Int>();
-        var b = baseTilemap.cellBounds;
-        foreach (var pos in b.allPositionsWithin)
-        {
+        var bounds = baseTilemap.cellBounds;
+        foreach (var pos in bounds.allPositionsWithin)
             if (baseTilemap.GetTile(pos) == roadTile)
                 roadCells.Add(pos);
-        }
-
-
     }
-    // µµ·Î ¼¿ÀÎÁö ¿©ºÎ¸¦ È®ÀÎÇÏ´Â ÇïÆÛ ÇÔ¼ö
+
+    // ë„ë¡œì¸ì§€ í™•ì¸
     public bool IsRoadCell(Vector3Int cell)
-    {
-        // µµ·Î ¼¿ÀÎÁö ¿©ºÎ¸¦ È®ÀÎ
-        return roadCells != null && roadCells.Contains(cell);
-    }
+        => roadCells != null && roadCells.Contains(cell);
 
-
-    // ¹Ì¸® ¼öÁıÇØµĞ µµ·Î(roadCells)¸¸ ÆÄ¶õ»öÀ¸·Î ÇÏÀÌ¶óÀÌÆ®
-
+    // ì „ì²´ í•˜ì´ë¼ì´íŠ¸
     public void HighlightAllowedCells()
     {
         rangeTilemap.ClearAllTiles();
-        foreach (var cell in roadCells)
-            rangeTilemap.SetTile(cell, rangeHighlightTile);
+        foreach (var c in roadCells)
+            rangeTilemap.SetTile(c, rangeHighlightTile);
     }
 
-    
-    //ÇÁ¸®ºä Àü¿ë Å¸ÀÏ¸Ê Å¬¸®¾î
-    
-    public void ClearPreview()
-    {
-        previewTilemap.ClearAllTiles();
-    }
+    // ë¯¸ë¦¬ë³´ê¸° í´ë¦¬ì–´
+    public void ClearPreview() => previewTilemap.ClearAllTiles();
 
-    
-    // Æ¯Á¤ ¼¿¿¡¸¸ »¡°£»ö ÇÁ¸®ºä Âï±â (µµ·Î ¼¿ÀÏ ¶§¸¸)
-    
+    // (Optional) í•œ ì…€ë§Œ í”„ë¦¬ë·°
     public void PreviewCell(Vector3Int cell)
     {
         previewTilemap.ClearAllTiles();
-        if (roadCells.Contains(cell))
+        if (IsRoadCell(cell))
             previewTilemap.SetTile(cell, placementPreviewTile);
     }
 
-    
-    // ÀüÃ¼ ÇÏÀÌ¶óÀÌÆ®(¹üÀ§+ÇÁ¸®ºä) ÇÑ ¹ø¿¡ Áö¿ì±â
-    
+    // ì „ì²´ í•˜ì´ë¼ì´íŠ¸ ë‹¤ ì§€ìš°ê¸°
     public void ClearAllHighlights()
     {
         rangeTilemap.ClearAllTiles();
         previewTilemap.ClearAllTiles();
     }
 
-    // ÁÂÇ¥ º¯È¯ ÇïÆÛµé
+    // ì¢Œí‘œ ë³€í™˜
     public Vector3Int WorldToCell(Vector3 worldPos)
         => baseTilemap.WorldToCell(worldPos);
 
     public Vector3 CellToWorldCenter(Vector3Int cellPos)
     {
-        Vector3 bl = baseTilemap.CellToWorld(cellPos);
+        var bl = baseTilemap.CellToWorld(cellPos);
         return bl + baseTilemap.cellSize * 0.5f;
+    }
+
+    //
+    // === ì—¬ê¸°ì„œë¶€í„° ìœ ë‹› ì ìœ  ê´€ë ¨ ë©”ì„œë“œë“¤ ===
+    //
+
+    /// <summary>
+    /// íŠ¹ì • ìœ ë‹›ì´ ì ìœ  ì¤‘ì¸ ì…€ ëª©ë¡ì„ ë°˜í™˜í•©ë‹ˆë‹¤.
+    /// ë“±ë¡ëœ ì •ë³´ê°€ ì—†ìœ¼ë©´ ë¹ˆ Setì„ ëŒë ¤ì¤ë‹ˆë‹¤.
+    /// </summary>
+    public HashSet<Vector3Int> GetOccupiedCellsFor(GameObject unit)
+    {
+        if (_unitCells.TryGetValue(unit, out var set))
+            // ë³µì‚¬ë³¸ ëŒë ¤ì„œ ì™¸ë¶€ ìˆ˜ì • ê¸ˆì§€
+            return new HashSet<Vector3Int>(set);
+        return new HashSet<Vector3Int>();
+    }
+
+    /// <summary>
+    /// ì£¼ì–´ì§„ ì…€ë“¤ì„ í•´ì œí•©ë‹ˆë‹¤.
+    /// í•´ì œ ëŒ€ìƒ ì…€ì„ í¬í•¨í•˜ê³  ìˆëŠ” ìœ ë‹› ì—”íŠ¸ë¦¬ë¥¼ ëª¨ë‘ ì œê±°í•©ë‹ˆë‹¤.
+    /// </summary>
+    public void FreeCells(HashSet<Vector3Int> cells)
+    {
+        // ê²¹ì¹˜ëŠ” ì—”íŠ¸ë¦¬ë¥¼ ì°¾ì•„ì„œ ëª¨ë‘ ì œê±°
+        var toRemove = _unitCells
+            .Where(kv => kv.Value.Overlaps(cells))
+            .Select(kv => kv.Key)
+            .ToList();
+        foreach (var key in toRemove)
+            _unitCells.Remove(key);
+    }
+
+    /// <summary>
+    /// íŠ¹ì • ìœ ë‹›ì´ ì£¼ì–´ì§„ ì…€ë“¤ì„ ì°¨ì§€í–ˆë‹¤ê³  ë“±ë¡í•©ë‹ˆë‹¤.
+    /// ì´ì „ì— ê°™ì€ ìœ ë‹›ìœ¼ë¡œ ë“±ë¡ëœ ì…€ì€ ë®ì–´ì”Œì›Œì§‘ë‹ˆë‹¤.
+    /// </summary>
+    public void OccupyCells(HashSet<Vector3Int> cells, GameObject unit)
+    {
+        if (unit == null) return;
+        // ë³µì‚¬ë³¸ ì €ì¥
+        _unitCells[unit] = new HashSet<Vector3Int>(cells);
+    }
+
+    // ëª¨ë“  ìœ ë‹›ì´ ì ìœ í•œ ì…€ì˜ í•©ì§‘í•©ì„ ë¦¬í„´
+    public HashSet<Vector3Int> GetAllOccupiedCells()
+    {
+        var result = new HashSet<Vector3Int>();
+        foreach (var kv in _unitCells.Values)
+            result.UnionWith(kv);
+        return result;
+    }
+    // íŠ¹ì • ìœ ë‹›ì´, baseCell(ì™¼ìª½ í•˜ë‹¨ ì…€) ê¸°ì¤€ìœ¼ë¡œ ì°¨ì§€í•  footprint ì…€ ëª©ë¡ì„ ë¦¬í„´
+    public HashSet<Vector3Int> GetCellsFor(GameObject unit, Vector3Int baseCell)
+    {
+        var cells = new HashSet<Vector3Int>();
+        var ub = unit.GetComponent<MainGame.Units.UnitBase>();
+        if (ub == null) return cells;
+
+        int w = ub.GetBaseRawSize;
+        int h = ub.GetBaseColSize;
+        for (int dx = 0; dx < w; dx++)
+            for (int dy = 0; dy < h; dy++)
+                cells.Add(new Vector3Int(baseCell.x + dx,
+                                         baseCell.y + dy,
+                                         baseCell.z));
+        return cells;
     }
 }

@@ -32,11 +32,16 @@ namespace JiHoon
         [Header("웨이브 설정 에셋 목록")]
         public List<WaveConfig> waveConfig;
 
+        public UnitPlacementManager placementMgr;
+
         private int _currentWaveIndex = 0;
         private Coroutine _autoRoutine;
 
         void Start()
         {
+            // 처음엔 웨이브 전이니 설치 허용
+            placementMgr.placementEnabled = true;
+
             // 1) 게임 시작 시 카드 초기 지급
             cardManager.AddRandomCards(initialCardCount);
 
@@ -46,6 +51,9 @@ namespace JiHoon
 
         void OnStartClicked()
         {
+            // 웨이브 시작 시 설치&재배치 모두 비허용
+            placementMgr.placementEnabled = false;
+
             // 버튼 잠금
             startWaveButton.interactable = false;
 
@@ -63,6 +71,13 @@ namespace JiHoon
 
         private IEnumerator RunWave(WaveConfig config)
         {
+            // 웨이브 끝나고 대기 상태로 돌아올 때
+            yield return new WaitUntil(() =>
+                Object.FindObjectsByType<EnemyMovement>(FindObjectsSortMode.None).Length == 0
+            );
+
+            
+
             // 1) 모든 EnemyInfo 에 대해 SpawnRoutine 코루틴을 동시에 시작
             var done = new bool[config.enemies.Count];
             for (int i = 0; i < config.enemies.Count; i++)
@@ -94,6 +109,9 @@ namespace JiHoon
             startWaveButton.interactable = true;
             _autoRoutine = StartCoroutine(AutoStartNext());
             _currentWaveIndex = (_currentWaveIndex + 1) % waveConfig.Count;
+
+            // **설치/재배치 다시 허용**
+            placementMgr.placementEnabled = true;
         }
 
         private IEnumerator SpawnRoutine(WaveEnemyInfo enemyInfo)

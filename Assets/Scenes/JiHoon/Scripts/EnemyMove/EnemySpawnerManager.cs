@@ -13,6 +13,9 @@ namespace JiHoon
 
     public class EnemySpawnerManager : MonoBehaviour
     {
+        [Header("스폰된 적들을 담을 컨테이너")]
+        public Transform spawnContainer; // 빈 오브젝트를 드래그
+
         [Header("도착 지점 (EndPoint)")]
         public Transform endPoint;
 
@@ -21,37 +24,56 @@ namespace JiHoon
 
         /// <summary>
         /// 지정한 프리팹을 spawnPoints[index] 위치에 인스턴스화하고,
-        /// EnemyMovement 컴포넌트의 start/end/via 세팅을 전부 처리합니다.
+        /// EnemyMovement 컴포넌트의 start/end/via 세팅까지 책임집니다.
         /// </summary>
         /// <param name="spawnPointIndex">spawnPoints 배열 인덱스</param>
         /// <param name="prefab">인스턴스화할 프리팹</param>
         public void SpawnPrefabAt(int spawnPointIndex, GameObject prefab)
         {
-            // 안전 처리
-            if (spawnPoints == null ||
-                spawnPointIndex < 0 ||
-                spawnPointIndex >= spawnPoints.Length)
+            // 1) 사전 안전 검사
+            if (spawnPoints == null || spawnPoints.Length == 0)
             {
-                Debug.LogError($"[{name}] Invalid spawnPointIndex {spawnPointIndex}");
+                Debug.LogError($"[{name}] spawnPoints 배열이 비어 있습니다.");
+                return;
+            }
+            if (spawnPointIndex < 0 || spawnPointIndex >= spawnPoints.Length)
+            {
+                Debug.LogError($"[{name}] 잘못된 spawnPointIndex: {spawnPointIndex}");
+                return;
+            }
+            if (spawnContainer == null)
+            {
+                Debug.LogError($"[{name}] spawnContainer가 할당되지 않았습니다.");
+                return;
+            }
+            if (prefab == null)
+            {
+                Debug.LogError($"[{name}] SpawnPrefabAt에 전달된 prefab이 null입니다.");
                 return;
             }
 
             var info = spawnPoints[spawnPointIndex];
-            // 1) 인스턴스화
-            var go = Instantiate(prefab, info.spawnPoint.position, Quaternion.identity);
 
-            // 2) EnemyMovement 컴포넌트 세팅
+            // 2) 인스턴스화 (부모 지정)
+            var go = Instantiate(
+                prefab,
+                info.spawnPoint.position,
+                Quaternion.identity,
+                spawnContainer
+            );
+
+            // 3) EnemyMovement 컴포넌트 세팅
             var mv = go.GetComponent<EnemyMovement>();
             if (mv == null)
             {
-                Debug.LogWarning($"[{name}] Spawned prefab '{prefab.name}' has no EnemyMovement");
+                Debug.LogWarning($"[{name}] 생성된 '{prefab.name}'에 EnemyMovement가 없습니다.");
                 return;
             }
 
             mv.startPoint = info.spawnPoint;
             mv.endPoint = endPoint;
 
-            // 3) 경유 포인트(viaPoints) 설정
+            // 4) 경유 포인트(viaPoints) 설정
             if (info.viaPoints != null && info.viaPoints.Length > 0)
             {
                 var group = info.viaPoints[

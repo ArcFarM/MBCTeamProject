@@ -13,6 +13,9 @@ namespace JiHoon
     {
         public UnitPreset[] unitPresets;
 
+        [Header("스폰된 아군 유닛을 담을 컨테이너")]
+        public Transform unitContainer;    
+
         // 마우스 클릭 위치(worldPos)에 prefab 그대로 인스턴스화
         public void SpawnAtPosition(int presetIndex, Vector3 worldPos)
         {
@@ -22,7 +25,8 @@ namespace JiHoon
             GameObject go = Instantiate(
                 unitPresets[presetIndex].prefab,
                 worldPos,
-                Quaternion.identity
+                Quaternion.identity,
+                unitContainer
             );
 
             // 추가 세팅이 필요 없으면 여기서 끝!

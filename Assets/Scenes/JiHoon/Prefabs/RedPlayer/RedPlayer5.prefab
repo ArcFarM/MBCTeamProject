@@ -5233,6 +5233,8 @@ GameObject:
   - component: {fileID: 7950320695007744922}
   - component: {fileID: 5201532270748755211}
   - component: {fileID: 525718161868814579}
+  - component: {fileID: 8142530936820762032}
+  - component: {fileID: -5178020990616463116}
   m_Layer: 5
   m_Name: RedPlayer5
   m_TagString: Untagged
@@ -8399,6 +8401,55 @@ MonoBehaviour:
   currSpd: 1
   stats: []
   prices: 00000000000000000000000000000000
+--- !u!70 &8142530936820762032
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039307120196332833}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
+--- !u!114 &-5178020990616463116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039307120196332833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6d90b498a0a7642a3f5c45a5398a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7090685956854025740
 GameObject:
   m_ObjectHideFlags: 0
