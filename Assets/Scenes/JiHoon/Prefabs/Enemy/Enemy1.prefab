@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 3332730498628433170}
   - component: {fileID: 4445603992680336512}
   m_Layer: 5
-  m_Name: Enemy
+  m_Name: Enemy1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3564,13 +3564,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7fae641ace76c41bc145a8b3c4ee64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.7
-  rotationSpeed: 180
-  pathSmoothness: 0.7
+  moveSpeed: 3
   nodeReachDistance: 0.3
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
-  gridSize: 1
   viaPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -3579,15 +3576,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  roadTilemap: {fileID: 0}
-  walkableTiles:
-  - {fileID: 11400000, guid: 693e93eae62b3054994b6a8c70ca881d, type: 2}
-  roadTile: {fileID: 11400000, guid: 693e93eae62b3054994b6a8c70ca881d, type: 2}
-  showPath: 1
-  pathColor: {r: 0, g: 1, b: 0, a: 1}
-  smoothPathColor: {r: 0, g: 0, b: 1, a: 1}
   isMoving: 0
-  waypointSpacing: 0.5
 --- !u!50 &4445603992680336512
 Rigidbody2D:
   serializedVersion: 5

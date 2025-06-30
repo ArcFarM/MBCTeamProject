@@ -326,7 +326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 589, y: -462}
+  m_AnchoredPosition: {x: 856, y: -462}
   m_SizeDelta: {x: 200, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &56054007
@@ -816,7 +816,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456980c30cfc2fa45ac2b24a9f3dc189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
   endPoint: {fileID: 673847408}
   spawnPoints:
   - spawnPoint: {fileID: 436220220}
@@ -828,13 +827,6 @@ MonoBehaviour:
     - {fileID: 942424016}
     - {fileID: 1229521305}
     - {fileID: 1907734746}
-    maxEnemies: 1
-    spawnInterval: 1
-    enemiesPerWave: 1
-    useWaves: 0
-    currentEnemyCount: 0
-    totalSpawned: 0
-  autoStart: 0
 --- !u!1 &332819661
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,7 +2520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456980c30cfc2fa45ac2b24a9f3dc189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
   endPoint: {fileID: 673847408}
   spawnPoints:
   - spawnPoint: {fileID: 1696205197}
@@ -2536,13 +2527,6 @@ MonoBehaviour:
     - {fileID: 1415286362}
     - {fileID: 2303856}
     - {fileID: 1757945761}
-    maxEnemies: 1
-    spawnInterval: 1
-    enemiesPerWave: 1
-    useWaves: 0
-    currentEnemyCount: 0
-    totalSpawned: 0
-  autoStart: 0
 --- !u!1 &778401865
 GameObject:
   m_ObjectHideFlags: 0
@@ -8286,11 +8270,16 @@ MonoBehaviour:
   - {fileID: 1449829259}
   - {fileID: 766161631}
   - {fileID: 306961127}
+  bossSpawnPoint: {fileID: 436220220}
   cardManager: {fileID: 1907221773}
   startWaveButton: {fileID: 56054007}
   initialCardCount: 5
   cardsPerWave: 3
-  autoDelay: 50
+  autoDelay: 5
+  waveConfig:
+  - {fileID: 11400000, guid: 66f73a341508e3a44b2494a407bcdd26, type: 2}
+  - {fileID: 11400000, guid: 318c6ffa7725fe443b6619d5d15358ef, type: 2}
+  - {fileID: 11400000, guid: 9e783696e4091334baa0a37b8b8fbd42, type: 2}
 --- !u!1 &1080112541
 GameObject:
   m_ObjectHideFlags: 0
@@ -9147,7 +9136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456980c30cfc2fa45ac2b24a9f3dc189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
   endPoint: {fileID: 673847408}
   spawnPoints:
   - spawnPoint: {fileID: 1968968283}
@@ -9155,13 +9143,6 @@ MonoBehaviour:
     - {fileID: 432700485}
     - {fileID: 9334316}
     - {fileID: 858573812}
-    maxEnemies: 1
-    spawnInterval: 1
-    enemiesPerWave: 1
-    useWaves: 0
-    currentEnemyCount: 0
-    totalSpawned: 0
-  autoStart: 0
 --- !u!1 &1478358310
 GameObject:
   m_ObjectHideFlags: 0
@@ -10204,7 +10185,7 @@ RectTransform:
   m_GameObject: {fileID: 2035456592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1364627535}

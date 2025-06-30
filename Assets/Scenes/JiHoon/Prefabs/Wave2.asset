@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ce68c36f8b19c4688252a05aa4f46e, type: 3}
+  m_Name: Wave2
+  m_EditorClassIdentifier: 
+  waveName: 1
+  isBossWave: 0
+  bossPrefab: {fileID: 0}
+  enemies:
+  - prefab: {fileID: 631529754140920010, guid: c32e8bffa93bf2f40be3bc9c98a45414, type: 3}
+    count: 3
+    spawnInterval: 2
+    spawnerIndex: 0
+  - prefab: {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
+    count: 3
+    spawnInterval: 1.5
+    spawnerIndex: 1
+  - prefab: {fileID: 631529754140920010, guid: c32e8bffa93bf2f40be3bc9c98a45414, type: 3}
+    count: 3
+    spawnInterval: 2.6
+    spawnerIndex: 2
