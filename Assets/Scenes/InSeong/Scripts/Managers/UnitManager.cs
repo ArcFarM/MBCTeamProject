@@ -27,5 +27,4 @@ namespace MainGame.Manager {
         }
         #endregion
     }
-
 }
