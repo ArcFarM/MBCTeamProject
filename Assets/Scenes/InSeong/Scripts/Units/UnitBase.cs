@@ -91,7 +91,7 @@ namespace MainGame.Units {
         #endregion
 
         #region Unity Event Method
-        private void Start() {
+        protected virtual void Start() {
             InitStats();
         }
         #endregion

@@ -1,47 +1,36 @@
-using JiHoon;
 using UnityEngine;
 using MainGame.Units;
-using Unity.VisualScripting;
-
-
-
 
 namespace JeaYoon
 {
-    public class UN001 : UnitBase
+    public class UN001 : MainGame.Units.UnitBase
     {
-        private void Awake()
+        protected override void Start()
         {
-            /*
-            // 고유 정보 설정
-            unitID = "UN_001";
-            unitName = "용사";
-            faction = UnitFaction.Enemy;
+            // [◆] - ▶▶▶ 정의.
+            unitID = "UN_001";                         // ) 항목 ID.
+            unitName = "용사";                        // ) 항목명.
+            faction = UnitFaction.Enemy;             // ) 아군/적군.
 
-            // 배치 크기 설정 (1x1)
-            baseRawSize = 1;
-            baseColSize = 1;
+            // [◆] - ▶▶▶ 공격.
+            baseDamage = 100f;                      // ) 공격력.
+            baseAtkSpd = 0.5f;                        // ) 공격 대기 시간.
+            baseSplash = 2f;                           // ) 방사형 공격범위.
+            baseRange = 2f;                           // ) 사거리.
 
-            // 스플래시 없음
-            baseSplash = 0f;
+            // [◆] - ▶▶▶ 크기.
+            baseRawSize = 1;                           // ) 배치타일 행 크기.
+            baseColSize = 1;                            // ) 배치타일 열 크기.
 
-            // 능력치 설정
-            baseHealth = 1000f;
-            baseDamage = 100f;
-            baseAtkSpd = 0.5f;       // 초당 공격 2 → 1초에 2회 = 0.5초에 한 번
-            baseRange = 2f;          // 정면 2타일
-            baseSpd = 1f;            // 기본 이동 속도 (가정)
+            // [◆] - ▶▶▶ HP.
+            baseHealth = 1000f;                        // ) HP.
 
-            // 현재 능력치도 동기화
-            currHealth = baseHealth;
-            currDamage = baseDamage;
-            currAtkSpd = baseAtkSpd;
-            currRange = baseRange;
-            currSpd = baseSpd;
+            // [◆] - ▶▶▶ 이동속도.
+            baseSpd = 1f;                               // ) 이동속도.
 
-            // 능력치 초기화
-            InitStats();
-            */
+            // [◆] - ▶▶▶ ETC.
+
+            base.Start();
         }
     }
 }
