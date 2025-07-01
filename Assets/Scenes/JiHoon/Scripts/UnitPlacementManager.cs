@@ -25,10 +25,11 @@ namespace JiHoon
         private Vector3Int originalCell; // 이동 시작 셀
         private HashSet<Vector3Int> originalOccupiedCells;  // 이동 시작 시점의 점유 셀 목록
 
+        [Header("Raycast LayerMasks")]
+        [SerializeField] LayerMask unitLayerMask;   // Unit 레이어만 검사
+        [SerializeField] LayerMask roadLayerMask;   // Road 레이어만 검사 (선택)
 
-        private HashSet<Vector3Int> occupiedCells = new HashSet<Vector3Int>(); // 이미 배치된 셀 목록
 
-        
 
         // 싱글턴 프로퍼티
         public static UnitPlacementManager Instance { get; private set; }
@@ -64,7 +65,7 @@ namespace JiHoon
         // UI 버튼에서 호출
         public void OnClickSelectUmit(UnitCardUI card)
         {
-            if(!placementEnabled)
+            if (!placementEnabled)
             {
                 Debug.Log("카드 설치모드가 아닙니다");
                 return;
@@ -86,45 +87,39 @@ namespace JiHoon
             }
             movingUnit = unit;
 
-            // 1) 원래 차지하고 있던 셀들 기록
-            originalOccupiedCells = gridManager.GetOccupiedCellsFor(unit);
+            // 1) gridManager 안의 자료구조와 분리된 복사본을 만들자
+            var cells = gridManager.GetOccupiedCellsFor(unit);
+            originalOccupiedCells = new HashSet<Vector3Int>(cells);
 
             // 2) 그 셀들에서 점유 해제
             gridManager.FreeCells(originalOccupiedCells);
 
-            foreach (var cell in originalOccupiedCells)
-            {
-                occupiedCells.Remove(cell); // 이동 전 셀 목록에서 제거
-            }
+            // 원위치 복귀용 셀도 저장
+            originalCell = gridManager.WorldToCell(unit.transform.position);
 
             // 3) 하이라이트
             gridManager.HighlightAllowedCells();
 
-            // (이동 모드 진입 플래그 따로 두고 Update에서 처리해도 됩니다)
         }
 
         void Update()
         {
-            
+
             // 이동/설치 모드 모두 placementEnabled가 false면 리턴
             if (!placementEnabled) return;
 
             if (Input.GetMouseButtonDown(0)
-                && !EventSystem.current.IsPointerOverGameObject())  // UI 위 클릭은 무시
+            && !EventSystem.current.IsPointerOverGameObject())
             {
-                // 화면 좌표 → 월드포인트
                 Vector3 ws = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 ws.z = 0;
-                // 2D 레이캐스트로 Unit 확인
-                var hit = Physics2D.Raycast(ws, Vector2.zero);
+                // Unit 클릭만 잡도록 레이어 마스크 전달
+                var hit = Physics2D.Raycast(ws, Vector2.zero, Mathf.Infinity, unitLayerMask);
                 bool clickedOnUnit = hit.collider != null
-                                     && hit.collider.GetComponent<ClickableUnit>() != null;
-                if (!clickedOnUnit)
-                {
-                    // 메뉴가 떠 있으면 숨기기
-                    UnitPlacementManager.Instance.Menu?.Hide();
-                }
-            }
+                                      && hit.collider.GetComponent<ClickableUnit>() != null;
+                  if (!clickedOnUnit)
+                   Menu?.Hide();
+                        }
 
             // 이동모드
             if (movingUnit != null)
@@ -159,15 +154,12 @@ namespace JiHoon
                     var newCells = gridManager.GetCellsFor(movingUnit, cell);
                     gridManager.OccupyCells(newCells, movingUnit);
 
-                    //HashSet에 추가해 주기
-                    foreach (var c in newCells)
-                    {
-                        occupiedCells.Add(c); // 이동 후 셀 목록에 추가
-                    }
-
                     // 모드 종료
                     movingUnit = null;
+                    originalOccupiedCells.Clear(); // 원래 점유 셀 목록 초기화
                     gridManager.ClearAllHighlights();
+
+                    return; // 이동 후 더 이상 처리할 필요 없음
                 }
 
                 // 1-5) ESC 취소 → 원위치 복귀 + 점유 복원
@@ -213,7 +205,7 @@ namespace JiHoon
             bool canPlace = true;
             foreach (var cell in footprint)
             {
-                if (!gridManager.IsRoadCell(cell) || occupiedCells.Contains(cell))
+                if (!gridManager.IsRoadCell(cell) || gridManager.GetAllOccupiedCells().Contains(cell))
                 {
                     canPlace = false;
                     break;
@@ -236,8 +228,13 @@ namespace JiHoon
 
                 // 스폰 & 점유 기록
                 spawner.SpawnAtPosition(selectedPreset, spawnPos);
-                foreach (var cell in footprint)
-                    occupiedCells.Add(cell);
+
+                // GridManager에 점유 정보 등록
+                var spawnedUnit = spawner.GetLastSpawnedUnit(); // 이 메서드가 있다고 가정
+                if (spawnedUnit != null)
+                {
+                    gridManager.OccupyCells(new HashSet<Vector3Int>(footprint), spawnedUnit);
+                }
 
                 // 카드 UI 제거
                 if (selectedCardUI != null)
@@ -259,16 +256,12 @@ namespace JiHoon
             }
 
         }
+
         public void SellUnit(GameObject unit)
         {
             // 셀 점유 해제
             var cells = gridManager.GetOccupiedCellsFor(unit);
             gridManager.FreeCells(cells);
-
-            foreach (var cell in originalOccupiedCells)
-            {
-                occupiedCells.Remove(cell); // 이동 전 셀 목록에서 제거
-            }
 
             //TODO : 유닛 판매 로직 구현
             Destroy(unit);

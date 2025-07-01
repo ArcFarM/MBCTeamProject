@@ -11,6 +11,7 @@ namespace JiHoon
 
     public class UnitSpawner : MonoBehaviour
     {
+        private GameObject lastSpawnedUnit; // 마지막으로 생성된 유닛
         public UnitPreset[] unitPresets;
 
         [Header("스폰된 아군 유닛을 담을 컨테이너")]
@@ -32,5 +33,10 @@ namespace JiHoon
             // 추가 세팅이 필요 없으면 여기서 끝!
             // UnitBase 스크립트가 Awake/Start에서 stats 초기화 담당
         }
+        public GameObject GetLastSpawnedUnit()
+        {
+            return lastSpawnedUnit;
+        }
     }
+
 }

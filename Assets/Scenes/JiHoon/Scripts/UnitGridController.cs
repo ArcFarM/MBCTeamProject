@@ -4,33 +4,33 @@ namespace JiHoon
 {
     public class UnitGridController : MonoBehaviour
     {
-        public GridManager gridManager; // ±×¸®µå ¸Å´ÏÀú ÂüÁ¶
-                                        //¼¿ ÁÂÇ¥ < > À¯´Ö ¸ÅÇÎ
+        public GridManager gridManager; // ê·¸ë¦¬ë“œ ë§¤ë‹ˆì € ì°¸ì¡°
+                                        //ì…€ ì¢Œí‘œ < > ìœ ë‹› ë§¤í•‘
         private Dictionary<Vector3Int, GameObject> unitsOnCell = new Dictionary<Vector3Int, GameObject>();
 
-        //¸¶¿ì½º Å¬¸¯ µîÀ¸·Î ¾Æ±º ¹èÄ¡
+        //ë§ˆìš°ìŠ¤ í´ë¦­ ë“±ìœ¼ë¡œ ì•„êµ° ë°°ì¹˜
         public void TryPlaceUnit(GameObject unitPrefab, Vector3 worldPos)
         {
-            var cell = gridManager.WorldToCell(worldPos); //¿ùµå ÁÂÇ¥¸¦ ¼¿ ÁÂÇ¥·Î º¯È¯
-            if (!gridManager.baseTilemap.HasTile(cell))
+            var cell = gridManager.WorldToCell(worldPos); //ì›”ë“œ ì¢Œí‘œë¥¼ ì…€ ì¢Œí‘œë¡œ ë³€í™˜
+            if (!gridManager.placementZoneTilemap.HasTile(cell))
             {
-                //¼¿¿¡ Å¸ÀÏÀÌ ¾øÀ¸¸é ¹èÄ¡ ºÒ°¡
-                Debug.Log("¸Ê ¹ÛÀÔ´Ï´Ù");
+                //ì…€ì— íƒ€ì¼ì´ ì—†ìœ¼ë©´ ë°°ì¹˜ ë¶ˆê°€
+                Debug.Log("ë§µ ë°–ì…ë‹ˆë‹¤");
                 return;
             }
             if (unitsOnCell.ContainsKey(cell))
             {
-                Debug.Log("ÀÌ¹Ì À¯´ÖÀÌ ÀÖ½À´Ï´Ù!");
+                Debug.Log("ì´ë¯¸ ìœ ë‹›ì´ ìˆìŠµë‹ˆë‹¤!");
                 return;
             }
 
-            //À¯´Ö ¹èÄ¡
-            Vector3 spawnPos = gridManager.CellToWorldCenter(cell); //¼¿ Áß½É À§Ä¡ °è»ê
-            var unit = Instantiate(unitPrefab, spawnPos, Quaternion.identity); //À¯´Ö »ı¼º
-            unitsOnCell.Add(cell, unit); //¼¿°ú À¯´Ö ¸ÅÇÎ ÀúÀå
+            //ìœ ë‹› ë°°ì¹˜
+            Vector3 spawnPos = gridManager.CellToWorldCenter(cell); //ì…€ ì¤‘ì‹¬ ìœ„ì¹˜ ê³„ì‚°
+            var unit = Instantiate(unitPrefab, spawnPos, Quaternion.identity); //ìœ ë‹› ìƒì„±
+            unitsOnCell.Add(cell, unit); //ì…€ê³¼ ìœ ë‹› ë§¤í•‘ ì €ì¥
         }
 
-        //¼¿ ±âÁØÀ¸·Î À¯´Ö ²¨³»±â
+        //ì…€ ê¸°ì¤€ìœ¼ë¡œ ìœ ë‹› êº¼ë‚´ê¸°
         public GameObject GetUnitAt(Vector3Int cell)
         {
             unitsOnCell.TryGetValue(cell, out var unit);

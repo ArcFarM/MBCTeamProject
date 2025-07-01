@@ -1,53 +1,60 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class GridManager : MonoBehaviour
 {
     [Header("Tilemaps")]
-    public Tilemap baseTilemap;    // 실제 맵 (도로)
-    public Tilemap rangeTilemap;   // 설치 가능 범위 하이라이트
-    public Tilemap previewTilemap; // 마우스 오버 프리뷰
+    public Tilemap placementZoneTilemap;  // 에디터에서 설치 가능 영역만 칠해둔 Tilemap
+    public Tilemap rangeTilemap;          // 설치 가능 범위 하이라이트
+    public Tilemap previewTilemap;        // 마우스 오버 설치 프리뷰
 
     [Header("Tiles")]
-    public TileBase roadTile;
-    public Tile rangeHighlightTile;
-    public Tile placementPreviewTile;
+    public TileBase rangeHighlightTile;
+    public TileBase placementPreviewTile;
 
-    // 도로 셀 목록 (ReadOnly)
-    public List<Vector3Int> roadCells { get; private set; }
+    // 설치 가능 셀 목록
+    public HashSet<Vector3Int> placementCells { get; private set; }
 
-    // *** 유닛별 점유 셀 기록 ***
+    // 유닛별 점유 셀 기록
     private Dictionary<GameObject, HashSet<Vector3Int>> _unitCells
         = new Dictionary<GameObject, HashSet<Vector3Int>>();
 
     void Start()
     {
-        // roadCells 초기화
-        roadCells = new List<Vector3Int>();
-        var bounds = baseTilemap.cellBounds;
+        // placementCells 초기화 (placementZoneTilemap에 칠한 타일만)
+        placementCells = new HashSet<Vector3Int>();
+        var bounds = placementZoneTilemap.cellBounds;
         foreach (var pos in bounds.allPositionsWithin)
-            if (baseTilemap.GetTile(pos) == roadTile)
-                roadCells.Add(pos);
+            if (placementZoneTilemap.HasTile(pos))
+                placementCells.Add(pos);
     }
 
-    // 도로인지 확인
+    /// <summary>
+    /// 해당 셀이 설치 가능 영역인지 확인
+    /// </summary>
     public bool IsRoadCell(Vector3Int cell)
-        => roadCells != null && roadCells.Contains(cell);
+        => placementCells.Contains(cell);
 
-    // 전체 하이라이트
+    /// <summary>
+    /// 설치 가능 영역 전체를 rangeTilemap에 하이라이트
+    /// </summary>
     public void HighlightAllowedCells()
     {
         rangeTilemap.ClearAllTiles();
-        foreach (var c in roadCells)
+        foreach (var c in placementCells)
             rangeTilemap.SetTile(c, rangeHighlightTile);
     }
 
-    // 미리보기 클리어
-    public void ClearPreview() => previewTilemap.ClearAllTiles();
+    /// <summary>
+    /// 미리보기 클리어
+    /// </summary>
+    public void ClearPreview()
+        => previewTilemap.ClearAllTiles();
 
-    // (Optional) 한 셀만 프리뷰
+    /// <summary>
+    /// 단일 셀 미리보기
+    /// </summary>
     public void PreviewCell(Vector3Int cell)
     {
         previewTilemap.ClearAllTiles();
@@ -55,74 +62,68 @@ public class GridManager : MonoBehaviour
             previewTilemap.SetTile(cell, placementPreviewTile);
     }
 
-    // 전체 하이라이트 다 지우기
+    /// <summary>
+    /// 모든 하이라이트/프리뷰 제거
+    /// </summary>
     public void ClearAllHighlights()
     {
         rangeTilemap.ClearAllTiles();
         previewTilemap.ClearAllTiles();
     }
 
-    // 좌표 변환
+    /// <summary>
+    /// 월드 좌표 → 셀 좌표
+    /// </summary>
     public Vector3Int WorldToCell(Vector3 worldPos)
-        => baseTilemap.WorldToCell(worldPos);
-
-    public Vector3 CellToWorldCenter(Vector3Int cellPos)
-    {
-        var bl = baseTilemap.CellToWorld(cellPos);
-        return bl + baseTilemap.cellSize * 0.5f;
-    }
-
-    //
-    // === 여기서부터 유닛 점유 관련 메서드들 ===
-    //
+        => placementZoneTilemap.WorldToCell(worldPos);
 
     /// <summary>
-    /// 특정 유닛이 점유 중인 셀 목록을 반환합니다.
-    /// 등록된 정보가 없으면 빈 Set을 돌려줍니다.
+    /// 셀 좌표 → 셀 중앙 월드 좌표
     /// </summary>
+    public Vector3 CellToWorldCenter(Vector3Int cellPos)
+        => placementZoneTilemap.GetCellCenterWorld(cellPos);
+
+    // === 이하 유닛 점유(Cell Occupation) 관리 ===
+
     public HashSet<Vector3Int> GetOccupiedCellsFor(GameObject unit)
     {
         if (_unitCells.TryGetValue(unit, out var set))
-            // 복사본 돌려서 외부 수정 금지
             return new HashSet<Vector3Int>(set);
         return new HashSet<Vector3Int>();
     }
 
-    /// <summary>
-    /// 주어진 셀들을 해제합니다.
-    /// 해제 대상 셀을 포함하고 있는 유닛 엔트리를 모두 제거합니다.
-    /// </summary>
     public void FreeCells(HashSet<Vector3Int> cells)
     {
-        // 겹치는 엔트리를 찾아서 모두 제거
-        var toRemove = _unitCells
-            .Where(kv => kv.Value.Overlaps(cells))
-            .Select(kv => kv.Key)
-            .ToList();
-        foreach (var key in toRemove)
-            _unitCells.Remove(key);
+        var keysToUpdate = new List<GameObject>();
+        foreach (var kv in _unitCells)
+        {
+            if (kv.Value.Overlaps(cells))
+                keysToUpdate.Add(kv.Key);
+        }
+        foreach (var unit in keysToUpdate)
+        {
+            var set = _unitCells[unit];
+            foreach (var cell in cells)
+                set.Remove(cell);
+            if (set.Count == 0)
+                _unitCells.Remove(unit);
+        }
     }
 
-    /// <summary>
-    /// 특정 유닛이 주어진 셀들을 차지했다고 등록합니다.
-    /// 이전에 같은 유닛으로 등록된 셀은 덮어씌워집니다.
-    /// </summary>
     public void OccupyCells(HashSet<Vector3Int> cells, GameObject unit)
     {
         if (unit == null) return;
-        // 복사본 저장
         _unitCells[unit] = new HashSet<Vector3Int>(cells);
     }
 
-    // 모든 유닛이 점유한 셀의 합집합을 리턴
     public HashSet<Vector3Int> GetAllOccupiedCells()
     {
         var result = new HashSet<Vector3Int>();
-        foreach (var kv in _unitCells.Values)
-            result.UnionWith(kv);
+        foreach (var set in _unitCells.Values)
+            result.UnionWith(set);
         return result;
     }
-    // 특정 유닛이, baseCell(왼쪽 하단 셀) 기준으로 차지할 footprint 셀 목록을 리턴
+
     public HashSet<Vector3Int> GetCellsFor(GameObject unit, Vector3Int baseCell)
     {
         var cells = new HashSet<Vector3Int>();
