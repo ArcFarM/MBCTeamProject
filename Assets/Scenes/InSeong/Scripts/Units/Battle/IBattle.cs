@@ -4,7 +4,6 @@ namespace MainGame.Units.Battle {
     public interface IBattle{
 
         #region Properties
-        public bool isFighting { get; set; } //전투 중인지 여부
         #endregion
 
         #region Unity Event Methods
