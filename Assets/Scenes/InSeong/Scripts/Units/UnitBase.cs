@@ -128,6 +128,12 @@ namespace MainGame.Units {
             stats[(int)StatType.CurrAtkSpd] = baseAtkSpd;
             stats[(int)StatType.CurrRange] = baseRange;
             stats[(int)StatType.CurrSpd] = baseSpd;
+
+            currHealth = baseHealth;
+            currDamage = baseDamage;
+            currAtkSpd = baseAtkSpd;
+            currRange = baseRange;
+            currSpd = baseSpd;
         }
         #endregion
     }

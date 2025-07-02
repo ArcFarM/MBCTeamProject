@@ -9,8 +9,9 @@ namespace MainGame.Units.Battle {
     public class BattleBase : MonoBehaviour, IBattle {
         #region Variables
         [SerializeField] UnitBase ub;
+        float detectingRange; // 탐지 범위 - 현재는 배수와 상수로 계산하여 사용
         [SerializeField] float detectingMultiplier = 1.5f; // 탐지 범위 배수
-        [SerializeField] float detectingRangeconstant = 3f; // 탐지 범위 상수
+        [SerializeField] float detectingRangeconstant = 2.5f; // 탐지 범위 상수
         [SerializeField] float engageDistanceMultiplier = 0.75f; // 전투 돌입 거리 배수
 
         #region IBattle 구현
@@ -32,6 +33,7 @@ namespace MainGame.Units.Battle {
         #region Unity Event Methods
         private void Start() {
             //Debug.Log($"[{gameObject.name}] BattleBase 시작");
+            detectingRange = Mathf.Max(ub.GetStat(StatType.CurrRange) * detectingMultiplier, detectingRangeconstant);
             StartStateMachine();
         }
 
@@ -106,9 +108,6 @@ namespace MainGame.Units.Battle {
         void HandleDetectingState() {
             //Debug.Log($"[{gameObject.name}] Detecting: 주변 적 탐지 시작");
 
-            float detectingRange = Mathf.Max(ub.GetStat(StatType.CurrRange) * detectingMultiplier,
-                ub.GetStat(StatType.CurrRange) + detectingRangeconstant);
-
             Collider2D[] detectedTargets = Physics2D.OverlapCircleAll(transform.position, detectingRange);
             //Debug.Log($"[{gameObject.name}] Detecting: 탐지 범위 {detectingRange:F2}, 발견된 객체 수: {detectedTargets.Length}");
 
@@ -134,20 +133,21 @@ namespace MainGame.Units.Battle {
 
         // 조건 확인 상태: 최적 타겟 선택
         void HandleEngagingState() {
-            //Debug.Log($"[{gameObject.name}] Engaging: 타겟 검증 시작, 현재 타겟 수: {combatTargetList.Count}");
+            Debug.Log($"[{gameObject.name}] Engaging: 타겟 검증 시작, 현재 타겟 수: {combatTargetList.Count}");
 
             //교전 불가능한 적 제거 - 람다식을 쓸 수 밖에 없어서 람다식 사용
-            combatTargetList.RemoveAll(target => !EngageConditionCheck(target, out UnitBase ub, out BattleBase bb));
+            combatTargetList.RemoveAll(target => !EngageConditionCheck(target, out UnitBase ub, out BattleBase bb) 
+                                    || !target.activeSelf);
 
             // 교전 상태에서 교전할 대상이 없다면 다시 탐지 상태로 전환
             if (combatTargetList.Count == 0) {
-                //Debug.Log($"[{gameObject.name}] Engaging: 유효한 타겟 없음, Detecting 상태로 전환");
+                Debug.Log($"[{gameObject.name}] Engaging: 유효한 타겟 없음, Detecting 상태로 전환");
                 ChangeState(CombatState.Detecting);
                 return;
             }
             else {
                 Debug.Log($"[{gameObject.name}] Engaging: 유효한 타겟 {combatTargetList.Count}개, Moving 상태로 전환");
-                //Debug.Log($"[{gameObject.name}] Engaging: 선택된 타겟 - {combatTargetList[0].name}");
+                Debug.Log($"[{gameObject.name}] Engaging: 선택된 타겟 - {combatTargetList[0].name}");
                 ChangeState(CombatState.Moving);
             }
         }
@@ -192,6 +192,7 @@ namespace MainGame.Units.Battle {
             if (target != null) {
                 Debug.Log($"[{gameObject.name}] Fighting: {target.name} 공격 실행");
                 Attack(target);
+                ChangeState(CombatState.Detecting); // 공격 후 다시 이동 상태로 전환
             }
             else {
                 Debug.Log($"[{gameObject.name}] Fighting: 타겟이 null, 제거 후 Detecting 상태로 전환");
@@ -201,7 +202,7 @@ namespace MainGame.Units.Battle {
         }
 
         void HandleDeadState() {
-
+            Die();
         }
         #endregion
 
@@ -213,7 +214,7 @@ namespace MainGame.Units.Battle {
             Debug.Log($"[{gameObject.name}] {damage} 데미지 받음, 체력: {ub.GetStat(StatType.CurrHealth):F1} → {newHealth:F1}");
             ub.SetStat(StatType.CurrHealth, newHealth);
             if (newHealth <= 0 && !ub.IsDead) {
-                Die();
+                ChangeState(CombatState.Dead);
             }
         }
 
@@ -231,9 +232,8 @@ namespace MainGame.Units.Battle {
             Debug.Log($"[{gameObject.name}] 사망");
             ub.SetStat(StatType.CurrHealth, 0);
             // TODO: 사망 시 처리할 내용
-            ChangeState(CombatState.Dead);
             // 예: 애니메이션 재생, 사망 이펙트, 오브젝트 비활성화 등
-            gameObject.SetActive(false); // 예시로 오브젝트 비활성화
+            Destroy(gameObject, 0.5f); //오브젝트 제거
         }
 
         public virtual bool IsInRange(UnitBase target) {
@@ -275,12 +275,13 @@ namespace MainGame.Units.Battle {
                 Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}은 이미 전투 중");
                 return false;
             }*/
-            if (combatTargetList.Count > maxCombatTarget) {
+
+            int targetIndex = combatTargetList.IndexOf(target);
+            if (targetIndex > maxCombatTarget) {
                 Debug.Log($"[{gameObject.name}] EngageCheck: 전투 대상 최대치 도달 ({maxCombatTarget})");
                 return false;
             }
-            //내가 대상을 인식할 수 있는 거리에 있는 지 확인 - 배수와 상수 중 더 작은 값 사용
-            float detectingRange = Mathf.Min(ub.GetStat(StatType.CurrRange) * detectingMultiplier, detectingRangeconstant);
+
             float distance = Vector2.Distance(transform.position, target.transform.position);
             if (distance > detectingRange) {
                 Debug.Log($"[{gameObject.name}] EngageCheck: {target.name} 거리 초과, 거리: {distance:F2}, 탐지범위: {detectingRange:F2}");
