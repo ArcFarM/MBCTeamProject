@@ -702,6 +702,7 @@ GameObject:
   - component: {fileID: -1036421442225988300}
   - component: {fileID: 1641757255846101461}
   - component: {fileID: -8719825686131837247}
+  - component: {fileID: -3998002314271284625}
   m_Layer: 8
   m_Name: BrownPlayer3
   m_TagString: Untagged
@@ -3766,7 +3767,7 @@ MonoBehaviour:
   currHealth: 1
   currDamage: 1
   currAtkSpd: 1
-  currRange: 1
+  currRange: 3
   currSpd: 1
   stats: []
   prices: 00000000000000000000000000000000
@@ -3846,6 +3847,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-3998002314271284625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1804733949350671915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ub: {fileID: -1637685066991605496}
+  detectingMultiplier: 1.5
+  detectingRangeconstant: 2.5
+  engageDistanceMultiplier: 0.75
+  maxCombatTarget: 3
+  combatTargetList: []
+  currentState: 0
+  stateUpdateInterval: 0.1
 --- !u!1 &2030634766652981791
 GameObject:
   m_ObjectHideFlags: 0

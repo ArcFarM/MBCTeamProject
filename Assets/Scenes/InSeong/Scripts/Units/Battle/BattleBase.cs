@@ -160,6 +160,7 @@ namespace MainGame.Units.Battle {
                 return;
             }
 
+            //null reference error 발생
             GameObject target = combatTargetList[0]; // 첫 번째 타겟으로 이동
             float targetDistance = ub.GetStat(StatType.CurrRange) * engageDistanceMultiplier;
             float currentDistance = Vector2.Distance(transform.position, target.transform.position);

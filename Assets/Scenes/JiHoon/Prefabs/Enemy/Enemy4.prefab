@@ -198,6 +198,9 @@ GameObject:
   - component: {fileID: 9042698383628537295}
   - component: {fileID: 1323061866369389016}
   - component: {fileID: 3792132723117236923}
+  - component: {fileID: 1974795483733441944}
+  - component: {fileID: 1114454932325520066}
+  - component: {fileID: -7787545021522122019}
   m_Layer: 5
   m_Name: Enemy4
   m_TagString: Untagged
@@ -3295,12 +3298,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7fae641ace76c41bc145a8b3c4ee64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 0.5
   nodeReachDistance: 0.1
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
   viaPoints: []
   isMoving: 0
+--- !u!114 &1974795483733441944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631529754140920010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ub: {fileID: -7787545021522122019}
+  detectingMultiplier: 1.5
+  detectingRangeconstant: 2.5
+  engageDistanceMultiplier: 0.75
+  maxCombatTarget: 1
+  combatTargetList: []
+  currentState: 0
+  stateUpdateInterval: 0.1
+--- !u!70 &1114454932325520066
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631529754140920010}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
+--- !u!114 &-7787545021522122019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631529754140920010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93364533096f0d04e97dbd825ef0941c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitID: 
+  unitName: 
+  faction: 1
+  baseRawSize: 1
+  baseColSize: 1
+  baseSplash: 0
+  baseHealth: 1
+  baseDamage: 1
+  baseAtkSpd: 1
+  baseRange: 1
+  baseSpd: 1
+  currRawSize: 1
+  currColSize: 1
+  currSplash: 0
+  currHealth: 1
+  currDamage: 1
+  currAtkSpd: 1
+  currRange: 1
+  currSpd: 1
+  stats: []
+  panelty: 0
 --- !u!1 &672726948309911493
 GameObject:
   m_ObjectHideFlags: 0

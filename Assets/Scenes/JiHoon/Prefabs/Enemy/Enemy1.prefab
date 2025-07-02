@@ -425,8 +425,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1186334772798934496}
   - component: {fileID: 367712013540580091}
+  - component: {fileID: -5077008302058110944}
   - component: {fileID: 3332730498628433170}
   - component: {fileID: 4445603992680336512}
+  - component: {fileID: 353809961183880960}
+  - component: {fileID: 6458001922697312151}
   m_Layer: 5
   m_Name: Enemy1
   m_TagString: Untagged
@@ -3552,6 +3555,26 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 4c70df3312bb83346a1bf065b30d3467, type: 2}
   - {fileID: 7400000, guid: 1ef525d53ae254f7d82ef364ced85490, type: 2}
   - {fileID: 7400000, guid: fabe4f140fdb9cb448bc941c7c93e8b6, type: 2}
+--- !u!114 &-5077008302058110944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856652019981532589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ub: {fileID: 6458001922697312151}
+  detectingMultiplier: 1.5
+  detectingRangeconstant: 2.5
+  engageDistanceMultiplier: 0.75
+  maxCombatTarget: 1
+  combatTargetList: []
+  currentState: 0
+  stateUpdateInterval: 0.1
 --- !u!114 &3332730498628433170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3564,7 +3587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7fae641ace76c41bc145a8b3c4ee64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 0.5
   nodeReachDistance: 0.3
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
@@ -3604,6 +3627,76 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!70 &353809961183880960
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856652019981532589}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
+--- !u!114 &6458001922697312151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856652019981532589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93364533096f0d04e97dbd825ef0941c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitID: 
+  unitName: 
+  faction: 1
+  baseRawSize: 1
+  baseColSize: 1
+  baseSplash: 0
+  baseHealth: 1
+  baseDamage: 1
+  baseAtkSpd: 1
+  baseRange: 1
+  baseSpd: 1
+  currRawSize: 1
+  currColSize: 1
+  currSplash: 0
+  currHealth: 1
+  currDamage: 1
+  currAtkSpd: 1
+  currRange: 1
+  currSpd: 1
+  stats: []
+  panelty: 0
 --- !u!1 &1898533620134970038
 GameObject:
   m_ObjectHideFlags: 0

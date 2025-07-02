@@ -4566,6 +4566,7 @@ GameObject:
   - component: {fileID: 5483514627024774249}
   - component: {fileID: 1432222708756896153}
   - component: {fileID: -3043268785565724134}
+  - component: {fileID: 5348663155855796347}
   m_Layer: 8
   m_Name: RedPlayer1
   m_TagString: Untagged
@@ -7650,7 +7651,7 @@ MonoBehaviour:
   currHealth: 1
   currDamage: 1
   currAtkSpd: 1
-  currRange: 1
+  currRange: 3
   currSpd: 1
   stats: []
   prices: 00000000000000000000000000000000
@@ -7730,6 +7731,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5348663155855796347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8355353816177164395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ub: {fileID: -5303888469913817299}
+  detectingMultiplier: 1.5
+  detectingRangeconstant: 2.5
+  engageDistanceMultiplier: 0.75
+  maxCombatTarget: 3
+  combatTargetList: []
+  currentState: 0
+  stateUpdateInterval: 0.1
 --- !u!1 &8389786015950933803
 GameObject:
   m_ObjectHideFlags: 0
