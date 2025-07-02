@@ -5235,6 +5235,7 @@ GameObject:
   - component: {fileID: 525718161868814579}
   - component: {fileID: 8142530936820762032}
   - component: {fileID: -5178020990616463116}
+  - component: {fileID: 4424937933234117843}
   m_Layer: 5
   m_Name: RedPlayer5
   m_TagString: Untagged
@@ -8450,6 +8451,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6d90b498a0a7642a3f5c45a5398a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4424937933234117843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7039307120196332833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ub: {fileID: 525718161868814579}
+  detectingMultiplier: 1.5
+  detectingRangeconstant: 3
+  engageDistanceMultiplier: 0.75
+  maxCombatTarget: 1
+  combatTargetList: []
+  currentState: 0
+  stateUpdateInterval: 0.1
 --- !u!1 &7090685956854025740
 GameObject:
   m_ObjectHideFlags: 0

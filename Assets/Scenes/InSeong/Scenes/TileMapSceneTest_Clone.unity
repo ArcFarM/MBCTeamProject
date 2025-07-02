@@ -1417,23 +1417,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPresets:
-  - prefab: {fileID: 2721758889849644916, guid: d89133a213b141b459566ebd3aea8112, type: 3}
+  - prefab: {fileID: 2721758889849644916, guid: 79a9f2abbdcc18042a440e3e667f1723, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
-  - prefab: {fileID: 7265233419418686336, guid: 1eb3b35a003dad941a613fc0282e220b, type: 3}
+  - prefab: {fileID: 7265233419418686336, guid: 2909eaff1c3f6994291200cd373566ce, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
   - prefab: {fileID: 8514850830143079336, guid: 99a6bde45d4170c429ce3abb21d17a18, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
   - prefab: {fileID: 3910339013826355901, guid: 04a1d7ae128452644b7f6bf269d7914d, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
-  - prefab: {fileID: 2831740823323081645, guid: 45a11cdfe63326a409f215bf26fdab5a, type: 3}
+  - prefab: {fileID: 2831740823323081645, guid: a03487413068f5b419cd7ae4eb59f546, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
-  - prefab: {fileID: 898435344270824819, guid: cca4efdba5c84964f851d7835fb2f38c, type: 3}
+  - prefab: {fileID: 898435344270824819, guid: 201d323a7366588489d986bde5f034f1, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
-  - prefab: {fileID: 1804733949350671915, guid: 1dff6100e4dd38746b4fe1cf5fec1ffa, type: 3}
+  - prefab: {fileID: 1804733949350671915, guid: 4a9bf871dcf9ff54790217c2ce222c6e, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
-  - prefab: {fileID: 1822108203758653323, guid: 9ab7ec2891f5d0040b46f03eaf7c460c, type: 3}
+  - prefab: {fileID: 1822108203758653323, guid: 567d6078034c082429a44e49e0c7f00c, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
-  - prefab: {fileID: 3676276360844246494, guid: afbc28016ee554141bcc5ba9289e95e4, type: 3}
+  - prefab: {fileID: 3676276360844246494, guid: 7d1bf787144ccbf4295d482c9dd3878b, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
   - prefab: {fileID: 8355353816177164395, guid: 8354191bd949297468c57802b886ee63, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
@@ -8297,9 +8297,9 @@ MonoBehaviour:
   cardsPerWave: 3
   autoDelay: 50
   waveConfig:
-  - {fileID: 11400000, guid: 66f73a341508e3a44b2494a407bcdd26, type: 2}
-  - {fileID: 11400000, guid: 318c6ffa7725fe443b6619d5d15358ef, type: 2}
-  - {fileID: 11400000, guid: 9e783696e4091334baa0a37b8b8fbd42, type: 2}
+  - {fileID: 11400000, guid: 62355d5ab0ba72a4cb160135f7750b18, type: 2}
+  - {fileID: 11400000, guid: 62355d5ab0ba72a4cb160135f7750b18, type: 2}
+  - {fileID: 11400000, guid: 62355d5ab0ba72a4cb160135f7750b18, type: 2}
   placementMgr: {fileID: 1909818602}
 --- !u!1 &1080112541
 GameObject:
@@ -8502,10 +8502,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cc459b88c3ff04492bc43dcae647eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTilemap: {fileID: 1040176377}
+  placementZoneTilemap: {fileID: 1040176377}
   rangeTilemap: {fileID: 332819664}
   previewTilemap: {fileID: 974587161}
-  roadTile: {fileID: 11400000, guid: 693e93eae62b3054994b6a8c70ca881d, type: 2}
   rangeHighlightTile: {fileID: 11400000, guid: 8309b963f4eaab243be65546d03001ab, type: 2}
   placementPreviewTile: {fileID: 11400000, guid: 17166e38a80c6204b9f7c105f4bfba2e, type: 2}
 --- !u!4 &1161173642
@@ -9979,6 +9978,12 @@ MonoBehaviour:
   placementEnabled: 0
   spawner: {fileID: 454846737}
   gridManager: {fileID: 1161173641}
+  unitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  roadLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &1909818603
 Transform:
   m_ObjectHideFlags: 0

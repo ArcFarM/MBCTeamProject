@@ -1267,6 +1267,7 @@ GameObject:
   - component: {fileID: -8500414788895772786}
   - component: {fileID: -3854168570861975300}
   - component: {fileID: -8151220970807536849}
+  - component: {fileID: 6892413726861642612}
   m_Layer: 5
   m_Name: BrownPlayer4
   m_TagString: Untagged
@@ -4373,7 +4374,7 @@ MonoBehaviour:
   baseHealth: 1
   baseDamage: 1
   baseAtkSpd: 1
-  baseRange: 1
+  baseRange: 3
   baseSpd: 1
   currRawSize: 1
   currColSize: 1
@@ -4434,6 +4435,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c6d90b498a0a7642a3f5c45a5398a6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6892413726861642612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822108203758653323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ub: {fileID: -8500414788895772786}
+  detectingMultiplier: 1.5
+  detectingRangeconstant: 3
+  engageDistanceMultiplier: 0.75
+  maxCombatTarget: 1
+  combatTargetList: []
+  currentState: 0
+  stateUpdateInterval: 0.1
 --- !u!1 &1891749474339206920
 GameObject:
   m_ObjectHideFlags: 0
