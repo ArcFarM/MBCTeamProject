@@ -1,4 +1,5 @@
 using JeaYoon;
+using MainGame.Manager;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,6 +9,9 @@ namespace JiHoon
 {
     public class ShopManager : MonoBehaviour
     {
+        [Header("카드 덱 매니저")]
+        public UnitCardManager cardManager;
+
         [Header("UI 패널")]
         public GameObject shopPanel; // 상점 UI 패널
 
@@ -56,7 +60,7 @@ namespace JiHoon
             ClearDetail();
 
             buyButton.onClick.RemoveAllListeners();
-            buyButton.onClick.AddListener(OnBuyButton);
+            
         }
 
         // 아이템 버튼들을 그리드에 채우는 함수
@@ -120,11 +124,24 @@ namespace JiHoon
             playerDiscontent -= selectedItem.discontent;
             playerDominance -= selectedItem.discontent;
             playerChaos -= selectedItem.discontent;
-
             UpdateGoldUI();
+
             Debug.Log($"{selectedItem.itemName} 구매 성공! 남은 골드: {playerGold}, 불만: {playerDiscontent}, 지배: {playerDominance}, 혼돈: {playerChaos}");
+
+            // 유닛 아이템인 경우 카드덱에 추가
+            if (selectedItem.itemType == ItemType.Unit && selectedItem.unitPrefab != null)
+            {
+                if (cardManager != null)
+                {
+                    cardManager.AddCardFromShopItem(selectedItem);
+                }
+                else
+                {
+                    Debug.LogError("CardManager가 연결되지 않았습니다!");
+                }
+            }
         }
-            
+
 
         // 플레이어 골드 UI 업데이트 함수
         private void UpdateGoldUI()
@@ -183,5 +200,6 @@ namespace JiHoon
                 }
             }
         }
+        
     }
 }

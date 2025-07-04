@@ -23,6 +23,8 @@ public class ItemData : ScriptableObject
 
     public Sprite illustration; // 아이템 일러스트
 
-    public ItemType itemType;       // ) 아이템 타입.
-    public UnitData unitData;       // ) 유닛 연결 필드. 
+    public ItemType itemType;       // ) 아이템 타입
+                                    // .
+    [Header("유닛 프리팹 (UnitBase 스크립트가 붙은)")]
+    public GameObject unitPrefab;
 }
