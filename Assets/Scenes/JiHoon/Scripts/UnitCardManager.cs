@@ -42,5 +42,21 @@ namespace JiHoon
                 ui.Init(idx, presets[idx].icon, placementMgr);
             }
         }
+        public void AddCardFromShopItem(ItemData item)
+        {
+            if (item == null || item.unitPrefab == null)
+            {
+                Debug.LogError("구매한 아이템에 unitPrefab이 없습니다!");
+                return;
+            }
+
+            // 카드 UI 생성
+            var go = Instantiate(cardUIPrefab, deckContainer);
+            var ui = go.GetComponent<UnitCardUI>();
+
+            // 아이템 정보로 카드 초기화
+            ui.InitFromShopItem(item, placementMgr);
+            Debug.Log($"상점에서 구매한 {item.itemName} 카드가 덱에 추가되었습니다!");
+        }
     }
 }

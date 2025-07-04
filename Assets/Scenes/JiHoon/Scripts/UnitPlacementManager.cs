@@ -20,6 +20,10 @@ namespace JiHoon
         private int selectedPreset = -1; // 선택된 유닛 인덱스
         private UnitCardUI selectedCardUI; // 선택된 카드 UI
 
+        // 상점 아이템 처리용 추가 변수
+        private bool isUsingShopItem = false;
+        private ItemData selectedShopItem = null;
+
         //이동용 필드
         private GameObject movingUnit = null; // 현재 이동 중인 유닛
         private Vector3Int originalCell; // 이동 시작 셀
@@ -28,8 +32,6 @@ namespace JiHoon
         [Header("Raycast LayerMasks")]
         [SerializeField] LayerMask unitLayerMask;   // Unit 레이어만 검사
         [SerializeField] LayerMask roadLayerMask;   // Road 레이어만 검사 (선택)
-
-
 
         // 싱글턴 프로퍼티
         public static UnitPlacementManager Instance { get; private set; }
@@ -44,7 +46,6 @@ namespace JiHoon
             }
             Instance = this;
         }
-
 
         // 메뉴 인스턴스 반환 (한 번만 생성)
         public UnitContextMenu Menu
@@ -62,7 +63,7 @@ namespace JiHoon
             }
         }
 
-        // UI 버튼에서 호출
+        // UI 버튼에서 호출 - 기존 preset 방식과 상점 아이템 방식 모두 처리
         public void OnClickSelectUmit(UnitCardUI card)
         {
             if (!placementEnabled)
@@ -70,8 +71,28 @@ namespace JiHoon
                 Debug.Log("카드 설치모드가 아닙니다");
                 return;
             }
-            selectedPreset = card.presetIndex;  // 선택된 유닛 인덱스 저장
-            selectedCardUI = card;  // 선택된 카드 UI 저장
+
+            // 상점에서 구매한 카드인지 확인
+            if (card.isFromShop)
+            {
+                // 상점 아이템 방식
+                selectedPreset = -1; // preset 사용 안함
+                selectedShopItem = card.shopItemData;
+                isUsingShopItem = true;
+                selectedCardUI = card;
+
+                Debug.Log($"상점 아이템 {selectedShopItem.itemName} 설치 모드 활성화");
+            }
+            else
+            {
+                // 기존 preset 방식
+                selectedPreset = card.presetIndex;
+                selectedShopItem = null;
+                isUsingShopItem = false;
+                selectedCardUI = card;
+
+                Debug.Log($"프리셋 유닛 설치 모드 활성화");
+            }
 
             // 베이지 길 셀만 파란색으로 하이라이트
             gridManager.HighlightAllowedCells();
@@ -99,12 +120,10 @@ namespace JiHoon
 
             // 3) 하이라이트
             gridManager.HighlightAllowedCells();
-
         }
 
         void Update()
         {
-
             // 이동/설치 모드 모두 placementEnabled가 false면 리턴
             if (!placementEnabled) return;
 
@@ -117,9 +136,9 @@ namespace JiHoon
                 var hit = Physics2D.Raycast(ws, Vector2.zero, Mathf.Infinity, unitLayerMask);
                 bool clickedOnUnit = hit.collider != null
                                       && hit.collider.GetComponent<ClickableUnit>() != null;
-                  if (!clickedOnUnit)
-                   Menu?.Hide();
-                        }
+                if (!clickedOnUnit)
+                    Menu?.Hide();
+            }
 
             // 이동모드
             if (movingUnit != null)
@@ -179,7 +198,7 @@ namespace JiHoon
             // ────────────────
             // 2) 설치(카드) 모드
             // ────────────────
-            if (selectedPreset < 0)
+            if (selectedPreset < 0 && !isUsingShopItem)
                 return;
 
             // 2-1) 마우스→월드→셀
@@ -188,7 +207,18 @@ namespace JiHoon
             Vector3Int baseCell = gridManager.WorldToCell(wp);
 
             // 2-2) footprint 크기 계산
-            GameObject prefabObj = spawner.unitPresets[selectedPreset].prefab;
+            GameObject prefabObj = null;
+            if (isUsingShopItem)
+            {
+                // 상점 아이템 사용
+                prefabObj = selectedShopItem.unitPrefab;
+            }
+            else
+            {
+                // 기존 preset 사용
+                prefabObj = spawner.unitPresets[selectedPreset].prefab;
+            }
+
             var unitBase = prefabObj.GetComponent<MainGame.Units.UnitBase>();
             int w = unitBase.GetBaseRawSize;
             int h = unitBase.GetBaseColSize;
@@ -226,11 +256,22 @@ namespace JiHoon
                     sum += gridManager.CellToWorldCenter(cell);
                 Vector3 spawnPos = sum / footprint.Count;
 
-                // 스폰 & 점유 기록
-                spawner.SpawnAtPosition(selectedPreset, spawnPos);
+                GameObject spawnedUnit = null;
+
+                if (isUsingShopItem)
+                {
+                    // 상점 아이템 직접 스폰
+                    spawnedUnit = Instantiate(selectedShopItem.unitPrefab, spawnPos, Quaternion.identity);
+                    Debug.Log($"상점 아이템 {selectedShopItem.itemName} 스폰 완료");
+                }
+                else
+                {
+                    // 기존 preset 방식 스폰
+                    spawner.SpawnAtPosition(selectedPreset, spawnPos);
+                    spawnedUnit = spawner.GetLastSpawnedUnit(); // 이 메서드가 있다고 가정
+                }
 
                 // GridManager에 점유 정보 등록
-                var spawnedUnit = spawner.GetLastSpawnedUnit(); // 이 메서드가 있다고 가정
                 if (spawnedUnit != null)
                 {
                     gridManager.OccupyCells(new HashSet<Vector3Int>(footprint), spawnedUnit);
@@ -245,6 +286,8 @@ namespace JiHoon
 
                 // 모드 종료
                 selectedPreset = -1;
+                isUsingShopItem = false;
+                selectedShopItem = null;
                 gridManager.ClearAllHighlights();
             }
 
@@ -252,9 +295,10 @@ namespace JiHoon
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 selectedPreset = -1;
+                isUsingShopItem = false;
+                selectedShopItem = null;
                 gridManager.ClearAllHighlights();
             }
-
         }
 
         public void SellUnit(GameObject unit)

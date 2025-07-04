@@ -18,6 +18,11 @@ MonoBehaviour:
     skjdkfsldjfkl
 
     dskfjdsjfk'
-  icon: {fileID: 21300000, guid: d786f9f2bc9726044810ffe0a4a88c85, type: 3}
+  icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+  discontent: 0
   price: 200
+  dominace: 0
+  chaos: 0
   illustration: {fileID: 21300000, guid: b85d34759fa2ff9498b81d0126e238d9, type: 3}
+  itemType: 0
+  unitPrefab: {fileID: 8355353816177164395, guid: 8354191bd949297468c57802b886ee63, type: 3}
