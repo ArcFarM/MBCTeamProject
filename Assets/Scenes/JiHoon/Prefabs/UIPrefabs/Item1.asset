@@ -18,6 +18,11 @@ MonoBehaviour:
     dsf1d23sf1
 
     dlfkldksf5'
-  icon: {fileID: 21300000, guid: 115de08af7d20dc48848db81a0221d4a, type: 3}
+  icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
+  discontent: 0
   price: 100
+  dominace: 0
+  chaos: 0
   illustration: {fileID: 21300000, guid: b66c80674ee3da34891fd8a4fe428c30, type: 3}
+  itemType: 0
+  unitPrefab: {fileID: 2721758889849644916, guid: d89133a213b141b459566ebd3aea8112, type: 3}

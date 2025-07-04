@@ -604,6 +604,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 657235418}
   m_CullTransparentMesh: 1
+--- !u!1 &1655427454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1655427455}
+  m_Layer: 0
+  m_Name: ShopUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1655427455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655427454}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 706.5463, y: 520.90173, z: -5.8656096}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1883955202}
+  - {fileID: 6150014307751508314}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1875821832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -744,7 +777,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 657235419}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1655427455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1108,8 +1141,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8277027893830047495}
   m_HandleRect: {fileID: 8912102950566774632}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1865,7 +1898,7 @@ GameObject:
   - component: {fileID: 2176089201708514151}
   - component: {fileID: 7551973374096250789}
   m_Layer: 5
-  m_Name: ShopUI
+  m_Name: ShopUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1885,7 +1918,7 @@ RectTransform:
   m_Children:
   - {fileID: 1581462971992897336}
   - {fileID: 5987575130727039046}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1655427455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2046,7 +2079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 266.5, y: -174.99922}
+  m_AnchoredPosition: {x: 266.5, y: -175}
   m_SizeDelta: {x: 533, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6762735420482882869
@@ -2319,7 +2352,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopPanel: {fileID: 2659525220849285346}
+  playerDiscontent: 50
   playerGold: 1000
+  playerDominance: 50
+  playerChaos: 50
   goldText: {fileID: 759592880459038307}
   allItems:
   - {fileID: 11400000, guid: 8b7910136a4258440be165f45f65a0bb, type: 2}
@@ -2339,6 +2375,9 @@ MonoBehaviour:
   buyButton: {fileID: 5240108942129136728}
   effectText: {fileID: 6181217227264866848}
   npcIllustration: {fileID: 5854888621103354186}
+  ownedUnitSlots: []
+  unitData: {fileID: 0}
+  iconImage: {fileID: 0}
 --- !u!114 &7647840947074978291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2642,5 +2681,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 242769721}
   - {fileID: 29216275}
-  - {fileID: 1883955202}
-  - {fileID: 6150014307751508314}
+  - {fileID: 1655427455}

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Nazgul_Icon_0: -7179096401362038427
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
