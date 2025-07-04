@@ -1,99 +1,99 @@
 using UnityEngine;
 
-/* [0] °³¿ä : EnemyMove
-		- ÀûÀÇ ÀÌµ¿°ú °ü·ÃµÈ ³»¿ëÀ» °ü¸®ÇÏ´Â Å¬·¡½º.
+/* [0] ê°œìš” : EnemyMove
+		- ì ì˜ ì´ë™ê³¼ ê´€ë ¨ëœ ë‚´ìš©ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤.
 */
 public class EnemyMove : MonoBehaviour
 {
     // [1] Variable.
-    #region ¡å¡å¡å¡å¡å Variable ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º ÀÌµ¿.
-    [SerializeField] private float startMoveSpeed = 10f;        // ) ÀûÀÇ ÀÌµ¿¼Óµµ.
-    [HideInInspector] public float moveSpeed;             // ) À¯´ÏÆ¼¿¡¼­ Inspector¿¡¼­ ÀÌµ¿¼Óµµ¸¦ Àß¸ø ±âÀÔÇÏ´Â ¿À·ù ¹æÁö.
+    #region â–¼â–¼â–¼â–¼â–¼ Variable â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ ì´ë™.
+    [SerializeField] private float startMoveSpeed = 10f;        // ) ì ì˜ ì´ë™ì†ë„.
+    [HideInInspector] public float moveSpeed;             // ) ìœ ë‹ˆí‹°ì—ì„œ Inspectorì—ì„œ ì´ë™ì†ë„ë¥¼ ì˜ëª» ê¸°ì…í•˜ëŠ” ì˜¤ë¥˜ ë°©ì§€.
 
 
-    // [¡ß] - ¢º¢º¢º ETC.
-    private bool isArrive = false;           // ) ÀûÀÌ ¸ñÀûÁö±îÁö µµÂøÇÏ¿´´ÂÁö Ã¼Å©ÇÔ.
-    private Transform target;               // ) ÇöÀç ÀûÀÌ ÇâÇÏ°í ÀÖ´Â ¿şÀÌÆ÷ÀÎÆ®ÀÇ À§Ä¡¸¦ ³ªÅ¸³»´Â º¯¼ö.
-    private int wayPointIndex = 0;         // ) ÇöÀç ÀûÀÌ ¾î´À ¿şÀÌÆ÷ÀÎÆ®¸¦ ÇâÇÏ¿© ÀÌµ¿ÁßÀÎÁö ³ªÅ¸³¿.
-    #endregion ¡ã¡ã¡ã¡ã¡ã Variable ¡ã¡ã¡ã¡ã¡ã
+    // [â—†] - â–¶â–¶â–¶ ETC.
+    private bool isArrive = false;           // ) ì ì´ ëª©ì ì§€ê¹Œì§€ ë„ì°©í•˜ì˜€ëŠ”ì§€ ì²´í¬í•¨.
+    private Transform target;               // ) í˜„ì¬ ì ì´ í–¥í•˜ê³  ìˆëŠ” ì›¨ì´í¬ì¸íŠ¸ì˜ ìœ„ì¹˜ë¥¼ ë‚˜íƒ€ë‚´ëŠ” ë³€ìˆ˜.
+    private int wayPointIndex = 0;         // ) í˜„ì¬ ì ì´ ì–´ëŠ ì›¨ì´í¬ì¸íŠ¸ë¥¼ í–¥í•˜ì—¬ ì´ë™ì¤‘ì¸ì§€ ë‚˜íƒ€ëƒ„.
+    #endregion â–²â–²â–²â–²â–² Variable â–²â–²â–²â–²â–²
 
 
 
 
 
     // [2] Property.
-    #region ¡å¡å¡å¡å¡å Property ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º ???.
-    public bool IsArrive => isArrive;       // ) ÀûÀÌ ¿şÀÌÆ÷ÀÎÆ® Á¾Á¡¿¡ µµÂøÇÏ¸é true·Î ¹Ù²ñ.
-    public float StartMoveSpeed => startMoveSpeed;      // ) ÀûÀÇ ÀÌµ¿¼Óµµ¸¦ ÀĞ±âÀü¿ëÀ¸·Î ¿ÜºÎ¿¡ °ø°³ÇÔ.
-    #endregion ¡ã¡ã¡ã¡ã¡ã Property ¡ã¡ã¡ã¡ã¡ã
+    #region â–¼â–¼â–¼â–¼â–¼ Property â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ ???.
+    public bool IsArrive => isArrive;       // ) ì ì´ ì›¨ì´í¬ì¸íŠ¸ ì¢…ì ì— ë„ì°©í•˜ë©´ trueë¡œ ë°”ë€œ.
+    public float StartMoveSpeed => startMoveSpeed;      // ) ì ì˜ ì´ë™ì†ë„ë¥¼ ì½ê¸°ì „ìš©ìœ¼ë¡œ ì™¸ë¶€ì— ê³µê°œí•¨.
+    #endregion â–²â–²â–²â–²â–² Property â–²â–²â–²â–²â–²
 
 
 
 
 
     // [3] Unity Event Method.
-    #region ¡å¡å¡å¡å¡å Unity Event Method ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º Start.
+    #region â–¼â–¼â–¼â–¼â–¼ Unity Event Method â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ Start.
     private void Start()
     {
-        // [¡Ş] - [¡ß] - ) ???.
-        wayPointIndex = 0;                                        // ) wayPointIndex¸¦ 0À¸·Î ÇÔ ¡æ wayPointIndexÀÇ ±âº»°ªÀº 1ÀÌ±â¿¡ 0À¸·Î ÇØ¾ßÇÔ.
-        target = WayPoints.wayPoints[wayPointIndex];        // ) WayPoints ½ºÅ©¸³Æ®¿¡¼­ .
+        // [â—‡] - [â—†] - ) ???.
+        wayPointIndex = 0;                                        // ) wayPointIndexë¥¼ 0ìœ¼ë¡œ í•¨ â†’ wayPointIndexì˜ ê¸°ë³¸ê°’ì€ 1ì´ê¸°ì— 0ìœ¼ë¡œ í•´ì•¼í•¨.
+        target = WayPoints.wayPoints[wayPointIndex];        // ) WayPoints ìŠ¤í¬ë¦½íŠ¸ì—ì„œ .
         moveSpeed = startMoveSpeed;                         // ) .
     }
 
 
-    // [¡ß] - ¢º¢º¢º Update.
+    // [â—†] - â–¶â–¶â–¶ Update.
     private void Update()
     {
-        // [¡Ş] - [¡ß] - ) Á¾Á¡¿¡ µµÂøÇÑ ÀûÀº ´õ ÀÌ»ó ÀÌµ¿À» ½ÇÇàÇÏÁö ¾Êµµ·Ï ¸·´Â ¿ªÇÒ.
+        // [â—‡] - [â—†] - ) ì¢…ì ì— ë„ì°©í•œ ì ì€ ë” ì´ìƒ ì´ë™ì„ ì‹¤í–‰í•˜ì§€ ì•Šë„ë¡ ë§‰ëŠ” ì—­í• .
         if (isArrive)
             return;
-        // [¡Ş] - [¡ß] - ) ÇöÀç ÀûÀ§Ä¡ - ¸ñÇ¥ ¿şÀÌÆ÷ÀÎÆ®ÀÇ À§Ä¡.
+        // [â—‡] - [â—†] - ) í˜„ì¬ ì ìœ„ì¹˜ - ëª©í‘œ ì›¨ì´í¬ì¸íŠ¸ì˜ ìœ„ì¹˜.
         Vector3 dir = target.position - this.transform.position;
-        // [¡Ş] - [¡ß] - ) ÀûÀÌ ¸Å ÇÁ·¹ÀÓ¸¶´Ù ¿òÁ÷ÀÌ°Ô ÇÔ
+        // [â—‡] - [â—†] - ) ì ì´ ë§¤ í”„ë ˆì„ë§ˆë‹¤ ì›€ì§ì´ê²Œ í•¨
         transform.Translate(dir.normalized * Time.deltaTime * moveSpeed, Space.World);
-        // [¡Ş] - [¡ß] - ) ÀûÀÌ ¸ñÇ¥ ¿şÀÌÆ÷ÀÎÆ®¿¡ ¾ó¸¶³ª°¡ °¡±î¿öÁ³´ÂÁö °Å¸®¸¦ °è»êÇÔ.
+        // [â—‡] - [â—†] - ) ì ì´ ëª©í‘œ ì›¨ì´í¬ì¸íŠ¸ì— ì–¼ë§ˆë‚˜ê°€ ê°€ê¹Œì›Œì¡ŒëŠ”ì§€ ê±°ë¦¬ë¥¼ ê³„ì‚°í•¨.
         float distance = Vector3.Distance(target.position, this.transform.position);
-        // [¡Ş] - [¡ß] - ) ÀûÀÌ ¸ñÀûÁö¿¡ °ÅÀÇ µµÂøÇß´ÂÁö ÆÇ´ÜÇÏ±â À§ÇØ °è»ê.
+        // [â—‡] - [â—†] - ) ì ì´ ëª©ì ì§€ì— ê±°ì˜ ë„ì°©í–ˆëŠ”ì§€ íŒë‹¨í•˜ê¸° ìœ„í•´ ê³„ì‚°.
         if (distance <= 0.1f)
         {
-            // [¡Ş] - [¡ß] - ) ??? - ´ÙÀ½ Å¸°Ù ¼ÂÆÃ
+            // [â—‡] - [â—†] - ) ??? - ë‹¤ìŒ íƒ€ê²Ÿ ì…‹íŒ…
             GetNextTarget();
         }
-        // [¡Ş] - [¡ß] - ) µğ¹öÇÁ·Î ´À·ÁÁø ¼Óµµ¸¦ ¿ø»óº¹±¸ÇÔ.
+        // [â—‡] - [â—†] - ) ë””ë²„í”„ë¡œ ëŠë ¤ì§„ ì†ë„ë¥¼ ì›ìƒë³µêµ¬í•¨.
         moveSpeed = startMoveSpeed;
     }
-    #endregion ¡ã¡ã¡ã¡ã¡ã Unity Event Meathod ¡ã¡ã¡ã¡ã¡ã
+    #endregion â–²â–²â–²â–²â–² Unity Event Meathod â–²â–²â–²â–²â–²
 
 
 
 
 
     // [4] Custom Method.
-    #region ¡å¡å¡å¡å¡å Custom Method ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º GetNextTarget.
+    #region â–¼â–¼â–¼â–¼â–¼ Custom Method â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ GetNextTarget.
     private void GetNextTarget()
     {
-        // [¡Ş] - [¡ß] - ) ÀûÀÌ Á¾Á¡¿¡ µµÂøÇÏ¿´´ÂÁö ÆÇÁ¤.
+        // [â—‡] - [â—†] - ) ì ì´ ì¢…ì ì— ë„ì°©í•˜ì˜€ëŠ”ì§€ íŒì •.
         if (wayPointIndex == WayPoints.wayPoints.Length - 1)
         {
-            // [¡Ş] - [¡Ş] - [¡ß] ) ÀûÀÌ Á¾Á¡¿¡ µµÂøÇÏ¿´´ÂÁö Ã¼Å©.
+            // [â—‡] - [â—‡] - [â—†] ) ì ì´ ì¢…ì ì— ë„ì°©í•˜ì˜€ëŠ”ì§€ ì²´í¬.
             isArrive = true;
-            // [¡Ş] - [¡Ş] - [¡ß] ) ÀûÀÌ Á¾Á¡¿¡ µµÂøÇÒ °æ¿ì ÇÃ·¹ÀÌ¾îÀÇ ¶óÀÌÇÁ ¼Ò¸ğ.
-            PlayerStats.UseLife(1);
-            // [¡Ş] - [¡Ş] - [¡ß] ) Enemy Ä«¿îÆÃ.
+            // [â—‡] - [â—‡] - [â—†] ) ì ì´ ì¢…ì ì— ë„ì°©í•  ê²½ìš° í”Œë ˆì´ì–´ì˜ ë¼ì´í”„ ì†Œëª¨.
+            // ) PlayerStats.UseLife(1);
+            // [â—‡] - [â—‡] - [â—†] ) Enemy ì¹´ìš´íŒ….
             WaveManager.enemyAlive--;
             Debug.Log($"enemyAlive: {WaveManager.enemyAlive}");
-            // [¡Ş] - [¡Ş] - [¡ß] ) ÀûÀÌ Á¾Á¡¿¡ µµÂøÇÏ¿´À» °æ¿ì »èÁ¦.
+            // [â—‡] - [â—‡] - [â—†] ) ì ì´ ì¢…ì ì— ë„ì°©í•˜ì˜€ì„ ê²½ìš° ì‚­ì œ.
             Destroy(this.gameObject, 1f);
             return;
         }
-        // [¡Ş] - [¡ß] - ) ÀûÀÌ ÇöÀç ¿şÀÌÆ÷ÀÎÆ®¿¡ µµÂøÇÏ¿´À¸´Ï ´ÙÀ½ ¿şÀÌÆ÷ÀÎÆ®·Î Å¸°ÙÀ» ¼³Á¤ÇÔ.
+        // [â—‡] - [â—†] - ) ì ì´ í˜„ì¬ ì›¨ì´í¬ì¸íŠ¸ì— ë„ì°©í•˜ì˜€ìœ¼ë‹ˆ ë‹¤ìŒ ì›¨ì´í¬ì¸íŠ¸ë¡œ íƒ€ê²Ÿì„ ì„¤ì •í•¨.
         wayPointIndex++;
         target = WayPoints.wayPoints[wayPointIndex];
     }
-    #endregion ¡ã¡ã¡ã¡ã¡ã Custom Method ¡ã¡ã¡ã¡ã¡ã
+    #endregion â–²â–²â–²â–²â–² Custom Method â–²â–²â–²â–²â–²
 }

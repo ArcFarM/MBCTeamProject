@@ -7,24 +7,27 @@ namespace JiHoon
     [CreateAssetMenu(menuName = "Game/UnitData")]
     public class UnitData : ScriptableObject
     {
-        public string unitID;   // À¯´ÖÀÇ °íÀ¯ ID
-        public string unitName; // À¯´ÖÀÇ ÀÌ¸§
-        public Faction faction; // À¯´ÖÀÇ Áø¿µ (Player ¶Ç´Â Enemy)
-        public AttackType attackType; // À¯´ÖÀÇ °ø°İ À¯Çü (Melee, Ranged, AOE, Support)
+        public string unitID;   // ìœ ë‹›ì˜ ê³ ìœ  ID
+        public string unitName; // ìœ ë‹›ì˜ ì´ë¦„
+        public Faction faction; // ìœ ë‹›ì˜ ì§„ì˜ (Player ë˜ëŠ” Enemy)
+        public AttackType attackType; // ìœ ë‹›ì˜ ê³µê²© ìœ í˜• (Melee, Ranged, AOE, Support)
 
         [Header("Basic Stats")]
-        public int maxHP; // ÃÖ´ë Ã¼·Â
-        public int damage; // °ø°İ·Â
-        public float attackRange; // °ø°İ »ç°Å¸®
-        public float attackInterval; // °ø°İ ÁÖ±â
+        public int maxHP; // ìµœëŒ€ ì²´ë ¥
+        public int damage; // ê³µê²©ë ¥
+        public float attackRange; // ê³µê²© ì‚¬ê±°ë¦¬
+        public float attackInterval; // ê³µê²© ì£¼ê¸°
 
         [Header("Footprint")]
-        // À¯´ÖÀÌ Â÷ÁöÇÏ´Â ¼¿ Å©±â (°¡·Î)
+        // ìœ ë‹›ì´ ì°¨ì§€í•˜ëŠ” ì…€ í¬ê¸° (ê°€ë¡œ)
         public int footprintWidth = 1;
-        // À¯´ÖÀÌ Â÷ÁöÇÏ´Â ¼¿ Å©±â (¼¼·Î)
+        // ìœ ë‹›ì´ ì°¨ì§€í•˜ëŠ” ì…€ í¬ê¸° (ì„¸ë¡œ)
         public int footprintHeight = 1;
 
-        //TODO :[Header("Special")] »óÅÂÀÌ»ó °ø°İ, »óÅÂÀÌ»óµî Ã¼Å© ¾ÆÁ÷ ±âÈ¹¾ÈÇÔ
+        public Sprite icon;         // ) .
+        public Sprite illustration;
+
+        //TODO :[Header("Special")] ìƒíƒœì´ìƒ ê³µê²©, ìƒíƒœì´ìƒë“± ì²´í¬ ì•„ì§ ê¸°íšì•ˆí•¨
 
     }
 }

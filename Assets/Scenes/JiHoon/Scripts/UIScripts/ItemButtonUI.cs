@@ -1,26 +1,35 @@
+using JiHoon;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemButtonUI : MonoBehaviour
 {
-    public Image iconImage; // ¾ÆÀÌÄÜ ÀÌ¹ÌÁö ÄÄÆ÷³ÍÆ®
-    public TextMeshProUGUI priceText; // °¡°İ ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®
+    public Image iconImage; // ì•„ì´ì½˜ ì´ë¯¸ì§€ ì»´í¬ë„ŒíŠ¸
+    public TextMeshProUGUI discontentText;      // ) ë¶ˆë§Œ í…ìŠ¤íŠ¸ ???.
+    public TextMeshProUGUI priceText; // ê°€ê²© í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸
+    public TextMeshProUGUI dominaceText;        // ) ì§€ë°° í…ìŠ¤íŠ¸ ???.
+    public TextMeshProUGUI chaosText;        // ) í˜¼ëˆ í…ìŠ¤íŠ¸ ???.
     private ItemData data;
     private ShopManager shop;
 
     public void Initialize(ItemData item, ShopManager shopManager)
     {
-        data = item; // ¾ÆÀÌÅÛ µ¥ÀÌÅÍ ¼³Á¤
-        shop = shopManager; // ShopManager ¼³Á¤
-        iconImage.sprite = data.icon; // ¾ÆÀÌÄÜ ÀÌ¹ÌÁö ¼³Á¤
-        priceText.text = item.price.ToString(); // °¡°İ ÅØ½ºÆ® ¼³Á¤
+        data = item; // ì•„ì´í…œ ë°ì´í„° ì„¤ì •
+        shop = shopManager; // ShopManager ì„¤ì •
+        iconImage.sprite = data.icon; // ì•„ì´ì½˜ ì´ë¯¸ì§€ ì„¤ì •
+        discontentText.text = item.discontent.ToString();       // ) ë¶ˆë§Œ í…ìŠ¤íŠ¸ ???.
+        priceText.text = item.price.ToString(); // ê°€ê²© í…ìŠ¤íŠ¸ ì„¤ì •
+        dominaceText.text = item.dominace.ToString();       // ) ì§€ë°° í…ìŠ¤íŠ¸ ???.
+        chaosText.text = item.chaos.ToString();       // ) í˜¼ëˆ í…ìŠ¤íŠ¸ ???.
 
-        GetComponent<Button>().onClick.AddListener(OnClick);
+        var button = GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(OnClick);
     }
     public void OnClick()
     {
-        shop.SelectItem(data); // ShopManagerÀÇ SelectItem ¸Ş¼­µå È£Ãâ
+        shop.SelectItem(data); // ShopManagerì˜ SelectItem ë©”ì„œë“œ í˜¸ì¶œ
     }
 }
 

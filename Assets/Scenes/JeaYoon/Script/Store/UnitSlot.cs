@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using JiHoon;
 
 /* [0] 개요 : UnitSlot
         - 상점 슬롯을 관리하는 UI 스크립트.

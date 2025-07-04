@@ -6,77 +6,77 @@ namespace MainGame.Units
 
 }
 
-/* [0] °³¿ä : EnemyBase
-		- Àû°ú °ü·ÃµÈ ³»¿ëÀ» °ü¸®ÇÏ´Â Å¬·¡½º.
+/* [0] ê°œìš” : EnemyBase
+		- ì ê³¼ ê´€ë ¨ëœ ë‚´ìš©ì„ ê´€ë¦¬í•˜ëŠ” í´ë˜ìŠ¤.
 */
 
 public class EnemyBase : UnitBase
 {
     // [1] Variable.
-    #region ¡å¡å¡å¡å¡å Variable ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º ÀÌµ¿.
-    private EnemyMove enemyMove;        // ) ÀÌµ¿.
+    #region â–¼â–¼â–¼â–¼â–¼ Variable â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ ì´ë™.
+    private EnemyMove enemyMove;        // ) ì´ë™.
 
 
-    // [¡ß] - ¢º¢º¢º Ã¼·Â.
-    private float health;                                      // ) Ã¼·Â.
-    [SerializeField] private float startHealth = 100f;      // ) ½ÃÀÛÇÒ ¶§ÀÇ Ã¼·ÂÃÊ±â°ª.
-    public Image healthBarImage;                         // ) Ã¼·Â¹Ù UI.
+    // [â—†] - â–¶â–¶â–¶ ì²´ë ¥.
+    private float health;                                      // ) ì²´ë ¥.
+    [SerializeField] private float startHealth = 100f;      // ) ì‹œì‘í•  ë•Œì˜ ì²´ë ¥ì´ˆê¸°ê°’.
+    public Image healthBarImage;                         // ) ì²´ë ¥ë°” UI.
 
 
-    // [¡Ş] - [¡ß] - ) »ç¸Á.
-    private bool isDeath = false;                   // ) Á×À½ Ã¼Å©.
-    public GameObject deathEffectPrefab;        // ) Á×¾úÀ» ¶§ÀÇ ÀÌÆÑÆ® ÇÁ¸®ÆÕ.
+    // [â—‡] - [â—†] - ) ì‚¬ë§.
+    private bool isDeath = false;                   // ) ì£½ìŒ ì²´í¬.
+    public GameObject deathEffectPrefab;        // ) ì£½ì—ˆì„ ë•Œì˜ ì´íŒ©íŠ¸ í”„ë¦¬íŒ¹.
 
 
-    // [¡Ş] - [¡ß] - ) º¸»ó.
-    [SerializeField] private int rewardGold = 50;       // ) ÀûÀ» Àâ¾ÒÀ» °æ¿ì Gold Áö±Ş.
-    #endregion ¡ã¡ã¡ã¡ã¡ã Variable ¡ã¡ã¡ã¡ã¡ã
+    // [â—‡] - [â—†] - ) ë³´ìƒ.
+    [SerializeField] private int rewardGold = 50;       // ) ì ì„ ì¡ì•˜ì„ ê²½ìš° Gold ì§€ê¸‰.
+    #endregion â–²â–²â–²â–²â–² Variable â–²â–²â–²â–²â–²
 
 
 
 
 
     // [2] Property.
-    #region ¡å¡å¡å¡å¡å Property ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º enemyMoveÀÇ IsArrive¸¦ ÀÌ¿ëÇÏ¿©ÀûÀÌ ¸ñÇ¥ÁöÁ¡¿¡ µµÂøÇÏ¿´´ÂÁö ¾Ë·ÁÁÜ.
+    #region â–¼â–¼â–¼â–¼â–¼ Property â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ enemyMoveì˜ IsArriveë¥¼ ì´ìš©í•˜ì—¬ì ì´ ëª©í‘œì§€ì ì— ë„ì°©í•˜ì˜€ëŠ”ì§€ ì•Œë ¤ì¤Œ.
     public bool IsArrive => enemyMove.IsArrive;
-    #endregion ¡ã¡ã¡ã¡ã¡ã Property ¡ã¡ã¡ã¡ã¡ã
+    #endregion â–²â–²â–²â–²â–² Property â–²â–²â–²â–²â–²
 
 
 
 
 
     // [3] Unity Event Method.
-    #region ¡å¡å¡å¡å¡å Unity Event Method ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º Start.
+    #region â–¼â–¼â–¼â–¼â–¼ Unity Event Method â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ Start.
     private void Start()
     {
-        // [¡Ş] - [¡ß] - ) EnemyMove¸¦ ÂüÁ¶ÇÔ.
+        // [â—‡] - [â—†] - ) EnemyMoveë¥¼ ì°¸ì¡°í•¨.
         enemyMove = this.GetComponent<EnemyMove>();
 
-        // [¡Ş] - [¡ß] - ) ÀûÀÇ ÇöÀç Ã¼·ÂÀ» Ã¼·ÂÃÊ±â°ªÀ¸·Î ¼³Á¤ÇÔ.
+        // [â—‡] - [â—†] - ) ì ì˜ í˜„ì¬ ì²´ë ¥ì„ ì²´ë ¥ì´ˆê¸°ê°’ìœ¼ë¡œ ì„¤ì •í•¨.
         health = startHealth;
     }
-    #endregion ¡ã¡ã¡ã¡ã¡ã Unity Event Method ¡ã¡ã¡ã¡ã¡ã
+    #endregion â–²â–²â–²â–²â–² Unity Event Method â–²â–²â–²â–²â–²
 
 
 
 
 
     // [4] Custom Method.
-    #region ¡å¡å¡å¡å¡å Custom Method ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º TakeDamage.
+    #region â–¼â–¼â–¼â–¼â–¼ Custom Method â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ TakeDamage.
     public void TakeDamage(float damage)
     {
-        // [¡Ş] - [¡ß] - ) ¸ñÀûÁö¿¡ µµÂøÇÑ ÀûÀº µ¥¹ÌÁö¸¦ ¹ŞÁö¾ÊÀ½.
+        // [â—‡] - [â—†] - ) ëª©ì ì§€ì— ë„ì°©í•œ ì ì€ ë°ë¯¸ì§€ë¥¼ ë°›ì§€ì•ŠìŒ.
         if (enemyMove.IsArrive)
             return;
-        // [¡Ş] - [¡ß] - ) µ¥¹ÌÁö ¹ŞÀº ¸¸Å­ health°¡ °¨¼ÒÇÔ.
+        // [â—‡] - [â—†] - ) ë°ë¯¸ì§€ ë°›ì€ ë§Œí¼ healthê°€ ê°ì†Œí•¨.
         health -= damage;
-        // [¡Ş] - [¡ß] - ) Ã¼·Â¹Ù UI(¹éºĞÀ²) = ÇöÀçÃ¼·Â(health) / Ã¼·ÂÃÊ±â°ª(startHealth).
+        // [â—‡] - [â—†] - ) ì²´ë ¥ë°” UI(ë°±ë¶„ìœ¨) = í˜„ì¬ì²´ë ¥(health) / ì²´ë ¥ì´ˆê¸°ê°’(startHealth).
         healthBarImage.fillAmount = health / startHealth;
-        // [¡Ş] - [¡ß] - ) ÀûÀÇ »ç¸Á È®ÀÎ ¹× Ã¼·ÂÀÌ 0ÀÌÇÏ°¡ µÇ¸é Á×À½À¸·Î Ã³¸®.
+        // [â—‡] - [â—†] - ) ì ì˜ ì‚¬ë§ í™•ì¸ ë° ì²´ë ¥ì´ 0ì´í•˜ê°€ ë˜ë©´ ì£½ìŒìœ¼ë¡œ ì²˜ë¦¬.
         if (health <= 0f && isDeath == false)
         {
             Die();
@@ -84,29 +84,29 @@ public class EnemyBase : UnitBase
     }
 
 
-    // [¡ß] - ¢º¢º¢º Die.
+    // [â—†] - â–¶â–¶â–¶ Die.
     private void Die()
     {
-        // [¡Ş] - [¡ß] - ) »ç¸Á.
+        // [â—‡] - [â—†] - ) ì‚¬ë§.
         isDeath = true;
-        // [¡Ş] - [¡ß] - ) ÀûÀ» Àâ¾ÒÀ» °æ¿ì º¸»óÀ» Áö±Ş.
-        PlayerStats.AddMoney(rewardGold);
-        // [¡Ş] - [¡ß] - ) ÀûÀÌ Á×¾úÀ» ¶§, ÀÌÆÑÆ® ½ÇÇà.
+        // [â—‡] - [â—†] - ) ì ì„ ì¡ì•˜ì„ ê²½ìš° ë³´ìƒì„ ì§€ê¸‰.
+        // ) PlayerStats.AddMoney(rewardGold);
+        // [â—‡] - [â—†] - ) ì ì´ ì£½ì—ˆì„ ë•Œ, ì´íŒ©íŠ¸ ì‹¤í–‰.
         GameObject effectGo = Instantiate(deathEffectPrefab, this.transform.position, Quaternion.identity);
         Destroy(effectGo, 2f);
-        // [¡Ş] - [¡ß] - ) ÇöÀç »ıÁ¸ÇÑ ÀûÀÇ ¼ıÀÚ Ä«¿îÆÃ.
+        // [â—‡] - [â—†] - ) í˜„ì¬ ìƒì¡´í•œ ì ì˜ ìˆ«ì ì¹´ìš´íŒ….
         WaveManager.enemyAlive--;
         Debug.Log($"enemyAlive: {WaveManager.enemyAlive}");
-        // [¡Ş] - [¡ß] - ) Á×¾úÀ» °æ¿ì ¿ÀºêÁ§Æ® Á¦°Å.
+        // [â—‡] - [â—†] - ) ì£½ì—ˆì„ ê²½ìš° ì˜¤ë¸Œì íŠ¸ ì œê±°.
         Destroy(this.gameObject, 0f);
     }
 
 
-    // [¡ß] - ¢º¢º¢º Slow.
+    // [â—†] - â–¶â–¶â–¶ Slow.
     public void Slow(float rate)
     {
-        // [¡Ş] - [¡ß] - ) °¨¼Ó·ü¸¸Å­ ÀûÀÇ ¼Óµµ¸¦ °¨¼Ó.
+        // [â—‡] - [â—†] - ) ê°ì†ë¥ ë§Œí¼ ì ì˜ ì†ë„ë¥¼ ê°ì†.
         enemyMove.moveSpeed = enemyMove.StartMoveSpeed * (1 - rate);
     }
-    #endregion ¡ã¡ã¡ã¡ã¡ã Custom Method ¡ã¡ã¡ã¡ã¡ã
+    #endregion â–²â–²â–²â–²â–² Custom Method â–²â–²â–²â–²â–²
 }
