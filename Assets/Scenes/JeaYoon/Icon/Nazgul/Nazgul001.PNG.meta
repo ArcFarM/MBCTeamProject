@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Nazgul001_0: 1562744231874024601
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

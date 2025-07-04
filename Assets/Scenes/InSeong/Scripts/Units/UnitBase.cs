@@ -57,10 +57,6 @@ namespace MainGame.Units {
         //능력치는 배열로 관리
         [SerializeField] protected float[] stats;
         #endregion
-
-        //참조
-        //애니메이션 사용에 필요한 Animator
-        Animator animator;
         #endregion
 
         #region Properties

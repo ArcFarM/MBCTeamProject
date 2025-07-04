@@ -24,6 +24,12 @@ namespace MainGame.Units.Battle {
         [SerializeField] float stateUpdateInterval = 0.1f;
         private Coroutine stateMachineCoroutine;
         private Coroutine movementCoroutine;
+
+        #region Animation
+        [Header("애니메이션 관련")]
+        [SerializeField] UnitAnim unitAnim; // 유닛 애니메이션 컴포넌트
+        AnimParam animParam = new AnimParam(); // 애니메이션 파라미터 설정
+        #endregion
         #endregion
         #endregion
 
@@ -308,6 +314,10 @@ namespace MainGame.Units.Battle {
         }
 
         IEnumerator MoveToTarget(float targetDistance, GameObject target) {
+            //이동 애니메이션 재생
+            if (unitAnim != null) {
+                unitAnim.SetAnimBool(animParam.Param_bool_move, true);
+            }
             Debug.Log($"[{gameObject.name}] MoveToTarget 코루틴 시작: {target.name}");
             while (target != null) {
                 float distance = Vector2.Distance(transform.position, target.transform.position);
@@ -322,6 +332,10 @@ namespace MainGame.Units.Battle {
                 yield return null;
             }
             Debug.Log($"[{gameObject.name}] MoveToTarget 코루틴 종료");
+            //이동 애니메이션 중지
+            if (unitAnim != null) {
+                unitAnim.SetAnimBool(animParam.Param_bool_move, false);
+            }
         }
 
         public virtual void Attack(GameObject target) {
@@ -330,7 +344,10 @@ namespace MainGame.Units.Battle {
                 Debug.LogError($"[{gameObject.name}] Attack: 공격 대상이 null입니다.");
                 return;
             }
-
+            //공격 애니메이션 재생
+            if (unitAnim != null) {
+                unitAnim.SetAnimTrigger(animParam.Param_trigger_attack);
+            }
             if (target.TryGetComponent<IBattle>(out IBattle ib) && target.TryGetComponent<UnitBase>(out UnitBase ub_Method)) {
                 Debug.Log($"[{gameObject.name}] Attack: {target.name} 공격 시도");
                 // TODO: 공격 애니메이션 재생, 애니메이션이 끝나고 - 코루틴으로 처리 - 공격 효과 적용
