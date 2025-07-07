@@ -5234,7 +5234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b7f2a50298afb4794d291cf3d103bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitID: 55
+  unitID: 555
   unitName: 555
   faction: 0
   baseRawSize: 1
@@ -5324,7 +5324,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: 0}
+  unitAnim: {fileID: 4995601386439491798}
 --- !u!114 &4995601386439491798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5337,9 +5337,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  animationData: {fileID: 0}
-  unitID: 
+  animator: {fileID: 4476890059619275155}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 555
 --- !u!1 &3771258422291561001
 GameObject:
   m_ObjectHideFlags: 0

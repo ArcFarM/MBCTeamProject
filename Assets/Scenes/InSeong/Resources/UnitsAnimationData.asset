@@ -13,8 +13,33 @@ MonoBehaviour:
   m_Name: UnitsAnimationData
   m_EditorClassIdentifier: 
   unitConfigs:
-  - unitID: 1234
-    unitName: 
+  - unitID: 111
+    unitName: 222
     attackDamageFrame: 15
     attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 222
+    unitName: 222
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 333
+    unitName: 333
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 444
+    unitName: 444
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 444
+    unitName: 444
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
     idleLoopInterval: 1

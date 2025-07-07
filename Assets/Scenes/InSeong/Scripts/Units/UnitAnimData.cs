@@ -16,6 +16,7 @@ namespace MainGame.Units.Animation {
         [Header("공격 설정")]
         public int attackDamageFrame = 15;
         public int attackCompleteFrame = 30;
+        public int frameRate = 60;
 
         [Header("루프 설정")]
         public float idleLoopInterval = 2f;

@@ -1,9 +1,9 @@
 using MainGame.Enum;
-using MainGame.Units.Battle;
 using System.Collections.Generic;
-using MainGame.Units;
+using MainGame.Units.Animation;
 using UnityEngine;
 using System.Collections;
+using NUnit.Framework.Constraints;
 
 namespace MainGame.Units.Battle {
     public class BattleBase : MonoBehaviour, IBattle {
@@ -209,6 +209,8 @@ namespace MainGame.Units.Battle {
         }
 
         void HandleDeadState() {
+            StopAllCoroutines();
+            StopStateMachine();
             Die();
         }
         #endregion
@@ -238,9 +240,10 @@ namespace MainGame.Units.Battle {
             if (ub.IsDead) return;
             Debug.Log($"[{gameObject.name}] 사망");
             ub.SetStat(StatType.CurrHealth, 0);
-            // TODO: 사망 시 처리할 내용
-            // 예: 애니메이션 재생, 사망 이펙트, 오브젝트 비활성화 등
-            Destroy(gameObject, 0.5f); //오브젝트 제거
+            // 사망 애니메이션 재생
+            if (unitAnim != null) {
+                StartCoroutine(unitAnim.PlayDeathAnim());
+            }
         }
 
         public virtual bool IsInRange(UnitBase target) {
@@ -353,8 +356,8 @@ namespace MainGame.Units.Battle {
                 // TODO: 공격 애니메이션 재생, 애니메이션이 끝나고 - 코루틴으로 처리 - 공격 효과 적용
                 if (IsInRange(ub_Method)) {
                     float damage = ub.GetStat(StatType.CurrDamage);
-                    Debug.Log($"[{gameObject.name}] Attack: {target.name}에게 {damage} 데미지 가함");
-                    ib.TakeDamage(damage);
+                    //대미지 적용을 코루틴으로 변경
+                    StartCoroutine(DamageCalc(target, damage));
                 }
                 else {
                     Debug.Log($"[{gameObject.name}] Attack: {target.name}이 사거리 밖");
@@ -363,6 +366,16 @@ namespace MainGame.Units.Battle {
             else {
                 Debug.LogError($"[{gameObject.name}] Attack: {target.name}은 올바른 공격 대상이 아닙니다.");
             }
+        }
+
+        IEnumerator DamageCalc(GameObject target, float damage) {
+            //yield return으로 애니메이션의 특정 프레임까지 재생 대기
+            UnitAnimFrameConfig currFrameInfo = unitAnim.GetAnimData();
+            float waitTime = currFrameInfo.attackCompleteFrame / (float)currFrameInfo.frameRate;
+            yield return new WaitForSeconds(waitTime);
+            //null check는 상위 메서드에서 이미 했음
+            if(target != null) target.GetComponent<IBattle>().TakeDamage(damage);
+            //Debug.Log($"[{gameObject.name}] Attack: {target.name}에게 {damage} 데미지 가함");
         }
         #endregion
         #endregion

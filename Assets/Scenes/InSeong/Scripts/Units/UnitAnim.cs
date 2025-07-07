@@ -1,5 +1,6 @@
 using UnityEngine;
 using MainGame.Units.Animation;
+using System.Collections;
 
 namespace MainGame.Units {
     public class UnitAnim : MonoBehaviour {
@@ -53,6 +54,28 @@ namespace MainGame.Units {
             else {
                 Debug.LogError("Animator is not assigned.");
             }
+        }
+
+        //animdata 반환
+        public UnitAnimFrameConfig GetAnimData() {
+            if (currentConfig != null) {
+                return currentConfig;
+            }
+            else return null;
+        }
+
+        //사망 시 모든 애니메이션을 중지하고 사망 애니메이션 재생
+        public IEnumerator PlayDeathAnim() {
+            if (animator != null) {
+                animator.SetTrigger(animParam.Param_trigger_death);
+                animator.SetBool(animParam.Param_bool_isDeath, true);
+                yield return new WaitForSeconds(1f); // 잠시 대기하여 상태가 적용되도록 함
+            }
+            else {
+                Debug.LogError("Animator is not assigned.");
+            }
+            gameObject.SetActive(false); // 애니메이션 재생 후 오브젝트 비활성화
+            Destroy(gameObject);
         }
         #endregion
     }

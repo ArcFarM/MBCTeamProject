@@ -4456,7 +4456,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: 0}
+  unitAnim: {fileID: 5917806466719429496}
 --- !u!114 &5917806466719429496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4469,9 +4469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  animationData: {fileID: 0}
-  unitID: 
+  animator: {fileID: 3136746260682068861}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 444
 --- !u!1 &1891749474339206920
 GameObject:
   m_ObjectHideFlags: 0
