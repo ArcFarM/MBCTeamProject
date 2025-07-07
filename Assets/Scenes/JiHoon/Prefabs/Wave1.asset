@@ -15,20 +15,84 @@ MonoBehaviour:
   waveName: 1
   isBossWave: 0
   bossPrefab: {fileID: 0}
-  enemies:
-  - prefab: {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
-    count: 3
-    spawnInterval: 2
-    spawnerIndex: 0
-  - prefab: {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
-    count: 3
-    spawnInterval: 1.5
-    spawnerIndex: 1
-  - prefab: {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
-    count: 3
-    spawnInterval: 3
-    spawnerIndex: 2
-  - prefab: {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
-    count: 3
-    spawnInterval: 3
-    spawnerIndex: 0
+  enemies: []
+  groups:
+  - groupId: 0
+    maxMembersPerGroup: 7
+    formationSpacing: 3
+    formation: 2
+    enemyTypes:
+    - prefab: {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 0
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+    - prefab: {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 0
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+    - prefab: {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 0
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+  - groupId: 0
+    maxMembersPerGroup: 7
+    formationSpacing: 3
+    formation: 2
+    enemyTypes:
+    - prefab: {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 1
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+    - prefab: {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 1
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+    - prefab: {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 1
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+  - groupId: 0
+    maxMembersPerGroup: 7
+    formationSpacing: 3
+    formation: 2
+    enemyTypes:
+    - prefab: {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 2
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+    - prefab: {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 2
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+    - prefab: {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
+      count: 2
+      spawnInterval: 0.5
+      spawnerIndex: 2
+      groupCount: 0
+      groupSpacing: 0
+      groupInterval: 0
+  useGroupSystem: 1

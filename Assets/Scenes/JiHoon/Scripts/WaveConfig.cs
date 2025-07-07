@@ -1,22 +1,49 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace JiHoon
 {
     [System.Serializable]
-    public class  WaveEnemyInfo
+    public class WaveEnemyInfo
     {
-        public GameObject prefab;   //스폰할 적 프리팹
-        public int count;   //스폰할 적의 수
-        public float spawnInterval;   //스폰 간격
-        public int spawnerIndex; //적을 스폰할 스포너 인덱스
-        
+        public GameObject prefab;
+        public int count;
+        public float spawnInterval;
+        public int spawnerIndex;
+        [Header("=== 파티 스폰 옵션 ===")]
+        public int groupCount = 3;
+        public float groupSpacing = 1f;
+        public float groupInterval = 0.5f;
     }
+
+    [System.Serializable]
+    public class GroupConfig
+    {
+        [Header("그룹 설정")]
+        public int groupId;
+        public int maxMembersPerGroup = 5;
+        public float formationSpacing = 1.5f;
+        public EnemyGroup.FormationType formation = EnemyGroup.FormationType.VFormation;
+
+        [Header("이 그룹에 포함될 적들")]
+        public List<WaveEnemyInfo> enemyTypes = new List<WaveEnemyInfo>();
+    }
+
     [CreateAssetMenu(menuName = "Game/WaveConfig")]
     public class WaveConfig : ScriptableObject
     {
-        public string waveName;  //웨이브 이름
-        public bool isBossWave;     //보스 웨이브 여부
-        public GameObject bossPrefab;  //보스 프리팹 (보스 웨이브일 때만 사용)
-        public List<WaveEnemyInfo> enemies; //웨이브에 포함된 적 정보 리스트
+        [Header("웨이브 기본 설정")]
+        public string waveName;
+        public bool isBossWave;
+        public GameObject bossPrefab;
+
+        [Header("기존 방식 (하위 호환)")]
+        public List<WaveEnemyInfo> enemies;
+
+        [Header("새로운 그룹 방식")]
+        public List<GroupConfig> groups = new List<GroupConfig>();
+
+        [Header("그룹 사용 여부")]
+        public bool useGroupSystem = false; // 체크하면 그룹 시스템 사용
     }
 }

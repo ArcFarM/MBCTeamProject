@@ -6,21 +6,21 @@ namespace JiHoon
     public class UnitBase : MonoBehaviour
     {
         [Header("Config")]
-        public UnitData data; // À¯´Ö µ¥ÀÌÅÍ ÂüÁ¶
+        public UnitData data; // ìœ ë‹› ë°ì´í„° ì°¸ì¡°
 
-        protected int currentHP; // ÇöÀç Ã¼·Â
-        protected bool isDead; // À¯´ÖÀÌ Á×¾ú´ÂÁö ¿©ºÎ
+        protected int currentHP; // í˜„ì¬ ì²´ë ¥
+        protected bool isDead; // ìœ ë‹›ì´ ì£½ì—ˆëŠ”ì§€ ì—¬ë¶€
 
         protected virtual void Awake()
         {
-            currentHP = data.maxHP; // ÃÊ±â Ã¼·Â ¼³Á¤
+            currentHP = data.maxHP; // ì´ˆê¸° ì²´ë ¥ ì„¤ì •
         }
         protected virtual void Start()
         {
             StartCoroutine(AttackRoutine());
         }
 
-        //»ı¸í·Â °¨¼Ò
+        //ìƒëª…ë ¥ ê°ì†Œ
         public virtual void TakeDamage(int damage)
         {
             if (isDead) return;
@@ -33,21 +33,21 @@ namespace JiHoon
         protected virtual void Die()
         {
             isDead = true;
-            //Á×À½ ¾Ö´Ï¸ŞÀÌ¼Ç, ÀÌÆåÆ® Ã³¸®
-            Destroy(gameObject, 1f);
+            //ì£½ìŒ ì• ë‹ˆë©”ì´ì…˜, ì´í™íŠ¸ ì²˜ë¦¬
+            Destroy(gameObject, 0f);
         }
 
-        //°ø°İ ·çÆ¾(°øÅë)
+        //ê³µê²© ë£¨í‹´(ê³µí†µ)
         protected virtual IEnumerator AttackRoutine()
         {
             while (!isDead)
             {
-                yield return new WaitForSeconds(data.attackInterval);// °ø°İ ÁÖ±â ´ë±â
+                yield return new WaitForSeconds(data.attackInterval);// ê³µê²© ì£¼ê¸° ëŒ€ê¸°
                 DoAttack();
             }
         }
 
-        //½ÇÁ¦ °ø°İ Ã³¸®(ÆÄ»ı Å¬·¡½º³ª ÀÌ ¸Ş¼­µå ³»ºÎ¿¡¼­ ºĞ±â)
+        //ì‹¤ì œ ê³µê²© ì²˜ë¦¬(íŒŒìƒ í´ë˜ìŠ¤ë‚˜ ì´ ë©”ì„œë“œ ë‚´ë¶€ì—ì„œ ë¶„ê¸°)
         protected virtual void DoAttack()
         {
 
@@ -64,7 +64,7 @@ namespace JiHoon
                     break;
             }
         }
-        //±ÙÁ¢ °ø°İ Ã³¸®
+        //ê·¼ì ‘ ê³µê²© ì²˜ë¦¬
         protected void MeleeAttack()
         {
             if (isDead) return;
@@ -93,19 +93,19 @@ namespace JiHoon
                 closest.GetComponent<UnitBase>()?.TakeDamage(data.damage);
             }
         }
-        //¿ø°Å¸® °ø°İ Ã³¸®
+        //ì›ê±°ë¦¬ ê³µê²© ì²˜ë¦¬
         protected void RangedAttack()
         {
-            //·¹ÀÌÄ³½ºÆ® ÀÌ¿ë
+            //ë ˆì´ìºìŠ¤íŠ¸ ì´ìš©
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.right, data.attackRange, LayerMask.GetMask("Enemy"));
             if (hit.collider != null)
             {
                 hit.collider.GetComponent<UnitBase>()?.TakeDamage(data.damage);
-                //½ÇÁ¦ ¹æÇâ, ¹ß»ç ÀÌÆåÆ® , Ç®¸µ µî Ãß°¡
+                //ì‹¤ì œ ë°©í–¥, ë°œì‚¬ ì´í™íŠ¸ , í’€ë§ ë“± ì¶”ê°€
             }
         }
 
-        //±¤¿ª ¹üÀ§ : ¹üÀ§³» ¸ğµç Àû
+        //ê´‘ì—­ ë²”ìœ„ : ë²”ìœ„ë‚´ ëª¨ë“  ì 
         protected void AOEAttack()
         {
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, data.attackRange, LayerMask.GetMask("Enemy"));
@@ -115,7 +115,7 @@ namespace JiHoon
             }
         }
 
-        //»ç°Å¸® ½Ã°¢È­¸¦ À§ÇØ Gizmos »ç¿ë
+        //ì‚¬ê±°ë¦¬ ì‹œê°í™”ë¥¼ ìœ„í•´ Gizmos ì‚¬ìš©
         private void OnDrawGizmosSelected()
         {
             if (data == null) return;
