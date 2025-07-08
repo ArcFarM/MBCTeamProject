@@ -1,126 +1,86 @@
 using UnityEngine;
+
 namespace JiHoon
 {
     public class EnemyMovement : MonoBehaviour
     {
-        [Header("이동 세팅")]
+        [Header("이동 설정")]
         public float moveSpeed = 3f;
-        public float nodeReachDistance = 0.1f;
 
-        [Header("그룹 이동 설정")]
-        public float followDistance = 2f;       // 리더 따라가기 거리
-        public float separationRadius = 1f;     // 충돌 방지 반경
-        public float maxFollowSpeed = 5f;       // 팔로워 최대 속도
+        [Header("그룹 설정")]
+        public float separationRadius = 1f;
+        public float followDistance = 2f;
 
-        [Header("이동경로 세팅")]
-        public Transform startPoint;
-        public Transform endPoint;
-        public Transform[] viaPoints;
+        // 경로 정보
+        private Transform[] waypoints;
+        private int currentWaypointIndex = 0;
 
-        private Transform[] fullPath;
-        public int currentTargetIndex = 0;
-        public bool isMoving = false;
-
-        // 그룹 관련 변수
-        private EnemyGroup enemyGroup;
+        // 그룹 정보
         private bool isLeader = false;
-        private Vector3 formationOffset = Vector3.zero;
-        private Vector3 targetPosition;
-
-        void Start()
-        {
-            SetupPath();
-            isMoving = true;
-        }
-
-        void SetupPath()
-        {
-            int totalLen = 2 + (viaPoints != null ? viaPoints.Length : 0);
-            fullPath = new Transform[totalLen];
-            fullPath[0] = startPoint;
-            if (viaPoints != null && viaPoints.Length > 0)
-                viaPoints.CopyTo(fullPath, 1);
-            fullPath[totalLen - 1] = endPoint;
-
-            if (fullPath[0] != null)
-                transform.position = fullPath[0].position;
-            currentTargetIndex = 1;
-        }
+        private EnemyGroup myGroup;
+        private Vector3 formationOffset;
+        private EnemyMovement leaderReference;
 
         void Update()
         {
-            if (!isMoving || fullPath == null) return;
+            if (waypoints == null || waypoints.Length == 0) return;
 
             if (isLeader)
             {
-                UpdateLeaderMovement();
+                MoveAsLeader();
             }
             else
             {
-                UpdateFollowerMovement();
+                MoveAsFollower();
+            }
+
+            // 2D 게임이므로 회전 제거
+        }
+
+        void MoveAsLeader()
+        {
+            if (currentWaypointIndex >= waypoints.Length)
+            {
+                OnReachedDestination();
+                return;
+            }
+
+            Vector3 targetPos = waypoints[currentWaypointIndex].position;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+            // 웨이포인트 도달 체크
+            if (Vector3.Distance(transform.position, targetPos) < 0.5f)
+            {
+                currentWaypointIndex++;
             }
         }
 
-        void UpdateLeaderMovement()
+        void MoveAsFollower()
         {
-            if (currentTargetIndex >= fullPath.Length) return;
+            if (leaderReference == null) return;
 
-            Transform target = fullPath[currentTargetIndex];
-            if (target == null) return;
+            // 리더 기준 목표 위치
+            Vector3 targetPos = leaderReference.transform.position + formationOffset;
 
-            // 리더는 기존 웨이포인트 시스템 그대로
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                target.position,
-                moveSpeed * Time.deltaTime
-            );
+            // 다른 유닛과의 분리
+            Vector3 separation = CalculateSeparation();
+            targetPos += separation;
 
-            if (Vector3.Distance(transform.position, target.position) < nodeReachDistance)
+            // 이동
+            float speed = moveSpeed;
+            float distToTarget = Vector3.Distance(transform.position, targetPos);
+
+            // 너무 멀면 빠르게 따라잡기
+            if (distToTarget > followDistance * 2)
             {
-                currentTargetIndex++;
-                if (currentTargetIndex >= fullPath.Length)
-                {
-                    isMoving = false;
-                    OnReachedDestination();
-                }
-            }
-        }
-
-        void UpdateFollowerMovement()
-        {
-            if (enemyGroup == null || enemyGroup.leader == null) return;
-
-            Vector3 leaderPos = enemyGroup.GetLeaderPosition();
-            Vector3 desiredPos = leaderPos + formationOffset;
-
-            // 분리 행동 (다른 적들과 겹치지 않게)
-            Vector3 separationForce = CalculateSeparation();
-            desiredPos += separationForce;
-
-            // 리더와 너무 멀어지면 빠르게 따라잡기
-            float distanceToLeader = Vector3.Distance(transform.position, leaderPos);
-            float currentSpeed = moveSpeed;
-
-            if (distanceToLeader > followDistance)
-            {
-                currentSpeed = Mathf.Lerp(moveSpeed, maxFollowSpeed,
-                    (distanceToLeader - followDistance) / followDistance);
+                speed = moveSpeed * 1.5f;
             }
 
-            // 목표 위치로 이동
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                desiredPos,
-                currentSpeed * Time.deltaTime
-            );
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
 
-            // 리더의 진행도 동기화
-            currentTargetIndex = enemyGroup.leader.currentTargetIndex;
-
-            // 리더가 도착했으면 팔로워도 도착
-            if (!enemyGroup.leader.isMoving)
+            // 리더가 도착했으면 팔로워도 도착 처리
+            if (leaderReference.currentWaypointIndex >= leaderReference.waypoints.Length)
             {
-                isMoving = false;
                 OnReachedDestination();
             }
         }
@@ -128,38 +88,60 @@ namespace JiHoon
         Vector3 CalculateSeparation()
         {
             Vector3 separationForce = Vector3.zero;
-            int count = 0;
+            int neighborCount = 0;
 
-            if (enemyGroup != null)
+            if (myGroup != null)
             {
-                foreach (var member in enemyGroup.members)
+                foreach (var member in myGroup.GetMembers())
                 {
                     if (member != this && member != null)
                     {
                         float distance = Vector3.Distance(transform.position, member.transform.position);
                         if (distance < separationRadius && distance > 0)
                         {
-                            Vector3 diff = (transform.position - member.transform.position).normalized;
-                            diff /= distance; // 거리에 반비례
+                            Vector3 diff = (transform.position - member.transform.position) / distance;
                             separationForce += diff;
-                            count++;
+                            neighborCount++;
                         }
                     }
                 }
             }
 
-            if (count > 0)
+            if (neighborCount > 0)
             {
-                separationForce /= count;
-                separationForce = separationForce.normalized * 0.5f; // 강도 조절
+                separationForce /= neighborCount;
+                separationForce = separationForce.normalized * 0.5f;
             }
 
             return separationForce;
         }
 
-        public void SetGroup(EnemyGroup group)
+        void UpdateRotation()
         {
-            enemyGroup = group;
+            // 2D 게임에서는 회전 제거 또는 Z축 회전만 사용
+            Vector3 moveDirection = Vector3.zero;
+
+            if (isLeader && currentWaypointIndex < waypoints.Length)
+            {
+                moveDirection = waypoints[currentWaypointIndex].position - transform.position;
+            }
+            else if (!isLeader && leaderReference != null)
+            {
+                moveDirection = (leaderReference.transform.position + formationOffset) - transform.position;
+            }
+
+            if (moveDirection != Vector3.zero)
+            {
+                // 2D 게임용 회전 (Z축만 사용)
+                float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 스프라이트가 위를 향하도록 -90도 조정
+            }
+        }
+
+        public void SetPath(Transform[] path)
+        {
+            waypoints = path;
+            currentWaypointIndex = 0;
         }
 
         public void SetAsLeader()
@@ -168,62 +150,37 @@ namespace JiHoon
             formationOffset = Vector3.zero;
         }
 
-        public void SetAsFollower()
+        public void SetAsFollower(Vector3 offset)
         {
             isLeader = false;
+            formationOffset = offset;
         }
 
-        public void SetFormationOffset(Vector3 offset)
+        public void SetGroup(EnemyGroup group, EnemyMovement leader = null)
         {
-            formationOffset = offset;
+            myGroup = group;
+            leaderReference = leader;
         }
 
         void OnReachedDestination()
         {
-            Debug.Log($"{gameObject.name} 목표 도착");
-
-            // 그룹에서 제거
-            if (enemyGroup != null)
+            if (myGroup != null)
             {
-                enemyGroup.RemoveMember(this);
+                myGroup.RemoveMember(this);
             }
-
             Destroy(gameObject);
         }
 
         void OnDestroy()
         {
-            // 그룹에서 제거
-            if (enemyGroup != null)
+            if (myGroup != null)
             {
-                enemyGroup.RemoveMember(this);
+                myGroup.RemoveMember(this);
             }
         }
 
         void OnDrawGizmos()
         {
-            // 기존 웨이포인트 그리기
-            if (startPoint == null || endPoint == null)
-                return;
-
-            Gizmos.color = Color.green;
-            Vector3 prev = startPoint.position;
-
-            if (viaPoints != null && viaPoints.Length > 0)
-            {
-                foreach (var v in viaPoints)
-                {
-                    if (v != null)
-                    {
-                        Gizmos.DrawLine(prev, v.position);
-                        prev = v.position;
-                    }
-                }
-            }
-
-            Gizmos.DrawLine(prev, endPoint.position);
-
-            // 그룹 관련 기즈모
             if (isLeader)
             {
                 Gizmos.color = Color.blue;
@@ -233,15 +190,6 @@ namespace JiHoon
             {
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawWireSphere(transform.position, 0.2f);
-
-                // 대형 위치 표시
-                if (enemyGroup != null && enemyGroup.leader != null)
-                {
-                    Vector3 formationPos = enemyGroup.GetLeaderPosition() + formationOffset;
-                    Gizmos.color = Color.cyan;
-                    Gizmos.DrawWireCube(formationPos, Vector3.one * 0.2f);
-                    Gizmos.DrawLine(transform.position, formationPos);
-                }
             }
         }
     }

@@ -1,55 +1,173 @@
-using System;
-using System.Linq;
 using UnityEngine;
+using System.Linq;
 
 namespace JiHoon
 {
-    [Serializable]
-    public class SpawnPointInfo
+    [System.Serializable]
+    public class SpawnPointData
     {
-        public Transform spawnPoint;    // 출발 위치
-        public Transform[] viaPoints;   // 경유할 포인트 그룹
+        public string name;
+        public Transform spawnPoint;
+
+        [Header("경로 설정 (2개의 경로 중 랜덤 선택)")]
+        public Transform waypointsParentA; // 첫 번째 경로
+        public Transform waypointsParentB; // 두 번째 경로
+
+        [HideInInspector]
+        public Transform[] waypointsA; // A 경로의 웨이포인트들
+        [HideInInspector]
+        public Transform[] waypointsB; // B 경로의 웨이포인트들
+
+        // 랜덤하게 경로 선택
+        public Transform[] GetRandomPath()
+        {
+            return Random.value < 0.5f ? waypointsA : waypointsB;
+        }
     }
 
     public class EnemySpawnerManager : MonoBehaviour
     {
-        [Header("스폰된 적들을 담을 컨테이너")]
-        public Transform spawnContainer; // 빈 오브젝트를 드래그
+        [Header("스폰 포인트 데이터")]
+        public SpawnPointData[] spawnPointsData;
 
-        [Header("도착 지점 (EndPoint)")]
-        public Transform endPoint;
-
-        [Header("스폰 지점들 (SpawnPointInfo 배열)")]
-        public SpawnPointInfo[] spawnPoints;
-
-        /// <summary>
-        /// 지정한 프리팹을 spawnPoints[index] 위치 + offset 에 인스턴스화하고,
-        /// EnemyMovement 컴포넌트 세팅까지 책임집니다.
-        /// </summary>
-        public void SpawnPrefabAt(int spawnPointIndex, GameObject prefab, Vector3 offset)
+        void Awake()
         {
+            // 게임 시작 시 자동으로 자식 웨이포인트들을 수집
+            CollectChildWaypoints();
+        }
 
-            // (안전 검사 코드는 생략하되, 기존 SpawnPrefabAt과 동일하게 처리)
-            var info = spawnPoints[spawnPointIndex];
-            var pos = info.spawnPoint.position + offset;
-            var go = Instantiate(prefab, pos, Quaternion.identity, spawnContainer);
-            
+        void OnValidate()
+        {
+            // Inspector에서 값이 변경될 때마다 자동 수집
+            CollectChildWaypoints();
+        }
 
-            var mv = go.GetComponent<EnemyMovement>();
-            if (mv == null) return;
+        void CollectChildWaypoints()
+        {
+            if (spawnPointsData == null) return;
 
-            mv.startPoint = info.spawnPoint;
-            mv.endPoint = endPoint;
-
-            if (info.viaPoints != null && info.viaPoints.Length > 0)
+            foreach (var data in spawnPointsData)
             {
-                var group = info.viaPoints[UnityEngine.Random.Range(0, info.viaPoints.Length)];
-                mv.viaPoints = group
-                  .GetComponentsInChildren<Transform>()
-                  .Where(t => t != group)
-                  .ToArray();
+                // A 경로 수집
+                if (data.waypointsParentA != null)
+                {
+                    data.waypointsA = new Transform[data.waypointsParentA.childCount];
+                    for (int i = 0; i < data.waypointsParentA.childCount; i++)
+                    {
+                        data.waypointsA[i] = data.waypointsParentA.GetChild(i);
+                    }
+                }
+
+                // B 경로 수집
+                if (data.waypointsParentB != null)
+                {
+                    data.waypointsB = new Transform[data.waypointsParentB.childCount];
+                    for (int i = 0; i < data.waypointsParentB.childCount; i++)
+                    {
+                        data.waypointsB[i] = data.waypointsParentB.GetChild(i);
+                    }
+                }
             }
         }
-    
+
+        // 특정 인덱스의 스폰 데이터 가져오기
+        public SpawnPointData GetSpawnData(int index)
+        {
+            if (spawnPointsData != null && index >= 0 && index < spawnPointsData.Length)
+                return spawnPointsData[index];
+
+            return spawnPointsData[0];
+        }
+
+        // 랜덤 스폰 데이터 가져오기
+        public SpawnPointData GetRandomSpawnData()
+        {
+            if (spawnPointsData == null || spawnPointsData.Length == 0)
+                return null;
+
+            return spawnPointsData[Random.Range(0, spawnPointsData.Length)];
+        }
+
+        // 모든 스폰 데이터 가져오기
+        public SpawnPointData[] GetAllSpawnData()
+        {
+            return spawnPointsData;
+        }
+
+        void OnDrawGizmos()
+        {
+            if (spawnPointsData == null) return;
+
+            // 먼저 웨이포인트 수집
+            CollectChildWaypoints();
+
+            foreach (var data in spawnPointsData)
+            {
+                if (data.spawnPoint == null) continue;
+
+                // 각 경로마다 다른 색상 사용
+                Color baseColor;
+                switch (data.name)
+                {
+                    case "Up":
+                    case "Left":
+                        baseColor = Color.red;
+                        break;
+                    case "Middle":
+                    case "Right":
+                        baseColor = Color.blue;
+                        break;
+                    case "Down":
+                    case "Straight":
+                        baseColor = Color.green;
+                        break;
+                    default:
+                        baseColor = Color.yellow;
+                        break;
+                }
+
+                // 스폰 포인트 표시
+                Gizmos.color = baseColor;
+                Gizmos.DrawWireSphere(data.spawnPoint.position, 0.5f);
+
+                // A 경로 그리기 (기본 색상)
+                if (data.waypointsA != null && data.waypointsA.Length > 0)
+                {
+                    Gizmos.color = baseColor;
+                    DrawPath(data.spawnPoint.position, data.waypointsA);
+                }
+
+                // B 경로 그리기 (살짝 어두운 색상)
+                if (data.waypointsB != null && data.waypointsB.Length > 0)
+                {
+                    Gizmos.color = new Color(baseColor.r * 0.6f, baseColor.g * 0.6f, baseColor.b * 0.6f);
+                    DrawPath(data.spawnPoint.position, data.waypointsB);
+                }
+            }
+        }
+
+        void DrawPath(Vector3 startPos, Transform[] waypoints)
+        {
+            if (waypoints[0] != null)
+            {
+                Gizmos.DrawLine(startPos, waypoints[0].position);
+            }
+
+            // 웨이포인트 경로 그리기
+            for (int i = 0; i < waypoints.Length - 1; i++)
+            {
+                if (waypoints[i] != null && waypoints[i + 1] != null)
+                {
+                    Gizmos.DrawLine(waypoints[i].position, waypoints[i + 1].position);
+                    Gizmos.DrawWireSphere(waypoints[i].position, 0.3f);
+                }
+            }
+
+            // 마지막 웨이포인트
+            if (waypoints[waypoints.Length - 1] != null)
+            {
+                Gizmos.DrawWireSphere(waypoints[waypoints.Length - 1].position, 0.5f);
+            }
+        }
     }
 }
