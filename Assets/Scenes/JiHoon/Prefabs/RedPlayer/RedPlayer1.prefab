@@ -4570,7 +4570,7 @@ GameObject:
   - component: {fileID: -4152261151120496572}
   m_Layer: 8
   m_Name: RedPlayer1
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7644,7 +7644,7 @@ MonoBehaviour:
   baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
-  baseRange: 1
+  baseRange: 2
   baseSpd: 1
   currRawSize: 1
   currColSize: 1

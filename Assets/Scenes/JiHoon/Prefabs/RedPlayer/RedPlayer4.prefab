@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 3191320882694027778}
   m_Layer: 8
   m_Name: RedPlayer4
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3183,7 +3183,7 @@ MonoBehaviour:
   baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
-  baseRange: 1
+  baseRange: 2
   baseSpd: 1
   currRawSize: 1
   currColSize: 1
@@ -3291,7 +3291,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: -4152261151120496572, guid: 8354191bd949297468c57802b886ee63, type: 3}
+  unitAnim: {fileID: 3191320882694027778}
 --- !u!114 &3191320882694027778
 MonoBehaviour:
   m_ObjectHideFlags: 0

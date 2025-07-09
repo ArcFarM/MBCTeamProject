@@ -8,6 +8,7 @@ TagManager:
   - EndPoint
   - RoadTilemap
   - WayPoints
+  - Unit
   layers:
   - Default
   - TransparentFX

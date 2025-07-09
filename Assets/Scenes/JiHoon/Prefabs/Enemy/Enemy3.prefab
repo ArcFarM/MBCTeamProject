@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: -3292773263947045424}
   m_Layer: 5
   m_Name: Enemy3
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3864,11 +3864,11 @@ MonoBehaviour:
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
   engageDistanceMultiplier: 0.75
-  maxCombatTarget: 1
+  maxCombatTarget: 99
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: -2420492565539389044, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
+  unitAnim: {fileID: -3292773263947045424}
 --- !u!70 &7678930484091204771
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

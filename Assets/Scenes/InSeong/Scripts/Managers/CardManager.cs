@@ -63,7 +63,7 @@ namespace MainGame.Manager {
 
         public void GetEvent() {
             //웨이브 끝나고 고정적으로 카드 출현
-            if (WaveManager.Instance.IsWaveStarted) return;
+            //if (WaveManager.Instance.IsWaveStarted) return;
             //TODO : 카드 풀에서 카드를 3장 생성하여 UI에 배치 - HorizontalLayoutGroup을 가진 컴포넌트에 자식으로 붙이기
         }
         #endregion

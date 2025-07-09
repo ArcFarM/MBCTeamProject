@@ -5,8 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using JiHoon;
 
-namespace MainGame.Manager {
-    public class WaveManager : SingletonManager<WaveManager> {
+namespace MainGame.Manager
+{
+    public class WaveControllerClone : SingletonManager<WaveController>
+    {
         [Header("적 스포너")]
         public EnemySpawnerManager spawner;
 
@@ -31,20 +33,23 @@ namespace MainGame.Manager {
         //남아 있는 적의 수
         public int enemyCount = 0;
 
-        void Start() {
+        void Start()
+        {
             placementManager.placementEnabled = true;
             cardManager.AddRandomCards(initialCardCount);
             startWaveButton.onClick.AddListener(StartWave);
         }
 
-        void StartWave() {
+        void StartWave()
+        {
             if (isWaveRunning) return;
 
             startWaveButton.interactable = false;
             StartCoroutine(RunWave());
         }
 
-        IEnumerator RunWave() {
+        IEnumerator RunWave()
+        {
             isWaveRunning = true;
             var config = waveConfigs[currentWaveIndex];
 
@@ -52,7 +57,8 @@ namespace MainGame.Manager {
             selectedPathsBySpawnPoint.Clear();
 
             // 그룹별로 스폰
-            foreach (var group in config.enemyGroups) {
+            foreach (var group in config.enemyGroups)
+            {
                 SpawnGroup(group);
                 yield return new WaitForSeconds(group.delayAfterGroup);
             }
@@ -65,14 +71,16 @@ namespace MainGame.Manager {
             OnWaveComplete();
         }
 
-        void SpawnGroup(EnemyGroupConfig group) {
+        void SpawnGroup(EnemyGroupConfig group)
+        {
             // SpawnPosition enum을 인덱스로 변환 (Top=0, Middle=1, Bottom=2)
             int spawnIndex = (int)group.spawnPosition;
             var spawnData = spawner.GetSpawnData(spawnIndex);
             SpawnGroupAtPoint(group, spawnData);
         }
 
-        void SpawnGroupAtPoint(EnemyGroupConfig group, SpawnPointData spawnData) {
+        void SpawnGroupAtPoint(EnemyGroupConfig group, SpawnPointData spawnData)
+        {
             if (spawnData == null || spawnData.spawnPoint == null) return;
 
             var basePosition = spawnData.spawnPoint.position;
@@ -86,7 +94,8 @@ namespace MainGame.Manager {
             float spacing = group.enemySpacing;
             int maxPerRow = 5; // 한 줄에 최대 개수
 
-            for (int i = 0; i < group.enemyCount; i++) {
+            for (int i = 0; i < group.enemyCount; i++)
+            {
                 int row = i / maxPerRow; // 현재 줄 번호
                 int col = i % maxPerRow; // 현재 줄에서의 위치
 
@@ -99,7 +108,8 @@ namespace MainGame.Manager {
             }
 
             // 적 스폰
-            for (int i = 0; i < group.enemyCount; i++) {
+            for (int i = 0; i < group.enemyCount; i++)
+            {
                 var enemyPrefab = group.enemyPrefabs[i % group.enemyPrefabs.Count];
                 var position = basePosition + positions[i];
 
@@ -108,19 +118,23 @@ namespace MainGame.Manager {
 
                 // 2D 스프라이트가 제대로 보이도록 설정
                 var spriteRenderer = enemy.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null) {
+                if (spriteRenderer != null)
+                {
                     spriteRenderer.sortingOrder = 10;
                 }
 
                 var movement = enemy.GetComponent<EnemyMovement>();
 
-                if (movement != null) {
+                if (movement != null)
+                {
                     // 첫 번째를 리더로 설정
-                    if (i == 0) {
+                    if (i == 0)
+                    {
                         movement.SetAsLeader();
                         enemyGroup.SetLeader(movement);
                     }
-                    else {
+                    else
+                    {
                         movement.SetAsFollower(positions[i]);
                     }
 
@@ -128,11 +142,13 @@ namespace MainGame.Manager {
                     int spawnIndex = (int)group.spawnPosition;
                     Transform[] pathToUse;
 
-                    if (selectedPathsBySpawnPoint.ContainsKey(spawnIndex)) {
+                    if (selectedPathsBySpawnPoint.ContainsKey(spawnIndex))
+                    {
                         // 이미 선택된 경로가 있으면 그것을 사용
                         pathToUse = selectedPathsBySpawnPoint[spawnIndex];
                     }
-                    else {
+                    else
+                    {
                         // 처음이면 랜덤으로 선택하고 저장
                         pathToUse = spawnData.GetRandomPath();
                         selectedPathsBySpawnPoint[spawnIndex] = pathToUse;
@@ -144,7 +160,8 @@ namespace MainGame.Manager {
             }
         }
 
-        void OnWaveComplete() {
+        void OnWaveComplete()
+        {
             isWaveRunning = false;
 
             // 보상 지급

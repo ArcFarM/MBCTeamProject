@@ -4680,7 +4680,7 @@ GameObject:
   - component: {fileID: -6247249681371005898}
   m_Layer: 8
   m_Name: BluePlayer3
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7764,7 +7764,7 @@ MonoBehaviour:
   baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
-  baseRange: 1
+  baseRange: 2
   baseSpd: 1
   currRawSize: 1
   currColSize: 1
@@ -7872,7 +7872,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: -8614656229711246947, guid: 1eb3b35a003dad941a613fc0282e220b, type: 3}
+  unitAnim: {fileID: -6247249681371005898}
 --- !u!114 &-6247249681371005898
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2150,7 +2150,7 @@ GameObject:
   - component: {fileID: 3064636338633933286}
   m_Layer: 8
   m_Name: BrownPlayer5
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5244,7 +5244,7 @@ MonoBehaviour:
   baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
-  baseRange: 1
+  baseRange: 2
   baseSpd: 1
   currRawSize: 1
   currColSize: 1
@@ -5352,7 +5352,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: 6132394987299961573, guid: 45a11cdfe63326a409f215bf26fdab5a, type: 3}
+  unitAnim: {fileID: 3064636338633933286}
 --- !u!114 &3064636338633933286
 MonoBehaviour:
   m_ObjectHideFlags: 0

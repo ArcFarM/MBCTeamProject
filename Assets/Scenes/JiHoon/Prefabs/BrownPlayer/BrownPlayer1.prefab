@@ -1525,7 +1525,7 @@ GameObject:
   - component: {fileID: 6132394987299961573}
   m_Layer: 8
   m_Name: BrownPlayer1
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4619,7 +4619,7 @@ MonoBehaviour:
   baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
-  baseRange: 1
+  baseRange: 2
   baseSpd: 1
   currRawSize: 1
   currColSize: 1
@@ -4627,7 +4627,7 @@ MonoBehaviour:
   currHealth: 1
   currDamage: 1
   currAtkSpd: 1
-  currRange: 3
+  currRange: 1
   currSpd: 1
   stats: []
   prices: 00000000000000000000000000000000
