@@ -1,136 +1,174 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
+using MainGame.Manager;
 
 namespace JiHoon
 {
-    public class WaveController : MonoBehaviour
+    public class WaveController : SingletonManager<WaveController>
     {
-        [Header("적 스포너들 (EnemySpawnerManager)")]
-        public List<EnemySpawnerManager> spawners;
+        [Header("적 스포너")]
+        public EnemySpawnerManager spawner;
 
-        [Header("보스 스폰 위치")]
-        public Transform bossSpawnPoint;
-
-        [Header("카드 매니저")]
-        public UnitCardManager cardManager;
-
-        [Header("웨이브 시작 버튼 UI")]
+        [Header("UI")]
         public Button startWaveButton;
+        public UnitCardManager cardManager;
+        public UnitPlacementManager placementManager;
 
-        [Header("첫 시작 시 지급할 카드 수")]
+        [Header("카드 설정")]
         public int initialCardCount = 5;
-
-        [Header("웨이브당 카드 수")]
         public int cardsPerWave = 3;
 
-        [Header("자동 재시작 대기 시간")]
-        public float autoDelay = 50f;
+        [Header("웨이브 설정")]
+        public List<WaveConfig> waveConfigs;
 
-        [Header("웨이브 설정 에셋 목록")]
-        public List<WaveConfig> waveConfig;
+        private int currentWaveIndex = 0;
+        private bool isWaveRunning = false;
 
-        public UnitPlacementManager placementMgr;
-
-        private int _currentWaveIndex = 0;
-        private Coroutine _autoRoutine;
+        // 각 스폰 포인트별로 선택된 경로를 저장
+        private Dictionary<int, Transform[]> selectedPathsBySpawnPoint = new Dictionary<int, Transform[]>();
 
         void Start()
         {
-            // 처음엔 웨이브 전이니 설치 허용
-            placementMgr.placementEnabled = true;
-
-            // 1) 게임 시작 시 카드 초기 지급
+            placementManager.placementEnabled = true;
             cardManager.AddRandomCards(initialCardCount);
-
-            // 2) 버튼 클릭 시 웨이브 시작
-            startWaveButton.onClick.AddListener(OnStartClicked);
+            startWaveButton.onClick.AddListener(StartWave);
         }
 
-        void OnStartClicked()
+        void StartWave()
         {
-            // 웨이브 시작 시 설치&재배치 모두 비허용
-            placementMgr.placementEnabled = false;
+            if (isWaveRunning) return;
 
-            // 버튼 잠금
             startWaveButton.interactable = false;
+            StartCoroutine(RunWave());
+        }
 
-            // 자동 재시작 중이면 취소
-            if (_autoRoutine != null)
+        IEnumerator RunWave()
+        {
+            isWaveRunning = true;
+            var config = waveConfigs[currentWaveIndex];
+
+            // 웨이브 시작 시 경로 초기화
+            selectedPathsBySpawnPoint.Clear();
+
+            // 그룹별로 스폰
+            foreach (var group in config.enemyGroups)
             {
-                StopCoroutine(_autoRoutine);
-                _autoRoutine = null;
+                SpawnGroup(group);
+                yield return new WaitForSeconds(group.delayAfterGroup);
             }
 
-            // 현재 웨이브 에셋 가져오기
-            var config = waveConfig[_currentWaveIndex];
-            StartCoroutine(RunWave(config));
+            // 모든 적이 처치될 때까지 대기
+            yield return new WaitUntil(() =>
+                GameObject.FindObjectsOfType<EnemyMovement>().Length == 0);
+
+            // 웨이브 완료 처리
+            OnWaveComplete();
         }
 
-        private IEnumerator RunWave(WaveConfig config)
+        void SpawnGroup(EnemyGroupConfig group)
         {
-            // 웨이브 끝나고 대기 상태로 돌아올 때
-            yield return new WaitUntil(() =>
-                Object.FindObjectsByType<EnemyMovement>(FindObjectsSortMode.None).Length == 0
-            );
+            // SpawnPosition enum을 인덱스로 변환 (Top=0, Middle=1, Bottom=2)
+            int spawnIndex = (int)group.spawnPosition;
+            var spawnData = spawner.GetSpawnData(spawnIndex);
+            SpawnGroupAtPoint(group, spawnData);
+        }
 
-            
+        void SpawnGroupAtPoint(EnemyGroupConfig group, SpawnPointData spawnData)
+        {
+            if (spawnData == null || spawnData.spawnPoint == null) return;
 
-            // 1) 모든 EnemyInfo 에 대해 SpawnRoutine 코루틴을 동시에 시작
-            var done = new bool[config.enemies.Count];
-            for (int i = 0; i < config.enemies.Count; i++)
+            var basePosition = spawnData.spawnPoint.position;
+
+            // 그룹 오브젝트 생성
+            var groupObj = new GameObject($"EnemyGroup_{group.groupName}_{spawnData.name}");
+            var enemyGroup = groupObj.AddComponent<EnemyGroup>();
+
+            // 두 줄로 배치 (한 줄에 최대 5마리)
+            var positions = new List<Vector3>();
+            float spacing = group.enemySpacing;
+            int maxPerRow = 5; // 한 줄에 최대 개수
+
+            for (int i = 0; i < group.enemyCount; i++)
             {
-                int idx = i;
-                StartCoroutine(Wrapper());
+                int row = i / maxPerRow; // 현재 줄 번호
+                int col = i % maxPerRow; // 현재 줄에서의 위치
 
-                IEnumerator Wrapper()
+                // 각 줄의 중앙 정렬
+                int itemsInThisRow = Mathf.Min(maxPerRow, group.enemyCount - row * maxPerRow);
+                float xOffset = (col - (itemsInThisRow - 1) / 2f) * spacing;
+                float yOffset = -row * spacing; // 두 번째 줄은 아래로
+
+                positions.Add(new Vector3(xOffset, yOffset, 0));
+            }
+
+            // 적 스폰
+            for (int i = 0; i < group.enemyCount; i++)
+            {
+                var enemyPrefab = group.enemyPrefabs[i % group.enemyPrefabs.Count];
+                var position = basePosition + positions[i];
+
+                // 2D 게임이므로 회전 없이 생성
+                var enemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+
+                // 2D 스프라이트가 제대로 보이도록 설정
+                var spriteRenderer = enemy.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
                 {
-                    yield return SpawnRoutine(config.enemies[idx]);
-                    done[idx] = true;      // i번 루틴이 끝났다고 표시
+                    spriteRenderer.sortingOrder = 10;
+                }
+
+                var movement = enemy.GetComponent<EnemyMovement>();
+
+                if (movement != null)
+                {
+                    // 첫 번째를 리더로 설정
+                    if (i == 0)
+                    {
+                        movement.SetAsLeader();
+                        enemyGroup.SetLeader(movement);
+                    }
+                    else
+                    {
+                        movement.SetAsFollower(positions[i]);
+                    }
+
+                    // 해당 스폰 포인트의 경로 선택 또는 재사용
+                    int spawnIndex = (int)group.spawnPosition;
+                    Transform[] pathToUse;
+
+                    if (selectedPathsBySpawnPoint.ContainsKey(spawnIndex))
+                    {
+                        // 이미 선택된 경로가 있으면 그것을 사용
+                        pathToUse = selectedPathsBySpawnPoint[spawnIndex];
+                    }
+                    else
+                    {
+                        // 처음이면 랜덤으로 선택하고 저장
+                        pathToUse = spawnData.GetRandomPath();
+                        selectedPathsBySpawnPoint[spawnIndex] = pathToUse;
+                    }
+
+                    movement.SetPath(pathToUse);
+                    enemyGroup.AddMember(movement);
                 }
             }
+        }
 
-            // 2) 모든 SpawnRoutine이 끝날 때까지 대기
-            yield return new WaitUntil(() => done.All(x => x));
+        void OnWaveComplete()
+        {
+            isWaveRunning = false;
 
-            // 3) (보스 웨이브 시) 보스 스폰
-            if (config.isBossWave && config.bossPrefab != null)
-                Instantiate(config.bossPrefab, bossSpawnPoint.position, Quaternion.identity);
-
-            // 4) 맵 위 모든 적이 사라질 때까지 대기
-            yield return new WaitUntil(() =>
-                Object.FindObjectsByType<EnemyMovement>(FindObjectsSortMode.None).Length == 0
-            );
-
-            // 5) 웨이브 종료 처리
+            // 보상 지급
             cardManager.AddRandomCards(cardsPerWave);
+
+            // 다음 웨이브로
+            currentWaveIndex = (currentWaveIndex + 1) % waveConfigs.Count;
+
+            // UI 복구
             startWaveButton.interactable = true;
-            _autoRoutine = StartCoroutine(AutoStartNext());
-            _currentWaveIndex = (_currentWaveIndex + 1) % waveConfig.Count;
-
-            // **설치/재배치 다시 허용**
-            placementMgr.placementEnabled = true;
-        }
-
-        private IEnumerator SpawnRoutine(WaveEnemyInfo enemyInfo)
-        {
-            int spawned = 0;
-            while (spawned < enemyInfo.count)
-            {
-                var manager = spawners[enemyInfo.spawnerIndex];
-                manager.SpawnPrefabAt(0, enemyInfo.prefab);
-                spawned++;
-                yield return new WaitForSeconds(enemyInfo.spawnInterval);
-            }
-        }
-
-        private IEnumerator AutoStartNext()
-        {
-            yield return new WaitForSeconds(autoDelay);
-            _autoRoutine = null;
-            OnStartClicked();
         }
     }
 }

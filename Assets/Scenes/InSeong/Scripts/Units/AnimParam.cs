@@ -8,7 +8,7 @@ namespace MainGame.Units {
         public string Param_trigger_death = "4_Death";
         public string Param_bool_debuff = "5_Debuff";
         public string Param_trigger_other = "6_Other";
-        public string Param_bool_isDeath = "7_isDeath";
+        public string Param_bool_isDeath = "isDeath";
     }
 
 }

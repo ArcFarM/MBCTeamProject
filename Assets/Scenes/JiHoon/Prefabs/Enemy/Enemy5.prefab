@@ -5406,9 +5406,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
   nodeReachDistance: 0.1
+  followDistance: 3
+  separationRadius: 2
+  maxFollowSpeed: 5
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
   viaPoints: []
+  currentTargetIndex: 0
   isMoving: 0
 --- !u!114 &968702827162009898
 MonoBehaviour:
@@ -5430,6 +5434,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
+  unitAnim: {fileID: 0}
 --- !u!70 &-1628379410399945241
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

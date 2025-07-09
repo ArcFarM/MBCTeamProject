@@ -1,37 +1,43 @@
 using JiHoon;
-using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UnitCardUI : MonoBehaviour, IPointerClickHandler
 {
+    [Header("UI")]
     public Image cardImage;
+
+    [HideInInspector] public bool isFromShop = false;
+    [HideInInspector] public ItemData shopItemData;
+    [HideInInspector] public GameObject shopUnitPrefab;
     [HideInInspector] public int presetIndex;
     [HideInInspector] public UnitPlacementManager placementMgr;
 
-    // 구매한 아이템 정보 저장용
-    [HideInInspector] public bool isFromShop = false;
-    [HideInInspector] public ItemData shopItemData;
-
+    // 프리셋 카드 초기화
     public void Init(int idx, Sprite sprite, UnitPlacementManager mgr)
     {
+        isFromShop = false;
+        shopItemData = null;
+        shopUnitPrefab = null;
         presetIndex = idx;
         cardImage.sprite = sprite;
         placementMgr = mgr;
-        isFromShop = false;
-        shopItemData = null;
     }
 
-    public void OnPointerClick(PointerEventData e)
+    // 상점 카드 초기화
+    public void InitFromShopItem(ItemData item, UnitPlacementManager mgr)
+    {
+        isFromShop = true;
+        shopItemData = item;
+        shopUnitPrefab = item.unitPrefab;  // GameObject
+        cardImage.sprite = item.icon;
+        placementMgr = mgr;
+    }
+
+    // **모두 선택 로직만 호출** → 실제 스폰은 PlacementManager.Update 에서 처리
+    public void OnPointerClick(PointerEventData eventData)
     {
         placementMgr.OnClickSelectUmit(this);
     }
-    public void InitFromShopItem(ItemData item, UnitPlacementManager mgr)
-    {
-        // 구매한 아이템 정보 저장
-        cardImage.sprite = item.icon;
-        placementMgr = mgr;
-        // unitPrefab 정보도 어딘가에 저장해야 함
-    }
-    
 }

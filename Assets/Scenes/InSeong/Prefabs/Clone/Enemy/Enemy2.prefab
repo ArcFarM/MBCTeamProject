@@ -2696,6 +2696,7 @@ GameObject:
   - component: {fileID: 4551004497784889446}
   - component: {fileID: -7618750362602994405}
   - component: {fileID: 5152729314619539443}
+  - component: {fileID: -6830251446051179281}
   m_Layer: 5
   m_Name: Enemy2
   m_TagString: Untagged
@@ -5859,6 +5860,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
+  unitAnim: {fileID: -6830251446051179281}
 --- !u!114 &-7618750362602994405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5929,6 +5931,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &-6830251446051179281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4877044180290529518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8280657200321604801}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 222
 --- !u!1 &4899576859799456125
 GameObject:
   m_ObjectHideFlags: 0

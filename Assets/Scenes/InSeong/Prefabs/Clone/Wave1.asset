@@ -28,7 +28,3 @@ MonoBehaviour:
     count: 1
     spawnInterval: 3
     spawnerIndex: 2
-  - prefab: {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
-    count: 3
-    spawnInterval: 3
-    spawnerIndex: 0

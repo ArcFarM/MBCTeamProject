@@ -1,22 +1,32 @@
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace JiHoon
 {
-    [System.Serializable]
-    public class  WaveEnemyInfo
+    public enum SpawnPosition
     {
-        public GameObject prefab;   //스폰할 적 프리팹
-        public int count;   //스폰할 적의 수
-        public float spawnInterval;   //스폰 간격
-        public int spawnerIndex; //적을 스폰할 스포너 인덱스
-        
+        Top,        // 상단 (0)
+        Middle,     // 중단 (1)
+        Bottom      // 하단 (2)
     }
-    [CreateAssetMenu(menuName = "Game/WaveConfig")]
+
+    [System.Serializable]
+    public class EnemyGroupConfig
+    {
+        public string groupName = "Enemy Group";
+        public List<GameObject> enemyPrefabs = new List<GameObject>();
+        public int enemyCount = 2; // 기본 2마리
+
+        [Header("스폰 설정")]
+        public SpawnPosition spawnPosition = SpawnPosition.Top;
+        public float enemySpacing = 0.5f; // 적 사이 간격
+        public float delayAfterGroup = 2f; // 다음 그룹까지 대기 시간
+    }
+
+    [CreateAssetMenu(menuName = "Game/WaveConfig", fileName = "Wave_")]
     public class WaveConfig : ScriptableObject
     {
-        public string waveName;  //웨이브 이름
-        public bool isBossWave;     //보스 웨이브 여부
-        public GameObject bossPrefab;  //보스 프리팹 (보스 웨이브일 때만 사용)
-        public List<WaveEnemyInfo> enemies; //웨이브에 포함된 적 정보 리스트
+        public string waveName = "Wave 1";
+        public List<EnemyGroupConfig> enemyGroups = new List<EnemyGroupConfig>();
     }
 }

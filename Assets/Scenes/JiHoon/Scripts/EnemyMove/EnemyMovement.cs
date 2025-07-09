@@ -1,112 +1,196 @@
 using UnityEngine;
+
 namespace JiHoon
 {
     public class EnemyMovement : MonoBehaviour
     {
-        [Header("이동 세팅")]
-        public float moveSpeed = 3f;    //이동속도
-        public float nodeReachDistance = 0.1f;  // 노드 도달 거리
+        [Header("이동 설정")]
+        public float moveSpeed = 3f;
 
-        [Header("이동경로 세팅")]
-        public Transform startPoint;    // 시작점
-        public Transform endPoint;  //도착점
-        public Transform[] viaPoints; // 중간 경유지들(웨이포인트)
+        [Header("그룹 설정")]
+        public float separationRadius = 1f;
+        public float followDistance = 2f;
 
-        private Transform[] fullPath; // 실제 이동 경로 (시작+경유+도착 합쳐서)
+        // 경로 정보
+        private Transform[] waypoints;
+        private int currentWaypointIndex = 0;
 
-        private int currentTargetIndex = 0; //현재 도착해야하는 웨이포인트 인덱스
-        public bool isMoving = false;   //이동 중인지 여부
-
-        void Start()
-        {
-            // 경로 합치기: Start → (Via...) → End
-            int totalLen = 2 + (viaPoints != null ? viaPoints.Length : 0);
-            fullPath = new Transform[totalLen];
-            fullPath[0] = startPoint;
-            if (viaPoints != null && viaPoints.Length > 0)
-                viaPoints.CopyTo(fullPath, 1);  //경유지 복사
-            fullPath[totalLen - 1] = endPoint;
-
-            // 시작점으로 위치 이동
-            if (fullPath[0] != null)
-                transform.position = fullPath[0].position;
-            currentTargetIndex = 1; //첫 목표 출발지 다음 포인트로 설정
-            isMoving = true;    //이동 시작
-        }
+        // 그룹 정보
+        private bool isLeader = false;
+        private EnemyGroup myGroup;
+        private Vector3 formationOffset;
+        private EnemyMovement leaderReference;
 
         void Update()
         {
-            // 이동 중이 아니거나 경로가 없으면 업데이트 중지
-            if (!isMoving || fullPath == null || currentTargetIndex >= fullPath.Length)
-                return;
+            if (waypoints == null || waypoints.Length == 0) return;
 
-            Transform target = fullPath[currentTargetIndex];    // 현재 목표 웨이포인트
-            if (target == null) return;
-
-            // 한 프레임마다 목표 웨이포인트로 이동
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                target.position,
-                moveSpeed * Time.deltaTime
-            );
-
-            // 도착하면 다음 포인트로
-            if (Vector3.Distance(transform.position, target.position) < nodeReachDistance)
+            if (isLeader)
             {
-                currentTargetIndex++;
-                if (currentTargetIndex >= fullPath.Length)
-                {
-                    isMoving = false;
-                    OnReachedDestination();
-                }
+                MoveAsLeader();
+            }
+            else
+            {
+                MoveAsFollower();
+            }
+
+            // 2D 게임이므로 회전 제거
+        }
+
+        void MoveAsLeader()
+        {
+            if (currentWaypointIndex >= waypoints.Length)
+            {
+                OnReachedDestination();
+                return;
+            }
+
+            Vector3 targetPos = waypoints[currentWaypointIndex].position;
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+
+            // 웨이포인트 도달 체크
+            if (Vector3.Distance(transform.position, targetPos) < 0.5f)
+            {
+                currentWaypointIndex++;
             }
         }
 
-        void OnReachedDestination()
+        void MoveAsFollower()
         {
-            // 목적지 도착 시 할 일
-            Debug.Log("목표 도착");
-            Destroy(gameObject);    // 도착시 제거
-            
-        }
-        void OnDrawGizmos()
-        {
-            // 경로(웨이포인트) 연결선 그리기
-            if (startPoint == null || endPoint == null)
-                return;
+            if (leaderReference == null) return;
 
-            Gizmos.color = Color.green;
-            Vector3 prev = startPoint.position;
+            // 리더 기준 목표 위치
+            Vector3 targetPos = leaderReference.transform.position + formationOffset;
 
-            // ViaPoints가 있으면
-            if (viaPoints != null && viaPoints.Length > 0)
+            // 다른 유닛과의 분리
+            Vector3 separation = CalculateSeparation();
+            targetPos += separation;
+
+            // 이동
+            float speed = moveSpeed;
+            float distToTarget = Vector3.Distance(transform.position, targetPos);
+
+            // 너무 멀면 빠르게 따라잡기
+            if (distToTarget > followDistance * 2)
             {
-                foreach (var v in viaPoints)
+                speed = moveSpeed * 1.5f;
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+
+            // 리더가 도착했으면 팔로워도 도착 처리
+            if (leaderReference.currentWaypointIndex >= leaderReference.waypoints.Length)
+            {
+                OnReachedDestination();
+            }
+        }
+
+        Vector3 CalculateSeparation()
+        {
+            Vector3 separationForce = Vector3.zero;
+            int neighborCount = 0;
+
+            if (myGroup != null)
+            {
+                foreach (var member in myGroup.GetMembers())
                 {
-                    if (v != null)
+                    if (member != this && member != null)
                     {
-                        Gizmos.DrawLine(prev, v.position);
-                        prev = v.position;
+                        float distance = Vector3.Distance(transform.position, member.transform.position);
+                        if (distance < separationRadius && distance > 0)
+                        {
+                            Vector3 diff = (transform.position - member.transform.position) / distance;
+                            separationForce += diff;
+                            neighborCount++;
+                        }
                     }
                 }
             }
 
-            // 마지막에 EndPoint까지 연결
-            Gizmos.DrawLine(prev, endPoint.position);
-
-            // 웨이포인트 구체(원) 표시
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(startPoint.position, 0.15f);
-            if (viaPoints != null)
+            if (neighborCount > 0)
             {
-                foreach (var v in viaPoints)
-                {
-                    if (v != null)
-                        Gizmos.DrawWireSphere(v.position, 0.13f);
-                }
+                separationForce /= neighborCount;
+                separationForce = separationForce.normalized * 0.5f;
             }
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(endPoint.position, 0.18f);
+
+            return separationForce;
+        }
+
+        void UpdateRotation()
+        {
+            // 2D 게임에서는 회전 제거 또는 Z축 회전만 사용
+            Vector3 moveDirection = Vector3.zero;
+
+            if (isLeader && currentWaypointIndex < waypoints.Length)
+            {
+                moveDirection = waypoints[currentWaypointIndex].position - transform.position;
+            }
+            else if (!isLeader && leaderReference != null)
+            {
+                moveDirection = (leaderReference.transform.position + formationOffset) - transform.position;
+            }
+
+            if (moveDirection != Vector3.zero)
+            {
+                // 2D 게임용 회전 (Z축만 사용)
+                float angle = Mathf.Atan2(moveDirection.y, moveDirection.x) * Mathf.Rad2Deg;
+                transform.rotation = Quaternion.Euler(0, 0, angle - 90); // 스프라이트가 위를 향하도록 -90도 조정
+            }
+        }
+
+        public void SetPath(Transform[] path)
+        {
+            waypoints = path;
+            currentWaypointIndex = 0;
+        }
+
+        public void SetAsLeader()
+        {
+            isLeader = true;
+            formationOffset = Vector3.zero;
+        }
+
+        public void SetAsFollower(Vector3 offset)
+        {
+            isLeader = false;
+            formationOffset = offset;
+        }
+
+        public void SetGroup(EnemyGroup group, EnemyMovement leader = null)
+        {
+            myGroup = group;
+            leaderReference = leader;
+        }
+
+        void OnReachedDestination()
+        {
+            if (myGroup != null)
+            {
+                myGroup.RemoveMember(this);
+            }
+            Destroy(gameObject);
+        }
+
+        void OnDestroy()
+        {
+            if (myGroup != null)
+            {
+                myGroup.RemoveMember(this);
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            if (isLeader)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(transform.position, 0.3f);
+            }
+            else
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(transform.position, 0.2f);
+            }
         }
     }
 }

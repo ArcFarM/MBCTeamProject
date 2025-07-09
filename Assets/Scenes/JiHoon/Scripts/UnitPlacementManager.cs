@@ -310,5 +310,21 @@ namespace JiHoon
             //TODO : 유닛 판매 로직 구현
             Destroy(unit);
         }
+        public void RequestPlaceUnit(GameObject prefab)
+        {
+            // 1) 마우스 위치 → 월드 좌표
+            Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            worldPos.z = 0;
+
+            // 2) Instantiate GameObject
+            var go = Instantiate(prefab, worldPos, Quaternion.identity);
+
+            // 3) GridManager에 점유 정보 등록하려면 UnitBase 컴포넌트를 뽑아와서 footprint 계산
+            var ub = go.GetComponent<UnitBase>();
+            // footprint 계산 로직 호출… (기존 코드 활용)
+
+            Debug.Log($"상점 유닛 {prefab.name} 스폰 완료");
+        }
+
     }
 }
