@@ -17,7 +17,7 @@ namespace MainGame.Manager {
 
         [Header("카드 설정")]
         public int initialCardCount = 5;
-        public int cardsPerWave = 3;
+        //public int cardsPerWave = 3;
 
         [Header("웨이브 설정")]
         public List<WaveConfig> waveConfigs;
@@ -33,7 +33,7 @@ namespace MainGame.Manager {
 
         void Start() {
             placementManager.placementEnabled = true;
-            cardManager.AddRandomCards(initialCardCount);
+            //cardManager.AddRandomCards(initialCardCount);
             startWaveButton.onClick.AddListener(StartWave);
         }
 
@@ -148,10 +148,18 @@ namespace MainGame.Manager {
             isWaveRunning = false;
 
             // 보상 지급
-            cardManager.AddRandomCards(cardsPerWave);
+            //cardManager.AddRandomCards(cardsPerWave);
 
             // 다음 웨이브로
             currentWaveIndex = (currentWaveIndex + 1) % waveConfigs.Count;
+
+            //TODO : PolicyCard 무작위로 3개 출현시키기
+            /*
+             * 1. Hierarchy에 있는 오브젝트에 명령 내리기
+             * 2. 명령을 내리면 CardPool에 있는 List에서 확률에 따라 카드 받아오기
+             * 3. 받아온 카드 UI에 표시하기
+             * 4. 카드 효과 적용하기
+             */
 
             // UI 복구
             startWaveButton.interactable = true;
