@@ -1,3 +1,4 @@
+using JiHoon;
 using UnityEngine;
 
 namespace MainGame.Units {
@@ -13,25 +14,17 @@ namespace MainGame.Units {
         #endregion
 
         #region Unity Event Method
+        protected override void Start() {
+            base.Start();
+            //MainGame.Manager.WaveManager.Instance.enemyCount++;
+        }
         #endregion
 
         #region Custom Method
         //TODO : 베이스에 도착했을 때 패널티 적용
-        /*
-             public class StatusEffect
-    {
-        public string effectName;
-        public float duration;
-        public float value;
+        void CalcPanelty() {
 
-        public StatusEffect(string name, float dur, float val)
-        {
-            effectName = name;
-            duration = dur;
-            value = val;
         }
-    }
-         */
         #endregion
     }
 

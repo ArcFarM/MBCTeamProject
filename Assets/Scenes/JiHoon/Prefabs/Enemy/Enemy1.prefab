@@ -429,9 +429,10 @@ GameObject:
   - component: {fileID: 3332730498628433170}
   - component: {fileID: 353809961183880960}
   - component: {fileID: 6458001922697312151}
+  - component: {fileID: -2420492565539389044}
   m_Layer: 5
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3570,11 +3571,11 @@ MonoBehaviour:
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
   engageDistanceMultiplier: 0.75
-  maxCombatTarget: 1
+  maxCombatTarget: 99
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: 0}
+  unitAnim: {fileID: -2420492565539389044}
 --- !u!114 &3332730498628433170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3588,22 +3589,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  nodeReachDistance: 0.3
-  followDistance: 3
   separationRadius: 2
-  maxFollowSpeed: 5
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
-  viaPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  currentTargetIndex: 0
-  isMoving: 0
+  followDistance: 3
 --- !u!70 &353809961183880960
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3653,8 +3640,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93364533096f0d04e97dbd825ef0941c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitID: 
-  unitName: 
+  unitID: 99
+  unitName: 99
   faction: 1
   baseRawSize: 1
   baseColSize: 1
@@ -3674,6 +3661,21 @@ MonoBehaviour:
   currSpd: 1
   stats: []
   panelty: 0
+--- !u!114 &-2420492565539389044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856652019981532589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3849104699504804562}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 99
 --- !u!1 &1898533620134970038
 GameObject:
   m_ObjectHideFlags: 0

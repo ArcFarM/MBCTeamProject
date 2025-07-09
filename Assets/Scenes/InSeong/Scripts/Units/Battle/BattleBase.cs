@@ -70,6 +70,8 @@ namespace MainGame.Units.Battle {
 
             while (!ub.IsDead) {
                 yield return updateInterval;
+                //null check
+                RemoveInvalidTargets();
 
                 switch (currentState) {
                     case CombatState.Idle:
@@ -113,13 +115,15 @@ namespace MainGame.Units.Battle {
         // 탐지 상태: 주변 적 스캔
         protected virtual void HandleDetectingState() {
             //Debug.Log($"[{gameObject.name}] Detecting: 주변 적 탐지 시작");
+            unitAnim.SetAnimBool(animParam.Param_bool_move, false); // 이동 애니메이션 중지
 
             Collider2D[] detectedTargets = Physics2D.OverlapCircleAll(transform.position, detectingRange);
             //Debug.Log($"[{gameObject.name}] Detecting: 탐지 범위 {detectingRange:F2}, 발견된 객체 수: {detectedTargets.Length}");
 
-            // 자기 자신을 제외한 모든 탐지된 대상을 리스트에 추가
+            // 자기 자신을 제외한 모든 Unit Tag 오브젝트들을 리스트에 추가
             int addedCount = 0;
             foreach (var target in detectedTargets) {
+                if(target.gameObject.tag != "Unit") continue; // Unit 태그가 아닌 오브젝트는 무시
                 if (target.gameObject == gameObject || combatTargetList.Contains(target.gameObject)) continue; // 자기 자신 및 중복 대상 제외
                 combatTargetList.Add(target.gameObject);
                 addedCount++;
@@ -376,6 +380,13 @@ namespace MainGame.Units.Battle {
             //null check는 상위 메서드에서 이미 했음
             if (target != null) target.GetComponent<IBattle>().TakeDamage(damage);
             //Debug.Log($"[{gameObject.name}] Attack: {target.name}에게 {damage} 데미지 가함");
+        }
+
+        //조건에 안맞는 적 삭제
+        public virtual void RemoveInvalidTargets() {
+            combatTargetList.RemoveAll(target => target == null 
+                                              || !target.activeSelf 
+                                              || !EngageConditionCheck(target, out UnitBase ub, out BattleBase bb));
         }
         #endregion
         #endregion

@@ -31,15 +31,117 @@ MonoBehaviour:
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 444
-    unitName: 444
+  - unitID: 1
+    unitName: 1
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 444
-    unitName: 444
+  - unitID: 2
+    unitName: 2
     attackDamageFrame: 15
     attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 3
+    unitName: 3
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 4
+    unitName: 4
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 5
+    unitName: 5
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 6
+    unitName: 6
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 7
+    unitName: 7
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 8
+    unitName: 8
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 9
+    unitName: 9
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 10
+    unitName: 10
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 11
+    unitName: 11
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 12
+    unitName: 12
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 13
+    unitName: 13
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 14
+    unitName: 14
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 95
+    unitName: 95
+    attackDamageFrame: 1
+    attackCompleteFrame: 1
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 96
+    unitName: 96
+    attackDamageFrame: 1
+    attackCompleteFrame: 1
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 97
+    unitName: 97
+    attackDamageFrame: 1
+    attackCompleteFrame: 1
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 98
+    unitName: 98
+    attackDamageFrame: 1
+    attackCompleteFrame: 1
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: 99
+    unitName: 99
+    attackDamageFrame: 1
+    attackCompleteFrame: 1
     frameRate: 60
     idleLoopInterval: 1
