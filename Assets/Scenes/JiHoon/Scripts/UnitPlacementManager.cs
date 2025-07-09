@@ -255,7 +255,6 @@ namespace JiHoon
                 foreach (var cell in footprint)
                     sum += gridManager.CellToWorldCenter(cell);
                 Vector3 spawnPos = sum / footprint.Count;
-
                 GameObject spawnedUnit = null;
 
                 if (isUsingShopItem)
@@ -268,7 +267,7 @@ namespace JiHoon
                 {
                     // 기존 preset 방식 스폰
                     spawner.SpawnAtPosition(selectedPreset, spawnPos);
-                    spawnedUnit = spawner.GetLastSpawnedUnit(); // 이 메서드가 있다고 가정
+                    spawnedUnit = spawner.GetLastSpawnedUnit();
                 }
 
                 // GridManager에 점유 정보 등록
@@ -277,11 +276,27 @@ namespace JiHoon
                     gridManager.OccupyCells(new HashSet<Vector3Int>(footprint), spawnedUnit);
                 }
 
-                // 카드 UI 제거
                 if (selectedCardUI != null)
                 {
-                    Destroy(selectedCardUI.gameObject);
+                    var cardDeck = FindFirstObjectByType<SimpleCardDeck>();
+                    if (cardDeck != null)
+                    {
+                        // 하스스톤 덱에서만 제거
+                        cardDeck.OnCardPlaced();
+                    }
+                    else
+                    {
+                        // 기존 방식은 직접 제거
+                        Destroy(selectedCardUI.gameObject);
+                    }
                     selectedCardUI = null;
+                }
+
+                // 카드덱에 배치 완료 알림 (추가)
+                var card_Deck = FindFirstObjectByType<SimpleCardDeck>();
+                if (card_Deck != null)
+                {
+                    card_Deck.OnCardPlaced();
                 }
 
                 // 모드 종료

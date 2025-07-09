@@ -38,6 +38,12 @@ public class UnitCardUI : MonoBehaviour, IPointerClickHandler
     // **모두 선택 로직만 호출** → 실제 스폰은 PlacementManager.Update 에서 처리
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (placementMgr == null)
+        {
+            Debug.LogError("PlacementMgr이 null입니다!");
+            return;
+        }
+
         placementMgr.OnClickSelectUmit(this);
     }
 }
