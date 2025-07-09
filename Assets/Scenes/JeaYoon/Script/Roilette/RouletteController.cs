@@ -7,32 +7,22 @@ namespace JeaYoon.Roulette
 {
     public class RouletteController : MonoBehaviour
     {
-        // 🎯 회전하는 룰렛 휠 (슬롯들을 자식으로 가짐)
-        public RectTransform rouletteWheel;
+        public RectTransform rouletteWheel;          // 회전하는 룰렛 휠
+        public RectTransform centerMarker;           // 🎯 룰렛 중앙 기준 (empty object를 UI 중앙에 두고 연결)
+        public float maxSpeed = 100f;               // 최대 회전 속도
+        public float itemHeight = 50f;              // 슬롯 하나의 높이
 
-        // 🎯 최대 회전 속도
-        public float maxSpeed = 1000f;
+        public Button startButton;                   // 시작 버튼
+        public Button stopButton;                    // 정지 버튼
+        public TextMeshProUGUI descriptionText;      // 결과 설명 텍스트
 
-        // 🎯 슬롯 하나의 높이 (간격 계산에 사용)
-        public float itemHeight = 100f;
+        private bool isSpinning = false;
+        private bool isStopping = false;
+        private Coroutine spinCoroutine;
+        private int startCount = 0;
+        private const int maxStartCount = 100;
 
-        // 🎯 시작 / 정지 버튼
-        public Button startButton;
-        public Button stopButton;
-
-        // 🎯 룰렛 결과 설명을 출력할 텍스트
-        public TextMeshProUGUI descriptionText;
-
-        // 내부 상태값들
-        private bool isSpinning = false;        // 룰렛이 회전 중인지 여부
-        private bool isStopping = false;        // 감속 중인지 여부
-        private Coroutine spinCoroutine;        // 회전 코루틴 핸들
-
-        // 시작 횟수 제한
-        private int startCount = 0;             // Start 버튼 누른 횟수
-        private const int maxStartCount = 100;  // Start 버튼 최대 허용 횟수
-
-        // 룰렛 효과 설명 목록 (슬롯 인덱스에 대응)
+        // 룰렛 효과 설명
         private string[] effectDescriptions = new string[]
         {
             "1번 효과: 적 전체에게 피해를 줍니다.",
@@ -45,10 +35,21 @@ namespace JeaYoon.Roulette
             "8번 효과: 이동속도 증가.",
             "9번 효과: 팀원 전체 버프 부여.",
             "10번 효과: 즉시 턴 획득!",
-            "11번 효과: 공격속도 2배 증가!",
         };
 
-        // ▶ Start 버튼 눌렀을 때 실행되는 함수
+        // 슬롯 텍스트 배열 (효과 설명과 동일한 순서)
+        private string[] slotTexts = new string[]
+        {
+            "1번 효과", "2번 효과", "3번 효과", "4번 효과", "5번 효과",
+            "6번 효과", "7번 효과", "8번 효과", "9번 효과", "10번 효과"
+        };
+
+        void Start()
+        {
+            // 시작 시 모든 슬롯 텍스트 초기화 및 위치 설정
+            InitializeSlotTexts();
+        }
+
         public void StartRoulette()
         {
             if (!isSpinning && startCount < maxStartCount)
@@ -57,7 +58,6 @@ namespace JeaYoon.Roulette
                 spinCoroutine = StartCoroutine(SpinRoutine());
                 startCount++;
 
-                // 최대 횟수에 도달하면 버튼 비활성화
                 if (startCount >= maxStartCount)
                 {
                     startButton.interactable = false;
@@ -65,13 +65,39 @@ namespace JeaYoon.Roulette
             }
         }
 
-        // ▶ Stop 버튼 눌렀을 때 감속 시작
         public void StopRoulette()
         {
             isStopping = true;
         }
 
-        // ▶ 룰렛 회전 코루틴
+        // 🔧 수정: 슬롯 텍스트 초기화 및 중앙 마커 기준으로 위치 설정
+        private void InitializeSlotTexts()
+        {
+            float startY = 100f; // 슬롯 시작 위치를 Y = +100으로 고정
+
+            for (int i = 0; i < rouletteWheel.childCount; i++)
+            {
+                RectTransform slot = rouletteWheel.GetChild(i) as RectTransform;
+                RouletteSlot slotScript = slot.GetComponent<RouletteSlot>();
+
+                if (slotScript != null)
+                {
+                    int textIndex = i % slotTexts.Length;
+                    slotScript.SetText(slotTexts[textIndex]);
+                }
+
+                // 🎯 여기에 추가!
+                slot.sizeDelta = new Vector2(slot.sizeDelta.x, itemHeight);
+                // 🔧 핵심 수정: 슬롯 위치를 중앙 마커 기준으로 설정
+                // 첫 번째 슬롯(i=0)이 중앙 마커 위치에 오도록 설정
+                float slotY = startY - (i * itemHeight);
+                slot.anchoredPosition = new Vector2(slot.anchoredPosition.x, slotY);
+            }
+
+            // 🔧 추가: 룰렛 휠 자체의 위치를 0으로 초기화
+            rouletteWheel.anchoredPosition = Vector2.zero;
+        }
+
         private IEnumerator SpinRoutine()
         {
             isSpinning = true;
@@ -79,45 +105,29 @@ namespace JeaYoon.Roulette
 
             while (true)
             {
-                // 감속 처리
                 if (isStopping)
                 {
                     speed = Mathf.MoveTowards(speed, 0, Time.deltaTime * 300f);
-
                     if (speed <= 20f)
-                        break; // 속도가 충분히 느려지면 회전 종료
+                        break;
                 }
 
-                // 룰렛 휠 이동 (위쪽으로 계속 움직임)
-                rouletteWheel.anchoredPosition += Vector2.up * speed * Time.deltaTime;
+                // 🔧 수정: 룰렛이 아래로 이동하도록 변경 (Vector2.down 사용)
+                rouletteWheel.anchoredPosition += Vector2.down * speed * Time.deltaTime;
 
-                // 슬롯 루프 처리 (화면 위로 지나간 슬롯을 아래로 재배치)
-                float halfHeight = (itemHeight * rouletteWheel.childCount) / 2f;
-
-                for (int i = 0; i < rouletteWheel.childCount; i++)
-                {
-                    RectTransform slot = rouletteWheel.GetChild(i) as RectTransform;
-                    float slotGlobalY = slot.localPosition.y + rouletteWheel.anchoredPosition.y;
-
-                    // 슬롯이 반 바퀴 이상 넘어가면 뒤로 보냄
-                    if (slotGlobalY > halfHeight)
-                    {
-                        float newY = slot.localPosition.y - itemHeight * rouletteWheel.childCount;
-                        slot.localPosition = new Vector2(slot.localPosition.x, newY);
-                    }
-                }
+                // 🔧 수정: 무한 순환 로직 개선
+                HandleInfiniteLoop();
 
                 yield return null;
             }
 
-            // ▶ 정지 직후 Lerp로 정중앙에 가까운 위치로 정렬
+            // 부드러운 정렬
             Vector2 startPos = rouletteWheel.anchoredPosition;
             float nearestY = Mathf.Round(startPos.y / itemHeight) * itemHeight;
             Vector2 targetPos = new Vector2(startPos.x, nearestY);
 
             float t = 0f;
             float duration = 0.2f;
-
             while (t < 1f)
             {
                 t += Time.deltaTime / duration;
@@ -127,38 +137,92 @@ namespace JeaYoon.Roulette
 
             isSpinning = false;
 
-            // ▶ 정지 후, 중앙에 가장 가까운 슬롯 찾기
-            float centerY = 0f;
+            // 중앙에 가장 가까운 슬롯 찾기
+            float centerY = centerMarker.position.y;
             float closestDistance = float.MaxValue;
-            int selectedIndex = 0;
+            int selectedSlotIndex = 0;
 
             for (int i = 0; i < rouletteWheel.childCount; i++)
             {
                 RectTransform slot = rouletteWheel.GetChild(i) as RectTransform;
-                float slotGlobalY = slot.localPosition.y + rouletteWheel.anchoredPosition.y;
+                float slotY = slot.position.y;
+                float distance = Mathf.Abs(slotY - centerY);
 
-                float distance = Mathf.Abs(slotGlobalY - centerY);
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    selectedIndex = i;
+                    selectedSlotIndex = i;
                 }
             }
 
-            // ▶ 효과 설명 출력 (슬롯 수가 descriptions보다 많을 경우 대비)
-            int actualIndex = selectedIndex % effectDescriptions.Length;
+            // 선택된 슬롯의 텍스트 확인
+            RectTransform selectedSlot = rouletteWheel.GetChild(selectedSlotIndex) as RectTransform;
+            RouletteSlot selectedSlotScript = selectedSlot.GetComponent<RouletteSlot>();
 
-            if (actualIndex >= 0 && actualIndex < effectDescriptions.Length)
+            if (selectedSlotScript != null)
             {
-                descriptionText.text = effectDescriptions[actualIndex];
-            }
-            else
-            {
-                descriptionText.text = "설명 없음";
-            }
+                string selectedText = selectedSlotScript.slotLabel.text;
+                Debug.Log($"🎯 선택된 슬롯 텍스트: {selectedText}");
 
-            // ▶ 콘솔 로그 출력
-            Debug.Log($"🎯 선택된 인덱스: {actualIndex + 1}");
+                // 텍스트에서 숫자 추출 (예: "5번 효과" -> 5)
+                int effectNumber = ExtractEffectNumber(selectedText);
+
+                if (effectNumber >= 1 && effectNumber <= effectDescriptions.Length)
+                {
+                    descriptionText.text = effectDescriptions[effectNumber - 1];
+                    Debug.Log($"🎯 선택된 효과: {effectNumber}번");
+                }
+                else
+                {
+                    Debug.LogError($"잘못된 효과 번호: {effectNumber}");
+                }
+            }
+        }
+
+        // 🔧 개별 슬롯 순환 로직 (자연스러운 무한 순환)
+        private void HandleInfiniteLoop()
+        {
+            float totalHeight = itemHeight * slotTexts.Length;
+            float resetY = 100f; // 슬롯이 되돌아오는 기준 지점
+
+            for (int i = 0; i < rouletteWheel.childCount; i++)
+            {
+                RectTransform slot = rouletteWheel.GetChild(i) as RectTransform;
+                float localY = slot.anchoredPosition.y + rouletteWheel.anchoredPosition.y;
+
+                // 아래로 충분히 내려갔으면 위로 재배치 (Y = 100을 기준으로)
+                if (localY < -itemHeight * 1.5f)
+                {
+                    slot.anchoredPosition += new Vector2(0, totalHeight);
+                }
+                // 위로 충분히 올라갔으면 아래로 재배치
+                else if (localY > resetY + (itemHeight * 0.5f))
+                {
+                    slot.anchoredPosition -= new Vector2(0, totalHeight);
+                }
+            }
+        }
+      
+
+
+        // 텍스트에서 효과 번호 추출
+        private int ExtractEffectNumber(string text)
+        {
+            // "5번 효과" 형태에서 숫자 추출
+            string[] parts = text.Split('번');
+            if (parts.Length > 0)
+            {
+                if (int.TryParse(parts[0], out int number))
+                {
+                    return number;
+                }
+            }
+            return 1; // 기본값
+        }
+        public void ResetRoulette()
+        {
+            startCount = 0;
+            startButton.interactable = true;
         }
     }
 }

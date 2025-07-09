@@ -2583,7 +2583,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 279.0003, y: -149.99985}
+  m_AnchoredPosition: {x: 279.0003, y: -149.99997}
   m_SizeDelta: {x: 533, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &562716046
@@ -11423,9 +11423,6 @@ MonoBehaviour:
   buyButton: {fileID: 231245782}
   effectText: {fileID: 1055483951}
   npcIllustration: {fileID: 1091582767}
-  ownedUnitSlots: []
-  unitData: {fileID: 0}
-  iconImage: {fileID: 0}
 --- !u!114 &1850953843
 MonoBehaviour:
   m_ObjectHideFlags: 0

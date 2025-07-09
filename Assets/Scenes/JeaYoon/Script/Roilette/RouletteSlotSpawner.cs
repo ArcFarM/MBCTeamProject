@@ -4,16 +4,13 @@ namespace JeaYoon.Roulette
 {
     public class RouletteSlotSpawner : MonoBehaviour
     {
-        // ▶ 슬롯 프리팹 (TextMeshProUGUI를 포함한 단일 슬롯 UI 오브젝트)
+        // ▶ 슬롯 프리팹 (TextMeshProUGUI 포함된 슬롯 오브젝트)
         public GameObject slotPrefab;
-
-        // ▶ 슬롯들이 배치될 부모 오브젝트 (예: Wheel RectTransform)
+        // ▶ 슬롯들이 배치될 부모 오브젝트 (RectTransform)
         public RectTransform slotParent;
-
-        // ▶ 슬롯 하나의 높이 (슬롯 간 간격 계산에 사용됨)
+        // ▶ 슬롯 하나의 높이 (슬롯 간격)
         public float slotHeight = 100f;
-
-        // ▶ 슬롯에 표시될 텍스트들 (효과 설명)
+        // ▶ 슬롯에 표시될 텍스트들
         [TextArea]
         public string[] slotTexts = new string[]
         {
@@ -21,37 +18,42 @@ namespace JeaYoon.Roulette
             "6번 효과", "7번 효과", "8번 효과", "9번 효과", "10번 효과"
         };
 
-        // ▶ Start()에서 자동 실행 → 게임 시작 시 슬롯 자동 생성
+        // ▶ 시작 시 슬롯 생성
         void Start()
         {
             SpawnSlots();
         }
 
-        // ▶ 슬롯을 생성하여 부모에 배치하는 함수
+        // ▶ 슬롯 생성 및 배치
         void SpawnSlots()
         {
-            // ▶ 슬롯을 2배로 생성 (무한 스크롤 느낌을 위한 반복)
-            int totalSlots = slotTexts.Length * 2;
+            // 🔧 수정: 무한 루프 효과를 위해 3배 생성 (연결성 보장)
+            int repetitions = 3;
+            int totalSlots = slotTexts.Length * repetitions;
 
             for (int i = 0; i < totalSlots; i++)
             {
-                // ▶ 프리팹을 부모(slotParent) 아래에 인스턴스화
                 GameObject newSlot = Instantiate(slotPrefab, slotParent);
 
-                // ▶ 슬롯의 위치 설정 (위에서 아래로 차곡차곡 배치)
+                // 🔧 수정: 슬롯 위치 설정 (위에서 아래로 연속 배치)
                 RectTransform rt = newSlot.GetComponent<RectTransform>();
-                rt.anchoredPosition = new Vector2(0, -i * slotHeight);  // 위에서 아래로 쌓음
+                rt.anchoredPosition = new Vector2(0, (totalSlots - 1 - i) * slotHeight);
 
-                // ▶ 슬롯 텍스트 설정 (i % slotTexts.Length 로 순환)
+                // 텍스트 설정 (순환 반복)
                 RouletteSlot slotScript = newSlot.GetComponent<RouletteSlot>();
                 if (slotScript != null)
                 {
-                    slotScript.SetText(slotTexts[i % slotTexts.Length]);
+                    int textIndex = i % slotTexts.Length;
+                    slotScript.SetText(slotTexts[textIndex]);
                 }
 
-                // ▶ 슬롯 이름 지정 (에디터에서 보기 편하도록)
-                newSlot.name = $"Slot_{i + 1}";
+                // 에디터에서 보기 편하게 이름 설정
+                newSlot.name = $"Slot_{i + 1}_{slotTexts[i % slotTexts.Length]}";
             }
+
+            // 🔧 수정: 첫 번째 슬롯이 화면 중앙(파란색 부분)에 오도록 설정
+            float centerOffset = -(slotTexts.Length * slotHeight * 0.5f);
+            slotParent.anchoredPosition = new Vector2(0, centerOffset);
         }
     }
 }
