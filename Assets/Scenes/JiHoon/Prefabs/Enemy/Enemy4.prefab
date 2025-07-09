@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 1114454932325520066}
   - component: {fileID: -7787545021522122019}
   - component: {fileID: 9069389212483292755}
+  - component: {fileID: 2014534849064724950}
   m_Layer: 5
   m_Name: Enemy4
   m_TagString: Unit
@@ -3408,6 +3409,33 @@ MonoBehaviour:
   animator: {fileID: 746797008813807025}
   animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
   unitID: 96
+--- !u!50 &2014534849064724950
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631529754140920010}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &672726948309911493
 GameObject:
   m_ObjectHideFlags: 0

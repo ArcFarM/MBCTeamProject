@@ -245,10 +245,8 @@ namespace JiHoon
                 foreach (var cell in footprint)
                     gridManager.previewTilemap.SetTile(cell, gridManager.placementPreviewTile);
 
-            // 2-4) 설치 확정
-            if (canPlace
-                && Input.GetMouseButtonDown(0)
-                && !EventSystem.current.IsPointerOverGameObject())
+            // 2-4) 설치 확정 부분
+            if (canPlace && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 // 중앙 좌표 계산
                 Vector3 sum = Vector3.zero;
@@ -257,6 +255,7 @@ namespace JiHoon
                 Vector3 spawnPos = sum / footprint.Count;
                 GameObject spawnedUnit = null;
 
+                // 유닛 스폰
                 if (isUsingShopItem)
                 {
                     // 상점 아이템 직접 스폰
@@ -276,27 +275,32 @@ namespace JiHoon
                     gridManager.OccupyCells(new HashSet<Vector3Int>(footprint), spawnedUnit);
                 }
 
+                // ★★★ 카드 제거 처리 - 이 부분이 중요! ★★★
                 if (selectedCardUI != null)
                 {
+                    Debug.Log($"카드 제거 시작. selectedCardUI: {selectedCardUI.name}");
+
+                    // SimpleCardDeck이 있는 경우
                     var cardDeck = FindFirstObjectByType<SimpleCardDeck>();
                     if (cardDeck != null)
                     {
-                        // 하스스톤 덱에서만 제거
+                        Debug.Log("SimpleCardDeck 발견 - OnCardPlaced 호출");
+                        // SimpleCardDeck이 모든 제거 처리를 담당
                         cardDeck.OnCardPlaced();
                     }
                     else
                     {
-                        // 기존 방식은 직접 제거
+                        // SimpleCardDeck이 없는 경우에만 직접 처리
+                        Debug.Log("SimpleCardDeck 없음 - 직접 제거");
+                        var cardManager = FindFirstObjectByType<UnitCardManager>();
+                        if (cardManager != null)
+                        {
+                            cardManager.RemoveCard(selectedCardUI);
+                        }
                         Destroy(selectedCardUI.gameObject);
                     }
-                    selectedCardUI = null;
-                }
 
-                // 카드덱에 배치 완료 알림 (추가)
-                var card_Deck = FindFirstObjectByType<SimpleCardDeck>();
-                if (card_Deck != null)
-                {
-                    card_Deck.OnCardPlaced();
+                    selectedCardUI = null;
                 }
 
                 // 모드 종료
