@@ -2297,6 +2297,7 @@ GameObject:
   - component: {fileID: 968702827162009898}
   - component: {fileID: -1628379410399945241}
   - component: {fileID: 155785959796607449}
+  - component: {fileID: 4078932711134146218}
   m_Layer: 5
   m_Name: Enemy5
   m_TagString: Untagged
@@ -5405,15 +5406,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  nodeReachDistance: 0.1
-  followDistance: 3
   separationRadius: 2
-  maxFollowSpeed: 5
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
-  viaPoints: []
-  currentTargetIndex: 0
-  isMoving: 0
+  followDistance: 3
 --- !u!114 &968702827162009898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5434,7 +5428,7 @@ MonoBehaviour:
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
-  unitAnim: {fileID: 0}
+  unitAnim: {fileID: -2420492565539389044, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
 --- !u!70 &-1628379410399945241
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -5484,8 +5478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93364533096f0d04e97dbd825ef0941c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitID: 
-  unitName: 
+  unitID: 95
+  unitName: 95
   faction: 1
   baseRawSize: 1
   baseColSize: 1
@@ -5505,6 +5499,21 @@ MonoBehaviour:
   currSpd: 1
   stats: []
   panelty: 0
+--- !u!114 &4078932711134146218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3307697242633967457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1431244070560951017}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 95
 --- !u!1 &3416927571140015875
 GameObject:
   m_ObjectHideFlags: 0

@@ -1317,6 +1317,117 @@ Transform:
   m_Children: []
   m_Father: {fileID: 507013936}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &263746599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 263746600}
+  - component: {fileID: 263746601}
+  m_Layer: 0
+  m_Name: EnemySpawnerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &263746600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263746599}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1079366841}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &263746601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263746599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 456980c30cfc2fa45ac2b24a9f3dc189, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPointsData:
+  - name: Up
+    spawnPoint: {fileID: 1968968283}
+    waypointsParentA: {fileID: 1415286362}
+    waypointsParentB: {fileID: 2303856}
+    waypointsA:
+    - {fileID: 446234604}
+    - {fileID: 1529650763}
+    - {fileID: 152134735}
+    - {fileID: 1727336223}
+    - {fileID: 1003439964}
+    - {fileID: 575542307}
+    - {fileID: 753429619}
+    - {fileID: 1168312469}
+    waypointsB:
+    - {fileID: 713332121}
+    - {fileID: 1549188749}
+    - {fileID: 1800786438}
+    - {fileID: 1620656782}
+    - {fileID: 1887491227}
+    - {fileID: 1478358311}
+    - {fileID: 1167707089}
+    - {fileID: 1032171911}
+  - name: Middle
+    spawnPoint: {fileID: 436220220}
+    waypointsParentA: {fileID: 0}
+    waypointsParentB: {fileID: 0}
+    waypointsA:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    waypointsB:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+  - name: Down
+    spawnPoint: {fileID: 1696205197}
+    waypointsParentA: {fileID: 0}
+    waypointsParentB: {fileID: 0}
+    waypointsA:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    waypointsB:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!1 &264070315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,18 +1680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456980c30cfc2fa45ac2b24a9f3dc189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnContainer: {fileID: 2137054130}
-  endPoint: {fileID: 673847408}
-  spawnPoints:
-  - spawnPoint: {fileID: 436220220}
-    viaPoints:
-    - {fileID: 732784751}
-    - {fileID: 581465139}
-    - {fileID: 746080899}
-    - {fileID: 507013936}
-    - {fileID: 942424016}
-    - {fileID: 1229521305}
-    - {fileID: 1907734746}
+  spawnPointsData: []
 --- !u!1 &307291697
 GameObject:
   m_ObjectHideFlags: 0
@@ -3967,14 +4067,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456980c30cfc2fa45ac2b24a9f3dc189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnContainer: {fileID: 2137054130}
-  endPoint: {fileID: 673847408}
-  spawnPoints:
-  - spawnPoint: {fileID: 1696205197}
-    viaPoints:
-    - {fileID: 1415286362}
-    - {fileID: 2303856}
-    - {fileID: 1757945761}
+  spawnPointsData: []
 --- !u!1 &778401865
 GameObject:
   m_ObjectHideFlags: 0
@@ -11655,6 +11748,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 263746600}
   - {fileID: 673847408}
   - {fileID: 1449829258}
   - {fileID: 766161630}
@@ -11673,21 +11767,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee805c7431c771240a9af450e603d656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawners:
-  - {fileID: 1449829259}
-  - {fileID: 766161631}
-  - {fileID: 306961127}
-  bossSpawnPoint: {fileID: 436220220}
-  cardManager: {fileID: 1907221773}
+  spawner: {fileID: 0}
   startWaveButton: {fileID: 56054007}
+  cardManager: {fileID: 1907221773}
+  placementManager: {fileID: 1909818602}
   initialCardCount: 5
   cardsPerWave: 3
-  autoDelay: 50
-  waveConfig:
-  - {fileID: 11400000, guid: 66f73a341508e3a44b2494a407bcdd26, type: 2}
-  - {fileID: 11400000, guid: 318c6ffa7725fe443b6619d5d15358ef, type: 2}
-  - {fileID: 11400000, guid: 9e783696e4091334baa0a37b8b8fbd42, type: 2}
-  placementMgr: {fileID: 1909818602}
+  waveConfigs: []
 --- !u!1 &1080112541
 GameObject:
   m_ObjectHideFlags: 0
@@ -12654,14 +12740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456980c30cfc2fa45ac2b24a9f3dc189, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnContainer: {fileID: 2137054130}
-  endPoint: {fileID: 673847408}
-  spawnPoints:
-  - spawnPoint: {fileID: 1968968283}
-    viaPoints:
-    - {fileID: 432700485}
-    - {fileID: 9334316}
-    - {fileID: 858573812}
+  spawnPointsData: []
 --- !u!1 &1478358310
 GameObject:
   m_ObjectHideFlags: 0
@@ -16948,6 +17027,8 @@ MonoBehaviour:
   unitPresets: []
   deckContainer: {fileID: 2035456593}
   placementMgr: {fileID: 1909818602}
+  hearthstoneDeck: {fileID: 0}
+  useHearthstoneStyle: 1
 --- !u!1 &1907734745
 GameObject:
   m_ObjectHideFlags: 0

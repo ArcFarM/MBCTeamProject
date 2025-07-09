@@ -2462,6 +2462,7 @@ GameObject:
   - component: {fileID: 6600835865580263475}
   - component: {fileID: 4082496454898183572}
   - component: {fileID: -344514587854515856}
+  - component: {fileID: 471139714354961603}
   m_Layer: 8
   m_Name: BluePlayer4
   m_TagString: Untagged
@@ -5539,13 +5540,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b7f2a50298afb4794d291cf3d103bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitID: 4444
-  unitName: 4444
+  unitID: 4
+  unitName: 4
   faction: 0
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 1
+  baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
   baseRange: 1
@@ -5652,10 +5653,26 @@ MonoBehaviour:
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
   engageDistanceMultiplier: 0.75
-  maxCombatTarget: 3
+  maxCombatTarget: 1
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
+  unitAnim: {fileID: 471139714354961603}
+--- !u!114 &471139714354961603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3910339013826355901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4222555583378605655}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 4
 --- !u!1 &3911199099466672482
 GameObject:
   m_ObjectHideFlags: 0

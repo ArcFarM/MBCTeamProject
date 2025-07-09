@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: 4220317812896038814}
   - component: {fileID: 763960424595151031}
   - component: {fileID: -443515184292244761}
+  - component: {fileID: -7020931638435799894}
   m_Layer: 8
   m_Name: RedPlayer3
   m_TagString: Untagged
@@ -3453,13 +3454,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b7f2a50298afb4794d291cf3d103bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitID: 33
-  unitName: 33
+  unitID: 12
+  unitName: 12
   faction: 0
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 1
+  baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
   baseRange: 1
@@ -3566,10 +3567,26 @@ MonoBehaviour:
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
   engageDistanceMultiplier: 0.75
-  maxCombatTarget: 3
+  maxCombatTarget: 1
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
+  unitAnim: {fileID: -4152261151120496572, guid: 8354191bd949297468c57802b886ee63, type: 3}
+--- !u!114 &-7020931638435799894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060447110712446823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 2085230304601751699}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 12
 --- !u!1 &1067593994650293211
 GameObject:
   m_ObjectHideFlags: 0

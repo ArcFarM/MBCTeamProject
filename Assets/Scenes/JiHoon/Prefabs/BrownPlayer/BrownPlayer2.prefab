@@ -975,6 +975,7 @@ GameObject:
   - component: {fileID: -7321192989021770607}
   - component: {fileID: 5008752916300099850}
   - component: {fileID: -5085709091641167824}
+  - component: {fileID: -8235616423526937483}
   m_Layer: 8
   m_Name: BrownPlayer2
   m_TagString: Untagged
@@ -4052,13 +4053,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b7f2a50298afb4794d291cf3d103bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitID: 222
-  unitName: 222
+  unitID: 6
+  unitName: 6
   faction: 0
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 1
+  baseHealth: 50
   baseDamage: 1
   baseAtkSpd: 1
   baseRange: 1
@@ -4165,10 +4166,26 @@ MonoBehaviour:
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
   engageDistanceMultiplier: 0.75
-  maxCombatTarget: 3
+  maxCombatTarget: 1
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
+  unitAnim: {fileID: 6132394987299961573, guid: 45a11cdfe63326a409f215bf26fdab5a, type: 3}
+--- !u!114 &-8235616423526937483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898435344270824819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee022259839f649428925e7ed8e595cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6006229898028822741}
+  animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
+  unitID: 6
 --- !u!1 &916843068387044777
 GameObject:
   m_ObjectHideFlags: 0
