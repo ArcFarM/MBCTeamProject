@@ -5,10 +5,7 @@ namespace JiHoon
     [System.Serializable]
     public struct UnitPreset
     {
-        public GameObject prefab;
-        public Sprite icon;           // 카드 덱에 보여줄 스프라이트
-        public Sprite hoverIcon;      // 마우스 오버 시 카드 자체가 바뀌는 스프라이트
-        public Sprite tooltipImage;   // 마우스 오버 시 툴팁에 표시될 스프라이트 (새로 추가!)
+        public UnitCardData cardData;  // ScriptableObject로 모든 데이터 관리
     }
 
     public class UnitSpawner : MonoBehaviour
@@ -23,10 +20,14 @@ namespace JiHoon
         public void SpawnAtPosition(int presetIndex, Vector3 worldPos)
         {
             if (presetIndex < 0 || presetIndex >= unitPresets.Length) return;
+            if (unitPresets[presetIndex].cardData == null) return;
+
+            var cardData = unitPresets[presetIndex].cardData;
+            if (cardData.unitPrefab == null) return;
 
             // 단순 instantiate
             GameObject go = Instantiate(
-                unitPresets[presetIndex].prefab,
+                cardData.unitPrefab,
                 worldPos,
                 Quaternion.identity,
                 unitContainer

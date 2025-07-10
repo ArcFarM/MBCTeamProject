@@ -28,12 +28,20 @@ namespace JiHoon
         private SimpleCardUI selectedCard = null;                     // 현재 선택된 카드
         private GameObject currentTooltip = null;                     // 현재 표시 중인 툴팁
         private SimpleCardUI currentHoveredCard = null;              // 현재 호버중인 카드 참조
+        private UnitSpawner spawner;                                 // UnitSpawner 참조
 
         void Start()
         {
             var layoutGroup = GetComponent<HorizontalLayoutGroup>();
             if (layoutGroup) layoutGroup.enabled = false;
             UpdateCardPositions();
+
+            // UnitSpawner 찾기
+            spawner = FindFirstObjectByType<UnitSpawner>();
+            if (spawner == null)
+            {
+                Debug.LogWarning("UnitSpawner를 찾을 수 없습니다!");
+            }
         }
 
         void Update()
@@ -112,7 +120,19 @@ namespace JiHoon
             card.Setup(cardUI, cards.Count, this);
 
             // 호버 스프라이트 설정
-            if (cardUI.hoverSprite != null)
+            if (!cardUI.isFromShop && spawner != null)
+            {
+                var presets = spawner.unitPresets;
+                if (cardUI.presetIndex >= 0 && cardUI.presetIndex < presets.Length)
+                {
+                    var cardData = presets[cardUI.presetIndex].cardData;
+                    if (cardData != null && cardData.hoverIcon != null)
+                    {
+                        card.SetHoverSprite(cardData.hoverIcon);
+                    }
+                }
+            }
+            else if (cardUI.hoverSprite != null)
             {
                 card.SetHoverSprite(cardUI.hoverSprite);
             }
@@ -248,47 +268,86 @@ namespace JiHoon
                 tooltipImage = currentTooltip.GetComponentInChildren<Image>();
             }
 
-            if (tooltipImage != null)
+            // 텍스트 컴포넌트도 찾기 (TextMeshPro 또는 일반 Text)
+            var tooltipTextTMP = currentTooltip.GetComponentInChildren<TMPro.TextMeshProUGUI>();
+            var tooltipTextLegacy = currentTooltip.GetComponentInChildren<UnityEngine.UI.Text>();
+
+            // 프리셋 유닛인 경우 - UnitSpawner에서 cardData 가져오기
+            if (!card.originalCard.isFromShop)
             {
-                // 프리셋 유닛인 경우 - UnitSpawner에서 tooltipImage 가져오기
-                if (!card.originalCard.isFromShop)
+                var spawner = FindFirstObjectByType<UnitSpawner>();
+                if (spawner != null && spawner.unitPresets != null)
                 {
-                    var spawner = FindFirstObjectByType<UnitSpawner>();
-                    if (spawner != null && spawner.unitPresets != null)
+                    var presets = spawner.unitPresets;
+                    if (card.originalCard.presetIndex >= 0 &&
+                        card.originalCard.presetIndex < presets.Length)
                     {
-                        var presets = spawner.unitPresets;
-                        if (card.originalCard.presetIndex >= 0 &&
-                            card.originalCard.presetIndex < presets.Length)
+                        // 해당 유닛의 cardData에서 tooltipImage와 tooltipText 사용
+                        var cardData = presets[card.originalCard.presetIndex].cardData;
+                        if (cardData != null)
                         {
-                            // 해당 유닛의 tooltipImage 사용 (hoverIcon이 아닌!)
-                            var preset = presets[card.originalCard.presetIndex];
-                            if (preset.tooltipImage != null)
+                            // 이미지 설정
+                            if (tooltipImage != null && cardData.tooltipImage != null)
                             {
-                                Debug.Log($"툴팁 이미지 변경: {preset.tooltipImage.name}");
-                                tooltipImage.sprite = preset.tooltipImage;
+                                Debug.Log($"툴팁 이미지 변경: {cardData.tooltipImage.name}");
+                                tooltipImage.sprite = cardData.tooltipImage;
                                 tooltipImage.enabled = true;
+                            }
+
+                            // 텍스트 설정
+                            if (!string.IsNullOrEmpty(cardData.tooltipText))
+                            {
+                                Debug.Log($"툴팁 텍스트 설정 시도: {cardData.tooltipText}");
+
+                                if (tooltipTextTMP != null)
+                                {
+                                    tooltipTextTMP.text = cardData.tooltipText;
+                                    Debug.Log("TextMeshPro에 텍스트 설정 완료");
+                                }
+                                else if (tooltipTextLegacy != null)
+                                {
+                                    tooltipTextLegacy.text = cardData.tooltipText;
+                                    Debug.Log("Legacy Text에 텍스트 설정 완료");
+                                }
+                                else
+                                {
+                                    Debug.LogWarning("텍스트 컴포넌트를 찾을 수 없습니다!");
+                                }
                             }
                             else
                             {
-                                Debug.LogWarning($"유닛 {card.originalCard.presetIndex}의 tooltipImage가 null입니다");
+                                Debug.LogWarning("tooltipText가 비어있습니다!");
                             }
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"유닛 {card.originalCard.presetIndex}의 cardData가 null입니다");
                         }
                     }
                 }
-                // 상점 아이템인 경우
-                else if (card.originalCard.isFromShop && card.originalCard.shopItemData != null)
+            }
+            // 상점 아이템인 경우
+            else if (card.originalCard.isFromShop && card.originalCard.shopItemData != null)
+            {
+                if (tooltipImage != null && card.originalCard.shopItemData.illustration != null)
                 {
-                    if (card.originalCard.shopItemData.illustration != null)
+                    Debug.Log($"상점 아이템 툴팁 이미지 변경: {card.originalCard.shopItemData.illustration.name}");
+                    tooltipImage.sprite = card.originalCard.shopItemData.illustration;
+                    tooltipImage.enabled = true;
+                }
+
+                // 상점 아이템의 설명 텍스트 설정
+                if (!string.IsNullOrEmpty(card.originalCard.shopItemData.description))
+                {
+                    if (tooltipTextTMP != null)
                     {
-                        Debug.Log($"상점 아이템 툴팁 이미지 변경: {card.originalCard.shopItemData.illustration.name}");
-                        tooltipImage.sprite = card.originalCard.shopItemData.illustration;
-                        tooltipImage.enabled = true;
+                        tooltipTextTMP.text = card.originalCard.shopItemData.description;
+                    }
+                    else if (tooltipTextLegacy != null)
+                    {
+                        tooltipTextLegacy.text = card.originalCard.shopItemData.description;
                     }
                 }
-            }
-            else
-            {
-                Debug.LogError("툴팁에서 Image 컴포넌트를 찾을 수 없습니다!");
             }
         }
 
