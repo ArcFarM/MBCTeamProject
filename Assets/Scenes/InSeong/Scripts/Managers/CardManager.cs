@@ -1,12 +1,12 @@
 using MainGame.Enum;
 using MainGame.UI;
 using MainGame.Units;
+//using MainGame.Card;
 using UnityEngine;
 
 namespace MainGame.Manager {
     public class CardManager : SingletonManager<CardManager> {
         #region Variables
-        [SerializeField] GameObject cardPool; //카드 정보가 담겨있는 프리팹
         #endregion
 
         #region Properties
@@ -59,14 +59,6 @@ namespace MainGame.Manager {
         void ChangeEnemy(PolicyCard pc) {
             //TODO : WaveManager 에서 맞닥뜨릴 다음 웨이브를 마주하고,
             //그 웨이브의 적군 유닛을 수정
-        }
-
-        public void GetEvent() {
-            //웨이브 끝나고 고정적으로 카드 출현
-            //if (WaveManager.Instance.IsWaveStarted) return;
-            //TODO : 카드 풀에서 카드를 3장 생성하여 UI에 배치
-            //- HorizontalLayoutGroup을 가진 컴포넌트에 자식으로 붙이기
-            
         }
         #endregion
     }

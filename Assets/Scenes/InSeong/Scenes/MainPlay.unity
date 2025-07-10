@@ -2223,10 +2223,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardManager: {fileID: 1907221773}
   shopPanel: {fileID: 1465857259}
+  playerUnrest: 50
   playerGold: 1000
-  playerDiscontent: 50
   playerDominance: 50
-  playerChaos: 50
+  playerManpower: 50
   goldText: {fileID: 1959451064}
   allItems:
   - {fileID: 11400000, guid: 8b7910136a4258440be165f45f65a0bb, type: 2}
@@ -2749,32 +2749,46 @@ MonoBehaviour:
   unitPresets:
   - prefab: {fileID: 2721758889849644916, guid: d89133a213b141b459566ebd3aea8112, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 7265233419418686336, guid: 1eb3b35a003dad941a613fc0282e220b, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 8514850830143079336, guid: 99a6bde45d4170c429ce3abb21d17a18, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 3910339013826355901, guid: 04a1d7ae128452644b7f6bf269d7914d, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 2831740823323081645, guid: 45a11cdfe63326a409f215bf26fdab5a, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 898435344270824819, guid: cca4efdba5c84964f851d7835fb2f38c, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 1804733949350671915, guid: 1dff6100e4dd38746b4fe1cf5fec1ffa, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 1822108203758653323, guid: 9ab7ec2891f5d0040b46f03eaf7c460c, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 3676276360844246494, guid: afbc28016ee554141bcc5ba9289e95e4, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 8355353816177164395, guid: 8354191bd949297468c57802b886ee63, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 2269105173681724915, guid: fb70fccfebd604444b8200a311dada8b, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 1060447110712446823, guid: 7343a220fe5e1594f8aab522f9bc18c1, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 640190455122559666, guid: 1b86b1a053fb0244a96ed5162fc72dd7, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+    hoverIcon: {fileID: 0}
   - prefab: {fileID: 7039307120196332833, guid: aa05cab6253d3d64e92cae192a5aead3, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+    hoverIcon: {fileID: 0}
   unitContainer: {fileID: 1999991201}
 --- !u!1 &460505633
 GameObject:
@@ -3155,6 +3169,53 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!1 &540025458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 540025459}
+  - component: {fileID: 540025460}
+  m_Layer: 0
+  m_Name: CardPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &540025459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540025458}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &540025460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540025458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35cd14656ec6b544f9586b410a0c58e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crisisEvent: 0
+  cards:
+  - {fileID: 0}
 --- !u!1 &548868257
 GameObject:
   m_ObjectHideFlags: 0
@@ -13550,6 +13611,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300439327}
   m_CullTransparentMesh: 1
+--- !u!1 &1303770380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303770382}
+  - component: {fileID: 1303770381}
+  m_Layer: 0
+  m_Name: CardEventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1303770381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303770380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1893f7e5973c8647b78e30acb42060e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardPool: {fileID: 0}
+--- !u!4 &1303770382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303770380}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1327657789
 GameObject:
   m_ObjectHideFlags: 0
@@ -18524,6 +18630,8 @@ MonoBehaviour:
   placementMgr: {fileID: 1909818602}
   hearthstoneDeck: {fileID: 2035456597}
   useHearthstoneStyle: 1
+  maxCardCount: 10
+  currentCards: []
 --- !u!1 &1907734745
 GameObject:
   m_ObjectHideFlags: 0
@@ -19500,7 +19608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 219.5608, y: -175}
+  m_AnchoredPosition: {x: 266.49988, y: -175}
   m_SizeDelta: {x: 533, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2027659723
@@ -19653,7 +19761,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2035707128
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20113,3 +20221,5 @@ SceneRoots:
   - {fileID: 1536119667}
   - {fileID: 1555209870}
   - {fileID: 582678128}
+  - {fileID: 1303770382}
+  - {fileID: 540025459}
