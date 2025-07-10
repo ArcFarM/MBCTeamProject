@@ -7,7 +7,8 @@ namespace JiHoon
     {
         public GameObject prefab;
         public Sprite icon;           // 카드 덱에 보여줄 스프라이트
-        public Sprite hoverIcon;      // 마우스 오버 시 보여줄 스프라이트 (새로 추가)
+        public Sprite hoverIcon;      // 마우스 오버 시 카드 자체가 바뀌는 스프라이트
+        public Sprite tooltipImage;   // 마우스 오버 시 툴팁에 표시될 스프라이트 (새로 추가!)
     }
 
     public class UnitSpawner : MonoBehaviour
