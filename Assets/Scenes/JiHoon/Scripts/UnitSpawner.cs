@@ -6,7 +6,8 @@ namespace JiHoon
     public struct UnitPreset
     {
         public GameObject prefab;
-        public Sprite icon;    // 카드 덱에 보여줄 스프라이트
+        public Sprite icon;           // 카드 덱에 보여줄 스프라이트
+        public Sprite hoverIcon;      // 마우스 오버 시 보여줄 스프라이트 (새로 추가)
     }
 
     public class UnitSpawner : MonoBehaviour
@@ -15,7 +16,7 @@ namespace JiHoon
         public UnitPreset[] unitPresets;
 
         [Header("스폰된 아군 유닛을 담을 컨테이너")]
-        public Transform unitContainer;    
+        public Transform unitContainer;
 
         // 마우스 클릭 위치(worldPos)에 prefab 그대로 인스턴스화
         public void SpawnAtPosition(int presetIndex, Vector3 worldPos)
@@ -30,13 +31,12 @@ namespace JiHoon
                 unitContainer
             );
 
-            // 추가 세팅이 필요 없으면 여기서 끝!
-            // UnitBase 스크립트가 Awake/Start에서 stats 초기화 담당
+            lastSpawnedUnit = go;  // 마지막 스폰 유닛 저장
         }
+
         public GameObject GetLastSpawnedUnit()
         {
             return lastSpawnedUnit;
         }
     }
-
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3615805155860663314}
   - component: {fileID: 7856792408639447020}
   - component: {fileID: 6043018645526684229}
+  - component: {fileID: 1916557140047769207}
   m_Layer: 5
   m_Name: CardUIPrefab
   m_TagString: Untagged
@@ -134,5 +135,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardImage: {fileID: 3615805155860663314}
+  hoverSprite: {fileID: 0}
+  isFromShop: 0
+  shopItemData: {fileID: 0}
+  shopUnitPrefab: {fileID: 0}
   presetIndex: 0
   placementMgr: {fileID: 0}
+--- !u!114 &1916557140047769207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686357956857563516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e735eec6f9cd3514eb6242188edefacb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardIcon: {fileID: 3615805155860663314}
+  tooltipPrefab: {fileID: 6879812196772635959, guid: e7ed47362b3b4c54a8ef6bdc5f43412e, type: 3}
+  tooltipOffset: {x: 400, y: 400}
+  cardIndex: 0
+  originalCard: {fileID: 0}
