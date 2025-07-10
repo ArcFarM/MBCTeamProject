@@ -266,11 +266,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceptButton: {fileID: 2110061305172657325}
   cardGrade: 2
-  cardEffect: 1
-  stats: 0f000000000000000000000000000000
+  cardEffect: 0
+  stats: 0a000000f6ffffff05000000fbffffff
   units:
   - {fileID: 5168783316952083730, guid: 4b2087e916f7f7d4b84d4e77b20c89c0, type: 3}
-  isAdd: 1
+  isAdd: 0
 --- !u!1 &6973909282906229089
 GameObject:
   m_ObjectHideFlags: 0

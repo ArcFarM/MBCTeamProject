@@ -2750,45 +2750,59 @@ MonoBehaviour:
   - prefab: {fileID: 2721758889849644916, guid: d89133a213b141b459566ebd3aea8112, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 7265233419418686336, guid: 1eb3b35a003dad941a613fc0282e220b, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 8514850830143079336, guid: 99a6bde45d4170c429ce3abb21d17a18, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 3910339013826355901, guid: 04a1d7ae128452644b7f6bf269d7914d, type: 3}
     icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 2831740823323081645, guid: 45a11cdfe63326a409f215bf26fdab5a, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 898435344270824819, guid: cca4efdba5c84964f851d7835fb2f38c, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 1804733949350671915, guid: 1dff6100e4dd38746b4fe1cf5fec1ffa, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 1822108203758653323, guid: 9ab7ec2891f5d0040b46f03eaf7c460c, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 3676276360844246494, guid: afbc28016ee554141bcc5ba9289e95e4, type: 3}
     icon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 8355353816177164395, guid: 8354191bd949297468c57802b886ee63, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 2269105173681724915, guid: fb70fccfebd604444b8200a311dada8b, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 1060447110712446823, guid: 7343a220fe5e1594f8aab522f9bc18c1, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 640190455122559666, guid: 1b86b1a053fb0244a96ed5162fc72dd7, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   - prefab: {fileID: 7039307120196332833, guid: aa05cab6253d3d64e92cae192a5aead3, type: 3}
     icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
     hoverIcon: {fileID: 0}
+    tooltipImage: {fileID: 0}
   unitContainer: {fileID: 1999991201}
 --- !u!1 &460505633
 GameObject:
@@ -3213,9 +3227,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35cd14656ec6b544f9586b410a0c58e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crisisEvent: 0
-  cards:
-  - {fileID: 0}
+  cardDatabase: {fileID: 0}
+  isCrisisEventActive: 0
+  isCrisisExclusive: 1
 --- !u!1 &548868257
 GameObject:
   m_ObjectHideFlags: 0
@@ -13640,7 +13654,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1893f7e5973c8647b78e30acb42060e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPool: {fileID: 0}
 --- !u!4 &1303770382
 Transform:
   m_ObjectHideFlags: 0
@@ -14729,6 +14742,7 @@ RectTransform:
   - {fileID: 2035707128}
   - {fileID: 803980274}
   - {fileID: 1941333254}
+  - {fileID: 2006429481}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -19390,6 +19404,108 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2006429480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2006429481}
+  - component: {fileID: 2006429484}
+  - component: {fileID: 2006429483}
+  - component: {fileID: 2006429482}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &2006429481
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006429480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1555209870}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2006429482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006429480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 25
+    m_Right: 25
+    m_Top: 25
+    m_Bottom: 25
+  m_ChildAlignment: 3
+  m_Spacing: 25
+  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandHeight: 0
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &2006429483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006429480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2006429484
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006429480}
+  m_CullTransparentMesh: 1
 --- !u!1 &2014495787
 GameObject:
   m_ObjectHideFlags: 0
@@ -19744,6 +19860,8 @@ MonoBehaviour:
   hoverScale: 3
   hoverSpacing: 300
   animationSpeed: 5
+  tooltipPrefab: {fileID: 0}
+  tooltipOffset: {x: 20, y: -20}
 --- !u!1 &2035707127
 GameObject:
   m_ObjectHideFlags: 0
