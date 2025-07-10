@@ -155,11 +155,15 @@ namespace MainGame.Manager {
 
             //TODO : PolicyCard 무작위로 3개 출현시키기
             /*
-             * 1. Hierarchy에 있는 오브젝트에 명령 내리기
-             * 2. 명령을 내리면 CardPool에 있는 List에서 확률에 따라 카드 받아오기
+
+
              * 3. 받아온 카드 UI에 표시하기
              * 4. 카드 효과 적용하기
              */
+            //             * 1. Hierarchy에 있는 오브젝트에 명령 내리기
+            CardManager cm = FindFirstObjectByType<MainGame.Manager.CardManager>();
+            cm.GetEvent();
+            //   cm에서 처리   * 2. 명령을 내리면 CardPool에 있는 List에서 확률에 따라 카드 받아오기
 
             // UI 복구
             startWaveButton.interactable = true;

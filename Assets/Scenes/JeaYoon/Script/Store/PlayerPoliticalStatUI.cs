@@ -14,10 +14,10 @@ namespace JeaYoon.Store
         // [1] Variable.
         #region ▼▼▼▼▼ Variable ▼▼▼▼▼
         // [◆] - ▶▶▶ 정의.
-        public TextMeshProUGUI discontentText;      // ) 불만 텍스트 수치.
+        public TextMeshProUGUI unrestText;      // ) 불만 텍스트 수치.
         public TextMeshProUGUI financesText;        // ) 재정 텍스트 수치.
         public TextMeshProUGUI dominanceText;       // ) 지배 텍스트 수치.
-        public TextMeshProUGUI chaosText;       // ) 혼돈 텍스트 수치.
+        public TextMeshProUGUI ManpowerText;       // ) 혼돈 텍스트 수치.
 
 
         public ShopManager shopManager;
@@ -32,10 +32,10 @@ namespace JeaYoon.Store
         // [◆] - ▶▶▶ Update.
         private void Update()
         {
-            discontentText.text = shopManager.playerDiscontent.ToString();         // ) 불만.
+            unrestText.text = shopManager.playerUnrest.ToString();         // ) 불만.
             financesText.text = shopManager.playerGold.ToString();              // ) 재정.
             dominanceText.text = shopManager.playerDominance.ToString();       // ) 지배.
-            chaosText.text = shopManager.playerChaos.ToString();                   // ) 혼돈.
+            ManpowerText.text = shopManager.playerManpower.ToString();                   // ) 혼돈.
         }
         #endregion ▲▲▲▲▲ Unity Event Method ▲▲▲▲▲
     }

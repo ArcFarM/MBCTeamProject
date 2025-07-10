@@ -15,10 +15,10 @@ public class ItemData : ScriptableObject
     public string itemName;     // 아이템 이름
     [TextArea]public string description;  // 아이템 설명
     public Sprite icon;         // 아이템 아이콘
-    public int discontent;      // ) 구매시 소모되는 아이템의 불만 수치.
+    public int unrest;      // ) 구매시 소모되는 아이템의 불만 수치.
     public int price;           // 아이템 가격 = 재정 수치
-    public int dominace;        // ) 구매시 소모되는 아이템의 지배 수치.
-    public int chaos;        // ) 구매시 소모되는 아이템의 혼돈 수치.
+    public int dominance;        // ) 구매시 소모되는 아이템의 지배 수치.
+    public int manpower;        // ) 구매시 소모되는 아이템의 혼돈 수치.
 
 
     public Sprite illustration; // 아이템 일러스트

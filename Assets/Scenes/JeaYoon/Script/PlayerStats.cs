@@ -12,8 +12,8 @@ namespace JeaYoon
         // [1] Variable.
         #region ▼▼▼▼▼ Variable ▼▼▼▼▼
         // [◆] - ▶▶▶ 정의.
-        private static int discontent;                                // ) 불만.
-        [SerializeField] private int startdiscontent = 50;          // ) 게임을 시작할 때 정해지는 불만.
+        private static int unrest;                                // ) 불만.
+        [SerializeField] private int startunrest = 50;          // ) 게임을 시작할 때 정해지는 불만.
 
         private static int finances;                                   // ) 재정.
         [SerializeField] private int startfinances = 1000;          // ) 게임을 시작할 때 정해지는 재정.
@@ -21,8 +21,8 @@ namespace JeaYoon
         private static int dominance;                                // ) 지배.
         [SerializeField] private int startdominance = 50;         // ) 게임을 시작할 때 정해지는 지배.
 
-        private static int chaos;                                      // ) 혼돈.
-        [SerializeField] private int startchaos = 50;               // ) 게임을 시작할 때 정해지는 혼돈.
+        private static int manpower;                                      // ) 혼돈.
+        [SerializeField] private int startManpower = 50;               // ) 게임을 시작할 때 정해지는 혼돈.
         #endregion ▲▲▲▲▲ Variable ▲▲▲▲▲
 
 
@@ -32,9 +32,9 @@ namespace JeaYoon
         // [2] Property.
         #region ▼▼▼▼▼ Property ▼▼▼▼▼
         // [◆] - ▶▶▶ 불만 읽기전용 속성.
-        public static int Discontent
+        public static int Unrest
         {
-            get { return discontent; }
+            get { return unrest; }
         }
 
 
@@ -53,9 +53,9 @@ namespace JeaYoon
 
 
         // [◆] - ▶▶▶ 혼돈 읽기전용 속성.
-        public static int Chaos
+        public static int Manpower
         {
-            get { return chaos; }
+            get { return manpower; }
         }
 
 
@@ -73,10 +73,10 @@ namespace JeaYoon
         private void Start()
         {
             // [◇] - [◆] - ) 초기화.
-            discontent = startdiscontent;           // ) 불만.
+            unrest = startunrest;           // ) 불만.
             finances = startfinances;                // ) 재정.
             dominance = startdominance;         // ) 지배.
-            chaos = startchaos;                      // ) 혼돈.
+            manpower = startManpower;                      // ) 혼돈.
             Waves = 0;                                // ) 웨이브.
         }
         #endregion ▲▲▲▲▲ Unity Event Method ▲▲▲▲▲
@@ -87,31 +87,31 @@ namespace JeaYoon
 
         // [4-1] Custom Method(불만도).
         #region ▼▼▼▼▼ Custom Method(불만도) ▼▼▼▼▼
-        // [◆] - ▶▶▶ AddDiscontent → 불만도 추가.
-        public static void AddDiscontent(int amount)
+        // [◆] - ▶▶▶ Addunrest → 불만도 추가.
+        public static void Addunrest(int amount)
         {
-            discontent += amount;
+            unrest += amount;
         }
 
 
-        // [◆] - ▶▶▶ UseDiscontent → 불만도 사용.
-        public static bool UseDiscontent(int amount)
+        // [◆] - ▶▶▶ Useunrest → 불만도 사용.
+        public static bool Useunrest(int amount)
         {
             // [◇] - [◆] - ) .
-            if (discontent < amount)
+            if (unrest < amount)
             {
                 Debug.Log("불만도가 부족합니다.");
                 return false;
             }
-            discontent -= amount;
+            unrest -= amount;
             return true;
         }
 
 
-        // [◆] - ▶▶▶ HasDiscontent → 보유하고 있는 불만도.
-        public static bool HasDiscontent(int amount)
+        // [◆] - ▶▶▶ Hasunrest → 보유하고 있는 불만도.
+        public static bool Hasunrest(int amount)
         {
-            return discontent >= amount;
+            return unrest >= amount;
         }
         #endregion ▲▲▲▲▲ Custom Method(불만도) ▲▲▲▲▲
 
@@ -128,7 +128,7 @@ namespace JeaYoon
         }
 
 
-        // [◆] - ▶▶▶ UseDiscontent → 재정 사용.
+        // [◆] - ▶▶▶ Useunrest → 재정 사용.
         public static bool UseFinances(int amount)
         {
             // [◇] - [◆] - ) .
@@ -189,31 +189,31 @@ namespace JeaYoon
 
         // [4-4] Custom Method(혼돈).
         #region ▼▼▼▼▼ Custom Method(혼돈) ▼▼▼▼▼
-        // [◆] - ▶▶▶ AddChaos → 혼돈 추가.
-        public static void AddChaos(int amount)
+        // [◆] - ▶▶▶ AddManpower → 혼돈 추가.
+        public static void AddManpower(int amount)
         {
-            chaos += amount;
+            manpower += amount;
         }
 
 
-        // [◆] - ▶▶▶ UseChaos → 혼돈 사용.
-        public static bool UseChaos(int amount)
+        // [◆] - ▶▶▶ UseManpower → 혼돈 사용.
+        public static bool UseManpower(int amount)
         {
             // [◇] - [◆] - ) .
-            if (chaos < amount)
+            if (manpower < amount)
             {
                 Debug.Log("혼돈이 부족합니다.");
                 return false;
             }
-            chaos -= amount;
+            manpower -= amount;
             return true;
         }
 
 
-        // [◆] - ▶▶▶ HasChaos → 보유하고 있는 혼돈.
-        public static bool HasChaos(int amount)
+        // [◆] - ▶▶▶ HasManpower → 보유하고 있는 혼돈.
+        public static bool HasManpower(int amount)
         {
-            return chaos >= amount;
+            return manpower >= amount;
         }
         #endregion ▲▲▲▲▲ Custom Method(혼돈) ▲▲▲▲▲
     }

@@ -14,10 +14,10 @@ namespace JiHoon
         public GameObject shopPanel;            // 상점 UI 패널
 
         [Header("플레이어 자원")]
-        public int playerDiscontent = 50;       // 불만 자원
+        public int playerUnrest = 50;       // 불만 자원
         public int playerGold = 1000;          // 골드
         public int playerDominance = 50;       // 지배 자원
-        public int playerChaos = 50;           // 혼돈 자원
+        public int playerManpower = 50;           // 혼돈 자원
         public TextMeshProUGUI goldText;       // 골드 표시 텍스트
 
         [Header("데이터")]
@@ -83,9 +83,9 @@ namespace JiHoon
             // 자원 확인
             bool canBuy =
                  playerGold >= selectedItem.price
-              && playerDiscontent >= selectedItem.discontent
-              && playerDominance >= selectedItem.dominace
-              && playerChaos >= selectedItem.chaos;
+              && playerUnrest >= selectedItem.unrest
+              && playerDominance >= selectedItem.dominance
+              && playerManpower >= selectedItem.manpower;
 
             if (!canBuy)
             {
@@ -105,9 +105,9 @@ namespace JiHoon
 
             // 구매 처리 - 자원 차감
             playerGold -= selectedItem.price;
-            playerDiscontent -= selectedItem.discontent;
-            playerDominance -= selectedItem.dominace;
-            playerChaos -= selectedItem.chaos;
+            playerUnrest -= selectedItem.unrest;
+            playerDominance -= selectedItem.dominance;
+            playerManpower -= selectedItem.manpower;
             UpdateGoldUI();
 
             // 유닛 카드 추가
