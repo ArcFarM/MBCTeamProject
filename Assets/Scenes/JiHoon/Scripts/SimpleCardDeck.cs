@@ -380,7 +380,14 @@ namespace JiHoon
 
         Vector3 CalculateCardPosition(int index)
         {
-            if (cards.Count == 1) return Vector3.zero;
+            // 카드가 하나일 때도 기본 Y 위치를 유지
+            if (cards.Count == 1)
+            {
+                Vector3 singleCardPos = Vector3.zero;
+                if (index == hoveredCardIndex)
+                    singleCardPos.y += hoverHeight;
+                return singleCardPos;
+            }
 
             float totalWidth = 0f;
             for (int i = 0; i < cards.Count - 1; i++)
