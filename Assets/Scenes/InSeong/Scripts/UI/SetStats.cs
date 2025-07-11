@@ -9,7 +9,8 @@ namespace MainGame.UI {
         //능력치 정확한 수치 표시
         [SerializeField] TextMeshProUGUI statValue;
         [SerializeField] int currStat = 50;
-        int currStatMin = 0, currStatMax = 100; //TODO : 최소치, 최대치도 능력치 관리 스크립트에서 가져올 것
+        [SerializeField] int currStatMin = 0;
+        [SerializeField] int currStatMax = 100; //TODO : 최소치, 최대치도 능력치 관리 스크립트에서 가져올 것
         //주 이미지 : 현재 능력치를 시각적으로 표시, 보조 이미지 : 능력치의 증가/감소를 연출
         [SerializeField] Image mainImage;
         [SerializeField] Image subImage;
@@ -18,6 +19,8 @@ namespace MainGame.UI {
         [SerializeField] Button minusButton;
         //값이 변화하는 효과의 시간
         [SerializeField] float animTime = 2f;
+        //무슨 스탯인 지 정리
+        public Enum.Stats stats;
         #endregion
 
         #region Properties
@@ -31,7 +34,7 @@ namespace MainGame.UI {
         }
         public int GetStatMax {
             get { return currStatMax; }
-            set { currStatMin = value; }
+            set { currStatMax = value; }
         }
         #endregion
 
@@ -49,6 +52,12 @@ namespace MainGame.UI {
 
         #region Custom Method
         //무작위 정수 min ~ max 범위 사이로 반환
+        public void Initialize() {
+
+            //시작 수치에 맞추기
+            StartCoroutine(SliderValueEffect(mainImage, 0, 0f));
+        }
+
         public void OnClick(int min, int max) {
             int rnd = Random.Range(min, max + 1);
             OnValueChange(rnd);
@@ -58,13 +67,13 @@ namespace MainGame.UI {
             if (value > 0) {
                 //값 증가 : 서브가 먼저 움직여서 녹색 영역을 만들고, 메인 영역이 따라감
                 subImage.color = SetColor(128, 255, 0);
-                subImage.fillAmount = Mathf.Clamp(currStat + value, 0, 100) / currStatMax;
+                subImage.fillAmount = Mathf.Clamp(currStat + value, currStatMin, currStatMax) / currStatMax;
                 StartCoroutine(SliderValueEffect(mainImage, value, animTime));
             }
             else {
                 //값 감소 : 메인이 먼저 움직여서 빨간 영역을 만들고, 서브 영역이 따라감
                 subImage.color = SetColor(255, 80, 90);
-                mainImage.fillAmount = Mathf.Clamp(currStat + value, 0, 100) / currStatMax;
+                mainImage.fillAmount = Mathf.Clamp(currStat + value, currStatMin, currStatMax) / currStatMax;
                 StartCoroutine(SliderValueEffect(subImage, value, animTime));
             }
            

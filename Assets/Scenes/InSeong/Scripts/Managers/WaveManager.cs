@@ -21,7 +21,7 @@ namespace MainGame.Manager {
         public int initialCardCount = 5;
         //public int cardsPerWave = 3;
         [SerializeField, Header("카드 정보가 담긴 오브젝트")]
-        CardPool cardPool;
+        //CardPool cardPool;
         //웨이브 종료 후 지급할 카드 수량
         int cardPoolCount = 3;
 
@@ -169,7 +169,7 @@ namespace MainGame.Manager {
             //             * 1. Hierarchy에 있는 오브젝트에 명령 내리기
             CardManager cm = FindFirstObjectByType<MainGame.Manager.CardManager>();
             for(int i = 0; i < cardPoolCount; i++) {
-                GameObject go = cardPool.GetCard().gameObject;
+                //GameObject go = cardPool.GetCard().gameObject;
                 //go.transform.SetParent(여기에 카드 패널 올 것)
             }
             //   cm에서 처리   * 2. 명령을 내리면 CardPool에 있는 List에서 확률에 따라 카드 받아오기

@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a672bf3107475b4187c693cb839cf33, type: 3}
   m_Name: _CardData
   m_EditorClassIdentifier: 
-  cardName: Test
-  description: Test Card Data
-  cardIcon: {fileID: 0}
+  cardName: TestCard
+  description: 'This is Test Card
+
+    for Script Test'
+  cardIcon: {fileID: 4060780304857465359, guid: 0e73e497b5615bf46bfc40ddc50199db, type: 3}
   cardPrefab: {fileID: 5787633363400484810, guid: d5071c6b59aba2c48a749015350f6437, type: 3}
-  cardGrade: 0
+  cardGrade: 2
   cardEffect: 0
-  stats: 
+  stats: 0a000000f6ffffff05000000fbffffff
   isAdd: 0

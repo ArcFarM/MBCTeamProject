@@ -1,25 +1,10 @@
 fileFormatVersion: 2
-guid: a5f1270019f234a438ab5e77d5a7afc4
+guid: 4cbaa14a27e38854591738cd9bb371be
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3283728061913803992
-    second: Wave_0
-  - first:
-      213: -8492855265564123367
-    second: Wave_1
-  - first:
-      213: 2381565514505258138
-    second: Wave_2
-  - first:
-      213: -1518679696105634085
-    second: Wave_3
-  - first:
-      213: -7331227793502035523
-    second: Wave_4
-  - first:
-      213: -646423415180596007
-    second: Wave_5
+      213: -1997982010870045950
+    second: temp_1752138002254.-351374787_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -128,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Wave_0
+      name: temp_1752138002254.-351374787_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 1523
-        height: 1024
+        x: 5
+        y: 16
+        width: 90
+        height: 68
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -143,118 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8dcaa5d3645229d20800000000000000
-      internalID: 3283728061913803992
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wave_1
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 622
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 91f9e3f0221532a80800000000000000
-      internalID: -8492855265564123367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wave_2
-      rect:
-        serializedVersion: 2
-        x: 223
-        y: 231
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a940865a7350d0120800000000000000
-      internalID: 2381565514505258138
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wave_3
-      rect:
-        serializedVersion: 2
-        x: 994
-        y: 200
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bd6860adcd09ceae0800000000000000
-      internalID: -1518679696105634085
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wave_4
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 86
-        width: 8
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: db127d01a2f324a90800000000000000
-      internalID: -7331227793502035523
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wave_5
-      rect:
-        serializedVersion: 2
-        x: 994
-        y: 24
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9dc6aab24517707f0800000000000000
-      internalID: -646423415180596007
+      spriteID: 203687662fdb544e0800000000000000
+      internalID: -1997982010870045950
       vertices: []
       indices: 
       edges: []
@@ -273,12 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Wave_0: 3283728061913803992
-      Wave_1: -8492855265564123367
-      Wave_2: 2381565514505258138
-      Wave_3: -1518679696105634085
-      Wave_4: -7331227793502035523
-      Wave_5: -646423415180596007
+      temp_1752138002254.-351374787_0: -1997982010870045950
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

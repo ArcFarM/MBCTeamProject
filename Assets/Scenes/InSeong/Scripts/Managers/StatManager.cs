@@ -2,6 +2,8 @@ using UnityEngine;
 using MainGame.UI;
 using MainGame.Enum;
 using MainGame.SystemProcess;
+using MainGame.Card;
+using Unity.VisualScripting;
 //능력치를 현재 수치와 동기화하여 시각 효과
 namespace MainGame.Manager {
     public class StatManager : SingletonManager<StatManager> {
@@ -33,7 +35,9 @@ namespace MainGame.Manager {
                 statArr[i].GetStatMin = minStat[i];
                 statArr[i].GetStatMax = maxStat[i];
                 statArr[i].GetStat = defaultStat;
+                statArr[i].Initialize();
             }
+
         }
         //정책카드를 클릭하여 능력치 변화가 생겼을 때 그만큼 수치를 조정
         public void AdjustStat(PolicyCard pc) {
@@ -47,12 +51,30 @@ namespace MainGame.Manager {
                     }
                 }
             }
+        }
 
+        public void AdjustStat(CardData cd) {
+            int[] statDelta = cd.stats;
+            Debug.Log(statDelta.Length);
+            for (int i = 0; i < statArr.Length; i++) {
+                Debug.Log(statDelta[i]);
+                if (statDelta[i] != 0) {
+                    statArr[i].OnValueChange(statDelta[i]);
+                    if (isEnd(statArr[i])) {
+                        GameOver(i);
+                        break;
+                    }
+                }
+            }
         }
         //TODO : 유닛을 구매하여 능력치 변화가 생겼을 때 그만큼 수치를 조정
 
         //스탯이 0 또는 최대치에 도달하면 게임 오버
         bool isEnd(SetStats ss) {
+            //단, 재정은 상한선이 없다
+            if(ss.stats == Enum.Stats.Money) {
+                return ss.GetStat <= ss.GetStatMin;
+            }
             return ss.GetStat <= ss.GetStatMin || ss.GetStat >= ss.GetStatMax;
         }
 

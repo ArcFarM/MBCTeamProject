@@ -20,24 +20,24 @@ namespace MainGame.SystemProcess {
         #region Custom Method
         public void OnStatMin(Stats stat) {
             //TODO : 준비된 오브젝트 활성화
-            int idx = (int)stat;
+            /*int idx = (int)stat;
             if (gameoverMinPopups[idx] != null) {
                 gameoverMinPopups[idx].SetActive(true);
             }
             else {
                 Debug.LogError("게임오버 최소치 팝업이 설정되지 않았습니다: " + stat);
-            }
+            }*/
         }
 
         public void OnStatMax(Stats stat) {
             //TODO : 준비된 오브젝트 활성화
-            int idx = (int)stat;
+            /*int idx = (int)stat;
             if (gameoverMaxPopups[idx] != null) {
                 gameoverMaxPopups[idx].SetActive(true);
             }
             else {
                 Debug.LogError("게임오버 최대치 팝업이 설정되지 않았습니다: " + stat);
-            }
+            }*/
         }
 
         public void DoGameOver(Stats stat) {
