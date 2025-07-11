@@ -28,6 +28,7 @@ namespace MainGame.Card {
             if (cardDatabase == null) return null;
 
             // carddatabase에서 데이터 가져옴
+
             List<CardGradeData> currentPools = new List<CardGradeData>();
             float currentTotalWeight = 0f;
 
