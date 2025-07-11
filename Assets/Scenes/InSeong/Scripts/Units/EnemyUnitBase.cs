@@ -23,7 +23,6 @@ namespace MainGame.Units {
         #region Custom Method
         //TODO : 베이스에 도착했을 때 패널티 적용
         void CalcPanelty() {
-
         }
         #endregion
     }
