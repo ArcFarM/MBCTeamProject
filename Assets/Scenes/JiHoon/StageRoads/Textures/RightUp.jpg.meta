@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1332162f7b6b54c4ea1014dc6712c99c
+guid: 5d5eb95e9585a554cb4f4eb24583d26c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7059786456934827982
-    second: way-10_0
+      213: 6915409652731321907
+    second: RightUp_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,24 +109,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: way-10_0
+      name: RightUp_0
       rect:
         serializedVersion: 2
         x: 0
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec7c6b3d06669f160800000000000000
-      internalID: 7059786456934827982
+      spriteID: 33e9b53907878ff50800000000000000
+      internalID: 6915409652731321907
       vertices: []
       indices: 
       edges: []
@@ -161,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      way-10_0: 7059786456934827982
+      RightUp_0: 6915409652731321907
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

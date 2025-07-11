@@ -39,6 +39,6 @@ MonoBehaviour:
     - {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
     - {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
     enemyCount: 4
-    spawnPosition: 0
+    spawnPosition: 2
     enemySpacing: 0.5
     delayAfterGroup: 0

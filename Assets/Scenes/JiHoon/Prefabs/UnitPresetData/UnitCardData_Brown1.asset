@@ -15,5 +15,5 @@ MonoBehaviour:
   unitPrefab: {fileID: 2831740823323081645, guid: 45a11cdfe63326a409f215bf26fdab5a, type: 3}
   unitIcon: {fileID: 21300000, guid: 29ed6191f43cf9e41ad478443823f189, type: 3}
   hoverIcon: {fileID: -2097993509185368194, guid: d65233b0048c3b94283297d75aea1763, type: 3}
-  tooltipImage: {fileID: 21300000, guid: 80db5512bd02a0940bc408626b3a9929, type: 3}
+  tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: BrownPlayer1

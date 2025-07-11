@@ -80,7 +80,7 @@ public class CardPool : MonoBehaviour
             PolicyCard_new pc = newCardInstance.GetComponent<PolicyCard_new>();
 
             if(pc != null) {
-                pc.Initialize();
+               // pc.Initialize();
             }
         }
 

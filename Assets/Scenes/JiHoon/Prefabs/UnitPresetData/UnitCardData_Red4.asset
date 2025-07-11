@@ -15,7 +15,7 @@ MonoBehaviour:
   unitPrefab: {fileID: 640190455122559666, guid: 1b86b1a053fb0244a96ed5162fc72dd7, type: 3}
   unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
   hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
-  tooltipImage: {fileID: 21300000, guid: cd9c680af86ee4447981d74c26b1096f, type: 3}
+  tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: 'RedPlayer4
 
 '
