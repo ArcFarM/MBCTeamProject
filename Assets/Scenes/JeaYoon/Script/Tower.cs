@@ -1,74 +1,74 @@
 using UnityEngine;
 
-/* [0] °³¿ä : Tower
-		- ¾Æ±º À¯´Ö Áß Å¸¿ö¿¡ ´ëÇÑ ³»¿ëÀÓ.
-		- Å¸¿ö´Â ¿ø°Å¸® / ¹«Àû
-		- Åõ»çÃ¼ ¹× »óÀ§Æ¼¾î Å¸¿ö ÇÊ¿ä.
-		- Å¸¿öÀÇ ºÎ¸ğÅ¬·¡½º.
+/* [0] ê°œìš” : Tower
+		- ì•„êµ° ìœ ë‹› ì¤‘ íƒ€ì›Œì— ëŒ€í•œ ë‚´ìš©ì„.
+		- íƒ€ì›ŒëŠ” ì›ê±°ë¦¬ / ë¬´ì 
+		- íˆ¬ì‚¬ì²´ ë° ìƒìœ„í‹°ì–´ íƒ€ì›Œ í•„ìš”.
+		- íƒ€ì›Œì˜ ë¶€ëª¨í´ë˜ìŠ¤.
 */
 
 public class Tower : MonoBehaviour
 {
     // [1] Variable.
-    #region ¡å¡å¡å¡å¡å Variable ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º °ø°İ.
-    [SerializeField] private float attackPerSecond = 1.0f;      // ) °ø°İ¼Óµµ.
-    private float shootCountdown = 0;                         // ) °ø°İ ÀÌÈÄ ´ÙÀ½ °ø°İ±îÁöÀÇ Ä«¿îÆ®.
-    [SerializeField] private float attackRange = 10f;           // ) °ø°İ»ç°Å¸®.
+    #region â–¼â–¼â–¼â–¼â–¼ Variable â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ ê³µê²©.
+    [SerializeField] private float attackPerSecond = 1.0f;      // ) ê³µê²©ì†ë„.
+    private float shootCountdown = 0;                         // ) ê³µê²© ì´í›„ ë‹¤ìŒ ê³µê²©ê¹Œì§€ì˜ ì¹´ìš´íŠ¸.
+    [SerializeField] private float attackRange = 10f;           // ) ê³µê²©ì‚¬ê±°ë¦¬.
 
 
-    // [¡ß] - ¢º¢º¢º »öÀû.
-    protected Transform target;                 // ) °¡Àå °¡±î¿î ÀûÀ» Ã£À½.
-    protected IDamageable targetEnemy;      // ) IDamageable ½ºÅ©¸³Æ®¿¡¼­ 
+    // [â—†] - â–¶â–¶â–¶ ìƒ‰ì .
+    protected Transform target;                 // ) ê°€ì¥ ê°€ê¹Œìš´ ì ì„ ì°¾ìŒ.
+    protected IDamageable targetEnemy;      // ) IDamageable ìŠ¤í¬ë¦½íŠ¸ì—ì„œ 
     public float searchTimer = 0.5f;             // ) ???.
     private float countdown = 0f;               // ) ???.
 
 
-    // [¡ß] - ¢º¢º¢º Åõ»çÃ¼.
-    public GameObject projectilePrefab;         // ) Åõ»çÃ¼ ÇÁ¸®ÆÕ.
-    public Transform firePoint;                // ) Åõ»çÃ¼ÀÇ ¹ß»ç À§Ä¡.
+    // [â—†] - â–¶â–¶â–¶ íˆ¬ì‚¬ì²´.
+    public GameObject projectilePrefab;         // ) íˆ¬ì‚¬ì²´ í”„ë¦¬íŒ¹.
+    public Transform firePoint;                // ) íˆ¬ì‚¬ì²´ì˜ ë°œì‚¬ ìœ„ì¹˜.
 
 
-    // [¡ß] - ¢º¢º¢º ºñ¿ë(¾Æ±ºÇÑÁ¤).
-    [SerializeField] private int cost;      // ) ¾Æ±º ±¸¸Åºñ¿ë.
+    // [â—†] - â–¶â–¶â–¶ ë¹„ìš©(ì•„êµ°í•œì •).
+    [SerializeField] private int cost;      // ) ì•„êµ° êµ¬ë§¤ë¹„ìš©.
 
 
-    // [¡ß] - ¢º¢º¢º ETC.
-    public string enemyTag = "Enemy";       // ) Enemy ÅÂ±×.
-    #endregion ¡ã¡ã¡ã¡ã¡ã Variable ¡ã¡ã¡ã¡ã¡ã
+    // [â—†] - â–¶â–¶â–¶ ETC.
+    public string enemyTag = "Enemy";       // ) Enemy íƒœê·¸.
+    #endregion â–²â–²â–²â–²â–² Variable â–²â–²â–²â–²â–²
 
 
 
 
 
     // [2] Unity Event Method.
-    #region ¡å¡å¡å¡å¡å Unity Event Method ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º Start.
+    #region â–¼â–¼â–¼â–¼â–¼ Unity Event Method â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ Start.
     private void Start()
     {
-        InvokeRepeating("UpdateTarget", 0f, 0.1f);      // ) UpdateTarget¸¦ 0.1ÃÊ¸¶´Ù ¹İº¹ÇÏ¿© È£ÃâÇÔ.
+        InvokeRepeating("UpdateTarget", 0f, 0.1f);      // ) UpdateTargetë¥¼ 0.1ì´ˆë§ˆë‹¤ ë°˜ë³µí•˜ì—¬ í˜¸ì¶œí•¨.
     }
 
 
-    // [¡ß] - ¢º¢º¢º UpdateTarget.
+    // [â—†] - â–¶â–¶â–¶ UpdateTarget.
     private void UpdateTarget()
     {
-        // [¡Ş] - [¡ß] - ) Enemy ÅÂ±×¸¦ °¡Áø ¸ğµç ¿ÀºêÁ§Æ®¸¦ ¹è¿­ ÇüÅÂ·Î ¹İÈ¯.
+        // [â—‡] - [â—†] - ) Enemy íƒœê·¸ë¥¼ ê°€ì§„ ëª¨ë“  ì˜¤ë¸Œì íŠ¸ë¥¼ ë°°ì—´ í˜•íƒœë¡œ ë°˜í™˜.
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        // [¡Ş] - [¡ß] - ) ÃÖ¼Ò°Å¸®ÀÏ ¶§ÀÇ Àû.
+        // [â—‡] - [â—†] - ) ìµœì†Œê±°ë¦¬ì¼ ë•Œì˜ ì .
         float minDistance = float.MaxValue;
         GameObject nearEnemy = null;
-        // [¡Ş] - [¡ß] - ) ¹è¿­¿¡ Æ÷ÇÔµÈ ¸ğµç Àû ¿ÀºêÁ§Æ®(GameObject) ¸¦ ÇÏ³ª¾¿ ²¨³»¼­ enemy¶ó´Â ÀÌ¸§À¸·Î ¹İº¹ ½ÇÇà.
+        // [â—‡] - [â—†] - ) ë°°ì—´ì— í¬í•¨ëœ ëª¨ë“  ì  ì˜¤ë¸Œì íŠ¸(GameObject) ë¥¼ í•˜ë‚˜ì”© êº¼ë‚´ì„œ enemyë¼ëŠ” ì´ë¦„ìœ¼ë¡œ ë°˜ë³µ ì‹¤í–‰.
         foreach (var enemy in enemies)
         {
-            // [¡Ş] - [¡Ş] - [¡ß] ) Á¾Á¡¿¡ µµÂøÇÑ Enemy Å½»ö¿¡¼­ Á¦°Å.
+            // [â—‡] - [â—‡] - [â—†] ) ì¢…ì ì— ë„ì°©í•œ Enemy íƒìƒ‰ì—ì„œ ì œê±°.
             EnemyBase arriveEnemy = enemy.GetComponent<EnemyBase>();
-            // [¡Ş] - [¡Ş] - [¡ß] ) ÀÌ¹Ì ¸ñÀûÁö¿¡ µµÂøÇÑ ÀûÀº ¹«½ÃÇÏ°í, ´õ ÀÌ»ó Å¸°ÙÀ¸·Î °í·ÁÇÏÁö ¾ÊÀ½.
+            // [â—‡] - [â—‡] - [â—†] ) ì´ë¯¸ ëª©ì ì§€ì— ë„ì°©í•œ ì ì€ ë¬´ì‹œí•˜ê³ , ë” ì´ìƒ íƒ€ê²Ÿìœ¼ë¡œ ê³ ë ¤í•˜ì§€ ì•ŠìŒ.
             if (arriveEnemy != null && arriveEnemy.IsArrive == true)
             {
                 continue;
             }
-            // [¡Ş] - [¡Ş] - [¡ß] ) ???. Å½»ö
+            // [â—‡] - [â—‡] - [â—†] ) ???. íƒìƒ‰
             float distance = Vector3.Distance(this.transform.position, enemy.transform.position);
             if (distance < minDistance)
             {
@@ -76,7 +76,7 @@ public class Tower : MonoBehaviour
                 nearEnemy = enemy;
             }
         }
-        // [¡Ş] - [¡ß] - ) ¹üÀ§ ¾È¿¡ ÀûÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ°í, °¡Àå °¡±î¿î ÀûÀÌ »ç°Å¸® ¾È¿¡ Á¸ÀçÇÒ °æ¿ì, °ø°İÇÔ.
+        // [â—‡] - [â—†] - ) ë²”ìœ„ ì•ˆì— ì ì´ ìˆëŠ”ì§€ í™•ì¸í•˜ê³ , ê°€ì¥ ê°€ê¹Œìš´ ì ì´ ì‚¬ê±°ë¦¬ ì•ˆì— ì¡´ì¬í•  ê²½ìš°, ê³µê²©í•¨.
         if (nearEnemy != null && minDistance <= attackRange)
         {
             target = nearEnemy.transform;
@@ -90,40 +90,40 @@ public class Tower : MonoBehaviour
     }
 
 
-    // [¡ß] - ¢º¢º¢º Update.
+    // [â—†] - â–¶â–¶â–¶ Update.
     private void Update()
     {
-        // [¡Ş] - [¡ß] - ) Å¸°ÙÀÌ ¾øÀ» °æ¿ì °è¼Ó ¹İº¹ÇÔ.
+        // [â—‡] - [â—†] - ) íƒ€ê²Ÿì´ ì—†ì„ ê²½ìš° ê³„ì† ë°˜ë³µí•¨.
         if (target == null)
             return;
-        // [¡Ş] - [¡ß] - ) Å¸°ÙÀ» Ã£¾ÒÀ» ¶§ Á¶ÁØ.
+        // [â—‡] - [â—†] - ) íƒ€ê²Ÿì„ ì°¾ì•˜ì„ ë•Œ ì¡°ì¤€.
         LockOn();
-        // [¡Ş] - [¡ß] - ) Å¸°ÙÆÃÀ» ÇÏ¸é Å¸¿ö°¡ 1ÃÊ¸¶´Ù 1¹ß¾¿ ½î±â.
+        // [â—‡] - [â—†] - ) íƒ€ê²ŸíŒ…ì„ í•˜ë©´ íƒ€ì›Œê°€ 1ì´ˆë§ˆë‹¤ 1ë°œì”© ì˜ê¸°.
         shootCountdown += Time.deltaTime;
         if (shootCountdown >= attackPerSecond)
         {
-            // [¡Ş] - [¡Ş] - [¡ß] ) Å¸ÀÌ¸Ó ±â´É - 1¹ß¾¿ ½î±â.
+            // [â—‡] - [â—‡] - [â—†] ) íƒ€ì´ë¨¸ ê¸°ëŠ¥ - 1ë°œì”© ì˜ê¸°.
             Shoot();
-            // [¡Ş] - [¡Ş] - [¡ß] ) Å¸ÀÌ¸Ó ÃÊ±âÈ­.
+            // [â—‡] - [â—‡] - [â—†] ) íƒ€ì´ë¨¸ ì´ˆê¸°í™”.
             shootCountdown = 0f;
         }
     }
-    #endregion ¡ã¡ã¡ã¡ã¡ã Unity Event Method ¡ã¡ã¡ã¡ã¡ã
+    #endregion â–²â–²â–²â–²â–² Unity Event Method â–²â–²â–²â–²â–²
 
 
 
 
 
     // [4] Custom Method.
-    #region ¡å¡å¡å¡å¡å Custom Method ¡å¡å¡å¡å¡å
-    // [¡ß] - ¢º¢º¢º Shoot.
+    #region â–¼â–¼â–¼â–¼â–¼ Custom Method â–¼â–¼â–¼â–¼â–¼
+    // [â—†] - â–¶â–¶â–¶ Shoot.
     private void Shoot()
     {
-        // [¡Ş] - [¡ß] - ) Åõ»çÃ¼ÀÇ Á¤ÀÇ
+        // [â—‡] - [â—†] - ) íˆ¬ì‚¬ì²´ì˜ ì •ì˜
         GameObject projectileGo = Instantiate(projectilePrefab, firePoint.position, Quaternion.identity);
-        // [¡Ş] - [¡ß] - ) ProjectileBase ½ºÅ©¸³Æ®¸¦ °¡Á®¿È.
+        // [â—‡] - [â—†] - ) ProjectileBase ìŠ¤í¬ë¦½íŠ¸ë¥¼ ê°€ì ¸ì˜´.
         ProjectileBase projectile = projectileGo.GetComponent<ProjectileBase>();
-        // [¡Ş] - [¡ß] - ) Projectile ½ºÅ©¸³Æ®¿¡¼­ SetTargetÀ» °¡Á®¿È.
+        // [â—‡] - [â—†] - ) Projectile ìŠ¤í¬ë¦½íŠ¸ì—ì„œ SetTargetì„ ê°€ì ¸ì˜´.
         if (projectile != null)
         {
             projectile.SetTarget(target);
@@ -131,23 +131,23 @@ public class Tower : MonoBehaviour
     }
 
 
-    // [¡ß] - ¢º¢º¢º LockOn.
+    // [â—†] - â–¶â–¶â–¶ LockOn.
     private void LockOn()
     {
-        // [¡Ş] - [¡ß] - ) ÇöÀç ¿ÀºêÁ§Æ®¿¡¼­ Å¸°ÙÀ» ÇâÇÏ´Â ¹æÇâ º¤ÅÍ(¹æÇâ°ª)¸¦ ±¸ÇÏ´Â °Í.
+        // [â—‡] - [â—†] - ) í˜„ì¬ ì˜¤ë¸Œì íŠ¸ì—ì„œ íƒ€ê²Ÿì„ í–¥í•˜ëŠ” ë°©í–¥ ë²¡í„°(ë°©í–¥ê°’)ë¥¼ êµ¬í•˜ëŠ” ê²ƒ.
         Vector3 dir = target.position - this.transform.position;
-        // [¡Ş] - [¡ß] - ) Å¸°ÙÀ» ÇâÇØ ¿ÀºêÁ§Æ®¸¦ È¸Àü½ÃÅ°°Å³ª Á¶ÁØÇÒ ¶§.
+        // [â—‡] - [â—†] - ) íƒ€ê²Ÿì„ í–¥í•´ ì˜¤ë¸Œì íŠ¸ë¥¼ íšŒì „ì‹œí‚¤ê±°ë‚˜ ì¡°ì¤€í•  ë•Œ.
         // ) Quaternion targetRotation = Quaternion.LookRotation(dir);
     }
 
 
-    // [¡ß] - ¢º¢º¢º OnDrawGizmosSelected.
+    // [â—†] - â–¶â–¶â–¶ OnDrawGizmosSelected.
     private void OnDrawGizmosSelected()
     {
-        // [¡Ş] - [¡ß] - ) Å¸¿öÀÇ »ç°Å¸® »ö»ó.
+        // [â—‡] - [â—†] - ) íƒ€ì›Œì˜ ì‚¬ê±°ë¦¬ ìƒ‰ìƒ.
         Gizmos.color = Color.red;
-        // [¡Ş] - [¡ß] - ) ¿øÀ¸·Î Å¸¿öÀÇ »ç°Å¸® Ç¥±â.
+        // [â—‡] - [â—†] - ) ì›ìœ¼ë¡œ íƒ€ì›Œì˜ ì‚¬ê±°ë¦¬ í‘œê¸°.
         Gizmos.DrawWireSphere(this.transform.position, attackRange);
     }
-    #endregion ¡ã¡ã¡ã¡ã¡ã Custom Method ¡ã¡ã¡ã¡ã¡ã
+    #endregion â–²â–²â–²â–²â–² Custom Method â–²â–²â–²â–²â–²
 }
