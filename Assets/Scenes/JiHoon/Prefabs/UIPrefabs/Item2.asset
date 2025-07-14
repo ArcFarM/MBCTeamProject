@@ -25,5 +25,5 @@ MonoBehaviour:
   manpower: 1
   illustration: {fileID: 21300000, guid: b85d34759fa2ff9498b81d0126e238d9, type: 3}
   itemType: 0
-  unitPrefab: {fileID: 2269105173681724915, guid: fb70fccfebd604444b8200a311dada8b, type: 3}
+  unitPrefab: {fileID: 8355353816177164395, guid: 8354191bd949297468c57802b886ee63, type: 3}
   unitCardData: {fileID: 11400000, guid: b418ce745cf6eda429fa54c7dd47d693, type: 2}

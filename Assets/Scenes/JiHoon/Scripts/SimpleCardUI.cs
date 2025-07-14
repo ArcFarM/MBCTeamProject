@@ -141,6 +141,13 @@ public class SimpleCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         var placementMgr = FindFirstObjectByType<UnitPlacementManager>();
         if (placementMgr == null) return;
 
+        // ★ 카드 클릭 시 죽은 유닛 정리 ★
+        var gridManager = FindFirstObjectByType<GridManager>();
+        if (gridManager != null)
+        {
+            gridManager.CleanupDeadUnits();
+        }
+
         if (!placementMgr.placementEnabled)
             placementMgr.placementEnabled = true;
 
@@ -149,8 +156,8 @@ public class SimpleCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             originalCard.placementMgr = placementMgr;
             if (originalCard.placementMgr != null)
             {
-                parentDeck.OnCardSelected(this);  // 선택 알림
-                placementMgr.OnClickSelectUmit(originalCard);  // 배치 모드 시작
+                parentDeck.OnCardSelected(this);
+                placementMgr.OnClickSelectUmit(originalCard);
             }
         }
     }

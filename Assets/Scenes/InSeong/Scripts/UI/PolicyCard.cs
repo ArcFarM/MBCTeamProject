@@ -53,7 +53,7 @@ namespace MainGame.UI {
 
         void OnPolicySelected() {
             //카드 클릭하면 싱글톤이 사용
-            CardManager.Instance.ApplyEffect(this);
+           // CardManager.Instance.ApplyEffect(this);
         }
         #endregion
     }

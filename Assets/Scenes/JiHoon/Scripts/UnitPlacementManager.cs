@@ -72,29 +72,31 @@ namespace JiHoon
                 return;
             }
 
-            // 상점에서 구매한 카드인지 확인
+            // ★ 카드 클릭 시 죽은 유닛 정리 + 위치 검증 ★
+            if (gridManager != null)
+            {
+                gridManager.CleanupDeadUnits();
+                gridManager.ValidateUnitPositions();  // 유닛 위치 검증 추가
+            }
+
+            // 기존 코드...
             if (card.isFromShop)
             {
-                // 상점 아이템 방식
-                selectedPreset = -1; // preset 사용 안함
+                selectedPreset = -1;
                 selectedShopItem = card.shopItemData;
                 isUsingShopItem = true;
                 selectedCardUI = card;
-
                 Debug.Log($"상점 아이템 {selectedShopItem.itemName} 설치 모드 활성화");
             }
             else
             {
-                // 기존 preset 방식
                 selectedPreset = card.presetIndex;
                 selectedShopItem = null;
                 isUsingShopItem = false;
                 selectedCardUI = card;
-
                 Debug.Log($"프리셋 유닛 설치 모드 활성화");
             }
 
-            // 베이지 길 셀만 파란색으로 하이라이트
             gridManager.HighlightAllowedCells();
         }
 
@@ -105,6 +107,12 @@ namespace JiHoon
             {
                 Debug.Log("재배치 모드가 아닙니다.");
                 return;
+            }
+
+            // ★ 유닛 이동 시작 시 죽은 유닛 정리 ★
+            if (gridManager != null)
+            {
+                gridManager.CleanupDeadUnits();
             }
             movingUnit = unit;
 
@@ -146,48 +154,88 @@ namespace JiHoon
                 // 1-1) 마우스→월드→셀
                 Vector3 worldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 worldPos.z = 0;
-                Vector3Int cell = gridManager.WorldToCell(worldPos);
+                Vector3Int baseCells = gridManager.WorldToCell(worldPos);
 
                 // 1-2) 프리뷰 초기화
                 gridManager.ClearPreview();
 
-                // 1-3) 해당 셀이 도로이고 다른 유닛 점유 중이 아니어야 함
-                bool canMove = gridManager.IsRoadCell(cell)
-                            && !gridManager.GetAllOccupiedCells().Contains(cell);
+                // ★ 유닛 크기를 고려한 footprint 계산 ★
+                var footprintCells = gridManager.GetCellsFor(movingUnit, baseCells);
+                bool canMove = true;
 
+                // 모든 셀이 배치 가능한지 확인
+                foreach (var cell in footprintCells)
+                {
+                    if (!gridManager.IsRoadCell(cell) ||
+                        gridManager.GetAllOccupiedCells().Contains(cell))
+                    {
+                        canMove = false;
+                        break;
+                    }
+                }
+
+                // ★ 프리뷰 표시 - 모든 셀에 ★
                 if (canMove)
                 {
-                    // 빨간색 프리뷰 타일
-                    gridManager.previewTilemap.SetTile(cell, gridManager.placementPreviewTile);
+                    foreach (var cell in footprintCells)
+                    {
+                        gridManager.previewTilemap.SetTile(cell, gridManager.placementPreviewTile);
+                    }
                 }
 
                 // 1-4) 클릭 확정 → 실제 이동
-                if (canMove
-                    && Input.GetMouseButtonDown(0)
-                    && !EventSystem.current.IsPointerOverGameObject())
+                if (canMove && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
                 {
-                    // 이동
-                    movingUnit.transform.position = gridManager.CellToWorldCenter(cell);
+                    // 이동 - 다중 셀의 경우 중앙 위치 계산
+                    if (footprintCells.Count > 1)
+                    {
+                        Vector3 centerPos = Vector3.zero;
+                        foreach (var cell in footprintCells)
+                        {
+                            centerPos += gridManager.CellToWorldCenter(cell);
+                        }
+                        centerPos /= footprintCells.Count;
+                        movingUnit.transform.position = centerPos;
+                    }
+                    else
+                    {
+                        movingUnit.transform.position = gridManager.CellToWorldCenter(baseCells);
+                    }
 
                     // 점유 정보 재등록
-                    var newCells = gridManager.GetCellsFor(movingUnit, cell);
-                    gridManager.OccupyCells(newCells, movingUnit);
+                    gridManager.OccupyCells(footprintCells, movingUnit);
 
                     // 모드 종료
                     movingUnit = null;
-                    originalOccupiedCells.Clear(); // 원래 점유 셀 목록 초기화
+                    originalOccupiedCells.Clear();
                     gridManager.ClearAllHighlights();
 
-                    return; // 이동 후 더 이상 처리할 필요 없음
+                    return;
                 }
 
                 // 1-5) ESC 취소 → 원위치 복귀 + 점유 복원
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    movingUnit.transform.position = gridManager.CellToWorldCenter(originalCell);
+                    // 원래 위치로 복귀 - 다중 셀의 경우 중앙 위치 재계산
+                    if (originalOccupiedCells.Count > 1)
+                    {
+                        Vector3 centerPos = Vector3.zero;
+                        foreach (var cell in originalOccupiedCells)
+                        {
+                            centerPos += gridManager.CellToWorldCenter(cell);
+                        }
+                        centerPos /= originalOccupiedCells.Count;
+                        movingUnit.transform.position = centerPos;
+                    }
+                    else
+                    {
+                        movingUnit.transform.position = gridManager.CellToWorldCenter(originalCell);
+                    }
+
                     gridManager.OccupyCells(originalOccupiedCells, movingUnit);
 
                     movingUnit = null;
+                    originalOccupiedCells.Clear();
                     gridManager.ClearAllHighlights();
                 }
 

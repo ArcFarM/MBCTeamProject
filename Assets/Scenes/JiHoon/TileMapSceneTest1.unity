@@ -3383,9 +3383,6 @@ MonoBehaviour:
   - cardData: {fileID: 11400000, guid: d7ac57b8f775e00449df082009eb54d7, type: 2}
   - cardData: {fileID: 11400000, guid: 2bb005fc5b0866845912ca5a8f8f2d5a, type: 2}
   - cardData: {fileID: 11400000, guid: b418ce745cf6eda429fa54c7dd47d693, type: 2}
-  - cardData: {fileID: 11400000, guid: c6d3a879465b8414aad6ecb887d93c5e, type: 2}
-  - cardData: {fileID: 11400000, guid: b9896b863059c4e4eaa8072932facbd9, type: 2}
-  - cardData: {fileID: 11400000, guid: 31fd6365d753de94ba9fa759a2e1c20d, type: 2}
   unitContainer: {fileID: 1999991201}
 --- !u!1 &460505633
 GameObject:
@@ -14056,7 +14053,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27.2, y: -25}
+  m_AnchoredPosition: {x: -27.199951, y: -25}
   m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1363174599
@@ -15614,7 +15611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1536119666

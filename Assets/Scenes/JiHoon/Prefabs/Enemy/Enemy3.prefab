@@ -3919,13 +3919,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitID: 97
-  unitName: 97
+  unitName: "\uACAC\uC2B5\uC544\uCC98"
   faction: 1
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 1
-  baseDamage: 0
+  baseHealth: 30
+  baseDamage: 10
   baseAtkSpd: 1
   baseRange: 1
   baseSpd: 1
