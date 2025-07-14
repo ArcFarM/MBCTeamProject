@@ -34,7 +34,7 @@ namespace MainGame.Manager {
         }
 
         //TODO : PolicyCard에서 카드 클릭하면 카드 효과 적용하기 - 카드 효과에 따라(추가)
-        public void ApplyEffect(PolicyCard pc) {
+        /*public void ApplyEffect(PolicyCard pc) {
             CardEffect ce = pc.GetSetCardEffect;
             switch (ce) {
                 case CardEffect.Change_Stat:
@@ -71,7 +71,7 @@ namespace MainGame.Manager {
                     }
                     break;
             }
-        }
+        }*/
 
         public void ApplyEffect(CardData cd) {
             //null check

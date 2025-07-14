@@ -256,6 +256,8 @@ namespace MainGame.Units.Battle {
             if (unitAnim != null) {
                 StartCoroutine(unitAnim.PlayDeathAnim());
             }
+            //게임오브젝트 파괴
+            Destroy(this);
         }
 
         public virtual bool IsInRange(UnitBase target) {

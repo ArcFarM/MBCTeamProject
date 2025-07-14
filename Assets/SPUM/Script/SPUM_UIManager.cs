@@ -52,7 +52,7 @@ public class SPUM_UIManager : MonoBehaviour
     [Header("▼ Color Picker")] [Space(5)]
     public Image _nowColorShow;
     public InputField _hexColorText;
-    public List<GameObject> _colorPanelType = new List<GameObject>();
+    public List<GameObject> _colorpenaltype = new List<GameObject>();
     public List<ColorSelect> _colorSaveList = new List<ColorSelect>();
     public int _nowSelectColorNum;
     public GameObject _nowSelectColor;
@@ -326,12 +326,12 @@ public class SPUM_UIManager : MonoBehaviour
     
     public void SetColorPickerPanel(int num)
     {
-        foreach( var obj in _colorPanelType )
+        foreach( var obj in _colorpenaltype )
         {
             obj.SetActive(false);
         }
 
-        _colorPanelType[num].SetActive(true);
+        _colorpenaltype[num].SetActive(true);
     }
     public void SetColorButton(SPUM_SpriteButtonST button)
     {

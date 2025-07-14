@@ -1,13 +1,15 @@
 using JiHoon;
 using UnityEngine;
+using System.Collections.Generic;
+using MainGame.Manager;
 
 namespace MainGame.Units {
     public class EnemyUnitBase : UnitBase {
         #region Variables
-        
+
         //적 유닛 통과 시 패널티
         [SerializeField, Tooltip("적 유닛 통과 시 입을 패널티")]
-        protected int panelty;
+        List<StatStruct> penalty;
         #endregion
 
         #region Properties
@@ -22,8 +24,12 @@ namespace MainGame.Units {
 
         #region Custom Method
         //TODO : 베이스에 도착했을 때 패널티 적용
-        void CalcPanelty() {
+        public void GivePenalty() {
             //StatManager에서 처리
+            //1. 베이스에 도착한 적 유닛들의 정보를 statmanager에게 넘겨준다
+            StatManager.Instance.GetPenalty(penalty);
+            //2. Wave가 끝나면 StatManager에서 Rewardpenalty에 있는 Calcpenalty를 실행한다
+            //3. 이걸 StatManager에서 반환값을 받아와서 적용한다
         }
         #endregion
     }

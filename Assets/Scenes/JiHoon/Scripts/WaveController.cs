@@ -205,6 +205,7 @@ namespace JiHoon
 
             // 카드 선택 시스템 사용
             StartCoroutine(CardSelect());
+            // 패널티 정산
         }
 
         IEnumerator CardSelect()
@@ -295,6 +296,11 @@ namespace JiHoon
         {
             enemyCount--;
             Debug.Log($"적 사망! 남은 적: {enemyCount}");
+        }
+
+        //패널티 정산
+        void CheckPenalty() {
+            StatManager.Instance.CalcPenalty();
         }
     }
 }

@@ -7,11 +7,13 @@ using MainGame.Card;
 namespace MainGame.UI {
     public class PolicyCard_new : MonoBehaviour {
         #region Variables
+        
         [Header("UI Elements")]
-        [SerializeField] private TextMeshProUGUI nameText;
-        [SerializeField] private TextMeshProUGUI descriptionText;
-        [SerializeField] private Image cardIconImage;
-        [SerializeField] private Button acceptButton;
+        [SerializeField] private TextMeshProUGUI nameText; //카드 이름
+        [SerializeField] private TextMeshProUGUI descriptionText; //카드 설명
+        [SerializeField] private Image cardIconImage; //카드 이미지
+        [SerializeField] private Button acceptButton; //선택 버튼
+        [SerializeField] private Image cardFrame; //카드 틀
         
         // 이 카드가 표시할 데이터 원본 (ScriptableObject)
         private CardData _cardData;
@@ -26,7 +28,6 @@ namespace MainGame.UI {
 
         #region Unity Event Method
         private void Awake() {
-            // 버튼 이벤트는 한 번만 등록하는 것이 안전합니다.
             acceptButton.onClick.AddListener(OnPolicySelected);
         }
         #endregion
@@ -47,6 +48,7 @@ namespace MainGame.UI {
             nameText.text = _cardData.cardName;
             descriptionText.text = _cardData.description;
             cardIconImage.sprite = _cardData.cardIcon;
+            cardFrame.sprite = _cardData.cardFrame;
         }
 
         //버튼을 눌러서 카드를 골랐을 때

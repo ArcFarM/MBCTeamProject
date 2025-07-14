@@ -3,19 +3,24 @@ using MainGame.UI;
 using MainGame.Enum;
 using MainGame.SystemProcess;
 using MainGame.Card;
-using Unity.VisualScripting;
+using System.Collections.Generic;
+using System;
+using MainGame.Units;
 //능력치를 현재 수치와 동기화하여 시각 효과
 namespace MainGame.Manager {
     public class StatManager : SingletonManager<StatManager> {
         #region Variables
         //정치 스탯들
         public SetStats[] statArr;
+        Dictionary<Stats, SetStats> statDict; //statArr 빠른 계산을 위해 생성
         //정치 스탯 최소치와 최대치, 게임 시작시 기본값
         [SerializeField] int[] minStat;
         [SerializeField] int[] maxStat;
         [SerializeField] int defaultStat;
         //게임오버 이벤트 관리자
         [SerializeField] GameOverEvent goe;
+        //적 패널티
+        List<StatStruct> penalty;
         #endregion
 
         #region Properties
@@ -24,10 +29,18 @@ namespace MainGame.Manager {
         #region Unity Event Method
         private void Start() {
             InitStat();
+            ConvertToDict();
         }
         #endregion
 
         #region Custom Method
+        //능력치 계산을 위해 dictionary로 변환
+        void ConvertToDict() {
+            statDict = new();
+            foreach(SetStats ss in statArr) {
+                statDict[ss.stats] = ss;
+            }
+        }
         //능력치 초기화
         void InitStat() {
             //각 능력치 최소/최대치 설정 후 기본값으로 설정
@@ -40,7 +53,7 @@ namespace MainGame.Manager {
 
         }
         //정책카드를 클릭하여 능력치 변화가 생겼을 때 그만큼 수치를 조정
-        public void AdjustStat(PolicyCard pc) {
+        /*public void AdjustStat(PolicyCard pc) {
             int[] statDelta = pc.GetSetStatsArr;
             for(int i = 0; i < statArr.Length; i++) {
                 if(statDelta[i] != 0) {
@@ -51,7 +64,7 @@ namespace MainGame.Manager {
                     }
                 }
             }
-        }
+        }*/
 
         public void AdjustStat(CardData cd) {
             int[] statDelta = cd.stats;
@@ -60,10 +73,34 @@ namespace MainGame.Manager {
                 Debug.Log(statDelta[i]);
                 if (statDelta[i] != 0) {
                     statArr[i].OnValueChange(statDelta[i]);
-                    if (isEnd(statArr[i])) {
-                        GameOver(i);
-                        break;
-                    }
+                }
+            }
+            // 전체 작업 후 게임 오버 조건 검사
+            for (int i = 0; i < statArr.Length; i++) {
+                if (isEnd(statArr[i])) {
+                    GameOver(i);
+                    break;
+                }
+            }
+        }
+
+        public void AdjustStat(List<StatStruct> list) {
+            //현재 능력치를 dictionary로 저장
+            ConvertToDict();
+
+            foreach(var item in list) {
+                //statstruct 리스트에 있는 item의 스탯에 해당하는 setstat 불러오기
+                if(statDict.TryGetValue(item.stat, out var setStats)) {
+                    //item의 변화치만큼 적용
+                    setStats.OnValueChange(item.value);
+                }
+            }
+
+            // 전체 작업 후 게임 오버 조건 검사
+            for (int i = 0; i < statArr.Length; i++) {
+                if (isEnd(statArr[i])) {
+                    GameOver(i);
+                    break;
                 }
             }
         }
@@ -81,6 +118,28 @@ namespace MainGame.Manager {
         //능력치 관리 못해서 게임 오버
         public void GameOver(int idx) {
             goe.DoGameOver((Stats)idx);
+        }
+
+        //적이 기지에 도착했을 때 적에게서 패널티를 받아오기
+        public void GetPenalty(List<StatStruct> input) {
+            foreach(var item in input) {
+                penalty.Add(item);
+            }
+        }
+
+        public void CalcPenalty() {
+            //전체 패널티 계산은 EnemyUnitBase에서 계속 했으므로 계산만 하면 됨
+            //페널티가 없으면 바로 종료
+            if(penalty == null || penalty.Count == 0) {
+                return;
+            }
+            //TODO : 있으면 페널티 정산 팝업을 띄움
+
+            //전체 패널티 계산
+            var final_penalty = RewardPenalty.CalcPenalty(penalty);
+            AdjustStat(final_penalty);
+            //정산 완료된 페널티 삭제
+            penalty.Clear();
         }
         #endregion
     }

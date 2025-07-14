@@ -481,6 +481,7 @@ MonoBehaviour:
   descriptionText: {fileID: 4085069219475369441}
   cardIconImage: {fileID: 5702223662958998080}
   acceptButton: {fileID: 2110061305172657325}
+  cardFrame: {fileID: 8596109182238825890}
 --- !u!1 &6973909282906229089
 GameObject:
   m_ObjectHideFlags: 0
