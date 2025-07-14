@@ -3919,13 +3919,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitID: 97
-  unitName: 97
+  unitName: "\uACAC\uC2B5\uC544\uCC98"
   faction: 1
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 1
-  baseDamage: 0
+  baseHealth: 30
+  baseDamage: 10
   baseAtkSpd: 1
   baseRange: 1
   baseSpd: 1
@@ -3938,7 +3938,9 @@ MonoBehaviour:
   currRange: 1
   currSpd: 1
   stats: []
-  panelty: 0
+  penalty:
+  - stat: 0
+    value: 1
 --- !u!114 &-3292773263947045424
 MonoBehaviour:
   m_ObjectHideFlags: 0

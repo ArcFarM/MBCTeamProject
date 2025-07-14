@@ -4368,15 +4368,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitID: 8
-  unitName: 8
+  unitName: "\uD53C\uC758\uC8FC\uC778"
   faction: 0
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 50
-  baseDamage: 1
-  baseAtkSpd: 1
-  baseRange: 2
+  baseHealth: 600
+  baseDamage: 300
+  baseAtkSpd: 2
+  baseRange: 5
   baseSpd: 1
   currRawSize: 1
   currColSize: 1

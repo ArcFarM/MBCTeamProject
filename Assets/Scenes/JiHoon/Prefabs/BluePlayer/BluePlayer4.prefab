@@ -5541,13 +5541,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitID: 4
-  unitName: 4
+  unitName: "\uB4C0\uB77C\uD55C"
   faction: 0
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 50
-  baseDamage: 1
+  baseHealth: 500
+  baseDamage: 150
   baseAtkSpd: 1
   baseRange: 2
   baseSpd: 1

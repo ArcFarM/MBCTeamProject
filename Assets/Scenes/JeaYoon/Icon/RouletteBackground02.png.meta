@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RouletteBackground02_0: 7312602464264562153
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

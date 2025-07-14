@@ -4001,15 +4001,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitID: 11
-  unitName: 11
+  unitName: "\uC2A4\uCF08\uB808\uD1A4\uC544\uCC98"
   faction: 0
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 50
-  baseDamage: 1
-  baseAtkSpd: 1
-  baseRange: 2
+  baseHealth: 100
+  baseDamage: 20
+  baseAtkSpd: 0.5
+  baseRange: 1
   baseSpd: 1
   currRawSize: 1
   currColSize: 1

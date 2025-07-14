@@ -3752,15 +3752,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitID: 7
-  unitName: 7
+  unitName: "\uC2AC\uB77C\uC784"
   faction: 0
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 50
-  baseDamage: 1
-  baseAtkSpd: 1
-  baseRange: 2
+  baseHealth: 20
+  baseDamage: 10
+  baseAtkSpd: 0.5
+  baseRange: 1
   baseSpd: 1
   currRawSize: 1
   currColSize: 1

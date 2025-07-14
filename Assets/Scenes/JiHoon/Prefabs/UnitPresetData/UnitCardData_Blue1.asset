@@ -16,4 +16,5 @@ MonoBehaviour:
   unitIcon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
   hoverIcon: {fileID: 2589877706116281792, guid: d002e2192380a7542b78487efea81af4, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
-  tooltipText: BluePlayer1
+  tooltipText: "\uC554\uC0B4\uC790\n\uB4A4\uC5D0\uC11C \uC8FD\uC774\uB294\uAC78 \uC88B\uC544\uD558\uB294
+    \uC545\uC885\uC785\uB2C8\uB2E4"

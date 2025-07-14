@@ -12,7 +12,6 @@ namespace MainGame.Manager {
         #region Variables
         //정치 스탯들
         public SetStats[] statArr;
-        Dictionary<Stats, SetStats> statDict; //statArr 빠른 계산을 위해 생성
         //정치 스탯 최소치와 최대치, 게임 시작시 기본값
         [SerializeField] int[] minStat;
         [SerializeField] int[] maxStat;
@@ -20,7 +19,7 @@ namespace MainGame.Manager {
         //게임오버 이벤트 관리자
         [SerializeField] GameOverEvent goe;
         //적 패널티
-        List<StatStruct> penalty;
+        [SerializeField] List<StatStruct> penalty;
         #endregion
 
         #region Properties
@@ -29,18 +28,10 @@ namespace MainGame.Manager {
         #region Unity Event Method
         private void Start() {
             InitStat();
-            ConvertToDict();
         }
         #endregion
 
         #region Custom Method
-        //능력치 계산을 위해 dictionary로 변환
-        void ConvertToDict() {
-            statDict = new();
-            foreach(SetStats ss in statArr) {
-                statDict[ss.stats] = ss;
-            }
-        }
         //능력치 초기화
         void InitStat() {
             //각 능력치 최소/최대치 설정 후 기본값으로 설정
@@ -85,14 +76,13 @@ namespace MainGame.Manager {
         }
 
         public void AdjustStat(List<StatStruct> list) {
-            //현재 능력치를 dictionary로 저장
-            ConvertToDict();
-
             foreach(var item in list) {
-                //statstruct 리스트에 있는 item의 스탯에 해당하는 setstat 불러오기
-                if(statDict.TryGetValue(item.stat, out var setStats)) {
-                    //item의 변화치만큼 적용
-                    setStats.OnValueChange(item.value);
+                //statstruct 리스트에 있는 item의 스탯에 해당하는 setstat을 statarr에서 불러와서 값 적용
+                for (int i = 0; i < statArr.Length; i++) {
+                    if (statArr[i].stats == item.stat) {
+                        statArr[i].OnValueChange(item.value);
+                        break;
+                    }
                 }
             }
 
@@ -131,11 +121,13 @@ namespace MainGame.Manager {
             //전체 패널티 계산은 EnemyUnitBase에서 계속 했으므로 계산만 하면 됨
             //페널티가 없으면 바로 종료
             if(penalty == null || penalty.Count == 0) {
+                Debug.Log("페널티 없음");
                 return;
             }
             //TODO : 있으면 페널티 정산 팝업을 띄움
 
             //전체 패널티 계산
+            Debug.Log("패널티 계산");
             var final_penalty = RewardPenalty.CalcPenalty(penalty);
             AdjustStat(final_penalty);
             //정산 완료된 페널티 삭제
