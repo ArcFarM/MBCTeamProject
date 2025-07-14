@@ -259,21 +259,44 @@ namespace JiHoon
         {
             if (currentTooltip == null || card.originalCard == null) return;
 
-            // 툴팁의 Image 컴포넌트를 가져옴
             Image tooltipImage = currentTooltip.GetComponent<Image>();
-
-            // 만약 최상위에 없으면 자식에서 찾기
             if (tooltipImage == null)
             {
                 tooltipImage = currentTooltip.GetComponentInChildren<Image>();
             }
 
-            // 텍스트 컴포넌트도 찾기 (TextMeshPro 또는 일반 Text)
             var tooltipTextTMP = currentTooltip.GetComponentInChildren<TMPro.TextMeshProUGUI>();
             var tooltipTextLegacy = currentTooltip.GetComponentInChildren<UnityEngine.UI.Text>();
 
-            // 프리셋 유닛인 경우 - UnitSpawner에서 cardData 가져오기
-            if (!card.originalCard.isFromShop)
+            // 상점 카드인 경우 - UnitCardData 사용
+            if (card.originalCard.isFromShop &&
+                card.originalCard.shopItemData != null &&
+                card.originalCard.shopItemData.unitCardData != null)
+            {
+                var unitCardData = card.originalCard.shopItemData.unitCardData;
+
+                // UnitCardData의 툴팁 이미지 사용
+                if (tooltipImage != null && unitCardData.tooltipImage != null)
+                {
+                    tooltipImage.sprite = unitCardData.tooltipImage;
+                    tooltipImage.enabled = true;
+                }
+
+                // UnitCardData의 툴팁 텍스트 사용
+                if (!string.IsNullOrEmpty(unitCardData.tooltipText))
+                {
+                    if (tooltipTextTMP != null)
+                    {
+                        tooltipTextTMP.text = unitCardData.tooltipText;
+                    }
+                    else if (tooltipTextLegacy != null)
+                    {
+                        tooltipTextLegacy.text = unitCardData.tooltipText;
+                    }
+                }
+            }
+            // 일반 프리셋 카드인 경우
+            else if (!card.originalCard.isFromShop)
             {
                 var spawner = FindFirstObjectByType<UnitSpawner>();
                 if (spawner != null && spawner.unitPresets != null)
@@ -282,50 +305,32 @@ namespace JiHoon
                     if (card.originalCard.presetIndex >= 0 &&
                         card.originalCard.presetIndex < presets.Length)
                     {
-                        // 해당 유닛의 cardData에서 tooltipImage와 tooltipText 사용
                         var cardData = presets[card.originalCard.presetIndex].cardData;
                         if (cardData != null)
                         {
-                            // 이미지 설정
                             if (tooltipImage != null && cardData.tooltipImage != null)
                             {
-                                Debug.Log($"툴팁 이미지 변경: {cardData.tooltipImage.name}");
                                 tooltipImage.sprite = cardData.tooltipImage;
                                 tooltipImage.enabled = true;
                             }
 
-                            // 텍스트 설정
                             if (!string.IsNullOrEmpty(cardData.tooltipText))
                             {
-                                Debug.Log($"툴팁 텍스트 설정 시도: {cardData.tooltipText}");
-
                                 if (tooltipTextTMP != null)
                                 {
                                     tooltipTextTMP.text = cardData.tooltipText;
-                                    Debug.Log("TextMeshPro에 텍스트 설정 완료");
                                 }
                                 else if (tooltipTextLegacy != null)
                                 {
                                     tooltipTextLegacy.text = cardData.tooltipText;
-                                    Debug.Log("Legacy Text에 텍스트 설정 완료");
-                                }
-                                else
-                                {
-                                    Debug.LogWarning("텍스트 컴포넌트를 찾을 수 없습니다!");
                                 }
                             }
-                            else
-                            {
-                                Debug.LogWarning("tooltipText가 비어있습니다!");
-                            }
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"유닛 {card.originalCard.presetIndex}의 cardData가 null입니다");
                         }
                     }
                 }
             }
+        
+    
             // 상점 아이템인 경우
             else if (card.originalCard.isFromShop && card.originalCard.shopItemData != null)
             {

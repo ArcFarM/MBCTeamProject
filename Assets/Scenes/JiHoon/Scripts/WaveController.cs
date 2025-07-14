@@ -8,6 +8,7 @@ using MainGame.Card;
 using MainGame.UI;
 using TMPro;
 
+
 namespace JiHoon
 {
     public class WaveController : SingletonManager<WaveController>
@@ -16,7 +17,7 @@ namespace JiHoon
         public EnemySpawnerManager spawner;
 
         [Header("컨테이너")]
-        public Transform enemyContainer;
+        public Transform enemyContainer;  // JiHoon 버전에서 추가
 
         [Header("UI")]
         public Button startWaveButton;
@@ -30,7 +31,7 @@ namespace JiHoon
         public int initialCardCount = 5;
         public int cardsPerWave = 3;
 
-        [Header("카드 선택 시스템")]  
+        [Header("카드 선택 시스템")]
         public GameObject cardSelectPanel;   // 카드 선택 패널
         public CardPool cardPool;            // 카드 풀
 
@@ -53,12 +54,12 @@ namespace JiHoon
         // 각 스폰 포인트별로 선택된 경로를 저장
         private Dictionary<int, Transform[]> selectedPathsBySpawnPoint = new Dictionary<int, Transform[]>();
 
-        // ★ WaveControllerClone에서 추가 ★
-        public int enemyCount = 0;  // 남아 있는 적의 수
+        // 남아 있는 적의 수
+        public int enemyCount = 0;
 
         void Start()
         {
-            // ★ 카드 선택 패널 초기화 ★
+            // 카드 선택 패널 초기화
             if (cardSelectPanel != null)
                 cardSelectPanel.SetActive(false);
 
@@ -95,7 +96,7 @@ namespace JiHoon
                 yield return new WaitForSeconds(group.delayAfterGroup);
             }
 
-            // ★ enemyCount 사용 방식으로 변경 (WaveControllerClone) ★
+            // 모든 적이 처치될 때까지 대기
             while (enemyCount > 0)
             {
                 yield return null;
@@ -120,7 +121,11 @@ namespace JiHoon
 
             // 그룹 오브젝트 생성
             var groupObj = new GameObject($"EnemyGroup_{group.groupName}_{spawnData.name}");
-            groupObj.transform.SetParent(enemyContainer);
+
+            // enemyContainer가 있으면 그 하위로, 없으면 그냥 생성
+            if (enemyContainer != null)
+                groupObj.transform.SetParent(enemyContainer);
+
             var enemyGroup = groupObj.AddComponent<EnemyGroup>();
 
             // 두 줄로 배치 (한 줄에 최대 5마리)
@@ -146,9 +151,13 @@ namespace JiHoon
                 var enemyPrefab = group.enemyPrefabs[i % group.enemyPrefabs.Count];
                 var position = basePosition + positions[i];
 
-                var enemy = Instantiate(enemyPrefab, position, Quaternion.identity, enemyContainer);
+                GameObject enemy;
+                if (enemyContainer != null)
+                    enemy = Instantiate(enemyPrefab, position, Quaternion.identity, enemyContainer);
+                else
+                    enemy = Instantiate(enemyPrefab, position, Quaternion.identity);
 
-                // ★ enemyCount 증가 (적이 생성될 때마다) ★
+                // enemyCount 증가 (적이 생성될 때마다)
                 enemyCount++;
 
                 var spriteRenderer = enemy.GetComponent<SpriteRenderer>();
@@ -194,11 +203,10 @@ namespace JiHoon
         {
             isWaveRunning = false;
 
-            // ★ 카드 선택 시스템 사용 (WaveControllerClone) ★
+            // 카드 선택 시스템 사용
             StartCoroutine(CardSelect());
         }
 
-        // ★ WaveControllerClone의 카드 선택 코루틴 ★
         IEnumerator CardSelect()
         {
             // 카드 선택 패널을 활성화
@@ -212,7 +220,7 @@ namespace JiHoon
             cardSelectPanel.SetActive(true);
 
             // 설정된 수만큼 카드를 뽑아서 패널에 등록
-            List<PolicyCard_new> spawnedCards = new();
+            List<PolicyCard_new> spawnedCards = new List<PolicyCard_new>();
             for (int i = 0; i < cardsPerWave; i++)
             {
                 PolicyCard_new newCard = cardPool.GetCard();
@@ -232,6 +240,7 @@ namespace JiHoon
                     if (!card.gameObject.activeSelf)
                     {
                         selectedCard = card;
+                        break;
                     }
                 }
                 yield return null;
@@ -281,10 +290,11 @@ namespace JiHoon
             return $"Wave {CurrentWaveNumber} / {TotalWaves:D2}";
         }
 
-        // ★ 적이 죽었을 때 호출되어야 하는 메서드 ★
+        // 적이 죽었을 때 호출되어야 하는 메서드
         public void OnEnemyDeath()
         {
             enemyCount--;
+            Debug.Log($"적 사망! 남은 적: {enemyCount}");
         }
     }
 }

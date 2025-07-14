@@ -25,20 +25,45 @@ public class SimpleCardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     // 카드 초기 설정
     public void Setup(UnitCardUI source, int index, SimpleCardDeck deck)
     {
-        originalCard = source;  // 원본 카드 참조 저장
+        originalCard = source;
         cardIndex = index;
         parentDeck = deck;
 
         if (cardIcon == null)
             cardIcon = GetComponent<Image>();
 
-        if (cardIcon && source.cardImage)
+        // 상점 카드 처리 - UnitCardData 사용
+        if (source.isFromShop && source.shopItemData != null && source.shopItemData.unitCardData != null)
         {
+            // UnitCardData의 아이콘 사용
+            var unitCardData = source.shopItemData.unitCardData;
+
+            if (unitCardData.unitIcon != null)
+            {
+                cardIcon.sprite = unitCardData.unitIcon;
+                originalSprite = unitCardData.unitIcon;
+            }
+
+            // 호버 스프라이트 설정
+            if (unitCardData.hoverIcon != null)
+            {
+                SetHoverSprite(unitCardData.hoverIcon);
+            }
+        }
+        else if (source.cardImage && source.cardImage.sprite)
+        {
+            // 일반 카드 처리
             cardIcon.sprite = source.cardImage.sprite;
-            originalSprite = cardIcon.sprite;  // 원본 스프라이트 저장
-            cardIcon.raycastTarget = true;
+            originalSprite = cardIcon.sprite;
+
+            // 일반 카드의 호버 스프라이트
+            if (source.hoverSprite != null)
+            {
+                SetHoverSprite(source.hoverSprite);
+            }
         }
 
+        cardIcon.raycastTarget = true;
         transform.localScale = Vector3.one;
     }
 

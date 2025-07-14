@@ -42,9 +42,22 @@ public class UnitCardUI : MonoBehaviour, IPointerClickHandler
         isFromShop = true;
         shopItemData = item;
         shopUnitPrefab = item.unitPrefab;
-        cardImage.sprite = item.icon;
-        hoverSprite = item.illustration;  // 상점 아이템은 illustration을 호버 이미지로 사용
         placementMgr = mgr;
+
+        // 카드 이미지를 아이템의 아이콘으로 설정
+        if (cardImage != null && item.icon != null)
+        {
+            cardImage.sprite = item.icon;
+        }
+
+        // 호버 이미지 설정 (일러스트 사용)
+        if (item.illustration != null)
+        {
+            hoverSprite = item.illustration;
+        }
+
+        // 카드가 제대로 보이도록 설정
+        gameObject.SetActive(true);
     }
 
     public void OnPointerClick(PointerEventData eventData)
