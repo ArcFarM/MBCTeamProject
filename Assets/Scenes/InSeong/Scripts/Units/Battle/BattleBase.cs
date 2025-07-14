@@ -119,25 +119,33 @@ namespace MainGame.Units.Battle {
 
             Collider2D[] detectedTargets = Physics2D.OverlapCircleAll(transform.position, detectingRange);
             //Debug.Log($"[{gameObject.name}] Detecting: 탐지 범위 {detectingRange:F2}, 발견된 객체 수: {detectedTargets.Length}");
-
-            // 자기 자신을 제외한 모든 Unit Tag 오브젝트들을 리스트에 추가
-            int addedCount = 0;
-            foreach (var target in detectedTargets) {
-                if(target.gameObject.tag != "Unit") continue; // Unit 태그가 아닌 오브젝트는 무시
-                if (target.gameObject == gameObject || combatTargetList.Contains(target.gameObject)) continue; // 자기 자신 및 중복 대상 제외
-                combatTargetList.Add(target.gameObject);
-                addedCount++;
-                //Debug.Log($"[{gameObject.name}] Detecting: 타겟 추가 - {target.gameObject.name}");
-            }
+            
+            //안맞는 유닛 거르기
+            Filter(detectedTargets);
 
             //감지된 유닛이 자기 말고 더 있다면 전투 돌입
             if (combatTargetList.Count > 0) {
-                Debug.Log($"[{gameObject.name}] Detecting: {addedCount}개 타겟 발견, Engaging 상태로 전환");
+                //Debug.Log($"[{gameObject.name}] Detecting: {addedCount}개 타겟 발견, Engaging 상태로 전환");
                 ChangeState(CombatState.Engaging);
             }
             else {
-                Debug.Log($"[{gameObject.name}] Detecting: 타겟 없음, Idle 상태로 전환");
+                //Debug.Log($"[{gameObject.name}] Detecting: 타겟 없음, Idle 상태로 전환");
                 ChangeState(CombatState.Idle);
+            }
+        }
+
+        void Filter(Collider2D[] list) {
+            // overlapcircle은 모든 오브젝트를 포함하므로 조건에 맞지 않는 오브젝트를 리스트에서 제외
+            foreach (var target in list) {
+                if (target.gameObject.tag != "Unit") continue; // Unit 태그가 아닌 오브젝트는 무시
+                if (target.gameObject == gameObject || combatTargetList.Contains(target.gameObject)) continue; // 자기 자신 및 중복 대상 제외
+                if (!target.TryGetComponent<UnitBase>(out UnitBase ub)) continue;
+                else { //대상 오브젝트와 내가 둘 다 Unitbase를 보유하고, 진영이 나와 같다면 아군이므로 무시
+                    if (!TryGetComponent<UnitBase>(out UnitBase my_ub)) continue;
+                    if (ub.GetFaction == my_ub.GetFaction) continue;
+                }
+                    combatTargetList.Add(target.gameObject);
+                //Debug.Log($"[{gameObject.name}] Detecting: 타겟 추가 - {target.gameObject.name}");
             }
         }
 

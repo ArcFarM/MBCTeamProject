@@ -430,7 +430,6 @@ GameObject:
   - component: {fileID: 353809961183880960}
   - component: {fileID: 6458001922697312151}
   - component: {fileID: -2420492565539389044}
-  - component: {fileID: -7064894059135924630}
   m_Layer: 5
   m_Name: Enemy1
   m_TagString: Unit
@@ -3589,7 +3588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b7fae641ace76c41bc145a8b3c4ee64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 1
   separationRadius: 2
   followDistance: 3
 --- !u!70 &353809961183880960
@@ -3626,8 +3625,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Offset: {x: 0, y: 0.4}
+  m_Size: {x: 0.1, y: 0.3}
   m_Direction: 0
 --- !u!114 &6458001922697312151
 MonoBehaviour:
@@ -3648,7 +3647,7 @@ MonoBehaviour:
   baseColSize: 1
   baseSplash: 0
   baseHealth: 1
-  baseDamage: 1
+  baseDamage: 0
   baseAtkSpd: 1
   baseRange: 1
   baseSpd: 1
@@ -3677,33 +3676,6 @@ MonoBehaviour:
   animator: {fileID: 3849104699504804562}
   animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
   unitID: 99
---- !u!50 &-7064894059135924630
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1856652019981532589}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 7
 --- !u!1 &1898533620134970038
 GameObject:
   m_ObjectHideFlags: 0

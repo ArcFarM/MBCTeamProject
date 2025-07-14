@@ -21,6 +21,9 @@ namespace JiHoon
         private Vector3 formationOffset;
         private EnemyMovement leaderReference;
 
+        // ★ 추가: 중복 처리 방지용 플래그 ★
+        private bool hasReachedDestination = false;
+
         void Update()
         {
             if (waypoints == null || waypoints.Length == 0) return;
@@ -164,6 +167,18 @@ namespace JiHoon
 
         void OnReachedDestination()
         {
+            // ★ 중복 호출 방지 ★
+            if (hasReachedDestination) return;
+            hasReachedDestination = true;
+
+            // ★ WaveController에 적 제거 알림 ★
+            var waveController = WaveController.Instance;
+            if (waveController != null)
+            {
+                waveController.OnEnemyDeath();
+                Debug.Log($"적 도착! 남은 적: {waveController.enemyCount - 1}");
+            }
+
             if (myGroup != null)
             {
                 myGroup.RemoveMember(this);
@@ -173,10 +188,42 @@ namespace JiHoon
 
         void OnDestroy()
         {
+            // ★ 도착이 아닌 다른 이유로 파괴될 때 (예: 플레이어가 처치) ★
+            if (!hasReachedDestination)
+            {
+                var waveController = WaveController.Instance;
+                if (waveController != null)
+                {
+                    waveController.OnEnemyDeath();
+                    Debug.Log($"적 파괴! 남은 적: {waveController.enemyCount - 1}");
+                }
+            }
+
             if (myGroup != null)
             {
                 myGroup.RemoveMember(this);
             }
+        }
+
+        // ★ 추가: 적이 공격받아 죽을 때 호출할 메서드 ★
+        public void Die()
+        {
+            hasReachedDestination = true; // 중복 처리 방지
+
+            var waveController = WaveController.Instance;
+            if (waveController != null)
+            {
+                waveController.OnEnemyDeath();
+                Debug.Log($"적 사망! 남은 적: {waveController.enemyCount - 1}");
+            }
+
+            if (myGroup != null)
+            {
+                myGroup.RemoveMember(this);
+            }
+
+            // 사망 이펙트나 애니메이션 재생 후 파괴
+            Destroy(gameObject);
         }
 
         void OnDrawGizmos()

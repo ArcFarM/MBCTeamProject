@@ -19,10 +19,11 @@ MonoBehaviour:
 
     dlfkldksf5'
   icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
-  discontent: 0
+  unrest: 1
   price: 100
-  dominace: 0
-  chaos: 0
+  dominance: 1
+  manpower: 1
   illustration: {fileID: 21300000, guid: b66c80674ee3da34891fd8a4fe428c30, type: 3}
   itemType: 0
   unitPrefab: {fileID: 2721758889849644916, guid: d89133a213b141b459566ebd3aea8112, type: 3}
+  unitCardData: {fileID: 11400000, guid: b658bbb393c7f464d85e38038c64a6e5, type: 2}

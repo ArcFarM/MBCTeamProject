@@ -19,10 +19,11 @@ MonoBehaviour:
 
     dskfjdsjfk'
   icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  discontent: 0
+  unrest: 1
   price: 200
-  dominace: 0
-  chaos: 0
+  dominance: 1
+  manpower: 1
   illustration: {fileID: 21300000, guid: b85d34759fa2ff9498b81d0126e238d9, type: 3}
   itemType: 0
   unitPrefab: {fileID: 2269105173681724915, guid: fb70fccfebd604444b8200a311dada8b, type: 3}
+  unitCardData: {fileID: 11400000, guid: b418ce745cf6eda429fa54c7dd47d693, type: 2}

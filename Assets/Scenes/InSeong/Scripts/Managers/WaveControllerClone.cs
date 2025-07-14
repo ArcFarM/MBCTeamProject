@@ -4,6 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using JiHoon;
+using MainGame.Card;
+using MainGame.UI;
 
 namespace MainGame.Manager
 {
@@ -33,11 +35,18 @@ namespace MainGame.Manager
         //남아 있는 적의 수
         public int enemyCount = 0;
 
+        //카드 선택 패널
+        public GameObject cardSelectPanel;
+        //카드 선택을 위한 카드풀
+        public CardPool cardPool;
+
         void Start()
         {
+            cardSelectPanel.SetActive(false);
             placementManager.placementEnabled = true;
             cardManager.AddRandomCards(initialCardCount);
             startWaveButton.onClick.AddListener(StartWave);
+
         }
 
         void StartWave()
@@ -165,8 +174,63 @@ namespace MainGame.Manager
             isWaveRunning = false;
 
             // 보상 지급
-            cardManager.AddRandomCards(cardsPerWave);
+            //cardManager.AddRandomCards(cardsPerWave);
+            //카드 출현
+            StartCoroutine(CardSelect());
 
+
+        }
+
+        IEnumerator CardSelect() {
+            // 1. 카드 선택 패널을 활성화
+            if (cardSelectPanel == null || cardPool == null) {
+                Debug.LogError("카드 선택에 필요한 UI 또는 CardPool 참조가 설정되지 않았습니다!");
+                // 필수 참조가 없으면 다음 웨이브로 바로 넘어감 (안전장치)
+                PrepareNextWave();
+                yield break;
+            }
+
+            cardSelectPanel.SetActive(true);
+
+            // 2. 설정된 수만큼 카드를 뽑아서 패널에 등록
+            List<PolicyCard_new> spawnedCards = new();
+            for (int i = 0; i < cardsPerWave; i++) {
+                PolicyCard_new newCard = cardPool.GetCard();
+                if (newCard != null) {
+                    // 카드를 컨테이너의 자식으로 만들고 UI가 올바르게 보이도록 스케일 초기화
+                    newCard.transform.SetParent(cardSelectPanel.transform, false);
+                    spawnedCards.Add(newCard);
+                }
+            }
+
+            // 3. 플레이어가 카드를 선택할 때까지 대기
+            // 플레이어가 카드를 선택하면 해당 카드의 OnPolicySelected -> ApplyEffect가 호출되고 비활성화됨
+            //비활성화된 카드를 찾아서 카드 선택을 감지
+            PolicyCard_new selectedCard = null;
+            while (selectedCard == null) {
+                foreach(PolicyCard_new card in spawnedCards) {
+                    if (!card.gameObject.activeSelf) {
+                        selectedCard = card;
+                    }
+                }
+                yield return null; // 매 프레임마다 체크
+            }
+
+            // 4. 선택되지 않은 나머지 카드들을 파괴
+            foreach (var unselectedCard in spawnedCards) {
+                if (unselectedCard != null) {
+                    Destroy(unselectedCard.gameObject);
+                }
+            }
+
+            // 5. 패널을 다시 숨김
+            cardSelectPanel.SetActive(false);
+
+            // 6. 모든 정리가 끝난 후 다음 웨이브를 준비
+            PrepareNextWave();
+        }
+
+        void PrepareNextWave() {
             // 다음 웨이브로
             currentWaveIndex = (currentWaveIndex + 1) % waveConfigs.Count;
 

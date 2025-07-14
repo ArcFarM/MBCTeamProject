@@ -12,19 +12,19 @@ Etc                     // ) 기타.
 [CreateAssetMenu(fileName = "NewItem", menuName = "Shop/ItemData")]
 public class ItemData : ScriptableObject
 {
-    public string itemName;     // 아이템 이름
-    [TextArea]public string description;  // 아이템 설명
-    public Sprite icon;         // 아이템 아이콘
-    public int unrest;      // ) 구매시 소모되는 아이템의 불만 수치.
-    public int price;           // 아이템 가격 = 재정 수치
-    public int dominance;        // ) 구매시 소모되는 아이템의 지배 수치.
-    public int manpower;        // ) 구매시 소모되는 아이템의 혼돈 수치.
+    public string itemName;
+    [TextArea] public string description;
+    public Sprite icon;
+    public int unrest;
+    public int price;
+    public int dominance;
+    public int manpower;
+    public Sprite illustration;
+    public ItemType itemType;
 
-
-    public Sprite illustration; // 아이템 일러스트
-
-    public ItemType itemType;       // ) 아이템 타입
-                                    // .
     [Header("유닛 프리팹 (UnitBase 스크립트가 붙은)")]
     public GameObject unitPrefab;
+
+    [Header("카드덱용 데이터 (중요!)")]
+    public JiHoon.UnitCardData unitCardData;  // 이 필드 추가!
 }

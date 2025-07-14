@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class RewardPanelty : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+namespace MainGame.Units {
+    public class RewardPanelty : MonoBehaviour {
+        //StatManager에서 리스트를 받아와서 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

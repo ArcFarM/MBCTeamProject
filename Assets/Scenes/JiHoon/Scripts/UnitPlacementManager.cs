@@ -207,6 +207,7 @@ namespace JiHoon
             Vector3Int baseCell = gridManager.WorldToCell(wp);
 
             // 2-2) footprint 크기 계산
+            
             GameObject prefabObj = null;
             if (isUsingShopItem)
             {
@@ -215,8 +216,17 @@ namespace JiHoon
             }
             else
             {
-                // 기존 preset 사용
-                prefabObj = spawner.unitPresets[selectedPreset].prefab;
+                // 기존 preset 사용 - cardData에서 prefab 가져오기
+                var preset = spawner.unitPresets[selectedPreset];
+                if (preset.cardData != null)
+                {
+                    prefabObj = preset.cardData.unitPrefab;
+                }
+                else
+                {
+                    Debug.LogError("Card Data가 null입니다!");
+                    return;
+                }
             }
 
             var unitBase = prefabObj.GetComponent<MainGame.Units.UnitBase>();

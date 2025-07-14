@@ -64,6 +64,11 @@ namespace JiHoon
 
                 int idx = Random.Range(0, total);
 
+                // cardData가 null인지 확인
+                if (presets[idx].cardData == null) continue;
+
+                var cardData = presets[idx].cardData;
+
                 if (useHearthstoneStyle && hearthstoneDeck != null)
                 {
                     // 원본 카드 생성 (UnitCardManager가 관리)
@@ -71,8 +76,8 @@ namespace JiHoon
                     originalCard.name = $"Card_Preset{idx}_{currentCards.Count}";
                     var originalUI = originalCard.GetComponent<UnitCardUI>();
 
-                    // 호버 스프라이트도 함께 전달
-                    originalUI.Init(idx, presets[idx].icon, presets[idx].hoverIcon, placementMgr);
+                    // hoverIcon도 함께 전달
+                    originalUI.Init(idx, cardData.unitIcon, cardData.hoverIcon, placementMgr);
 
                     currentCards.Add(originalCard);
                     originalCard.SetActive(false);  // UI에는 표시하지 않음
@@ -86,44 +91,60 @@ namespace JiHoon
                     var go = Instantiate(cardUIPrefab, deckContainer);
                     var ui = go.GetComponent<UnitCardUI>();
 
-                    // 호버 스프라이트도 함께 전달
-                    ui.Init(idx, presets[idx].icon, presets[idx].hoverIcon, placementMgr);
+                    // hoverIcon도 함께 전달
+                    ui.Init(idx, cardData.unitIcon, cardData.hoverIcon, placementMgr);
                     currentCards.Add(go);
                 }
             }
         }
 
+
+
         // 상점에서 구매한 카드 추가
         public void AddCardFromShopItem(ItemData item)
         {
-            if (item == null || item.unitPrefab == null)
+            if (item == null)
                 return;
 
-            CleanupNullCards();  // null 카드 정리
+            CleanupNullCards();
 
             if (currentCards.Count >= maxCardCount)
                 return;
 
-            if (useHearthstoneStyle && hearthstoneDeck != null)
+            // ItemData에 UnitCardData가 연결되어 있는지 확인
+            if (item.unitCardData != null)
             {
-                // 원본 카드 생성
-                var originalCard = Instantiate(cardUIPrefab);
-                originalCard.name = $"Card_{item.itemName}_{currentCards.Count}";
-                var originalUI = originalCard.GetComponent<UnitCardUI>();
-                originalUI.InitFromShopItem(item, placementMgr);
+                // UnitCardData가 있으면 일반 카드처럼 처리
+                if (useHearthstoneStyle && hearthstoneDeck != null)
+                {
+                    var originalCard = Instantiate(cardUIPrefab);
+                    originalCard.name = $"Card_{item.itemName}_{currentCards.Count}";
+                    var originalUI = originalCard.GetComponent<UnitCardUI>();
 
-                currentCards.Add(originalCard);
-                originalCard.SetActive(false);
+                    // UnitCardData의 정보로 초기화
+                    originalUI.Init(-1, item.unitCardData.unitIcon, item.unitCardData.hoverIcon, placementMgr);
+                    originalUI.isFromShop = true;
+                    originalUI.shopItemData = item;
+                    originalUI.shopUnitPrefab = item.unitPrefab;
 
-                // UI 표시 요청
-                hearthstoneDeck.AddCard(originalUI);
-            }
-            else
-            {
-                var go = Instantiate(cardUIPrefab, deckContainer);
-                var ui = go.GetComponent<UnitCardUI>();
-                ui.InitFromShopItem(item, placementMgr);
-                currentCards.Add(go);
+                    currentCards.Add(originalCard);
+                    originalCard.SetActive(false);
+
+                    hearthstoneDeck.AddCard(originalUI);
+                }
+                else
+                {
+                    var go = Instantiate(cardUIPrefab, deckContainer);
+                    var ui = go.GetComponent<UnitCardUI>();
+
+                    // UnitCardData의 정보로 초기화
+                    ui.Init(-1, item.unitCardData.unitIcon, item.unitCardData.hoverIcon, placementMgr);
+                    ui.isFromShop = true;
+                    ui.shopItemData = item;
+                    ui.shopUnitPrefab = item.unitPrefab;
+
+                    currentCards.Add(go);
+                }
             }
         }
 

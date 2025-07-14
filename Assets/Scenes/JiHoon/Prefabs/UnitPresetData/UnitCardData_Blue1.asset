@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b25574a5614154b9e4139f18b65d18, type: 3}
+  m_Name: UnitCardData_Blue1
+  m_EditorClassIdentifier: 
+  unitPrefab: {fileID: 2721758889849644916, guid: d89133a213b141b459566ebd3aea8112, type: 3}
+  unitIcon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
+  hoverIcon: {fileID: 2589877706116281792, guid: d002e2192380a7542b78487efea81af4, type: 3}
+  tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
+  tooltipText: BluePlayer1
