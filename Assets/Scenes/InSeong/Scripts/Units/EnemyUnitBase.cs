@@ -8,8 +8,8 @@ namespace MainGame.Units {
         #region Variables
 
         //적 유닛 통과 시 패널티
-        [SerializeField, Tooltip("적 유닛 통과 시 입을 패널티")]
-        List<StatStruct> penalty;
+        [Header("적 유닛 통과시 입을 패널티")]
+        public List<StatStruct> penalty;
         #endregion
 
         #region Properties

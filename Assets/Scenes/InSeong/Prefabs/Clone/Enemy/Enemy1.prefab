@@ -3569,18 +3569,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  nodeReachDistance: 0.3
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 0}
-  viaPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  isMoving: 0
+  separationRadius: 1
+  followDistance: 2
 --- !u!50 &4445603992680336512
 Rigidbody2D:
   serializedVersion: 5
@@ -3661,7 +3651,9 @@ MonoBehaviour:
   currRange: 1
   currSpd: 1
   stats: []
-  panelty: 0
+  penalty:
+  - stat: 0
+    value: -5
 --- !u!70 &-6251822097576193127
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

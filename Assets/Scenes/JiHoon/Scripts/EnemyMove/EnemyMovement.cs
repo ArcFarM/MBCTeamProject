@@ -1,3 +1,4 @@
+using MainGame.Units;
 using UnityEngine;
 
 namespace JiHoon
@@ -195,8 +196,14 @@ namespace JiHoon
                 if (waveController != null)
                 {
                     waveController.OnEnemyDeath();
-                    Debug.Log($"적 파괴! 남은 적: {waveController.enemyCount - 1}");
+                    //Debug.Log($"적 파괴! 남은 적: {waveController.enemyCount - 1}");
                 }
+            }
+
+            //적이 죽지않고 목표에 도달했을 때
+            if (TryGetComponent<EnemyUnitBase>(out EnemyUnitBase ub)) {
+                Debug.Log("유닛 패널티 전달");
+                ub.GivePenalty();
             }
 
             if (myGroup != null)

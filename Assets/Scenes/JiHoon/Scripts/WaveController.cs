@@ -265,6 +265,9 @@ namespace JiHoon
 
         void PrepareNextWave()
         {
+            // 페널티 정산
+            CheckPenalty();
+
             // 다음 웨이브로
             currentWaveIndex = (currentWaveIndex + 1) % waveConfigs.Count;
 
@@ -300,6 +303,7 @@ namespace JiHoon
 
         //패널티 정산
         void CheckPenalty() {
+            Debug.Log("유닛 페널티 정산");
             StatManager.Instance.CalcPenalty();
         }
     }

@@ -5927,7 +5927,9 @@ MonoBehaviour:
   currRange: 1
   currSpd: 1
   stats: []
-  panelty: 0
+  penalty:
+  - stat: 0
+    value: 1
 --- !u!114 &-1161821593971705707
 MonoBehaviour:
   m_ObjectHideFlags: 0
