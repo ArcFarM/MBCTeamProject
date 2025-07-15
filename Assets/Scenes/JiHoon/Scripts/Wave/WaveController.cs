@@ -203,6 +203,9 @@ namespace JiHoon
         {
             isWaveRunning = false;
 
+            // 페널티 정산
+            CheckPenalty();
+
             // 카드 선택 시스템 사용
             StartCoroutine(CardSelect());
             // 패널티 정산
@@ -265,9 +268,6 @@ namespace JiHoon
 
         void PrepareNextWave()
         {
-            // 페널티 정산
-            CheckPenalty();
-
             // 다음 웨이브로
             currentWaveIndex = (currentWaveIndex + 1) % waveConfigs.Count;
 
@@ -303,6 +303,7 @@ namespace JiHoon
 
         //패널티 정산
         void CheckPenalty() {
+            //int survivedEnemies = StatManager.Instance.GetPanelty().Count;
             Debug.Log("유닛 페널티 정산");
             StatManager.Instance.CalcPenalty();
         }

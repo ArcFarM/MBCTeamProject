@@ -55,7 +55,8 @@ namespace MainGame.UI {
         public void Initialize() {
 
             //시작 수치에 맞추기
-            StartCoroutine(SliderValueEffect(mainImage, 0, 0f));
+            subImage.fillAmount = currStat / (float)currStatMax;
+            mainImage.fillAmount = currStat / (float)currStatMax;
         }
 
         public void OnClick(int min, int max) {
@@ -96,7 +97,10 @@ namespace MainGame.UI {
             // 최종값 보정
             elapsed = animTime;
             image.fillAmount = target / currStatMax;
+            //49.999나 51.001 같은 값이 나오는 것을 방지하기 위해 (둘다 50이어야 함) 반올림 후 정수 변환
+            target = Mathf.Round(image.fillAmount * currStatMax);
             currStat = (int)target;
+            statValue.text = currStat.ToString() + " / " + currStatMax.ToString();
         }
 
         //Inspector에 맞춰서 0 ~ 255 값으로 색 생성

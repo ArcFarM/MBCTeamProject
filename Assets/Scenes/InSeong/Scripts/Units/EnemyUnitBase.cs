@@ -19,6 +19,7 @@ namespace MainGame.Units {
         protected override void Start() {
             base.Start();
             //MainGame.Manager.WaveManager.Instance.enemyCount++;
+            //scriptable 참조해서 해당 ID로 된 penalty를 가져온다
         }
         #endregion
 
@@ -27,7 +28,7 @@ namespace MainGame.Units {
         public void GivePenalty() {
             //StatManager에서 처리
             //1. 베이스에 도착한 적 유닛들의 정보를 statmanager에게 넘겨준다
-            StatManager.Instance.GetPenalty(penalty);
+            StatManager.Instance.AddPenalty(penalty);
             //2. Wave가 끝나면 StatManager에서 Rewardpenalty에 있는 Calcpenalty를 실행한다
             //3. 이걸 StatManager에서 반환값을 받아와서 적용한다
         }
