@@ -20,14 +20,20 @@ namespace MainGame.Manager {
         [SerializeField] GameOverEvent goe;
         //적 패널티
         [SerializeField] List<StatStruct> penalty;
+        //웨이브 종료 시 패널티 팝업
+        [SerializeField] GameObject penaltyPopup;
         #endregion
 
         #region Properties
+        public List<StatStruct> GetPenalty {
+            get { return penalty; }
+        }
         #endregion
 
         #region Unity Event Method
         private void Start() {
             InitStat();
+            penaltyPopup.SetActive(false);
         }
         #endregion
 
@@ -111,7 +117,7 @@ namespace MainGame.Manager {
         }
 
         //적이 기지에 도착했을 때 적에게서 패널티를 받아오기
-        public void GetPenalty(List<StatStruct> input) {
+        public void AddPenalty(List<StatStruct> input) {
             foreach(var item in input) {
                 penalty.Add(item);
             }
@@ -124,12 +130,7 @@ namespace MainGame.Manager {
                 Debug.Log("페널티 없음");
                 return;
             }
-            //TODO : 있으면 페널티 정산 팝업을 띄움
-
-            //전체 패널티 계산
-            Debug.Log("패널티 계산");
-            var final_penalty = RewardPenalty.CalcPenalty(penalty);
-            AdjustStat(final_penalty);
+            penaltyPopup.SetActive(true);
             //정산 완료된 페널티 삭제
             penalty.Clear();
         }
