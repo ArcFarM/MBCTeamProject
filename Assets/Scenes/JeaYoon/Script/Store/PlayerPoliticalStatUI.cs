@@ -32,10 +32,10 @@ namespace JeaYoon.Store
         // [◆] - ▶▶▶ Update.
         private void Update()
         {
-            unrestText.text = shopManager.playerUnrest.ToString();         // ) 불만.
-            financesText.text = shopManager.playerGold.ToString();              // ) 재정.
-            dominanceText.text = shopManager.playerDominance.ToString();       // ) 지배.
-            ManpowerText.text = shopManager.playerManpower.ToString();                   // ) 혼돈.
+            //unrestText.text = shopManager.playerUnrest.ToString();         // ) 불만.
+            //financesText.text = shopManager.playerGold.ToString();              // ) 재정.
+            //dominanceText.text = shopManager.playerDominance.ToString();       // ) 지배.
+            //ManpowerText.text = shopManager.playerManpower.ToString();                   // ) 혼돈.
         }
         #endregion ▲▲▲▲▲ Unity Event Method ▲▲▲▲▲
     }

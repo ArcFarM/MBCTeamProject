@@ -3662,7 +3662,7 @@ MonoBehaviour:
   stats: []
   penalty:
   - stat: 0
-    value: 1
+    value: 2
 --- !u!114 &-2420492565539389044
 MonoBehaviour:
   m_ObjectHideFlags: 0

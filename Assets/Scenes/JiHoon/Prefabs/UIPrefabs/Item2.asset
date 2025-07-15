@@ -20,7 +20,7 @@ MonoBehaviour:
     dskfjdsjfk'
   icon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
   unrest: 1
-  price: 200
+  price: 5
   dominance: 1
   manpower: 1
   illustration: {fileID: 21300000, guid: b85d34759fa2ff9498b81d0126e238d9, type: 3}

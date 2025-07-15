@@ -20,7 +20,7 @@ MonoBehaviour:
     dlfkldksf5'
   icon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
   unrest: 1
-  price: 100
+  price: 5
   dominance: 1
   manpower: 1
   illustration: {fileID: 21300000, guid: b66c80674ee3da34891fd8a4fe428c30, type: 3}
