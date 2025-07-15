@@ -3,7 +3,7 @@ using UnityEngine;
 
 /* [0] 개요 : AAARouletteStateManager
         - 배수는 따로 스크립트 만들기 <<< 만들기
-        ㄴ 인성씨 Scriptable 참고
+        ㄴ 인성씨 D:\Project\MBCTeamProject\Assets\Scenes\InSeong\Prefabs\Card 참고
         - 유닛 베이스에 연결해서 따로 연결하기
 */
 
