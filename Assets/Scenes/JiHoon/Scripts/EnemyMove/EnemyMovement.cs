@@ -62,7 +62,7 @@ namespace JiHoon
 
         void CheckCombatStatus()
         {
-            if (battleBase != null)
+            /*if (battleBase != null)
             {
                 // BattleBase의 전투 타겟 리스트를 체크
                 var combatTargets = battleBase.GetType().GetField("combatTargetList",
@@ -112,7 +112,7 @@ namespace JiHoon
                         isInCombat = true;
                     }
                 }
-            }
+            }*/
         }
 
         void MoveAsLeader()
@@ -241,8 +241,10 @@ namespace JiHoon
             Destroy(gameObject);
         }
 
-        void OnDestroy()
-        {
+        void OnDestroy() {
+            if (myGroup != null) {
+                myGroup.RemoveMember(this);
+            }
             // ★ 도착이 아닌 다른 이유로 파괴될 때 (예: 플레이어가 처치) ★
             if (!hasReachedDestination)
             {
@@ -252,6 +254,7 @@ namespace JiHoon
                     waveController.OnEnemyDeath();
                     //Debug.Log($"적 파괴! 남은 적: {waveController.enemyCount - 1}");
                 }
+                return;
             }
 
             //적이 죽지않고 목표에 도달했을 때
@@ -260,10 +263,7 @@ namespace JiHoon
                 ub.GivePenalty();
             }
 
-            if (myGroup != null)
-            {
-                myGroup.RemoveMember(this);
-            }
+
         }
 
         // ★ 추가: 적이 공격받아 죽을 때 호출할 메서드 ★
