@@ -33,7 +33,7 @@ namespace MainGame.Manager {
         #region Unity Event Method
         private void Start() {
             InitStat();
-            penaltyPopup.SetActive(false);
+            // ) penaltyPopup.SetActive(false);
         }
         #endregion
 

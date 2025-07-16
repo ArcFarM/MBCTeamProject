@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e92425bb80179f44b6f147d184bbc3a, type: 3}
+  m_Name: AAC_HighClass_Policy_CardGradeData
+  m_EditorClassIdentifier: 
+  grade: 3
+  probabilityWeight: 10
+  cards:
+  - {fileID: 11400000, guid: 0665ed8ee03796e498aee3a17809815f, type: 2}
+  - {fileID: 11400000, guid: 6d2bf382474e87947b983290a784c5f7, type: 2}

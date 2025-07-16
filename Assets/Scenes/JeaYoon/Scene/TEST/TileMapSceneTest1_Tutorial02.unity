@@ -24339,6 +24339,7 @@ MonoBehaviour:
   defaultStat: 50
   goe: {fileID: 1927497267}
   penalty: []
+  penaltyPopup: {fileID: 0}
 --- !u!4 &1927497269
 Transform:
   m_ObjectHideFlags: 0
