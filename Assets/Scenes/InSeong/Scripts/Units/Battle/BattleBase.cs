@@ -4,6 +4,7 @@ using MainGame.Units.Animation;
 using UnityEngine;
 using System.Collections;
 using NUnit.Framework.Constraints;
+using JiHoon;
 
 namespace MainGame.Units.Battle {
     public class BattleBase : MonoBehaviour, IBattle {
@@ -24,16 +25,30 @@ namespace MainGame.Units.Battle {
         [SerializeField] protected float stateUpdateInterval = 0.1f;
         protected Coroutine stateMachineCoroutine;
         protected Coroutine movementCoroutine;
+        #endregion
 
         #region Animation
         [Header("애니메이션 관련")]
         [SerializeField] protected UnitAnim unitAnim; // 유닛 애니메이션 컴포넌트
         protected AnimParam animParam = new AnimParam(); // 애니메이션 파라미터 설정
         #endregion
+
+        #region Movement
+        [Header("이동 관련")]
+        [SerializeField] EnemyMovement enemyMovement; // 적 이동 컴포넌트
         #endregion
         #endregion
 
         #region Properties
+        public int GetCurrCombatTargetCount {
+            get { return combatTargetList.Count; }
+        }
+        public int GetMaxCombatTarget {
+            get { return maxCombatTarget; }
+        }
+        public GameObject GetFightingTarget {
+            get { return combatTargetList.Count > 0 ? combatTargetList[0] : null; }
+        }
         #endregion
 
         #region Unity Event Methods
@@ -73,6 +88,8 @@ namespace MainGame.Units.Battle {
                 //null check
                 RemoveInvalidTargets();
 
+                CheckStatus();
+
                 switch (currentState) {
                     case CombatState.Idle:
                         HandleIdleState();
@@ -97,6 +114,17 @@ namespace MainGame.Units.Battle {
             //Debug.Log($"[{gameObject.name}] 유닛 사망으로 상태 머신 종료");
         }
 
+        //이동 컴포넌트를 끌 지 말 지 결정
+        void CheckStatus() {
+            //결정 조건 판정
+            if (ub.GetFaction != UnitFaction.Enemy) return;
+            if (enemyMovement == null) return;
+
+            int status = (int)currentState;
+            //Idle, Detecting 상태에서는 이동 컴포넌트를 켜고 아니면 끈다
+            if (status <= 1 && !ub.IsDead) enemyMovement.enabled = true;
+            else enemyMovement.enabled = false;
+        }
         protected void ChangeState(CombatState newState) {
             if (currentState == newState) return;
             //Debug.Log($"[{gameObject.name}] 상태 변경: {currentState} → {newState}");
@@ -292,15 +320,16 @@ namespace MainGame.Units.Battle {
                 Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}은 이미 사망");
                 return false;
             }
-            //대상이 이미 나와 전투 중이거나, 전투 대상이 최대치인 경우 전투할 수 없으므로 false
-            /*if (combatTargetList.Contains(target)) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}은 이미 전투 중");
-                return false;
-            }*/
-
+            //내가 전투 대상 최대치 초과 확인
             int targetIndex = combatTargetList.IndexOf(target);
             if (targetIndex > maxCombatTarget) {
                 Debug.Log($"[{gameObject.name}] EngageCheck: 전투 대상 최대치 도달 ({maxCombatTarget})");
+                return false;
+            }
+            //내가 대상을 공격할 수 없으면 false
+            if (targetBattleBase.GetCurrCombatTargetCount >= targetBattleBase.GetMaxCombatTarget
+                && (targetBattleBase.GetFightingTarget != gameObject)) {
+                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}은 전투 대상 최대치 도달");
                 return false;
             }
 
@@ -312,20 +341,6 @@ namespace MainGame.Units.Battle {
 
             Debug.Log($"[{gameObject.name}] EngageCheck: {target.name} 전투 조건 만족");
             return true;
-        }
-
-        // 전투 돌입
-        public virtual void Engage(GameObject target) {
-            Debug.Log($"[{gameObject.name}] Engage 호출: {target?.name}");
-            if (EngageConditionCheck(target, out UnitBase ub, out BattleBase bb)) {
-                //대상과 전투하기 위해 이동
-                Vector2 targetPosition = target.transform.position;
-                float distance = Vector2.Distance(transform.position, targetPosition);
-                float engageDistance = ub.GetStat(StatType.CurrRange) * engageDistanceMultiplier;
-                Debug.Log($"[{gameObject.name}] Engage: {target.name}로 이동 시작, 거리: {distance:F2}, 목표: {engageDistance:F2}");
-                //이동 코루틴 시작
-                StartCoroutine(MoveToTarget(engageDistance, target));
-            }
         }
 
         protected virtual IEnumerator MoveToTarget(float targetDistance, GameObject target) {
