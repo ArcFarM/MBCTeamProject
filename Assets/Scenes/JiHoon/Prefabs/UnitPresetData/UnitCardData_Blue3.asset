@@ -17,3 +17,5 @@ MonoBehaviour:
   hoverIcon: {fileID: 2589877706116281792, guid: d002e2192380a7542b78487efea81af4, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: BluePlayer3
+  specialAbilities:
+  - {fileID: 0}

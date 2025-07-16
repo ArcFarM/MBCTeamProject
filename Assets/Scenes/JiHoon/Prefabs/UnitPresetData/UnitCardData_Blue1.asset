@@ -18,3 +18,4 @@ MonoBehaviour:
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uC554\uC0B4\uC790\n\uB4A4\uC5D0\uC11C \uC8FD\uC774\uB294\uAC78 \uC88B\uC544\uD558\uB294
     \uC545\uC885\uC785\uB2C8\uB2E4"
+  specialAbilities: []

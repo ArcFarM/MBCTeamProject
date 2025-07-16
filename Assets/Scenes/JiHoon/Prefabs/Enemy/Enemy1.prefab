@@ -430,6 +430,7 @@ GameObject:
   - component: {fileID: 353809961183880960}
   - component: {fileID: 6458001922697312151}
   - component: {fileID: -2420492565539389044}
+  - component: {fileID: 7444814772265796245}
   m_Layer: 5
   m_Name: Enemy1
   m_TagString: Unit
@@ -3576,6 +3577,7 @@ MonoBehaviour:
   currentState: 0
   stateUpdateInterval: 0.1
   unitAnim: {fileID: -2420492565539389044}
+  enemyMovement: {fileID: 3332730498628433170}
 --- !u!114 &3332730498628433170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3589,8 +3591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  separationRadius: 2
-  followDistance: 3
+  moveStartDelay: 0.5
 --- !u!70 &353809961183880960
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3678,6 +3679,69 @@ MonoBehaviour:
   animator: {fileID: 3849104699504804562}
   animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
   unitID: 99
+--- !u!114 &7444814772265796245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856652019981532589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 405695a9ab9f0464195cf36abaa5255e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waveConfigs:
+  - waveNumber: 1
+    health: 100
+    damage: 10
+    attackRange: 1
+    targetCount: 1
+  - waveNumber: 2
+    health: 200
+    damage: 20
+    attackRange: 1
+    targetCount: 1
+  - waveNumber: 3
+    health: 300
+    damage: 30
+    attackRange: 1
+    targetCount: 1
+  - waveNumber: 4
+    health: 400
+    damage: 40
+    attackRange: 1
+    targetCount: 1
+  - waveNumber: 5
+    health: 500
+    damage: 50
+    attackRange: 1
+    targetCount: 1
+  - waveNumber: 6
+    health: 600
+    damage: 70
+    attackRange: 1
+    targetCount: 1
+  - waveNumber: 7
+    health: 700
+    damage: 80
+    attackRange: 2
+    targetCount: 2
+  - waveNumber: 8
+    health: 800
+    damage: 90
+    attackRange: 2
+    targetCount: 1
+  - waveNumber: 9
+    health: 900
+    damage: 95
+    attackRange: 2
+    targetCount: 1
+  - waveNumber: 10
+    health: 1000
+    damage: 100
+    attackRange: 2
+    targetCount: 1
 --- !u!1 &1898533620134970038
 GameObject:
   m_ObjectHideFlags: 0

@@ -5406,8 +5406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  separationRadius: 2
-  followDistance: 3
+  moveStartDelay: 0.5
 --- !u!114 &968702827162009898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5429,6 +5428,7 @@ MonoBehaviour:
   currentState: 0
   stateUpdateInterval: 0.1
   unitAnim: {fileID: 4078932711134146218}
+  enemyMovement: {fileID: 8940439590918862850}
 --- !u!70 &-1628379410399945241
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
