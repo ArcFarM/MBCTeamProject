@@ -15,7 +15,7 @@ namespace MainGame.Units.Battle {
         #region Custom Methods
 
         // 타워는 이동하지 않으므로 Moving 상태를 건너뛰고 바로 Fighting으로 전환
-        protected override void HandleEngagingState() {
+        /*protected override void HandleEngagingState() {
             Debug.Log($"[{gameObject.name}] Tower Engaging: 타겟 검증 시작, 현재 타겟 수: {combatTargetList.Count}");
 
             // 교전 불가능한 적 제거 - 람다식을 쓸 수 밖에 없어서 람다식 사용
@@ -33,7 +33,7 @@ namespace MainGame.Units.Battle {
                 Debug.Log($"[{gameObject.name}] Tower Engaging: 선택된 타겟 - {combatTargetList[0].name}");
                 ChangeState(CombatState.Fighting); // Moving 상태를 건너뛰고 바로 Fighting으로
             }
-        }
+        }*/
 
         // 타워는 이동하지 않으므로 Moving 상태 처리를 무시하고 바로 Fighting으로 전환
         protected override void HandleMovingState() {

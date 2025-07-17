@@ -2562,11 +2562,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardManager: {fileID: 1907221773}
   shopPanel: {fileID: 1465857259}
-  playerUnrest: 50
-  playerGold: 1000
-  playerDominance: 50
-  playerManpower: 50
-  goldText: {fileID: 1959451064}
   allItems:
   - {fileID: 11400000, guid: 8b7910136a4258440be165f45f65a0bb, type: 2}
   - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
@@ -5727,6 +5722,7 @@ MonoBehaviour:
     - {fileID: 1478358311}
     - {fileID: 1167707089}
     - {fileID: 1032171911}
+  spawnInterval: 1
 --- !u!1 &803980273
 GameObject:
   m_ObjectHideFlags: 0

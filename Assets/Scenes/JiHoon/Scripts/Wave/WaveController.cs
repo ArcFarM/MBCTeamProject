@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using MainGame.Manager;
@@ -8,16 +7,13 @@ using MainGame.Card;
 using MainGame.UI;
 using TMPro;
 
-
-namespace JiHoon
-{
-    public class WaveController : SingletonManager<WaveController>
-    {
+namespace JiHoon {
+    public class WaveController : SingletonManager<WaveController> {
         [Header("적 스포너")]
         public EnemySpawnerManager spawner;
 
         [Header("컨테이너")]
-        public Transform enemyContainer;  // JiHoon 버전에서 추가
+        public Transform enemyContainer;
 
         [Header("UI")]
         public Button startWaveButton;
@@ -25,15 +21,15 @@ namespace JiHoon
         public UnitPlacementManager placementManager;
 
         [Header("Wave 표시 UI")]
-        public TextMeshProUGUI waveDisplayText;  // Wave / 01 텍스트
+        public TextMeshProUGUI waveDisplayText;
 
         [Header("카드 설정")]
         public int initialCardCount = 5;
         public int cardsPerWave = 3;
 
         [Header("카드 선택 시스템")]
-        public GameObject cardSelectPanel;   // 카드 선택 패널
-        public CardPool cardPool;            // 카드 풀
+        public GameObject cardSelectPanel;
+        public CardPool cardPool;
 
         [Header("웨이브 설정")]
         public List<WaveConfig> waveConfigs;
@@ -50,16 +46,12 @@ namespace JiHoon
 
         private int currentWaveIndex = 0;
         private bool isWaveRunning = false;
+        public int enemyCount = 0; // 남아 있는 적의 수
 
         // 각 스폰 포인트별로 선택된 경로를 저장
         private Dictionary<int, Transform[]> selectedPathsBySpawnPoint = new Dictionary<int, Transform[]>();
 
-        // 남아 있는 적의 수
-        public int enemyCount = 0;
-
-        void Start()
-        {
-            // 카드 선택 패널 초기화
+        void Start() {
             if (cardSelectPanel != null)
                 cardSelectPanel.SetActive(false);
 
@@ -67,38 +59,37 @@ namespace JiHoon
             cardManager.AddRandomCards(initialCardCount);
             startWaveButton.onClick.AddListener(StartWave);
 
-            // 게임 시작 시 초기 웨이브 표시
             OnWaveChanged?.Invoke(CurrentWaveNumber);
             UpdateWaveDisplay();
         }
 
-        void StartWave()
-        {
+        void StartWave() {
             if (isWaveRunning) return;
 
             OnWaveStarted?.Invoke(CurrentWaveNumber);
             startWaveButton.interactable = false;
+            placementManager.placementEnabled = false; // 웨이브 시작 시 배치 비활성화
             StartCoroutine(RunWave());
         }
 
-        IEnumerator RunWave()
-        {
+        IEnumerator RunWave() {
             isWaveRunning = true;
-            var config = waveConfigs[currentWaveIndex];
+            if (currentWaveIndex >= waveConfigs.Count) {
+                Debug.LogWarning("모든 웨이브가 종료되었습니다.");
+                // TODO: 게임 승리 처리
+                yield break;
+            }
 
-            // 웨이브 시작 시 경로 초기화
+            var config = waveConfigs[currentWaveIndex];
             selectedPathsBySpawnPoint.Clear();
 
-            // 그룹별로 스폰
-            foreach (var group in config.enemyGroups)
-            {
-                SpawnGroup(group);
+            foreach (var group in config.enemyGroups) {
+                yield return StartCoroutine(SpawnGroup(group));
                 yield return new WaitForSeconds(group.delayAfterGroup);
             }
 
             // 모든 적이 처치될 때까지 대기
-            while (enemyCount > 0)
-            {
+            while (enemyCount > 0) {
                 yield return null;
             }
 
@@ -106,116 +97,67 @@ namespace JiHoon
             OnWaveComplete();
         }
 
-        void SpawnGroup(EnemyGroupConfig group)
-        {
+        IEnumerator SpawnGroup(EnemyGroupConfig group) {
             int spawnIndex = (int)group.spawnPosition;
             var spawnData = spawner.GetSpawnData(spawnIndex);
-            SpawnGroupAtPoint(group, spawnData);
+            if (spawnData != null) {
+                yield return StartCoroutine(SpawnGroupAtPoint(group, spawnData, spawnIndex));
+            }
+            else {
+                Debug.LogError($"SpawnPointData를 찾을 수 없습니다: index {spawnIndex}");
+            }
         }
 
-        void SpawnGroupAtPoint(EnemyGroupConfig group, SpawnPointData spawnData)
-        {
-            if (spawnData == null || spawnData.spawnPoint == null) return;
+        IEnumerator SpawnGroupAtPoint(EnemyGroupConfig group, SpawnPointData spawnData, int spawnIndex) {
+            if (spawnData.spawnPoint == null) yield break;
 
             var basePosition = spawnData.spawnPoint.position;
-
-            // 그룹 오브젝트 생성
             var groupObj = new GameObject($"EnemyGroup_{group.groupName}_{spawnData.name}");
-
-            // enemyContainer가 있으면 그 하위로, 없으면 그냥 생성
-            if (enemyContainer != null)
-                groupObj.transform.SetParent(enemyContainer);
+            groupObj.transform.SetParent(enemyContainer, false);
 
             var enemyGroup = groupObj.AddComponent<EnemyGroup>();
 
-            // 두 줄로 배치 (한 줄에 최대 5마리)
-            var positions = new List<Vector3>();
-            float spacing = group.enemySpacing;
-            int maxPerRow = 5;
-
-            for (int i = 0; i < group.enemyCount; i++)
-            {
-                int row = i / maxPerRow;
-                int col = i % maxPerRow;
-
-                int itemsInThisRow = Mathf.Min(maxPerRow, group.enemyCount - row * maxPerRow);
-                float xOffset = (col - (itemsInThisRow - 1) / 2f) * spacing;
-                float yOffset = -row * spacing;
-
-                positions.Add(new Vector3(xOffset, yOffset, 0));
+            if (!selectedPathsBySpawnPoint.ContainsKey(spawnIndex)) {
+                selectedPathsBySpawnPoint[spawnIndex] = spawnData.GetRandomPath();
             }
+            Transform[] pathToUse = selectedPathsBySpawnPoint[spawnIndex];
 
-            // 적 스폰
-            for (int i = 0; i < group.enemyCount; i++)
-            {
+            for (int i = 0; i < group.enemyCount; i++) {
                 var enemyPrefab = group.enemyPrefabs[i % group.enemyPrefabs.Count];
-                var position = basePosition + positions[i];
 
-                GameObject enemy;
-                if (enemyContainer != null)
-                    enemy = Instantiate(enemyPrefab, position, Quaternion.identity, enemyContainer);
-                else
-                    enemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+                float spacing = group.enemySpacing;
+                int row = i / 5;
+                int col = i % 5;
+                Vector3 formationOffset = new Vector3(col * spacing, -row * spacing, 0);
 
-                // enemyCount 증가 (적이 생성될 때마다)
+                var spawnPosition = basePosition + formationOffset;
+                var enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity, groupObj.transform);
+
                 enemyCount++;
 
-                var spriteRenderer = enemy.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.sortingOrder = 10;
-                }
-
                 var movement = enemy.GetComponent<EnemyMovement>();
-
-                if (movement != null)
-                {
-                    if (i == 0)
-                    {
-                        movement.SetAsLeader();
-                        enemyGroup.SetLeader(movement);
-                    }
-                    else
-                    {
-                        movement.SetAsFollower(positions[i]);
-                    }
-
-                    int spawnIndex = (int)group.spawnPosition;
-                    Transform[] pathToUse;
-
-                    if (selectedPathsBySpawnPoint.ContainsKey(spawnIndex))
-                    {
-                        pathToUse = selectedPathsBySpawnPoint[spawnIndex];
-                    }
-                    else
-                    {
-                        pathToUse = spawnData.GetRandomPath();
-                        selectedPathsBySpawnPoint[spawnIndex] = pathToUse;
-                    }
-
+                if (movement != null) {
                     movement.SetPath(pathToUse);
-                    enemyGroup.AddMember(movement);
+                    movement.SetGroup(enemyGroup);
+                }
+                enemyGroup.AddMember(movement);
+
+                // EnemySpawnerManager에 설정된 간격만큼 대기
+                if (spawner.spawnInterval > 0) {
+                    yield return new WaitForSeconds(spawner.spawnInterval);
                 }
             }
         }
 
-        void OnWaveComplete()
-        {
+        void OnWaveComplete() {
             isWaveRunning = false;
-
-            // 페널티 정산
+            OnWaveCompleted?.Invoke(CurrentWaveNumber);
             CheckPenalty();
-
-            // 카드 선택 시스템 사용
             StartCoroutine(CardSelect());
-            // 패널티 정산
         }
 
-        IEnumerator CardSelect()
-        {
-            // 카드 선택 패널을 활성화
-            if (cardSelectPanel == null || cardPool == null)
-            {
+        IEnumerator CardSelect() {
+            if (cardSelectPanel == null || cardPool == null) {
                 Debug.LogError("카드 선택에 필요한 UI 또는 CardPool 참조가 설정되지 않았습니다!");
                 PrepareNextWave();
                 yield break;
@@ -223,26 +165,19 @@ namespace JiHoon
 
             cardSelectPanel.SetActive(true);
 
-            // 설정된 수만큼 카드를 뽑아서 패널에 등록
             List<PolicyCard_new> spawnedCards = new List<PolicyCard_new>();
-            for (int i = 0; i < cardsPerWave; i++)
-            {
+            for (int i = 0; i < cardsPerWave; i++) {
                 PolicyCard_new newCard = cardPool.GetCard();
-                if (newCard != null)
-                {
+                if (newCard != null) {
                     newCard.transform.SetParent(cardSelectPanel.transform, false);
                     spawnedCards.Add(newCard);
                 }
             }
 
-            // 플레이어가 카드를 선택할 때까지 대기
             PolicyCard_new selectedCard = null;
-            while (selectedCard == null)
-            {
-                foreach (PolicyCard_new card in spawnedCards)
-                {
-                    if (!card.gameObject.activeSelf)
-                    {
+            while (selectedCard == null) {
+                foreach (PolicyCard_new card in spawnedCards) {
+                    if (card != null && !card.gameObject.activeSelf) {
                         selectedCard = card;
                         break;
                     }
@@ -250,60 +185,39 @@ namespace JiHoon
                 yield return null;
             }
 
-            // 선택되지 않은 나머지 카드들을 파괴
-            foreach (var unselectedCard in spawnedCards)
-            {
-                if (unselectedCard != null)
-                {
+            foreach (var unselectedCard in spawnedCards) {
+                if (unselectedCard != null && unselectedCard.gameObject.activeSelf) {
                     Destroy(unselectedCard.gameObject);
                 }
             }
 
-            // 패널을 다시 숨김
             cardSelectPanel.SetActive(false);
-
-            // 모든 정리가 끝난 후 다음 웨이브를 준비
             PrepareNextWave();
         }
 
-        void PrepareNextWave()
-        {
-            // 다음 웨이브로
-            currentWaveIndex = (currentWaveIndex + 1) % waveConfigs.Count;
-
-            // 웨이브 변경 이벤트 발생
-            OnWaveCompleted?.Invoke(currentWaveIndex);
+        void PrepareNextWave() {
+            currentWaveIndex++;
             OnWaveChanged?.Invoke(CurrentWaveNumber);
-            UpdateWaveDisplay();  // Wave 표시 업데이트
+            UpdateWaveDisplay();
 
-            // UI 복구
             startWaveButton.interactable = true;
+            placementManager.placementEnabled = true;
         }
 
-        // Wave 표시 업데이트 메서드
-        void UpdateWaveDisplay()
-        {
-            if (waveDisplayText != null)
-            {
+        void UpdateWaveDisplay() {
+            if (waveDisplayText != null) {
                 waveDisplayText.text = $"Wave / {CurrentWaveNumber:D2}";
             }
         }
 
-        public string GetWaveDisplayText()
-        {
-            return $"Wave {CurrentWaveNumber} / {TotalWaves:D2}";
+        public void OnEnemyDeath() {
+            if (enemyCount > 0) {
+                enemyCount--;
+            }
+            Debug.Log($"적 처리! 남은 적: {enemyCount}");
         }
 
-        // 적이 죽었을 때 호출되어야 하는 메서드
-        public void OnEnemyDeath()
-        {
-            enemyCount--;
-            Debug.Log($"적 사망! 남은 적: {enemyCount}");
-        }
-
-        //패널티 정산
         void CheckPenalty() {
-            //int survivedEnemies = StatManager.Instance.GetPanelty().Count;
             Debug.Log("유닛 페널티 정산");
             StatManager.Instance.CalcPenalty();
         }

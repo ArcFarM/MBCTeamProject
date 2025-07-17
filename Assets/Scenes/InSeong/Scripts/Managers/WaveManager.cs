@@ -123,11 +123,11 @@ namespace MainGame.Manager {
                 if (movement != null) {
                     // 첫 번째를 리더로 설정
                     if (i == 0) {
-                        movement.SetAsLeader();
+                       // movement.SetAsLeader();
                         enemyGroup.SetLeader(movement);
                     }
                     else {
-                        movement.SetAsFollower(positions[i]);
+                        //movement.SetAsFollower(positions[i]);
                     }
 
                     // 해당 스폰 포인트의 경로 선택 또는 재사용

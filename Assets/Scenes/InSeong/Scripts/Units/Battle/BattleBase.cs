@@ -3,415 +3,292 @@ using System.Collections.Generic;
 using MainGame.Units.Animation;
 using UnityEngine;
 using System.Collections;
-using NUnit.Framework.Constraints;
 using JiHoon;
 
 namespace MainGame.Units.Battle {
+    [RequireComponent(typeof(Rigidbody2D))]
     public class BattleBase : MonoBehaviour, IBattle {
         #region Variables
         [SerializeField] protected UnitBase ub;
-        protected float detectingRange; // 탐지 범위 - 현재는 배수와 상수로 계산하여 사용
-        [SerializeField] protected float detectingMultiplier = 1.5f; // 탐지 범위 배수
-        [SerializeField] protected float detectingRangeconstant = 2.5f; // 탐지 범위 상수
-        [SerializeField] protected float engageDistanceMultiplier = 0.75f; // 전투 돌입 거리 배수
+        protected float detectingRange;
+        [SerializeField] protected float detectingMultiplier = 1.5f;
+        [SerializeField] protected float detectingRangeconstant = 2.5f;
+        [SerializeField] protected float engageDistanceMultiplier = 0.75f;
 
-        #region IBattle 구현
+        [Header("IBattle 구현")]
         [SerializeField] protected int maxCombatTarget;
+        protected List<GameObject> attackers = new();
         [SerializeField] protected List<GameObject> combatTargetList = new();
-        #endregion
+        protected GameObject currentTarget = null;
 
-        #region StateMachine
+        [Header("StateMachine")]
         [SerializeField] protected CombatState currentState = CombatState.Idle;
         [SerializeField] protected float stateUpdateInterval = 0.1f;
         protected Coroutine stateMachineCoroutine;
-        protected Coroutine movementCoroutine;
-        #endregion
 
-        #region Animation
-        [Header("애니메이션 관련")]
-        [SerializeField] protected UnitAnim unitAnim; // 유닛 애니메이션 컴포넌트
-        protected AnimParam animParam = new AnimParam(); // 애니메이션 파라미터 설정
-        #endregion
+        [Header("컴포넌트 참조")]
+        [SerializeField] protected UnitAnim unitAnim;
+        protected AnimParam animParam = new AnimParam();
+        private EnemyMovement enemyMovement;
 
-        #region Movement
-        [Header("이동 관련")]
-        [SerializeField] EnemyMovement enemyMovement; // 적 이동 컴포넌트
-        #endregion
+        private Rigidbody2D rb;
+        private float lastAttackTime = -999f;
+        private float attackCooldown => 1f / ub.GetStat(StatType.CurrAtkSpd);
         #endregion
 
         #region Properties
-        public int GetCurrCombatTargetCount {
-            get { return combatTargetList.Count; }
-        }
-        public int GetMaxCombatTarget {
-            get { return maxCombatTarget; }
-        }
-        public GameObject GetFightingTarget {
-            get { return combatTargetList.Count > 0 ? combatTargetList[0] : null; }
-        }
+        public int GetCurrentAttackerCount => attackers.Count;
+        public int GetMaxCombatTarget => maxCombatTarget;
+        public GameObject GetFightingTarget => currentTarget;
         #endregion
 
         #region Unity Event Methods
+        private void Awake() {
+            TryGetComponent<EnemyMovement>(out enemyMovement);
+            rb = GetComponent<Rigidbody2D>();
+        }
+
         private void Start() {
-            //Debug.Log($"[{gameObject.name}] BattleBase 시작");
             detectingRange = Mathf.Max(ub.GetStat(StatType.CurrRange) * detectingMultiplier, detectingRangeconstant);
             StartStateMachine();
         }
 
         private void OnDestroy() {
-            //Debug.Log($"[{gameObject.name}] BattleBase 종료");
             StopStateMachine();
+        }
+
+        private void FixedUpdate() {
+            // 전투 상태(Moving)일 때의 이동만 여기서 담당
+            if (currentState == CombatState.Moving && currentTarget != null && !ub.IsDead) {
+                Vector2 direction = (currentTarget.transform.position - transform.position).normalized;
+                Vector2 nextPosition = rb.position + direction * ub.GetStat(StatType.CurrSpd) * Time.fixedDeltaTime;
+                rb.MovePosition(nextPosition);
+            }
         }
         #endregion
 
         #region 상태 머신
         protected void StartStateMachine() {
             if (stateMachineCoroutine == null) {
-                //Debug.Log($"[{gameObject.name}] 상태 머신 시작");
                 stateMachineCoroutine = StartCoroutine(StateMachineLoop());
             }
         }
 
         protected void StopStateMachine() {
             if (stateMachineCoroutine != null) {
-                //Debug.Log($"[{gameObject.name}] 상태 머신 중지");
                 StopCoroutine(stateMachineCoroutine);
                 stateMachineCoroutine = null;
             }
         }
 
         protected IEnumerator StateMachineLoop() {
-            WaitForSeconds updateInterval = new WaitForSeconds(stateUpdateInterval);
+            var updateInterval = new WaitForSeconds(stateUpdateInterval);
+            ChangeState(CombatState.Idle); // 시작 상태를 명확히 설정
 
             while (!ub.IsDead) {
-                yield return updateInterval;
-                //null check
-                RemoveInvalidTargets();
-
-                CheckStatus();
+                UpdateComponentStatus();
 
                 switch (currentState) {
-                    case CombatState.Idle:
-                        HandleIdleState();
-                        break;
-                    case CombatState.Detecting:
-                        HandleDetectingState();
-                        break;
-                    case CombatState.Engaging:
-                        HandleEngagingState();
-                        break;
-                    case CombatState.Moving:
-                        HandleMovingState();
-                        break;
-                    case CombatState.Fighting:
-                        HandleFightingState();
-                        break;
-                    case CombatState.Dead:
-                        HandleDeadState();
-                        break;
+                    case CombatState.Idle: HandleIdleState(); break;
+                    case CombatState.Detecting: HandleDetectingState(); break;
+                    case CombatState.Moving: HandleMovingState(); break;
+                    case CombatState.Fighting: HandleFightingState(); break;
+                    case CombatState.Dead: HandleDeadState(); yield break;
                 }
+                yield return updateInterval;
             }
-            //Debug.Log($"[{gameObject.name}] 유닛 사망으로 상태 머신 종료");
         }
 
-        //이동 컴포넌트를 끌 지 말 지 결정
-        void CheckStatus() {
-            //결정 조건 판정
-            if (ub.GetFaction != UnitFaction.Enemy) return;
+        private void UpdateComponentStatus() {
             if (enemyMovement == null) return;
-
-            int status = (int)currentState;
-            //Idle, Detecting 상태에서는 이동 컴포넌트를 켜고 아니면 끈다
-            if (status <= 1 && !ub.IsDead) enemyMovement.enabled = true;
-            else enemyMovement.enabled = false;
+            bool shouldDoWaypointMove = (currentState == CombatState.Idle || currentState == CombatState.Detecting) && currentTarget == null;
+            if (enemyMovement.enabled != shouldDoWaypointMove) {
+                enemyMovement.enabled = shouldDoWaypointMove;
+            }
         }
+
         protected void ChangeState(CombatState newState) {
             if (currentState == newState) return;
-            //Debug.Log($"[{gameObject.name}] 상태 변경: {currentState} → {newState}");
-            currentState = newState;
-        }
 
-        // 대기 상태: 전투 가능하면 탐지로 전환
-        protected virtual void HandleIdleState() {
-            //유닛이 살아있고, 추가 전투가 가능한 경우 전환
-            if (!ub.IsDead && combatTargetList.Count < maxCombatTarget) {
-                //Debug.Log($"[{gameObject.name}] Idle: 전투 가능, 탐지 상태로 전환");
-                ChangeState(CombatState.Detecting);
-            }
-        }
-
-        // 탐지 상태: 주변 적 스캔
-        protected virtual void HandleDetectingState() {
-            //Debug.Log($"[{gameObject.name}] Detecting: 주변 적 탐지 시작");
-            unitAnim.SetAnimBool(animParam.Param_bool_move, false); // 이동 애니메이션 중지
-
-            Collider2D[] detectedTargets = Physics2D.OverlapCircleAll(transform.position, detectingRange);
-            //Debug.Log($"[{gameObject.name}] Detecting: 탐지 범위 {detectingRange:F2}, 발견된 객체 수: {detectedTargets.Length}");
-            
-            //안맞는 유닛 거르기
-            Filter(detectedTargets);
-
-            //감지된 유닛이 자기 말고 더 있다면 전투 돌입
-            if (combatTargetList.Count > 0) {
-                //Debug.Log($"[{gameObject.name}] Detecting: {addedCount}개 타겟 발견, Engaging 상태로 전환");
-                ChangeState(CombatState.Engaging);
-            }
-            else {
-                //Debug.Log($"[{gameObject.name}] Detecting: 타겟 없음, Idle 상태로 전환");
-                ChangeState(CombatState.Idle);
-            }
-        }
-
-        void Filter(Collider2D[] list) {
-            // overlapcircle은 모든 오브젝트를 포함하므로 조건에 맞지 않는 오브젝트를 리스트에서 제외
-            foreach (var target in list) {
-                if (target.gameObject.tag != "Unit") continue; // Unit 태그가 아닌 오브젝트는 무시
-                if (target.gameObject == gameObject || combatTargetList.Contains(target.gameObject)) continue; // 자기 자신 및 중복 대상 제외
-                if (!target.TryGetComponent<UnitBase>(out UnitBase ub)) continue;
-                else { //대상 오브젝트와 내가 둘 다 Unitbase를 보유하고, 진영이 나와 같다면 아군이므로 무시
-                    if (!TryGetComponent<UnitBase>(out UnitBase my_ub)) continue;
-                    if (ub.GetFaction == my_ub.GetFaction) continue;
+            // 상태 변경 전 처리 (공격자 리스트에서 자신을 제거)
+            if (currentTarget != null && (newState == CombatState.Detecting || newState == CombatState.Dead)) {
+                if (currentTarget.TryGetComponent<BattleBase>(out var targetBattleBase)) {
+                    targetBattleBase.RemoveAttacker(gameObject);
                 }
-                    combatTargetList.Add(target.gameObject);
-                //Debug.Log($"[{gameObject.name}] Detecting: 타겟 추가 - {target.gameObject.name}");
+            }
+
+            currentState = newState;
+
+            if (unitAnim != null) {
+                bool isMoving = (currentState == CombatState.Moving) ||
+                                (currentState == CombatState.Detecting && ub.GetFaction == UnitFaction.Enemy);
+
+                // 저기에 해당 안하면 이동이 없는 상태
+                unitAnim.SetAnimBool(animParam.Param_bool_move, isMoving);
+
             }
         }
 
-        // 조건 확인 상태: 최적 타겟 선택
-        protected virtual void HandleEngagingState() {
-            Debug.Log($"[{gameObject.name}] Engaging: 타겟 검증 시작, 현재 타겟 수: {combatTargetList.Count}");
+        protected virtual void HandleIdleState() {
+            ChangeState(CombatState.Detecting);
+            if(ub.GetFaction == UnitFaction.Ally) transform.localScale = new Vector3(1, 1, 1); // 아군은 기본 스케일로 초기화
+            else if (ub.GetFaction == UnitFaction.Enemy) transform.localScale = new Vector3(-1, 1, 1); // 적군은 반전된 스케일로 초기화
+        }
 
-            //교전 불가능한 적 제거 - 람다식을 쓸 수 밖에 없어서 람다식 사용
-            combatTargetList.RemoveAll(target => !EngageConditionCheck(target, out UnitBase ub, out BattleBase bb)
-                                    || !target.activeSelf);
-
-            // 교전 상태에서 교전할 대상이 없다면 다시 탐지 상태로 전환
-            if (combatTargetList.Count == 0) {
-                Debug.Log($"[{gameObject.name}] Engaging: 유효한 타겟 없음, Detecting 상태로 전환");
-                ChangeState(CombatState.Detecting);
+        protected virtual void HandleDetectingState() {
+            if (currentTarget != null && (!currentTarget.activeSelf || currentTarget.GetComponent<UnitBase>().IsDead)) {
+                currentTarget = null;
+            }
+            if (currentTarget != null) {
+                ChangeState(CombatState.Moving);
                 return;
             }
-            else {
-                Debug.Log($"[{gameObject.name}] Engaging: 유효한 타겟 {combatTargetList.Count}개, Moving 상태로 전환");
-                Debug.Log($"[{gameObject.name}] Engaging: 선택된 타겟 - {combatTargetList[0].name}");
+
+            FilterValidTargets(Physics2D.OverlapCircleAll(transform.position, detectingRange));
+            GameObject potentialTarget = FindClosestTarget();
+
+            if (potentialTarget != null) {
+                currentTarget = potentialTarget;
+                if (currentTarget.TryGetComponent<BattleBase>(out var targetBattleBase)) {
+                    targetBattleBase.AddAttacker(gameObject);
+                }
+                combatTargetList.Clear();
                 ChangeState(CombatState.Moving);
             }
         }
 
-        // 이동 상태: 전투 위치로 이동
         protected virtual void HandleMovingState() {
-            if (combatTargetList.Count == 0) {
-                Debug.Log($"[{gameObject.name}] Moving: 타겟 없음, Detecting 상태로 전환");
+            if (currentTarget == null || !currentTarget.activeSelf || currentTarget.GetComponent<UnitBase>().IsDead) {
                 ChangeState(CombatState.Detecting);
                 return;
             }
 
-            //null reference error 발생
-            GameObject target = combatTargetList[0]; // 첫 번째 타겟으로 이동
-            float targetDistance = ub.GetStat(StatType.CurrRange) * engageDistanceMultiplier;
-            float currentDistance = Vector2.Distance(transform.position, target.transform.position);
+            float currentDistance = Vector2.Distance(transform.position, currentTarget.transform.position);
+            FlipSprite(currentTarget.transform.position.x);
 
-            if (movementCoroutine == null) {
-                Debug.Log($"[{gameObject.name}] Moving: {target.name}로 이동 시작, 목표 거리: {targetDistance:F2}, 현재 거리: {currentDistance:F2}");
-                movementCoroutine = StartCoroutine(MoveToTarget(targetDistance, target));
+            if (currentDistance > detectingRange) {
+                ChangeState(CombatState.Detecting);
+                return;
             }
 
-            // 이동이 완료되면 Fighting 상태로 전환
-            if (Vector2.Distance(transform.position, target.transform.position) <= targetDistance + 0.01f) {
-                Debug.Log($"[{gameObject.name}] Moving: 목표 거리 도달, Fighting 상태로 전환");
-                if (movementCoroutine != null) {
-                    StopCoroutine(movementCoroutine);
-                    movementCoroutine = null;
-                }
+            float engageDistance = currentTarget.GetComponent<UnitBase>().GetStat(StatType.CurrRange) * engageDistanceMultiplier;
+            if (currentDistance <= engageDistance) {
                 ChangeState(CombatState.Fighting);
             }
         }
 
-        // 전투 상태: 실제 공격 수행
         protected virtual void HandleFightingState() {
-            if (combatTargetList.Count == 0) {
-                Debug.Log($"[{gameObject.name}] Fighting: 타겟 없음, Detecting 상태로 전환");
+            rb.linearVelocity = Vector2.zero;
+
+            if (currentTarget == null || !currentTarget.activeSelf || currentTarget.GetComponent<UnitBase>().IsDead) {
                 ChangeState(CombatState.Detecting);
                 return;
             }
 
-            GameObject target = combatTargetList[0]; // 첫 번째 타겟으로 공격
-            if (target != null) {
-                Debug.Log($"[{gameObject.name}] Fighting: {target.name} 공격 실행");
-                Attack(target);
-                ChangeState(CombatState.Detecting); // 공격 후 다시 이동 상태로 전환
+            if (Time.time >= lastAttackTime + attackCooldown) {
+                Attack(currentTarget);
+                lastAttackTime = Time.time;
             }
-            else {
-                Debug.Log($"[{gameObject.name}] Fighting: 타겟이 null, 제거 후 Detecting 상태로 전환");
-                combatTargetList.RemoveAt(0); // 타겟이 null이면 제거
-                ChangeState(CombatState.Detecting); // 타겟이 없으면 다시 탐지 상태로 전환
+
+            float engageDistance = currentTarget.GetComponent<UnitBase>().GetStat(StatType.CurrRange) * engageDistanceMultiplier;
+            if (Vector2.Distance(transform.position, currentTarget.transform.position) > engageDistance) {
+                ChangeState(CombatState.Moving);
             }
         }
 
         protected virtual void HandleDeadState() {
             StopAllCoroutines();
-            StopStateMachine();
             Die();
         }
         #endregion
 
         #region Custom Methods
-        #region IBattle Methods
+        private void FlipSprite(float xValue) {
+            Vector3 scale = transform.localScale;
+            //기본 스프라이트가 왼쪽을 보고 있음
+            scale.x = scale.x * (xValue > transform.position.x ? -1 : 1);
+            transform.localScale = scale;
+        }
+
+        private void FilterValidTargets(Collider2D[] colliders) {
+            combatTargetList.Clear();
+            foreach (var col in colliders) {
+                if (col.gameObject == gameObject) continue;
+                if (col.TryGetComponent<UnitBase>(out var targetUnit) && targetUnit.GetFaction != ub.GetFaction && !targetUnit.IsDead) {
+                    if (col.TryGetComponent<BattleBase>(out var targetBattleBase) && targetBattleBase.GetCurrentAttackerCount >= targetBattleBase.GetMaxCombatTarget) {
+                        continue;
+                    }
+                    combatTargetList.Add(col.gameObject);
+                }
+            }
+        }
+
+        private GameObject FindClosestTarget() {
+            GameObject closest = null;
+            float minDistance = float.MaxValue;
+            foreach (var target in combatTargetList) {
+                float distance = Vector2.Distance(transform.position, target.transform.position);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closest = target;
+                }
+            }
+            return closest;
+        }
+
+        public void AddAttacker(GameObject attacker) {
+            if (!attackers.Contains(attacker)) attackers.Add(attacker);
+        }
+
+        public void RemoveAttacker(GameObject attacker) {
+            if (attackers.Contains(attacker)) attackers.Remove(attacker);
+        }
+
         public virtual void TakeDamage(float damage) {
             if (ub.IsDead) return;
             float newHealth = ub.GetStat(StatType.CurrHealth) - damage;
-            Debug.Log($"[{gameObject.name}] {damage} 데미지 받음, 체력: {ub.GetStat(StatType.CurrHealth):F1} → {newHealth:F1}");
             ub.SetStat(StatType.CurrHealth, newHealth);
-            if (newHealth <= 0 && !ub.IsDead) {
-                ChangeState(CombatState.Dead);
-            }
+            if (newHealth <= 0) ChangeState(CombatState.Dead);
         }
 
         public virtual void HealHealth(float healAmount) {
             if (ub.IsDead) return;
-            float oldHealth = ub.GetStat(StatType.CurrHealth);
-            float newHealth = ub.GetStat(StatType.CurrHealth) + healAmount;
-            newHealth = Mathf.Min(newHealth, ub.GetStat(StatType.BaseHealth));
-            Debug.Log($"[{gameObject.name}] {healAmount} 회복, 체력: {oldHealth:F1} → {newHealth:F1}");
+            float newHealth = Mathf.Min(ub.GetStat(StatType.CurrHealth) + healAmount, ub.GetStat(StatType.BaseHealth));
             ub.SetStat(StatType.CurrHealth, newHealth);
         }
 
         public virtual void Die() {
             if (ub.IsDead) return;
-            Debug.Log($"[{gameObject.name}] 사망");
             ub.SetStat(StatType.CurrHealth, 0);
-            // 사망 애니메이션 재생
-            if (unitAnim != null) {
-                StartCoroutine(unitAnim.PlayDeathAnim());
-            }
+            if (enemyMovement != null) enemyMovement.enabled = false;
+            ChangeState(CombatState.Dead);
+            if (unitAnim != null) StartCoroutine(unitAnim.PlayDeathAnim());
+            else Destroy(gameObject);
         }
 
         public virtual bool IsInRange(UnitBase target) {
-            if (ub.IsDead) return false;
-            float distance = Vector3.Distance(transform.position, target.transform.position);
-            bool inRange = (distance <= ub.GetStat(StatType.CurrRange)) && (combatTargetList.Count <= maxCombatTarget);
-            Debug.Log($"{gameObject.name}의 {target.gameObject.name}까지의 거리: {distance:F2}, 사거리: {ub.GetStat(StatType.CurrRange):F2}, 범위 내: {inRange}");
-            return inRange;
-        }
-
-        // 전투 조건 검사
-        protected virtual bool EngageConditionCheck(GameObject target, out UnitBase targetUnit, out BattleBase targetBattleBase) {
-            targetUnit = null; targetBattleBase = null;
-
-            //null check
-            if (target == null) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: 타겟이 null");
-                return false;
-            }
-            if (!target.TryGetComponent<UnitBase>(out targetUnit)) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}에 UnitBase 없음");
-                return false;
-            }
-            if (!target.TryGetComponent<BattleBase>(out targetBattleBase)) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}에 BattleBase 없음");
-                return false;
-            }
-            //아군 유닛이거나 이미 죽은 유닛인 경우 전투할 수 없으므로 false
-            if (targetUnit.GetFaction == ub.GetFaction) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}은 아군");
-                return false;
-            }
-            if (targetUnit.IsDead) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}은 이미 사망");
-                return false;
-            }
-            //내가 전투 대상 최대치 초과 확인
-            int targetIndex = combatTargetList.IndexOf(target);
-            if (targetIndex > maxCombatTarget) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: 전투 대상 최대치 도달 ({maxCombatTarget})");
-                return false;
-            }
-            //내가 대상을 공격할 수 없으면 false
-            if (targetBattleBase.GetCurrCombatTargetCount >= targetBattleBase.GetMaxCombatTarget
-                && (targetBattleBase.GetFightingTarget != gameObject)) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name}은 전투 대상 최대치 도달");
-                return false;
-            }
-
-            float distance = Vector2.Distance(transform.position, target.transform.position);
-            if (distance > detectingRange) {
-                Debug.Log($"[{gameObject.name}] EngageCheck: {target.name} 거리 초과, 거리: {distance:F2}, 탐지범위: {detectingRange:F2}");
-                return false;
-            }
-
-            Debug.Log($"[{gameObject.name}] EngageCheck: {target.name} 전투 조건 만족");
-            return true;
-        }
-
-        protected virtual IEnumerator MoveToTarget(float targetDistance, GameObject target) {
-            //이동 애니메이션 재생
-            if (unitAnim != null) {
-                unitAnim.SetAnimBool(animParam.Param_bool_move, true);
-            }
-            Debug.Log($"[{gameObject.name}] MoveToTarget 코루틴 시작: {target.name}");
-            while (target != null) {
-                float distance = Vector2.Distance(transform.position, target.transform.position);
-                if (distance <= targetDistance + 0.01f) {
-                    Debug.Log($"[{gameObject.name}] MoveToTarget 완료: 목표 거리 {targetDistance:F2} 도달");
-                    break;
-                }
-
-                //목표 거리까지 이동
-                Vector2 direction = (target.transform.position - transform.position).normalized;
-                transform.position += (Vector3)(direction * ub.GetStat(StatType.CurrSpd) * Time.deltaTime);
-                yield return null;
-            }
-            Debug.Log($"[{gameObject.name}] MoveToTarget 코루틴 종료");
-            //이동 애니메이션 중지
-            if (unitAnim != null) {
-                unitAnim.SetAnimBool(animParam.Param_bool_move, false);
-            }
+            if (target == null) return false;
+            return Vector2.Distance(transform.position, target.transform.position) <= ub.GetStat(StatType.CurrRange);
         }
 
         public virtual void Attack(GameObject target) {
-            if (ub.IsDead) return;
-            if (target == null) {
-                Debug.LogError($"[{gameObject.name}] Attack: 공격 대상이 null입니다.");
-                return;
+            if (ub.IsDead || target == null) return;
+            if (unitAnim != null) unitAnim.SetAnimTrigger(animParam.Param_trigger_attack);
+            if (target.TryGetComponent<IBattle>(out var targetBattle)) {
+                StartCoroutine(DamageCalc(targetBattle, ub.GetStat(StatType.CurrDamage)));
             }
-            //공격 애니메이션 재생
+        }
+
+        protected virtual IEnumerator DamageCalc(IBattle target, float damage) {
             if (unitAnim != null) {
-                unitAnim.SetAnimTrigger(animParam.Param_trigger_attack);
-            }
-            if (target.TryGetComponent<IBattle>(out IBattle ib) && target.TryGetComponent<UnitBase>(out UnitBase ub_Method)) {
-                Debug.Log($"[{gameObject.name}] Attack: {target.name} 공격 시도");
-                // TODO: 공격 애니메이션 재생, 애니메이션이 끝나고 - 코루틴으로 처리 - 공격 효과 적용
-                if (IsInRange(ub_Method)) {
-                    float damage = ub.GetStat(StatType.CurrDamage);
-                    //대미지 적용을 코루틴으로 변경
-                    StartCoroutine(DamageCalc(target, damage));
-                }
-                else {
-                    Debug.Log($"[{gameObject.name}] Attack: {target.name}이 사거리 밖");
-                }
+                UnitAnimFrameConfig frameInfo = unitAnim.GetAnimData();
+                yield return new WaitForSeconds(frameInfo.attackCompleteFrame / (float)frameInfo.frameRate);
             }
             else {
-                Debug.LogError($"[{gameObject.name}] Attack: {target.name}은 올바른 공격 대상이 아닙니다.");
+                yield return new WaitForSeconds(0.1f);
             }
+            if (target != null != null) target.TakeDamage(damage);
         }
-
-        protected virtual IEnumerator DamageCalc(GameObject target, float damage) {
-            //yield return으로 애니메이션의 특정 프레임까지 재생 대기
-            UnitAnimFrameConfig currFrameInfo = unitAnim.GetAnimData();
-            float waitTime = currFrameInfo.attackCompleteFrame / (float)currFrameInfo.frameRate;
-            yield return new WaitForSeconds(waitTime);
-            //null check는 상위 메서드에서 이미 했음
-            if (target != null) target.GetComponent<IBattle>().TakeDamage(damage);
-            //Debug.Log($"[{gameObject.name}] Attack: {target.name}에게 {damage} 데미지 가함");
-        }
-
-        //조건에 안맞는 적 삭제
-        public virtual void RemoveInvalidTargets() {
-            combatTargetList.RemoveAll(target => target == null 
-                                              || !target.activeSelf 
-                                              || !EngageConditionCheck(target, out UnitBase ub, out BattleBase bb));
-        }
-        #endregion
         #endregion
     }
 }

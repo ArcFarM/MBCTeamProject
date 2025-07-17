@@ -22,7 +22,7 @@ namespace JiHoon
             if (!members.Contains(enemy))
             {
                 members.Add(enemy);
-                enemy.SetGroup(this, leader);
+                enemy.SetGroup(this);
             }
         }
 

@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 1114454932325520066}
   - component: {fileID: -7787545021522122019}
   - component: {fileID: 9069389212483292755}
+  - component: {fileID: 1180431291019015019}
   m_Layer: 5
   m_Name: Enemy4
   m_TagString: Unit
@@ -216,14 +217,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 631529754140920010}
-  m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.00015256465}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7456414322643960500}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -170}
@@ -3300,7 +3301,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
-  moveStartDelay: 0.5
+  waypointArrivalRadius: 0.5
+  separationRadius: 1
+  separationForce: 1.5
 --- !u!114 &1974795483733441944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3322,7 +3325,6 @@ MonoBehaviour:
   currentState: 0
   stateUpdateInterval: 0.1
   unitAnim: {fileID: 9069389212483292755}
-  enemyMovement: {fileID: 3792132723117236923}
 --- !u!70 &1114454932325520066
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3358,7 +3360,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.4}
-  m_Size: {x: 0.1, y: 0.3}
+  m_Size: {x: 0.05, y: 0.15}
   m_Direction: 0
 --- !u!114 &-7787545021522122019
 MonoBehaviour:
@@ -3410,6 +3412,33 @@ MonoBehaviour:
   animator: {fileID: 746797008813807025}
   animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
   unitID: 96
+--- !u!50 &1180431291019015019
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631529754140920010}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!1 &672726948309911493
 GameObject:
   m_ObjectHideFlags: 0
