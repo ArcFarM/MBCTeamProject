@@ -4283,10 +4283,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPresets:
-  - cardData: {fileID: 11400000, guid: 64712466ba1cab64f9f861704d6bd3b3, type: 2}
   - cardData: {fileID: 11400000, guid: bb42d5576ce3be041820a1d299237036, type: 2}
   - cardData: {fileID: 11400000, guid: 114434cd16242fb419b09b840e78d7d5, type: 2}
-  - cardData: {fileID: 11400000, guid: f7763ea66f65a4d4c957d0dcfc9b6182, type: 2}
   - cardData: {fileID: 11400000, guid: 2aaeb81eb73bfdf4bb9574c4405ee237, type: 2}
   - cardData: {fileID: 11400000, guid: ea44772d7a4698f438b559c3f64202cc, type: 2}
   - cardData: {fileID: 11400000, guid: 4df1cf13bc77d4e4281a97e37a532405, type: 2}
@@ -7079,6 +7077,7 @@ MonoBehaviour:
     - {fileID: 1478358311}
     - {fileID: 1167707089}
     - {fileID: 1032171911}
+  spawnInterval: 0.2
 --- !u!1 &803980273
 GameObject:
   m_ObjectHideFlags: 0
