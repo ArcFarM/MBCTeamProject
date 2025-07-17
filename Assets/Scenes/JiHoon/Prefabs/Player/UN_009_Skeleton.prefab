@@ -7922,8 +7922,8 @@ MonoBehaviour:
   baseColSize: 1
   baseSplash: 0
   baseHealth: 100
-  baseDamage: 10
-  baseAtkSpd: 1
+  baseDamage: 20
+  baseAtkSpd: 2
   baseRange: 1
   baseSpd: 1
   currRawSize: 1
