@@ -13,135 +13,141 @@ MonoBehaviour:
   m_Name: UnitsAnimationData
   m_EditorClassIdentifier: 
   unitConfigs:
-  - unitID: 111
+  - unitID: UN_001
     unitName: 222
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 222
+  - unitID: UN_002
     unitName: 222
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 333
+  - unitID: UN_003
     unitName: 333
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 1
+  - unitID: UN_004
     unitName: 1
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 2
+  - unitID: UN_005
     unitName: 2
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 3
+  - unitID: UN_006
     unitName: 3
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 4
+  - unitID: UN_007
     unitName: 4
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 5
+  - unitID: UN_008
     unitName: 5
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 6
+  - unitID: UN_009
     unitName: 6
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 7
+  - unitID: UN_010
     unitName: 7
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 8
+  - unitID: UN_011
     unitName: 8
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 9
+  - unitID: UN_012
     unitName: 9
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 10
+  - unitID: UN_013
     unitName: 10
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 11
-    unitName: 11
+  - unitID: UN_014
+    unitName: 0
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 12
+  - unitID: UN_015
     unitName: 12
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 13
+  - unitID: UN_016
     unitName: 13
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 14
+  - unitID: UN_017
     unitName: 14
     attackDamageFrame: 15
     attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 95
-    unitName: 95
-    attackDamageFrame: 1
-    attackCompleteFrame: 1
+  - unitID: UN_018
+    unitName: 14
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 96
-    unitName: 96
-    attackDamageFrame: 1
-    attackCompleteFrame: 1
+  - unitID: UN_019
+    unitName: 14
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 97
-    unitName: 97
-    attackDamageFrame: 1
-    attackCompleteFrame: 1
+  - unitID: UN_020
+    unitName: 14
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 98
-    unitName: 98
-    attackDamageFrame: 1
-    attackCompleteFrame: 1
+  - unitID: UN_021
+    unitName: 14
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
-  - unitID: 99
-    unitName: 99
-    attackDamageFrame: 1
-    attackCompleteFrame: 1
+  - unitID: UN_022
+    unitName: 14
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
+    frameRate: 60
+    idleLoopInterval: 1
+  - unitID: UN_023
+    unitName: 14
+    attackDamageFrame: 15
+    attackCompleteFrame: 30
     frameRate: 60
     idleLoopInterval: 1
