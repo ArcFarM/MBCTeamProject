@@ -2,9 +2,17 @@
     "Name": "SongJiEun_Sauce",
     "Path": "Assets/SPUM/Resources/Addons",
     "Version": "",
-    "CreationDate": "2025-07-17 13:12:51",
+    "CreationDate": "2025-07-17 14:47:50",
     "SpumAnimationData": [],
     "SpumTextureData": [
+        {
+            "Name": "apprentice Archer",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
+        },
         {
             "Name": "apprentice Archer",
             "UnitType": "Unit",
@@ -22,18 +30,10 @@
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
         },
         {
-            "Name": "apprentice Archer",
-            "UnitType": "Unit",
-            "PartType": "Cloth",
-            "SubType": "Right",
-            "PartSubType": "",
-            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
-        },
-        {
             "Name": "DevilClothes",
             "UnitType": "Unit",
             "PartType": "Cloth",
-            "SubType": "Body",
+            "SubType": "Right",
             "PartSubType": "",
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/DevilClothes"
         },
@@ -41,7 +41,7 @@
             "Name": "DevilClothes",
             "UnitType": "Unit",
             "PartType": "Cloth",
-            "SubType": "Right",
+            "SubType": "Body",
             "PartSubType": "",
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/DevilClothes"
         },
@@ -76,6 +76,14 @@
             "SubType": "AssassinHat",
             "PartSubType": "",
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/AssassinHat"
+        },
+        {
+            "Name": "Fire",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "Fire",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/Fire"
         },
         {
             "Name": "HighArcheHat",
@@ -148,6 +156,14 @@
             "SubType": "DurahanHair",
             "PartSubType": "Hammer",
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/6_Weapons/6_Hammer/DurahanHair"
+        },
+        {
+            "Name": "PoisonPill",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "PoisonPill",
+            "PartSubType": "Hammer",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/6_Weapons/6_Hammer/PoisonPill"
         },
         {
             "Name": "WoodenSword",
