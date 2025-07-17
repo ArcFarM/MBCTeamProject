@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fccf7af8846d1d4bb15fee773f7160c, type: 3}
   m_Name: Item1
   m_EditorClassIdentifier: 
-  itemName: item1
+  itemName: "\uC6A9\uC0AC"
   description: 'asdaf121
 
     dsf1d23sf1
