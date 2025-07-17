@@ -7395,7 +7395,7 @@ MonoBehaviour:
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
   engageDistanceMultiplier: 0.75
-  maxCombatTarget: 0
+  maxCombatTarget: 1
   combatTargetList: []
   currentState: 0
   stateUpdateInterval: 0.1
