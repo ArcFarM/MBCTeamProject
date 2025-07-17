@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b25574a5614154b9e4139f18b65d18, type: 3}
+  m_Name: UnitCardData_Assassin
+  m_EditorClassIdentifier: 
+  unitPrefab: {fileID: 6126491108492895154, guid: 28d64f8bb605cf341b286316185f2254, type: 3}
+  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
+  tooltipText: "\uB4A4\uC5D0\uC11C \uC8FD\uC774\uB294 \uAC83\uC744 \uC88B\uC544\uD558\uB294
+    \uC545\uC885\uC785\uB2C8\uB2E4."
+  specialAbilities: []

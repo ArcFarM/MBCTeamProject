@@ -7295,6 +7295,8 @@ MonoBehaviour:
   currSpd: 1
   stats: []
   prices: 00000000000000000000000000000000
+  unitCardData: {fileID: 11400000, guid: f7763ea66f65a4d4c957d0dcfc9b6182, type: 2}
+  specialAbilities: []
 --- !u!70 &7033719014778925453
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -7392,6 +7394,7 @@ MonoBehaviour:
   currentState: 0
   stateUpdateInterval: 0.1
   unitAnim: {fileID: -8614656229711246947}
+  enemyMovement: {fileID: 0}
 --- !u!114 &-8614656229711246947
 MonoBehaviour:
   m_ObjectHideFlags: 0

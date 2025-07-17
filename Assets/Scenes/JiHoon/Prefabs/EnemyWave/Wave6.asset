@@ -16,31 +16,31 @@ MonoBehaviour:
   enemyGroups:
   - groupName: 6
     enemyPrefabs:
-    - {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
-    - {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
-    - {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
-    - {fileID: 3307697242633967457, guid: d9e3c41da02a858439524a4b72caee17, type: 3}
+    - {fileID: 6126491108492895154, guid: 28d64f8bb605cf341b286316185f2254, type: 3}
+    - {fileID: 6741373762652343638, guid: fc89aecc7ba7eed4e9f7583f3b54e8c2, type: 3}
+    - {fileID: 7283290810665584157, guid: aafa49acfe1031a439e497e57e024c7d, type: 3}
+    - {fileID: 7283290810665584157, guid: aafa49acfe1031a439e497e57e024c7d, type: 3}
     enemyCount: 4
     spawnPosition: 0
-    enemySpacing: 0.5
+    enemySpacing: 0.8
     delayAfterGroup: 0
   - groupName: 6
     enemyPrefabs:
-    - {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
-    - {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
-    - {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
-    - {fileID: 631529754140920010, guid: c32e8bffa93bf2f40be3bc9c98a45414, type: 3}
+    - {fileID: 6126491108492895154, guid: 28d64f8bb605cf341b286316185f2254, type: 3}
+    - {fileID: 6741373762652343638, guid: fc89aecc7ba7eed4e9f7583f3b54e8c2, type: 3}
+    - {fileID: 4939289540254946628, guid: 86758f40432eb0248ac25ca81603792b, type: 3}
+    - {fileID: 7283290810665584157, guid: aafa49acfe1031a439e497e57e024c7d, type: 3}
     enemyCount: 4
     spawnPosition: 1
-    enemySpacing: 0.5
+    enemySpacing: 0.8
     delayAfterGroup: 0
   - groupName: 6
     enemyPrefabs:
-    - {fileID: 1856652019981532589, guid: 562d03f1b6e64b845a52edb3247ec1c3, type: 3}
-    - {fileID: 4877044180290529518, guid: 44b97a72b3a8e134fb6997c78fb0c463, type: 3}
-    - {fileID: 1258851370833624633, guid: 4061c5d6b5242ed42bf411164d124c64, type: 3}
-    - {fileID: 631529754140920010, guid: c32e8bffa93bf2f40be3bc9c98a45414, type: 3}
+    - {fileID: 6126491108492895154, guid: 28d64f8bb605cf341b286316185f2254, type: 3}
+    - {fileID: 6741373762652343638, guid: fc89aecc7ba7eed4e9f7583f3b54e8c2, type: 3}
+    - {fileID: 7283290810665584157, guid: aafa49acfe1031a439e497e57e024c7d, type: 3}
+    - {fileID: 7283290810665584157, guid: aafa49acfe1031a439e497e57e024c7d, type: 3}
     enemyCount: 4
     spawnPosition: 2
-    enemySpacing: 0.5
+    enemySpacing: 0.8
     delayAfterGroup: 0

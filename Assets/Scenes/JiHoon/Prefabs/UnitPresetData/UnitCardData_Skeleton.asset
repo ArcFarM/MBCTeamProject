@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b25574a5614154b9e4139f18b65d18, type: 3}
-  m_Name: UnitCardData_Blue1
+  m_Name: UnitCardData_Skeleton
   m_EditorClassIdentifier: 
-  unitPrefab: {fileID: 2721758889849644916, guid: d89133a213b141b459566ebd3aea8112, type: 3}
-  unitIcon: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
-  hoverIcon: {fileID: 2589877706116281792, guid: d002e2192380a7542b78487efea81af4, type: 3}
+  unitPrefab: {fileID: 9081959168631761551, guid: 68bb3cb0510442b48bfe7f191108e9b1, type: 3}
+  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
-  tooltipText: "\uC554\uC0B4\uC790\n\uB4A4\uC5D0\uC11C \uC8FD\uC774\uB294\uAC78 \uC88B\uC544\uD558\uB294
-    \uC545\uC885\uC785\uB2C8\uB2E4"
+  tooltipText: "\uD558\uCE35\uBBFC \uC2A4\uCF08\uB808\uD1A4\uC785\uB2C8\uB2E4. \uCC28\uACE0
+    \uB118\uCE58\uAC8C \uB9CE\uC8E0"
   specialAbilities: []

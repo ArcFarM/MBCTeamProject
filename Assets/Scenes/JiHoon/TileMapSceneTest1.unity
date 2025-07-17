@@ -4283,17 +4283,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitPresets:
-  - cardData: {fileID: 11400000, guid: b658bbb393c7f464d85e38038c64a6e5, type: 2}
-  - cardData: {fileID: 11400000, guid: 34b415d748157a24d9049c5c0f4f49a0, type: 2}
-  - cardData: {fileID: 11400000, guid: 546b6e5907c2b2a45b494bad9e25fea2, type: 2}
+  - cardData: {fileID: 11400000, guid: 64712466ba1cab64f9f861704d6bd3b3, type: 2}
+  - cardData: {fileID: 11400000, guid: bb42d5576ce3be041820a1d299237036, type: 2}
+  - cardData: {fileID: 11400000, guid: 114434cd16242fb419b09b840e78d7d5, type: 2}
   - cardData: {fileID: 11400000, guid: f7763ea66f65a4d4c957d0dcfc9b6182, type: 2}
-  - cardData: {fileID: 11400000, guid: 1d21106990a1e3a4fab733444f370836, type: 2}
-  - cardData: {fileID: 11400000, guid: 824b8892946b1d0478a5fd880de4222e, type: 2}
-  - cardData: {fileID: 11400000, guid: d4d0d4ebb97b94f4e93d84aa39c7ac4f, type: 2}
-  - cardData: {fileID: 11400000, guid: 7b8de6496d4930f469d12dd19c297c3a, type: 2}
-  - cardData: {fileID: 11400000, guid: d7ac57b8f775e00449df082009eb54d7, type: 2}
-  - cardData: {fileID: 11400000, guid: 2bb005fc5b0866845912ca5a8f8f2d5a, type: 2}
-  - cardData: {fileID: 11400000, guid: b418ce745cf6eda429fa54c7dd47d693, type: 2}
+  - cardData: {fileID: 11400000, guid: 2aaeb81eb73bfdf4bb9574c4405ee237, type: 2}
+  - cardData: {fileID: 11400000, guid: ea44772d7a4698f438b559c3f64202cc, type: 2}
+  - cardData: {fileID: 11400000, guid: 4df1cf13bc77d4e4281a97e37a532405, type: 2}
+  - cardData: {fileID: 11400000, guid: 355482fc9dca1624db0c83bed00d5d78, type: 2}
+  - cardData: {fileID: 11400000, guid: c2e18edbb5dff5947af3027526f182bf, type: 2}
+  - cardData: {fileID: 11400000, guid: 59722175fd00dac4caeda1451385f16a, type: 2}
   unitContainer: {fileID: 1999991201}
 --- !u!1 &458420822
 GameObject:
@@ -7197,7 +7196,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &852641853
 RectTransform:
   m_ObjectHideFlags: 0
