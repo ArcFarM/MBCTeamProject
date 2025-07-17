@@ -2,17 +2,9 @@
     "Name": "SongJiEun_Sauce",
     "Path": "Assets/SPUM/Resources/Addons",
     "Version": "",
-    "CreationDate": "2025-07-17 11:44:42",
+    "CreationDate": "2025-07-17 13:12:51",
     "SpumAnimationData": [],
     "SpumTextureData": [
-        {
-            "Name": "apprentice Archer",
-            "UnitType": "Unit",
-            "PartType": "Cloth",
-            "SubType": "Right",
-            "PartSubType": "",
-            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
-        },
         {
             "Name": "apprentice Archer",
             "UnitType": "Unit",
@@ -30,10 +22,18 @@
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
         },
         {
-            "Name": "DevilClothes",
+            "Name": "apprentice Archer",
             "UnitType": "Unit",
             "PartType": "Cloth",
             "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
+        },
+        {
+            "Name": "DevilClothes",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
             "PartSubType": "",
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/DevilClothes"
         },
@@ -41,7 +41,7 @@
             "Name": "DevilClothes",
             "UnitType": "Unit",
             "PartType": "Cloth",
-            "SubType": "Body",
+            "SubType": "Right",
             "PartSubType": "",
             "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/DevilClothes"
         },

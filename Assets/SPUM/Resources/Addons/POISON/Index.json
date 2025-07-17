@@ -1,0 +1,41 @@
+{
+    "Name": "POISON",
+    "Path": "Assets/SPUM/Resources/Addons",
+    "Version": "",
+    "CreationDate": "2025-07-17 13:12:51",
+    "SpumAnimationData": [],
+    "SpumTextureData": [
+        {
+            "Name": "NON",
+            "UnitType": "Unit",
+            "PartType": "Hair",
+            "SubType": "NON",
+            "PartSubType": "",
+            "Path": "Addons/POISON/0_Unit/0_Sprite/0_Hair/NON"
+        },
+        {
+            "Name": "NON",
+            "UnitType": "Unit",
+            "PartType": "FaceHair",
+            "SubType": "NON",
+            "PartSubType": "",
+            "Path": "Addons/POISON/0_Unit/0_Sprite/1_FaceHair/NON"
+        },
+        {
+            "Name": "NON",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "NON",
+            "PartSubType": "",
+            "Path": "Addons/POISON/0_Unit/0_Sprite/4_Helmet/NON"
+        },
+        {
+            "Name": "poison",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "poison",
+            "PartSubType": "Poison",
+            "Path": "Addons/POISON/0_Unit/0_Sprite/6_Weapons/9_Poison/poison"
+        }
+    ]
+}
