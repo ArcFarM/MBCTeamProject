@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8577feadd8d07df48859430da8158a0d
+guid: 72b30f86ab695114982b1b99f14952e8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3174720985442913561
-    second: temp_1752645582152.-1847806791_0
+      213: -4664672355845041346
+    second: WizardBook_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.50000006, y: 0.43260473}
+  spritePivot: {x: 0.25227693, y: 0.49089247}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 64
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temp_1752645582152.-1847806791_0
+      name: WizardBook_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 16
-        width: 30
-        height: 17
+        x: 7
+        y: 24
+        width: 23
+        height: 20
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e272b9851021f3d0800000000000000
-      internalID: -3174720985442913561
+      spriteID: e339544f431c34fb0800000000000000
+      internalID: -4664672355845041346
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      temp_1752645582152.-1847806791_0: -3174720985442913561
+      WizardBook_0: -4664672355845041346
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

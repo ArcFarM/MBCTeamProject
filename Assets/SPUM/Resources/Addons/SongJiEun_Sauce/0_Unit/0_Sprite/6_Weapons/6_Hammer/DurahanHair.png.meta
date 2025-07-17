@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e78e3f021f865eb4283f207f9cc0e259
+guid: 28583e845842b784a860135f5794ecd5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7000278854132367292
-    second: temp_1752646626187.496592593_0
+      213: -8100926053351596463
+    second: DurahanHair_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,8 +49,8 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.20309655, y: 0.45810562}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 64
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temp_1752646626187.496592593_0
+      name: DurahanHair_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 17
-        width: 11
-        height: 27
+        x: 9
+        y: 18
+        width: 36
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 44003c2a8730ade90800000000000000
-      internalID: -7000278854132367292
+      spriteID: 15e554eccaab39f80800000000000000
+      internalID: -8100926053351596463
       vertices: []
       indices: 
       edges: []
@@ -152,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      temp_1752646626187.496592593_0: -7000278854132367292
+      DurahanHair_0: -8100926053351596463
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: e52c2dc397b6e9245b9f4dd91eff31a9
+guid: c41f63fadea7add4f900ee493b151187
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3725777397336453744
-    second: temp_1752647034233.1880287779_0
-  - first:
-      213: 4936702806907748509
-    second: temp_1752647034233.1880287779_1
+      213: 5481438491819548220
+    second: SatanDevil_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,11 +46,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.49817866, y: 0.61657554}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -129,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Reft
+      name: SatanDevil_0
       rect:
         serializedVersion: 2
-        x: 25
-        y: 18
-        width: 6
-        height: 9
+        x: 16
+        y: 16
+        width: 32
+        height: 39
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,30 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0723b688dce94b330800000000000000
-      internalID: 3725777397336453744
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Right
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 18
-        width: 6
-        height: 9
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d90096f0c01b28440800000000000000
-      internalID: 4936702806907748509
+      spriteID: c3e9e03344bf11c40800000000000000
+      internalID: 5481438491819548220
       vertices: []
       indices: 
       edges: []
@@ -176,8 +151,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dfa12a7f12a76ed48b98d4509b20e226
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -186,8 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Reft: 3725777397336453744
-      Right: 4936702806907748509
+      SatanDevil_0: 5481438491819548220
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

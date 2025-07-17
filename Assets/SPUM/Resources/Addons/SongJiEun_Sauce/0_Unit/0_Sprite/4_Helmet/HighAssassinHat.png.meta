@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 3a3ce7cc9df5bc24893221481d3b221d
+guid: 07cab277793d1ee49a9e978ed3cde993
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4762631375909421667
-    second: temp_1752564734639.1786962120_0
-  - first:
-      213: -7048092766221503868
-    second: temp_1752564734639.1786962120_1
+      213: -4189695691409866341
+    second: HighAssassinHat_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,11 +46,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.48907125, y: 0.64389795}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -129,14 +126,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Right
+      name: HighAssassinHat_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 23
-        width: 9
-        height: 6
-      alignment: 9
+        x: 20
+        y: 19
+        width: 23
+        height: 19
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -144,30 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 362063db004481240800000000000000
-      internalID: 4762631375909421667
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Body
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 17
-        width: 14
-        height: 13
-      alignment: 9
-      pivot: {x: 0.4393079, y: 0.5538041}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 482fd55b8f4203e90800000000000000
-      internalID: -7048092766221503868
+      spriteID: b91c78477f53bd5c0800000000000000
+      internalID: -4189695691409866341
       vertices: []
       indices: 
       edges: []
@@ -176,8 +151,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 62c4b2977ce8e0740987148164d66a20
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -186,8 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Body: -7048092766221503868
-      Right: 4762631375909421667
+      HighAssassinHat_0: -4189695691409866341
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

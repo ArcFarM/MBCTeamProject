@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: af8335013a1e19f49b39c046d30c1af8
+guid: ff89a8dc1bf642048a0682468c5cd7ab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5937207107389900114
-    second: temp_1752645582160.-1847806791_0
+      213: -3493546860208996330
+    second: WoodenSword_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.49453577, y: 0.6530054}
+  spritePivot: {x: 0.2704918, y: 0.33424407}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 64
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temp_1752645582160.-1847806791_0
+      name: WoodenSword_0
       rect:
         serializedVersion: 2
-        x: 18
-        y: 29
-        width: 26
-        height: 24
+        x: 9
+        y: 16
+        width: 13
+        height: 27
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 25546e15862356250800000000000000
-      internalID: 5937207107389900114
+      spriteID: 610cf07e3ad648fc0800000000000000
+      internalID: -3493546860208996330
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      temp_1752645582160.-1847806791_0: 5937207107389900114
+      WoodenSword_0: -3493546860208996330
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,0 +1,161 @@
+{
+    "Name": "SongJiEun_Sauce",
+    "Path": "Assets/SPUM/Resources/Addons",
+    "Version": "",
+    "CreationDate": "2025-07-17 11:44:42",
+    "SpumAnimationData": [],
+    "SpumTextureData": [
+        {
+            "Name": "apprentice Archer",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
+        },
+        {
+            "Name": "apprentice Archer",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
+        },
+        {
+            "Name": "apprentice Archer",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/apprentice Archer"
+        },
+        {
+            "Name": "DevilClothes",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/DevilClothes"
+        },
+        {
+            "Name": "DevilClothes",
+            "UnitType": "Unit",
+            "PartType": "Cloth",
+            "SubType": "Body",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/2_Cloth/DevilClothes"
+        },
+        {
+            "Name": "ArcherShoes",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Left",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/3_Pant/ArcherShoes"
+        },
+        {
+            "Name": "ArcherShoes",
+            "UnitType": "Unit",
+            "PartType": "Pant",
+            "SubType": "Right",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/3_Pant/ArcherShoes"
+        },
+        {
+            "Name": "ArchesHat",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "ArchesHat",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/ArchesHat"
+        },
+        {
+            "Name": "AssassinHat",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "AssassinHat",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/AssassinHat"
+        },
+        {
+            "Name": "HighArcheHat",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "HighArcheHat",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/HighArcheHat"
+        },
+        {
+            "Name": "HighArcherHat",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "HighArcherHat",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/HighArcherHat"
+        },
+        {
+            "Name": "HighAssassinHat",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "HighAssassinHat",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/HighAssassinHat"
+        },
+        {
+            "Name": "PlagueDoctor",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "PlagueDoctor",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/PlagueDoctor"
+        },
+        {
+            "Name": "SatanDevil",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "SatanDevil",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/SatanDevil"
+        },
+        {
+            "Name": "WizarCloak",
+            "UnitType": "Unit",
+            "PartType": "Helmet",
+            "SubType": "WizarCloak",
+            "PartSubType": "",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/4_Helmet/WizarCloak"
+        },
+        {
+            "Name": "MagicWand",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "MagicWand",
+            "PartSubType": "Wand",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/6_Weapons/5_Wand/MagicWand"
+        },
+        {
+            "Name": "WizardBook",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "WizardBook",
+            "PartSubType": "Wand",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/6_Weapons/5_Wand/WizardBook"
+        },
+        {
+            "Name": "DurahanHair",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "DurahanHair",
+            "PartSubType": "Hammer",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/6_Weapons/6_Hammer/DurahanHair"
+        },
+        {
+            "Name": "WoodenSword",
+            "UnitType": "Unit",
+            "PartType": "Weapons",
+            "SubType": "WoodenSword",
+            "PartSubType": "Hammer",
+            "Path": "Addons/SongJiEun_Sauce/0_Unit/0_Sprite/6_Weapons/6_Hammer/WoodenSword"
+        }
+    ]
+}

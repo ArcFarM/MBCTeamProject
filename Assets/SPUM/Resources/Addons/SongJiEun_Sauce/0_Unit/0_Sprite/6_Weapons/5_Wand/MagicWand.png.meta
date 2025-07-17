@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 4994ee80b74532741992184bf6954781
+guid: da525f006a1eeb04d9a4ba7106cc9ca7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -108640369624807871
-    second: temp_1752645582149.-1847806791_0
-  - first:
-      213: -2198047630974753563
-    second: temp_1752645582149.-1847806791_1
-  - first:
-      213: -1491926793632412794
-    second: temp_1752645582149.-1847806791_2
+      213: -1286768236951378217
+    second: MagicWand_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -30,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -52,11 +46,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.28506422, y: 0.41985428}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -78,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 64
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
@@ -132,67 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Right
+      name: MagicWand_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 24
-        width: 7
-        height: 7
-      alignment: 9
-      pivot: {x: 0.5, y: 0.42857143}
+        x: 11
+        y: 17
+        width: 11
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1460f30d8280e7ef0800000000000000
-      internalID: -108640369624807871
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Body
-      rect:
-        serializedVersion: 2
-        x: 24
-        y: 21
-        width: 19
-        height: 12
-      alignment: 9
-      pivot: {x: 0.40796772, y: 0.5097146}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5e46c5c4357fe71e0800000000000000
-      internalID: -2198047630974753563
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Reft
-      rect:
-        serializedVersion: 2
-        x: 44
-        y: 24
-        width: 7
-        height: 7
-      alignment: 9
-      pivot: {x: 0.5, y: 0.64285713}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 68b07aa5c7c9b4be0800000000000000
-      internalID: -1491926793632412794
+      spriteID: 7d6e1482b1b742ee0800000000000000
+      internalID: -1286768236951378217
       vertices: []
       indices: 
       edges: []
@@ -202,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -211,9 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Body: -2198047630974753563
-      Reft: -1491926793632412794
-      Right: -108640369624807871
+      MagicWand_0: -1286768236951378217
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

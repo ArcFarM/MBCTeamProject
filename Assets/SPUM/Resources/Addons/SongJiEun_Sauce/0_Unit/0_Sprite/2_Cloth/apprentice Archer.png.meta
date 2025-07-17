@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 74502a68108ec4647bb33ae9183a6537
+guid: 93e87368612d2c343a37dfb9f1c5ae86
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8690466546213150123
-    second: 1752561099216_0
+      213: 5514403627783839035
+    second: apprentice Archer_0
+  - first:
+      213: -7481383352822853162
+    second: apprentice Archer_1
+  - first:
+      213: 9033357817548542159
+    second: apprentice Archer_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,11 +52,11 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
-  spritePivot: {x: 0.49271405, y: 0.6420765}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -126,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1752561099216_0
+      name: Right
       rect:
         serializedVersion: 2
-        x: 19
-        y: 36
-        width: 24
-        height: 17
+        x: 16
+        y: 24
+        width: 7
+        height: 7
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +147,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 552ac8468b2456780800000000000000
-      internalID: -8690466546213150123
+      spriteID: b3d5e2602e8178c40800000000000000
+      internalID: 5514403627783839035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Body
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 21
+        width: 19
+        height: 12
+      alignment: 9
+      pivot: {x: 0.40183178, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d1197a8a79cc2890800000000000000
+      internalID: -7481383352822853162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Left
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 24
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc09af3031fec5d70800000000000000
+      internalID: 9033357817548542159
       vertices: []
       indices: 
       edges: []
@@ -151,8 +201,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 0a640377765a29b4c840d91108040b45
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -161,7 +211,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      1752561099216_0: -8690466546213150123
+      Body: -7481383352822853162
+      Left: 9033357817548542159
+      Right: 5514403627783839035
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

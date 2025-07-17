@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9b7b9c5fa9bdbe340a4859fdeff6da6b
+guid: b09f8c94620a830489e39f3f9a30fc5b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3315848125739624095
-    second: temp_1752645582154.-1847806791_0
+      213: 1677682568058323520
+    second: WizarCloak_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 9
-  spritePivot: {x: 0.48542812, y: 0.636612}
+  spritePivot: {x: 0.48907128, y: 0.62386155}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temp_1752645582154.-1847806791_0
+      name: WizarCloak_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 26
-        width: 32
-        height: 29
+        x: 19
+        y: 16
+        width: 24
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1691520a2bdbbf1d0800000000000000
-      internalID: -3315848125739624095
+      spriteID: 0424bfa2863584710800000000000000
+      internalID: 1677682568058323520
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      temp_1752645582154.-1847806791_0: -3315848125739624095
+      WizarCloak_0: 1677682568058323520
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b23a856029e26084292e98ca3d5ee962
+guid: 1c18b69460c85e1498f2fd5f24d0a70e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7195339142683094304
-    second: temp_1752645582164.-1847806791_0
+      213: -4762235175417675851
+    second: HighArcherHat_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,8 +49,8 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.49271405, y: 0.6275045}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: temp_1752645582164.-1847806791_0
+      name: HighArcherHat_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 16
-        width: 13
-        height: 27
+        x: 19
+        y: 36
+        width: 24
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 02de616e3dafad360800000000000000
-      internalID: 7195339142683094304
+      spriteID: 5bffb50e65429edb0800000000000000
+      internalID: -4762235175417675851
       vertices: []
       indices: 
       edges: []
@@ -152,7 +152,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      temp_1752645582164.-1847806791_0: 7195339142683094304
+      HighArcherHat_0: -4762235175417675851
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
