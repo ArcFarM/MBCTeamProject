@@ -72,7 +72,7 @@ namespace MainGame.Units {
         //프로퍼티처럼 쓰일 메서드
         public float GetStat(StatType st) {
             int index = (int)st;
-            Debug.Log(stats.Length);
+            //Debug.Log(stats.Length);
             if (index >= 0 && index < stats.Length) return stats[index];
             else {
                 Debug.LogError("올바르지 않은 StatType 입력됨 : "+ st);

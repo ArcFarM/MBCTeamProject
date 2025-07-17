@@ -49,7 +49,8 @@ namespace MainGame.Units.Battle {
         }
 
         private void Start() {
-            detectingRange = Mathf.Max(ub.GetStat(StatType.CurrRange) * detectingMultiplier, detectingRangeconstant);
+            float range = ub.GetStat(StatType.CurrRange);
+            detectingRange = Mathf.Max(range * detectingMultiplier, range + detectingRangeconstant);
             StartStateMachine();
         }
 
@@ -130,15 +131,17 @@ namespace MainGame.Units.Battle {
         }
 
         protected virtual void HandleIdleState() {
-            ChangeState(CombatState.Detecting);
             if(ub.GetFaction == UnitFaction.Ally) transform.localScale = new Vector3(1, 1, 1); // 아군은 기본 스케일로 초기화
             else if (ub.GetFaction == UnitFaction.Enemy) transform.localScale = new Vector3(-1, 1, 1); // 적군은 반전된 스케일로 초기화
+            ChangeState(CombatState.Detecting);
         }
 
         protected virtual void HandleDetectingState() {
+            //비활성화 됐거나 죽은 대상 삭제
             if (currentTarget != null && (!currentTarget.activeSelf || currentTarget.GetComponent<UnitBase>().IsDead)) {
                 currentTarget = null;
             }
+            //이미 전투하기로 결정된 대상이 있으면 전투 돌입
             if (currentTarget != null) {
                 ChangeState(CombatState.Moving);
                 return;
@@ -152,7 +155,7 @@ namespace MainGame.Units.Battle {
                 if (currentTarget.TryGetComponent<BattleBase>(out var targetBattleBase)) {
                     targetBattleBase.AddAttacker(gameObject);
                 }
-                combatTargetList.Clear();
+                //combatTargetList.Clear();
                 ChangeState(CombatState.Moving);
             }
         }
