@@ -32,8 +32,9 @@ namespace MainGame.Units.Battle {
         private EnemyMovement enemyMovement;
 
         private Rigidbody2D rb;
-        private float lastAttackTime = -999f;
-        private float attackCooldown => 1f / ub.GetStat(StatType.CurrAtkSpd);
+        //공격 대기 시간
+        bool isAttackCooldown = false;
+
         #endregion
 
         #region Properties
@@ -188,10 +189,7 @@ namespace MainGame.Units.Battle {
                 return;
             }
 
-            if (Time.time >= lastAttackTime + attackCooldown) {
-                Attack(currentTarget);
-                lastAttackTime = Time.time;
-            }
+            Attack(currentTarget);
 
             float engageDistance = currentTarget.GetComponent<UnitBase>().GetStat(StatType.CurrRange) * engageDistanceMultiplier;
             if (Vector2.Distance(transform.position, currentTarget.transform.position) > engageDistance) {
@@ -276,6 +274,8 @@ namespace MainGame.Units.Battle {
         }
 
         public virtual void Attack(GameObject target) {
+            if(isAttackCooldown) return; // 공격 대기 시간 체크
+
             if (ub.IsDead || target == null) return;
             if (unitAnim != null) unitAnim.SetAnimTrigger(animParam.Param_trigger_attack);
             if (target.TryGetComponent<IBattle>(out var targetBattle)) {
@@ -284,6 +284,8 @@ namespace MainGame.Units.Battle {
         }
 
         protected virtual IEnumerator DamageCalc(IBattle target, float damage) {
+            isAttackCooldown = true;
+
             if (unitAnim != null) {
                 UnitAnimFrameConfig frameInfo = unitAnim.GetAnimData();
                 yield return new WaitForSeconds(frameInfo.attackCompleteFrame / (float)frameInfo.frameRate);
@@ -292,6 +294,9 @@ namespace MainGame.Units.Battle {
                 yield return new WaitForSeconds(0.1f);
             }
             if (target != null) target.TakeDamage(damage);
+            Debug.Log(ub.GetStat(StatType.CurrAtkSpd));
+            yield return new WaitForSeconds(ub.GetStat(StatType.CurrAtkSpd));
+            isAttackCooldown = false;
         }
         #endregion
     }
