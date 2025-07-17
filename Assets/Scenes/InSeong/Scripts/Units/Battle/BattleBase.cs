@@ -209,7 +209,8 @@ namespace MainGame.Units.Battle {
         private void FlipSprite(float xValue) {
             Vector3 scale = transform.localScale;
             //기본 스프라이트가 왼쪽을 보고 있음
-            scale.x = scale.x * (xValue > transform.position.x ? -1 : 1);
+            //대상이 나보다 오른쪽이면 오른 쪽 보고, 아니면 왼쪽 보게 하기
+            scale.x = (xValue > transform.position.x ? -1 : 1);
             transform.localScale = scale;
         }
 
@@ -290,7 +291,7 @@ namespace MainGame.Units.Battle {
             else {
                 yield return new WaitForSeconds(0.1f);
             }
-            if (target != null != null) target.TakeDamage(damage);
+            if (target != null) target.TakeDamage(damage);
         }
         #endregion
     }

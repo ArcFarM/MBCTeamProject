@@ -11,8 +11,8 @@ namespace JiHoon {
         [SerializeField] private float waypointArrivalRadius = 0.5f;
 
         [Header("뭉침 방지 설정")]
-        [SerializeField] private float separationRadius = 1.2f;
-        [SerializeField] private float separationForce = 1.5f;
+        [SerializeField] private float separationRadius = 0.1f;
+        [SerializeField] private float separationForce = 0.25f;
 
         private Transform[] waypoints;
         private int currentWaypointIndex = 0;
