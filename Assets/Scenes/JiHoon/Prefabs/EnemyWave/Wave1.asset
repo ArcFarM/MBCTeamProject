@@ -26,7 +26,7 @@ MonoBehaviour:
   - groupName: 1
     enemyPrefabs:
     - {fileID: 4939289540254946628, guid: 86758f40432eb0248ac25ca81603792b, type: 3}
-    - {fileID: 1376788605711467294, guid: 91f21ac610dfeac4689f1986210cf8ec, type: 3}
+    - {fileID: 3694108820988057887, guid: 7d4a448b9083b344c9856f7558a7ac9b, type: 3}
     enemyCount: 2
     spawnPosition: 1
     enemySpacing: 0.8

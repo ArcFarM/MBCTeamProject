@@ -2929,11 +2929,10 @@ GameObject:
   - component: {fileID: 1314473189454692576}
   - component: {fileID: -6376621919374079768}
   - component: {fileID: -6232661068639644151}
-  - component: {fileID: 4325606447104383218}
   - component: {fileID: 495761930397236772}
   - component: {fileID: -1307944034085358912}
   - component: {fileID: 1998578675362531638}
-  - component: {fileID: -957613395068696446}
+  - component: {fileID: -504599174586249014}
   m_Layer: 5
   m_Name: UN_022_Assassin
   m_TagString: Unit
@@ -6151,10 +6150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ub: {fileID: -957613395068696446}
+  ub: {fileID: -504599174586249014}
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
-  engageDistanceMultiplier: 0.75
+  engageDistanceMultiplier: 1
   maxCombatTarget: 1
   combatTargetList: []
   currentState: 0
@@ -6197,18 +6196,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.4}
   m_Size: {x: 0.3, y: 0.3}
   m_Direction: 0
---- !u!114 &4325606447104383218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6126491108492895154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6d90b498a0a7642a3f5c45a5398a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &495761930397236772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6265,7 +6252,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-957613395068696446
+--- !u!114 &-504599174586249014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6274,12 +6261,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6126491108492895154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19b7f2a50298afb4794d291cf3d103bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 93364533096f0d04e97dbd825ef0941c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   unitID: UN_022
-  unitName: "\uC5B4\uC314\uC2E0"
-  faction: 0
+  unitName: 
+  faction: 1
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
@@ -6297,9 +6284,7 @@ MonoBehaviour:
   currRange: 1
   currSpd: 1
   stats: []
-  prices: 00000000000000000000000000000000
-  unitCardData: {fileID: 0}
-  specialAbilities: []
+  penalty: []
 --- !u!1 &6171445198803798775
 GameObject:
   m_ObjectHideFlags: 0

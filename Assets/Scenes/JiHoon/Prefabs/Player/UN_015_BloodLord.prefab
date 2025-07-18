@@ -7316,7 +7316,7 @@ MonoBehaviour:
   ub: {fileID: -1277800177614813546}
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
-  engageDistanceMultiplier: 0.75
+  engageDistanceMultiplier: 3
   maxCombatTarget: 1
   combatTargetList: []
   currentState: 0
@@ -7392,7 +7392,7 @@ MonoBehaviour:
   baseHealth: 600
   baseDamage: 300
   baseAtkSpd: 1
-  baseRange: 3
+  baseRange: 2.5
   baseSpd: 1
   currRawSize: 1
   currColSize: 1

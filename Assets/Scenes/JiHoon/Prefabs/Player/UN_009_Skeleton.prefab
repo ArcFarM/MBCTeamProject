@@ -7848,7 +7848,7 @@ MonoBehaviour:
   ub: {fileID: 5663876200454805188}
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
-  engageDistanceMultiplier: 0.75
+  engageDistanceMultiplier: 1
   maxCombatTarget: 1
   combatTargetList: []
   currentState: 0

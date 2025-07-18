@@ -29,7 +29,7 @@ MonoBehaviour:
     - {fileID: 3694108820988057887, guid: 7d4a448b9083b344c9856f7558a7ac9b, type: 3}
     - {fileID: 4939289540254946628, guid: 86758f40432eb0248ac25ca81603792b, type: 3}
     - {fileID: 7283290810665584157, guid: aafa49acfe1031a439e497e57e024c7d, type: 3}
-    enemyCount: 2
+    enemyCount: 4
     spawnPosition: 1
     enemySpacing: 0.8
     delayAfterGroup: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
     - {fileID: 6126491108492895154, guid: 28d64f8bb605cf341b286316185f2254, type: 3}
     - {fileID: 3694108820988057887, guid: 7d4a448b9083b344c9856f7558a7ac9b, type: 3}
     - {fileID: 7283290810665584157, guid: aafa49acfe1031a439e497e57e024c7d, type: 3}
-    enemyCount: 4
+    enemyCount: 3
     spawnPosition: 2
     enemySpacing: 0.8
     delayAfterGroup: 0
