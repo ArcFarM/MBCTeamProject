@@ -2712,6 +2712,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: afeded0fa86b71a4598b1f2795e11275, type: 2}
   gridParent: {fileID: 2027659722}
   itemButtonPrefab: {fileID: 417627971231818259, guid: f962bc3db6152e344aa713fdce6b1508, type: 3}
+  probabilityTable: {fileID: 0}
+  useProbabilitySystem: 1
   buyButton: {fileID: 747745937}
   effectText: {fileID: 389406641}
   npcIllustration: {fileID: 890288078}
@@ -22877,7 +22879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2081580138
 MonoBehaviour:
   m_ObjectHideFlags: 0

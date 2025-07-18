@@ -6,53 +6,54 @@ public class ChageScene : MonoBehaviour
 {
     private string mainMenuScene = "New Scene";
     public Button continueButton;
+    private string TileMapScene = "TileMapSceneTest1_Tutorial01";
 
 
-    public GameObject confirmPanel; // È®ÀÎÃ¢ ÆĞ³Î//
+    public GameObject confirmPanel; // í™•ì¸ì°½ íŒ¨ë„//
     
 
     private void Start()
     {
-        // ÀÌ¾îÇÏ±â ¹öÆ° »óÅÂ ¾÷µ¥ÀÌÆ®
+        // ì´ì–´í•˜ê¸° ë²„íŠ¼ ìƒíƒœ ì—…ë°ì´íŠ¸
         UpdateContinueButton();
     }
 
-    // »õ °ÔÀÓ ½ÃÀÛ
+    // ìƒˆ ê²Œì„ ì‹œì‘
     public void GameStartButton()
     {
         if(HasSaveData())
         {
-            // ÀúÀåµÈ µ¥ÀÌÅÍ°¡ ÀÖ´Ù¸é È®ÀÎÃ¢ ¶ç¿ì±â
+            // ì €ì¥ëœ ë°ì´í„°ê°€ ìˆë‹¤ë©´ í™•ì¸ì°½ ë„ìš°ê¸°
             confirmPanel.SetActive(true);
             
         }
         else
         {
-            SceneManager.LoadScene(mainMenuScene);
+            SceneManager.LoadScene(TileMapScene);
         }
     }
 
-    // ÀÌ¾îÇÏ±â ¹öÆ°
-    // Ã³À½¿¡ °ÔÀÓ½ºÅ¸Æ®¹öÆ°´©¸£¸é ´Ù ÃÊ±âÈ­µÇ°í ¸ŞÀÎ¸Ş´º¾ÀÀº ÀúÀå¾ÈÇÔ ¸ŞÀÎ¸Ş´º¾À¿¡¼­ ÀÌ¾îÇÏ±â ¹öÆ°À» ´©¸£¸é ÀúÀåµÈ ¾ÀÀ¸·Î ÀÌµ¿
-    // ´Ù¸¥¾À¿¡ AutoSaveScene½ºÅ©¸³Æ®°¡ ºÙ¾îÀÖ´Â ºó¿ÀºêÁ§Æ®°¡ ÀÖ´Â ¾À¸¸ ÀúÀåµÊ
+    // ì´ì–´í•˜ê¸° ë²„íŠ¼
+    // ì²˜ìŒì— ê²Œì„ìŠ¤íƒ€íŠ¸ë²„íŠ¼ëˆ„ë¥´ë©´ ë‹¤ ì´ˆê¸°í™”ë˜ê³  ë©”ì¸ë©”ë‰´ì”¬ì€ ì €ì¥ì•ˆí•¨ ë©”ì¸ë©”ë‰´ì”¬ì—ì„œ ì´ì–´í•˜ê¸° ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ì €ì¥ëœ ì”¬ìœ¼ë¡œ ì´ë™
+    // ë‹¤ë¥¸ì”¬ì— AutoSaveSceneìŠ¤í¬ë¦½íŠ¸ê°€ ë¶™ì–´ìˆëŠ” ë¹ˆì˜¤ë¸Œì íŠ¸ê°€ ìˆëŠ” ì”¬ë§Œ ì €ì¥ë¨
     public void ContinueGameButton()
     {
         if (HasSaveData())
         {
-            // ÀúÀåµÈ ¾À ·Îµå (ÀúÀåµÈ ·¹º§ÀÌ ÀÖ´Ù¸é)
+            // ì €ì¥ëœ ì”¬ ë¡œë“œ (ì €ì¥ëœ ë ˆë²¨ì´ ìˆë‹¤ë©´)
             string savedScene = PlayerPrefs.GetString("SavedScene", mainMenuScene);
             SceneManager.LoadScene(savedScene);
         }
         else
         {
-            Debug.LogWarning("ÀúÀåµÈ °ÔÀÓÀÌ ¾ø½À´Ï´Ù!");
+            Debug.LogWarning("ì €ì¥ëœ ê²Œì„ì´ ì—†ìŠµë‹ˆë‹¤!");
         }
     }
 
 
     public void OptionButton()
     {
-        Debug.Log("¿É¼Ç ¾À ÀÌµ¿");
+        Debug.Log("ì˜µì…˜ ì”¬ ì´ë™");
     }
 
     public void QuitButton()
@@ -64,14 +65,14 @@ public class ChageScene : MonoBehaviour
 #endif
     }
 
-    // ÀúÀå µ¥ÀÌÅÍ°¡ ÀÖ´ÂÁö È®ÀÎ
+    // ì €ì¥ ë°ì´í„°ê°€ ìˆëŠ”ì§€ í™•ì¸
     private bool HasSaveData()
     {
-        // PlayerPrefs¸¦ »ç¿ëÇÑ °£´ÜÇÑ ÀúÀå ½Ã½ºÅÛ
+        // PlayerPrefsë¥¼ ì‚¬ìš©í•œ ê°„ë‹¨í•œ ì €ì¥ ì‹œìŠ¤í…œ
         return PlayerPrefs.HasKey("GameSaved");
     }
 
-    // ÀÌ¾îÇÏ±â ¹öÆ° »óÅÂ ¾÷µ¥ÀÌÆ®
+    // ì´ì–´í•˜ê¸° ë²„íŠ¼ ìƒíƒœ ì—…ë°ì´íŠ¸
     private void UpdateContinueButton()
     {
         if (continueButton != null)

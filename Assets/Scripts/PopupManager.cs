@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 public class PopupManager : MonoBehaviour
 {
-    public GameObject popupPanel;   //ÆË¾÷ ÆĞ³Î
+    public GameObject popupPanel;   //íŒì—… íŒ¨ë„
 
-    public Button gameStartBtn; //°ÔÀÓ ½ÃÀÛ ¹öÆ°
-    public Button yesBtn; //¿¹ ¹öÆ°
-    public Button noBtn; //¾Æ´Ï¿À ¹öÆ°
+    public Button gameStartBtn; //ê²Œì„ ì‹œì‘ ë²„íŠ¼
+    public Button yesBtn; //ì˜ˆ ë²„íŠ¼
+    public Button noBtn; //ì•„ë‹ˆì˜¤ ë²„íŠ¼
 
     private void Start()
     {
-        //Ã³À½¿£ ÆË¾÷ ¼û±â±â
+        //ì²˜ìŒì—” íŒì—… ìˆ¨ê¸°ê¸°
         popupPanel.SetActive(false);
     }
     
@@ -22,13 +22,13 @@ public class PopupManager : MonoBehaviour
 
     public void OnClickYes()
     {
-        //±âÁ¸ ÀúÀåµ¥ÀÌÅÍ »èÁ¦ ÈÄ »õ °ÔÀÓ ½ÃÀÛ
+        //ê¸°ì¡´ ì €ì¥ë°ì´í„° ì‚­ì œ í›„ ìƒˆ ê²Œì„ ì‹œì‘
         DeleteSaveData();
         StartNewGame();
     }
     public void OnClickNo()
     {
-        //ÆË¾÷ ´İ±â
+        //íŒì—… ë‹«ê¸°
         popupPanel.SetActive(false);
     }
 
@@ -37,13 +37,13 @@ public class PopupManager : MonoBehaviour
     
     private void DeleteSaveData()
     {
-        //playerPrefs¿¡ ÀúÀåµÈ µ¥ÀÌÅÍ »èÁ¦(ÇÊ¿äÇÑ °æ¿ì¸¸ »èÁ¦)
+        //playerPrefsì— ì €ì¥ëœ ë°ì´í„° ì‚­ì œ(í•„ìš”í•œ ê²½ìš°ë§Œ ì‚­ì œ)
         PlayerPrefs.DeleteAll();
         PlayerPrefs.Save();
     }
     private void StartNewGame()
     {
-        //¿¹ ¹öÆ° : Ã¹ ¾ÀÀ¸·Î ÀÌµ¿
+        //ì˜ˆ ë²„íŠ¼ : ì²« ì”¬ìœ¼ë¡œ ì´ë™
         SceneManager.LoadScene("Mainmenu");
     }
 }
