@@ -192,6 +192,7 @@ namespace JiHoon {
             }
 
             cardSelectPanel.SetActive(false);
+            CardPool.ClearCardNames(); // 카드 선택 후 중복 방지용 해시셋 초기화
             PrepareNextWave();
         }
 

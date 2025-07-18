@@ -10133,7 +10133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51281fa93f92c1d4a8b07d2fc01c8381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardDatabase: {fileID: 11400000, guid: ca7a7758aad11354d83d2c855fb6bbbc, type: 2}
+  cardDatabase: {fileID: 11400000, guid: 4105480f0a2e9164b8f860ee1842ee17, type: 2}
   isCrisisEventActive: 0
   isCrisisExclusive: 1
 --- !u!4 &1033835769
