@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnitCardData_DrPlague
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 5594402510975165512, guid: 376f278e03e3cbe469d2979741cbccec, type: 3}
-  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  unitIcon: {fileID: 3907229906195976041, guid: cab9c562dc67d304db5b4c8bc75fc4b4, type: 3}
+  hoverIcon: {fileID: 517598691598996462, guid: ad1d6460ef0eb0249a8922bb9d63c778, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uB9C8\uC655\uAD70 \uC5F0\uAD6C\uC18C\uC758 \uC5F0\uAD6C\uC6D0 \uC785\uB2C8\uB2E4.
     \n\uC5B8\uC81C\uB098 \uC5F0\uAD6C\uC18C\uB294 \uBD88\uC774 \uCF1C\uC838 \n\uBE44\uBA85\uC18C\uB9AC\uAC00

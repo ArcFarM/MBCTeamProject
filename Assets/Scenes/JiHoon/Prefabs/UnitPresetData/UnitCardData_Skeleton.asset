@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnitCardData_Skeleton
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 9081959168631761551, guid: 68bb3cb0510442b48bfe7f191108e9b1, type: 3}
-  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  unitIcon: {fileID: -866892253051369948, guid: ccdceba10a0d06f48bd01535d717fabf, type: 3}
+  hoverIcon: {fileID: -7696303954208137168, guid: d6ce6760b234d994e8a531de95ef1fb2, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uD558\uCE35\uBBFC \uC2A4\uCF08\uB808\uD1A4\uC785\uB2C8\uB2E4. \uCC28\uACE0
     \uB118\uCE58\uAC8C \uB9CE\uC8E0"

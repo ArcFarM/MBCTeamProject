@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnitCardData_BloodSlave
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 2749741375467703070, guid: f56de88e288d98a48987ebaa3be403d5, type: 3}
-  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  unitIcon: {fileID: -7324718837304601039, guid: 4aefdb5df5222354d9ea9db48732e397, type: 3}
+  hoverIcon: {fileID: -2384731252217151230, guid: d88991ea52a75ec4682ef952acaf15dc, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uD53C\uC758 \uC8FC\uC778\uC758 \uB178\uC608\uC785\uB2C8\uB2E4. "
   specialAbilities: []

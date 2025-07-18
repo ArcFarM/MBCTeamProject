@@ -2703,17 +2703,13 @@ MonoBehaviour:
   shopPanel: {fileID: 1465857259}
   allItems:
   - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
-  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 06199c46638ee55439ffb9bd8d3bdebd, type: 2}
+  - {fileID: 11400000, guid: 6cec99e0b7321b845825c07066be99e3, type: 2}
+  - {fileID: 11400000, guid: 446ca50b820bf434291a3a74241980fa, type: 2}
+  - {fileID: 11400000, guid: 3c0fa7bba9c1c9e4db31d9cf844b0f43, type: 2}
+  - {fileID: 11400000, guid: 856b1e94f6063de489ed736ab60993c6, type: 2}
+  - {fileID: 11400000, guid: bf4dff1add4593e469d95efb0a4083f1, type: 2}
+  - {fileID: 11400000, guid: afeded0fa86b71a4598b1f2795e11275, type: 2}
   gridParent: {fileID: 2027659722}
   itemButtonPrefab: {fileID: 417627971231818259, guid: f962bc3db6152e344aa713fdce6b1508, type: 3}
   buyButton: {fileID: 747745937}
@@ -14676,9 +14672,9 @@ RectTransform:
   - {fileID: 2022769563}
   m_Father: {fileID: 2014495788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 237.5, y: -190}
   m_SizeDelta: {x: 475, y: 380}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1300439329
@@ -15584,7 +15580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1465857260
 RectTransform:
   m_ObjectHideFlags: 0

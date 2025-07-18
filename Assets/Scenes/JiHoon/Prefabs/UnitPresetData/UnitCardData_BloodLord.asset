@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnitCardData_BloodLord
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 7780158755118441526, guid: 0b7bd0ee044ba5241bcddc3240151448, type: 3}
-  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  unitIcon: {fileID: -6794909180888053462, guid: f65255d3b4687f244a410a6a5dff3ab1, type: 3}
+  hoverIcon: {fileID: -2947235909787578591, guid: f28f82717cca44e448fd72196d26e29f, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uD53C\uC758 \uC8FC\uC778\uC774\uC790 \uB9C8\uC655\uAD70\uC758 \uCD5C\uACE0
     \uC804\uB825\uC911 \uD558\uB098 \uC785\uB2C8\uB2E4\n \uD798\uC5D0\uB294 \uB300\uAC00\uAC00

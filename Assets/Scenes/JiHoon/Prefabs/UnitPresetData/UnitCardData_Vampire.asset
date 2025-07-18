@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnitCardData_Vampire
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 3140172387909017646, guid: ab9e24caf88cc23468f167640a580a14, type: 3}
-  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  unitIcon: {fileID: -5561965272136432373, guid: f4c3e60e57977b54d81978a5a90865b1, type: 3}
+  hoverIcon: {fileID: -1307667883546178248, guid: 4d82addd35c060b4da5aa0aa9d3d4425, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uD53C\uC758 \uC8FC\uC778\uC758 \uCDA9\uC2E4\uD55C \uC2EC\uBCF5\uC785\uB2C8\uB2E4."
   specialAbilities: []

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnitCardData_Ogre
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 8501783888101355829, guid: 4da87b3a022afb94b8a25800ebe03564, type: 3}
-  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  unitIcon: {fileID: 6689134158611597290, guid: 29fe50e793d95794ba2026e0bdf70feb, type: 3}
+  hoverIcon: {fileID: -647107638279973109, guid: eff5d1395f7327c4a9989c40943be1c3, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uC790\uB791\uC2A4\uB7EC\uC6B4 \uB9C8\uC655\uAD70\uC758 \uC815\uC608
     \uD0F1\uCEE4\uC785\uB2C8\uB2E4. \n\uC544\uBB34\uB9AC \uB9DE\uC544\uB3C4 \uC544\uD504\uC9C0

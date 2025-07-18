@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: UnitCardData_SkeletonArcher
   m_EditorClassIdentifier: 
   unitPrefab: {fileID: 3578224577947647990, guid: 6dd7c10a6efd5b048b6c2858dfc8ee48, type: 3}
-  unitIcon: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
-  hoverIcon: {fileID: 7074291879675921578, guid: 22b5f3c967a3fbf43813ad9ee3753bd9, type: 3}
+  unitIcon: {fileID: 4549549744988596482, guid: 65e26b5197b6f24448588acbd32dc83d, type: 3}
+  hoverIcon: {fileID: -8847763252662259620, guid: 5bcf24f54247b1e499e9479e023d6455, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uD558\uCE35\uBBFC \uC2A4\uCF08\uB808\uD1A4\uC785\uB2C8\uB2E4. \uCC28\uACE0
     \uB118\uCE58\uAC8C \uB9CE\uC8E0"
