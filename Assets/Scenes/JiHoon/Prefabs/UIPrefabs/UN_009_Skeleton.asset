@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fccf7af8846d1d4bb15fee773f7160c, type: 3}
+  m_Name: UN_009_Skeleton
+  m_EditorClassIdentifier: 
+  itemName: 
+  description: "\uD558\uCE35\uBBFC \uC2A4\uCF08\uB808\uD1A4\uC785\uB2C8\uB2E4. \uCC28\uACE0
+    \uB118\uCE58\uAC8C \uB9CE\uC8E0"
+  icon: {fileID: -2372755548260612164, guid: e5b8dbc5bd15a2c4d9c08eea0df47a2d, type: 3}
+  unrest: 25
+  price: -25
+  dominance: -10
+  manpower: -10
+  illustration: {fileID: -2372755548260612164, guid: e5b8dbc5bd15a2c4d9c08eea0df47a2d, type: 3}
+  itemType: 0
+  unitPrefab: {fileID: 9081959168631761551, guid: 68bb3cb0510442b48bfe7f191108e9b1, type: 3}
+  unitCardData: {fileID: 11400000, guid: 355482fc9dca1624db0c83bed00d5d78, type: 2}

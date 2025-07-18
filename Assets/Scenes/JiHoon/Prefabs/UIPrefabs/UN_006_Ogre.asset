@@ -17,10 +17,10 @@ MonoBehaviour:
     \uD0F1\uCEE4\uC785\uB2C8\uB2E4. \n\uC544\uBB34\uB9AC \uB9DE\uC544\uB3C4 \uC544\uD504\uC9C0
     \uC54A\uB2E4\uACE0 \uD569\uB2C8\uB2E4."
   icon: {fileID: -8225764335324119950, guid: 4f6c6c7cf960bab43aab00f80bbf0d05, type: 3}
-  unrest: 1
-  price: 5
-  dominance: 1
-  manpower: 1
+  unrest: 0
+  price: -80
+  dominance: -50
+  manpower: 60
   illustration: {fileID: -8225764335324119950, guid: 4f6c6c7cf960bab43aab00f80bbf0d05, type: 3}
   itemType: 0
   unitPrefab: {fileID: 8501783888101355829, guid: 4da87b3a022afb94b8a25800ebe03564, type: 3}

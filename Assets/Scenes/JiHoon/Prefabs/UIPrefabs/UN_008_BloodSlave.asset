@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fccf7af8846d1d4bb15fee773f7160c, type: 3}
+  m_Name: UN_008_BloodSlave
+  m_EditorClassIdentifier: 
+  itemName: 
+  description: "\uD53C\uC758 \uC8FC\uC778\uC758 \uB178\uC608\uC785\uB2C8\uB2E4. "
+  icon: {fileID: -5768564403951809459, guid: 87e9d7721a6dc1449a9bd887c3840d64, type: 3}
+  unrest: 20
+  price: -40
+  dominance: -20
+  manpower: -10
+  illustration: {fileID: -5768564403951809459, guid: 87e9d7721a6dc1449a9bd887c3840d64, type: 3}
+  itemType: 0
+  unitPrefab: {fileID: 2749741375467703070, guid: f56de88e288d98a48987ebaa3be403d5, type: 3}
+  unitCardData: {fileID: 11400000, guid: 114434cd16242fb419b09b840e78d7d5, type: 2}

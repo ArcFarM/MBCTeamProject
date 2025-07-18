@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fccf7af8846d1d4bb15fee773f7160c, type: 3}
+  m_Name: UN_018_SkeletonArcher
+  m_EditorClassIdentifier: 
+  itemName: 
+  description: "\uD558\uCE35\uBBFC \uC2A4\uCF08\uB808\uD1A4\uC785\uB2C8\uB2E4. \uCC28\uACE0
+    \uB118\uCE58\uAC8C \uB9CE\uC8E0"
+  icon: {fileID: 6736602876338177585, guid: 215663032125fcc4d96c71159c2db172, type: 3}
+  unrest: 30
+  price: -25
+  dominance: -15
+  manpower: -15
+  illustration: {fileID: 6736602876338177585, guid: 215663032125fcc4d96c71159c2db172, type: 3}
+  itemType: 0
+  unitPrefab: {fileID: 3578224577947647990, guid: 6dd7c10a6efd5b048b6c2858dfc8ee48, type: 3}
+  unitCardData: {fileID: 11400000, guid: c2e18edbb5dff5947af3027526f182bf, type: 2}
