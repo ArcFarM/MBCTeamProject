@@ -2931,9 +2931,9 @@ GameObject:
   - component: {fileID: -6232661068639644151}
   - component: {fileID: 4325606447104383218}
   - component: {fileID: 495761930397236772}
-  - component: {fileID: -3037669486577213533}
   - component: {fileID: -1307944034085358912}
   - component: {fileID: 1998578675362531638}
+  - component: {fileID: -957613395068696446}
   m_Layer: 5
   m_Name: UN_022_Assassin
   m_TagString: Unit
@@ -6151,7 +6151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4708adfe3f331c54fa19240a2008d7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ub: {fileID: -3037669486577213533}
+  ub: {fileID: -957613395068696446}
   detectingMultiplier: 1.5
   detectingRangeconstant: 2.5
   engageDistanceMultiplier: 0.75
@@ -6224,39 +6224,6 @@ MonoBehaviour:
   animator: {fileID: 4723029414247125959}
   animationData: {fileID: 11400000, guid: cc1766e71ff3dc841815f1c605757732, type: 2}
   unitID: UN_022
---- !u!114 &-3037669486577213533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6126491108492895154}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93364533096f0d04e97dbd825ef0941c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitID: UN_022
-  unitName: 
-  faction: 1
-  baseRawSize: 1
-  baseColSize: 1
-  baseSplash: 0
-  baseHealth: 1
-  baseDamage: 100
-  baseAtkSpd: 10
-  baseRange: 1
-  baseSpd: 1
-  currRawSize: 1
-  currColSize: 1
-  currSplash: 0
-  currHealth: 1
-  currDamage: 1
-  currAtkSpd: 1
-  currRange: 1
-  currSpd: 1
-  stats: []
-  penalty: []
 --- !u!114 &-1307944034085358912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6270,9 +6237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.8
-  waypointArrivalRadius: 0.5
-  separationRadius: 1.2
-  separationForce: 1.5
+  moveStartDelay: 0.5
 --- !u!50 &1998578675362531638
 Rigidbody2D:
   serializedVersion: 5
@@ -6288,7 +6253,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -6300,6 +6265,41 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &-957613395068696446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6126491108492895154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b7f2a50298afb4794d291cf3d103bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitID: UN_022
+  unitName: "\uC5B4\uC314\uC2E0"
+  faction: 0
+  baseRawSize: 1
+  baseColSize: 1
+  baseSplash: 0
+  baseHealth: 50
+  baseDamage: 70
+  baseAtkSpd: 1
+  baseRange: 1
+  baseSpd: 1
+  currRawSize: 1
+  currColSize: 1
+  currSplash: 0
+  currHealth: 1
+  currDamage: 1
+  currAtkSpd: 1
+  currRange: 1
+  currSpd: 1
+  stats: []
+  prices: 00000000000000000000000000000000
+  unitCardData: {fileID: 0}
+  specialAbilities: []
 --- !u!1 &6171445198803798775
 GameObject:
   m_ObjectHideFlags: 0

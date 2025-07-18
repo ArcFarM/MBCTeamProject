@@ -17,6 +17,6 @@ MonoBehaviour:
   hoverIcon: {fileID: -2947235909787578591, guid: f28f82717cca44e448fd72196d26e29f, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uD53C\uC758 \uC8FC\uC778\uC774\uC790 \uB9C8\uC655\uAD70\uC758 \uCD5C\uACE0
-    \uC804\uB825\uC911 \uD558\uB098 \uC785\uB2C8\uB2E4\n \uD798\uC5D0\uB294 \uB300\uAC00\uAC00
-    \uB530\uB985\uB2C8\uB2E4."
+    \uC804\uB825\uC911 \uD558\uB098 \uC785\uB2C8\uB2E4\n"
   specialAbilities: []
+  tooltipTextColor: {r: 1, g: 0, b: 0, a: 1}

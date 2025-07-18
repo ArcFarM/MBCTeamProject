@@ -1,0 +1,301 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: ShopProbabilityTable
+  m_EditorClassIdentifier: Assembly-CSharp::ShopProbabilityTable
+  itemProbabilities:
+  - itemName: "\uC6A9\uC0AC"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uAE30\uC0AC\uB2E8"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uAE30\uC0AC"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uACAC\uC2B5 \uAE30\uC0AC"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uACAC\uC2B5 \uC554\uC0B4\uC790"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uC624\uC6B0\uAC70"
+    itemData: {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+    probabilities:
+    - 0.1
+    - 0.5
+    - 1
+    - 5
+    - 10
+    - 15
+    - 20
+    - 30
+    - 35
+    - 35
+  - itemName: "\uB4C0\uB77C\uD55C"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uD53C \uC911\uB3C5\uC790"
+    itemData: {fileID: 11400000, guid: 06199c46638ee55439ffb9bd8d3bdebd, type: 2}
+    probabilities:
+    - 10
+    - 15
+    - 20
+    - 20
+    - 30
+    - 40
+    - 50
+    - 60
+    - 70
+    - 80
+  - itemName: "\uC2A4\uCF08\uB808\uD1A4"
+    itemData: {fileID: 11400000, guid: 6cec99e0b7321b845825c07066be99e3, type: 2}
+    probabilities:
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+  - itemName: "\uC2AC\uB77C\uC784"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uB9C8\uBC95\uC0AC"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uC544\uCC98 \uB9C8\uC2A4\uD130"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uC544\uCC98"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uACAC\uC2B5 \uC544\uCC98"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uD53C\uC758 \uC8FC\uC778"
+    itemData: {fileID: 11400000, guid: 446ca50b820bf434291a3a74241980fa, type: 2}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 5
+    - 10
+    - 20
+    - 20
+    - 25
+    - 35
+  - itemName: "\uD558\uAE09 \uBC40\uD30C\uC774\uC5B4"
+    itemData: {fileID: 11400000, guid: 3c0fa7bba9c1c9e4db31d9cf844b0f43, type: 2}
+    probabilities:
+    - 0
+    - 0
+    - 10
+    - 15
+    - 20
+    - 25
+    - 30
+    - 40
+    - 50
+    - 60
+  - itemName: "\uB9AC\uCE58"
+    itemData: {fileID: 11400000, guid: 856b1e94f6063de489ed736ab60993c6, type: 2}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 10
+    - 10
+    - 10
+    - 20
+    - 20
+    - 30
+  - itemName: "\uC2A4\uCF08\uB808\uD2B8 \uC544\uCC98"
+    itemData: {fileID: 11400000, guid: bf4dff1add4593e469d95efb0a4083f1, type: 2}
+    probabilities:
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+    - 100
+  - itemName: "\uC5ED\uBCD1 \uC758\uC0AC"
+    itemData: {fileID: 11400000, guid: afeded0fa86b71a4598b1f2795e11275, type: 2}
+    probabilities:
+    - 1
+    - 2
+    - 10
+    - 20
+    - 25
+    - 25
+    - 40
+    - 50
+    - 60
+    - 70
+  - itemName: "\uC544\uCC98 \uD0C0\uC6CC"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uB9C8\uBC95 \uD0C0\uC6CC"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+  - itemName: "\uC554\uC0B4\uC790"
+    itemData: {fileID: 0}
+    probabilities:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0

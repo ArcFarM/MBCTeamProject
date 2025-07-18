@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_018_SkeletonArcher_(100x100, NonBackground)_0: 6736602876338177585
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_016_Vampire_(100x100, NonBackground)_0: -8988454357745669754
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

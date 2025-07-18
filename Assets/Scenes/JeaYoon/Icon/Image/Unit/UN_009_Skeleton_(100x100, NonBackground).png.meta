@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_009_Skeleton_(100x100, NonBackground)_0: -2372755548260612164
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

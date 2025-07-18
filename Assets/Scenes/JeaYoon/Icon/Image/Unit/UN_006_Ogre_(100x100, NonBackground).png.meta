@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_006_Ogre_(100x100, NonBackground)_0: -8225764335324119950
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

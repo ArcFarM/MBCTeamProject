@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_015_BloodLord_(100x100, NonBackground)_0: -7416609089789529423
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

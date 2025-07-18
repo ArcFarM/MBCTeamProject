@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: UN_006_Ogre
   m_EditorClassIdentifier: 
   itemName: "\uC624\uC6B0\uAC70"
-  description: "\uC790\uB791\uC2A4\uB7EC\uC6B4 \uB9C8\uC655\uAD70\uC758 \uC815\uC608
-    \uD0F1\uCEE4\uC785\uB2C8\uB2E4. \n\uC544\uBB34\uB9AC \uB9DE\uC544\uB3C4 \uC544\uD504\uC9C0
-    \uC54A\uB2E4\uACE0 \uD569\uB2C8\uB2E4."
+  description: "\uC544\uBB34\uB9AC \uB9DE\uC544\uB3C4 \uC544\uD504\uC9C0 \uC54A\uB2E4\uACE0
+    \uD569\uB2C8\uB2E4."
   icon: {fileID: -8225764335324119950, guid: 4f6c6c7cf960bab43aab00f80bbf0d05, type: 3}
   unrest: 0
   price: -80

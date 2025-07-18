@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_008_BloodSlave_(Hover_Blue)_0: -2384731252217151230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

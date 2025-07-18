@@ -7922,7 +7922,7 @@ MonoBehaviour:
   baseColSize: 1
   baseSplash: 0
   baseHealth: 100
-  baseDamage: 10
+  baseDamage: 20
   baseAtkSpd: 1
   baseRange: 1
   baseSpd: 1

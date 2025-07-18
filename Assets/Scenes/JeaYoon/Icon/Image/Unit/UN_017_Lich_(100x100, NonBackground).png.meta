@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_017_Lich_(100x100, NonBackground)_0: 1990959153435632410
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

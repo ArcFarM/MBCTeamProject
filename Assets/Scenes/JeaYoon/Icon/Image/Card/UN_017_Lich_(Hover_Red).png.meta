@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_017_Lich_(Hover_Red)_0: -8605126854979334661
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_006_Ogre_(Hover_Brown)_0: -647107638279973109
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

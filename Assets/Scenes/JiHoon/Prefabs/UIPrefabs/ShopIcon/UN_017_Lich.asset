@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: 
   description: "\uB9C8\uC655\uAD70 \uC5F0\uAD6C\uC18C\uC758 \uC8FC\uC778\uC785\uB2C8\uB2E4.
-    \n\uC8FD\uC740\uC790\uB97C \uC0B4\uB9AC\uB294 \uB2A5\uB825\uC744 \uC9C0\uB2D9\uB2C8\uB2E4."
+    \n"
   icon: {fileID: 1990959153435632410, guid: fc3d5646c6e5bf447ac927f131413fae, type: 3}
   unrest: 70
   price: 0

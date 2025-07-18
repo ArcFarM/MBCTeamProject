@@ -17,7 +17,7 @@ MonoBehaviour:
   hoverIcon: {fileID: -647107638279973109, guid: eff5d1395f7327c4a9989c40943be1c3, type: 3}
   tooltipImage: {fileID: 21300000, guid: 4ccf7d8e67e805248ba7177edef13c4e, type: 3}
   tooltipText: "\uC790\uB791\uC2A4\uB7EC\uC6B4 \uB9C8\uC655\uAD70\uC758 \uC815\uC608
-    \uD0F1\uCEE4\uC785\uB2C8\uB2E4. \n\uC544\uBB34\uB9AC \uB9DE\uC544\uB3C4 \uC544\uD504\uC9C0
-    \uC54A\uB2E4\uACE0 \uD569\uB2C8\uB2E4."
+    \uD0F1\uCEE4\uC785\uB2C8\uB2E4. \n"
   specialAbilities:
   - {fileID: 11400000, guid: 50357c10fd558d549a5254453a02cded, type: 2}
+  tooltipTextColor: {r: 1, g: 0.59973276, b: 0, a: 1}

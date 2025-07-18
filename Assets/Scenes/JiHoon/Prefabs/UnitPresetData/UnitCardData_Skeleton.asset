@@ -19,3 +19,4 @@ MonoBehaviour:
   tooltipText: "\uD558\uCE35\uBBFC \uC2A4\uCF08\uB808\uD1A4\uC785\uB2C8\uB2E4. \uCC28\uACE0
     \uB118\uCE58\uAC8C \uB9CE\uC8E0"
   specialAbilities: []
+  tooltipTextColor: {r: 0, g: 0, b: 1, a: 1}

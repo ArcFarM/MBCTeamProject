@@ -6194,9 +6194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.8
-  waypointArrivalRadius: 0.5
-  separationRadius: 1.2
-  separationForce: 1.5
+  moveStartDelay: 0.5
 --- !u!114 &-8335603750719839984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6215,9 +6213,9 @@ MonoBehaviour:
   baseRawSize: 1
   baseColSize: 1
   baseSplash: 0
-  baseHealth: 1
-  baseDamage: 100
-  baseAtkSpd: 10
+  baseHealth: 30
+  baseDamage: 20
+  baseAtkSpd: 0.5
   baseRange: 1
   baseSpd: 1
   currRawSize: 1
@@ -6229,7 +6227,9 @@ MonoBehaviour:
   currRange: 1
   currSpd: 1
   stats: []
-  penalty: []
+  penalty:
+  - stat: 0
+    value: 2
 --- !u!114 &7337965535669758301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6297,7 +6297,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

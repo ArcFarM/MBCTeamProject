@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_009_Skeleton_(Hover_Blue)_0: -7696303954208137168
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_006_Ogre_(Brown)_0: 6689134158611597290
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

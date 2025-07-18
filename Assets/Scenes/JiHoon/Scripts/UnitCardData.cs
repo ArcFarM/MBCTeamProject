@@ -20,6 +20,9 @@ namespace JiHoon
 
         [Header("특수능력")]
         public List<AbilityData> specialAbilities = new List<AbilityData>();  // 특수능력 리스트
-        
+
+        [Header("툴팁 텍스트 색상")]
+        public Color tooltipTextColor = Color.white;
+
     }
 }

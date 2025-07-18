@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UN_018_SkeletonArcher_(Hover_Blue)_0: -8847763252662259620
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

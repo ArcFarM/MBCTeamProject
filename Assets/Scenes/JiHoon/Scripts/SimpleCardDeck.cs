@@ -288,6 +288,14 @@ namespace JiHoon
                     if (tooltipTextTMP != null)
                     {
                         tooltipTextTMP.text = unitCardData.tooltipText;
+
+                        // 색상 적용 - UnitCardData에 tooltipTextColor가 있다고 가정
+                        var colorField = unitCardData.GetType().GetField("tooltipTextColor");
+                        if (colorField != null)
+                        {
+                            Color textColor = (Color)colorField.GetValue(unitCardData);
+                            tooltipTextTMP.color = textColor;
+                        }
                     }
                     else if (tooltipTextLegacy != null)
                     {
@@ -319,6 +327,14 @@ namespace JiHoon
                                 if (tooltipTextTMP != null)
                                 {
                                     tooltipTextTMP.text = cardData.tooltipText;
+
+                                    // 색상 적용 - UnitCardData에 tooltipTextColor가 있다고 가정
+                                    var colorField = cardData.GetType().GetField("tooltipTextColor");
+                                    if (colorField != null)
+                                    {
+                                        Color textColor = (Color)colorField.GetValue(cardData);
+                                        tooltipTextTMP.color = textColor;
+                                    }
                                 }
                                 else if (tooltipTextLegacy != null)
                                 {
@@ -329,8 +345,6 @@ namespace JiHoon
                     }
                 }
             }
-        
-    
             // 상점 아이템인 경우
             else if (card.originalCard.isFromShop && card.originalCard.shopItemData != null)
             {
@@ -347,6 +361,17 @@ namespace JiHoon
                     if (tooltipTextTMP != null)
                     {
                         tooltipTextTMP.text = card.originalCard.shopItemData.description;
+
+                        // 상점 아이템도 unitCardData가 있으면 그 색상 사용
+                        if (card.originalCard.shopItemData.unitCardData != null)
+                        {
+                            var colorField = card.originalCard.shopItemData.unitCardData.GetType().GetField("tooltipTextColor");
+                            if (colorField != null)
+                            {
+                                Color textColor = (Color)colorField.GetValue(card.originalCard.shopItemData.unitCardData);
+                                tooltipTextTMP.color = textColor;
+                            }
+                        }
                     }
                     else if (tooltipTextLegacy != null)
                     {
