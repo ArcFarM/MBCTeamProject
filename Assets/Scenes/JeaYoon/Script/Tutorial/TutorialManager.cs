@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /* [0] 개요 : TutorialManager
 		- 
@@ -23,6 +24,7 @@ namespace JeaYoon.Tutorial
         public TextMeshProUGUI speechText;          // 말풍선 텍스트
         // ) public GameObject greenSlime;                 // 그린슬라임
         // ) public GameObject highlightFrame;           // 하이라이트 프레임
+        private string TileMapPlayScene = "TileMapSceneTest1";
 
 
         // [◆] - ▶▶▶ Header → 게임 UI 요소.
@@ -77,16 +79,22 @@ namespace JeaYoon.Tutorial
                 NextStep();
             }
         }
+
+        // [◆] - ▶▶▶ GameStartButton.
+        public void GameStartButton()
+        {
+                SceneManager.LoadScene(TileMapPlayScene);
+        }
         #endregion ▲▲▲▲▲ Unity Event Method ▲▲▲▲▲
 
 
 
 
 
-        // [3] Custom Method.
-        #region ▼▼▼▼▼ Custom Method ▼▼▼▼▼
-        
-        // [◆] - ▶▶▶ SetupTextComponent (새로 추가)
+            // [3] Custom Method.
+            #region ▼▼▼▼▼ Custom Method ▼▼▼▼▼
+
+            // [◆] - ▶▶▶ SetupTextComponent (새로 추가)
         private void SetupTextComponent()
         {
             if (speechText != null)
@@ -229,8 +237,8 @@ namespace JeaYoon.Tutorial
             speechBubble.SetActive(false);
             // 배경 다시 밝게 만들기
             StartCoroutine(FadeBackground(0.8f, 0f, 0.5f));
-            // 페이드 완료 후 튜토리얼 캔버스 비활성화
-            StartCoroutine(DeactivateTutorialCanvas(0.5f));
+            // 페이드 완료 후 튜토리얼 캔버스 비활성화 및 씬 전환
+            StartCoroutine(DeactivateTutorialCanvasAndLoadScene(0.5f));
         }
         #endregion ▲▲▲▲▲ Custom Method ▲▲▲▲▲
 
@@ -260,11 +268,14 @@ namespace JeaYoon.Tutorial
         }
 
 
-        // [◆] - ▶▶▶ DeactivateTutorialCanvas.
-        private IEnumerator DeactivateTutorialCanvas(float delay)
+        // [◆] - ▶▶▶ DeactivateTutorialCanvasAndLoadScene (수정됨)
+        private IEnumerator DeactivateTutorialCanvasAndLoadScene(float delay)
         {
             yield return new WaitForSeconds(delay);
             tutorialCanvas.SetActive(false);
+
+            // 씬 전환
+            SceneManager.LoadScene(TileMapPlayScene);
         }
 
         // 튜토리얼 건너뛰기 기능
