@@ -2702,18 +2702,18 @@ MonoBehaviour:
   cardManager: {fileID: 1907221773}
   shopPanel: {fileID: 1465857259}
   allItems:
-  - {fileID: 11400000, guid: 8b7910136a4258440be165f45f65a0bb, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
-  - {fileID: 11400000, guid: 5aab395d21e9c294bb8cc2a4ae7f7550, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
+  - {fileID: 11400000, guid: 7b07f6e7428134844a4033ff0b78e39f, type: 2}
   gridParent: {fileID: 2027659722}
   itemButtonPrefab: {fileID: 417627971231818259, guid: f962bc3db6152e344aa713fdce6b1508, type: 3}
   buyButton: {fileID: 747745937}
@@ -2797,8 +2797,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Effect
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 6e21ab5a50d688943b8e561592892b6e, type: 2}
+  m_sharedMaterial: {fileID: 7174368138871591281, guid: 6e21ab5a50d688943b8e561592892b6e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
