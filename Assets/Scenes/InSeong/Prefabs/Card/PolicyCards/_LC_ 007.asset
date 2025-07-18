@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a672bf3107475b4187c693cb839cf33, type: 3}
+  m_Name: _LC_ 007
+  m_EditorClassIdentifier: 
+  cardName: "\uC2DD\uB7C9 \uC218\uC785"
+  description: "\uC2DD\uB7C9\uC744 \uAE09\uD788 \uAD6C\uD558\uB290\uB77C \uC870\uC545\uD55C
+    \uD488\uC9C8\uC758 \uC2DD\uB7C9\uC744 \uC6C3\uB3C8\uC744 \uC8FC\uACE0 \uC0C0\uC2B5\uB2C8\uB2E4.
+    *\uBD88\uB9CC +10, \uC7AC\uC815 -10, \uC9C0\uBC30\uC640 \uC778\uAD6C +5*"
+  cardPrefab: {fileID: 5787633363400484810, guid: b703817370cafa04a93d4a8d8bc8eb7f, type: 3}
+  cardIcon: {fileID: 4060780304857465359, guid: 0e73e497b5615bf46bfc40ddc50199db, type: 3}
+  cardFrame: {fileID: 21300000, guid: 42961c7873a40c34ba218bb4fc1e9923, type: 3}
+  cardGrade: 1
+  cardEffect: 0
+  stats: 0a000000f6ffffff0500000005000000
+  isAdd: 0

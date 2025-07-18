@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a672bf3107475b4187c693cb839cf33, type: 3}
+  m_Name: _MC_ 001
+  m_EditorClassIdentifier: 
+  cardName: "\uC57D\uD0C8 \uD5C8\uAC00\uB839"
+  description: "\uAD6D\uACE0\uB97C \uCC44\uC6B0\uAE30 \uC704\uD574 \uC57D\uD0C8 \uD5C8\uAC00\uB839\uC744
+    \uB0B4\uB9BD\uB2C8\uB2E4. \n*\uC7AC\uC815 +15, \uC778\uAD6C -10*"
+  cardPrefab: {fileID: 5787633363400484810, guid: b703817370cafa04a93d4a8d8bc8eb7f, type: 3}
+  cardIcon: {fileID: 21300000, guid: 82158946eea321543b4959d977b62b9e, type: 3}
+  cardFrame: {fileID: 21300000, guid: a330673f59c95a94d9af04fd5519ba2c, type: 3}
+  cardGrade: 2
+  cardEffect: 0
+  stats: 000000000f00000000000000f6ffffff
+  isAdd: 0

@@ -13,6 +13,10 @@ namespace MainGame.Card {
         public bool isCrisisEventActive = false;
         public bool isCrisisExclusive = true;
 
+        //중복카드 뽑기 방지
+        static HashSet<string> cardNames = new HashSet<string>();
+
+
         private float normalTotalWeight;
 
         void Awake() {
@@ -22,6 +26,10 @@ namespace MainGame.Card {
             }
             // 데이터베이스로부터 가중치 합계를 계산
             normalTotalWeight = cardDatabase.gradePools.Sum(pool => pool.probabilityWeight);
+        }
+
+        public static void ClearCardNames() {
+            cardNames.Clear();
         }
 
         public PolicyCard_new GetCard() {
@@ -61,9 +69,17 @@ namespace MainGame.Card {
             }
 
             if (selectedGrade != null && selectedGrade.cards.Count > 0) {
-                // 선택된 등급에서 무작위 CardData를 뽑음
+                // 선택된 등급에서 무작위 CardData를 중복되지 않게 뽑음
+                
                 int rndIndex = Random.Range(0, selectedGrade.cards.Count);
                 CardData selectedCardData = selectedGrade.cards[rndIndex];
+
+                while (cardNames.Contains(selectedCardData.cardName)) {
+                    rndIndex = Random.Range(0, selectedGrade.cards.Count);
+                    selectedCardData = selectedGrade.cards[rndIndex];
+                }
+
+                cardNames.Add(selectedCardData.cardName);
 
                 // CardData에 저장된 프리팹을 사용해 인스턴스 생성
                 GameObject cardPrefab = selectedCardData.cardPrefab;

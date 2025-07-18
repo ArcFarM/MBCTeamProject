@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e92425bb80179f44b6f147d184bbc3a, type: 3}
+  m_Name: _LowerCards
+  m_EditorClassIdentifier: 
+  grade: 1
+  probabilityWeight: 70
+  cards:
+  - {fileID: 11400000, guid: 5f71863813325764a9eefdb73336f82b, type: 2}
+  - {fileID: 11400000, guid: e3bac8fa7e44778469c868150d10ba5b, type: 2}
+  - {fileID: 11400000, guid: fd58f008d5ae5a94f8ad0999c021a8fc, type: 2}
+  - {fileID: 11400000, guid: 30bfc98a2cd84c843923acdfc826eac2, type: 2}
+  - {fileID: 11400000, guid: 5098beb8c3c22634fb8efbc62fa52ae7, type: 2}
+  - {fileID: 11400000, guid: 2e6adfb1338bf9d468f8ee9d661efe5c, type: 2}
+  - {fileID: 11400000, guid: 7cdbddf1abe321245b3b683ac2a016a1, type: 2}
+  - {fileID: 11400000, guid: 46f775bee1d75ca4eb51641fb8405c24, type: 2}

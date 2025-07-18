@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d4d82b83662509f419fd5022a2365b95, type: 3}
-  m_Name: _CardDatabase
+  m_Name: _CardDataBase
   m_EditorClassIdentifier: 
   gradePools:
-  - {fileID: 11400000, guid: 8496833f37afba1409d24a939e43693c, type: 2}
+  - {fileID: 11400000, guid: f76574b7e4489ac4d91483b6ec181f2d, type: 2}
+  - {fileID: 11400000, guid: f2725d16204510b4e971162b89fd8cb3, type: 2}
   crisisPool: {fileID: 0}
